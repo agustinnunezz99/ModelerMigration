@@ -1,4 +1,4 @@
-<UIDescription name="System::ReleaseHandlerUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="System::ReleaseHandlerUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionPage" cachable="false">
     <PageHeader titleBinding="ProcessContext::titleText"></PageHeader>
     <Section sectionName="masterSection" sectionPattern="SingleAreaSection">
@@ -18,68 +18,68 @@
         <GroupElement name="SummaryAttributeGroup">
           <InputArea name="SummaryAttribute_1" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel0.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel0.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue0" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_2" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel1.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel1.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue1" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_3" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel2.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel2.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue2" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_4" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel3.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel3.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue3" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_5" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel4.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel4.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue4" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_6" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel5.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel5.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue5" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_7" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel6.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel6.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue6" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_8" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel7.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel7.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue7" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_9" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel8.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel8.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue8" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <InputArea name="SummaryAttribute_10" disabled="true">
             <Bindings>
-              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel9.text" bindingMode="ONE_WAY " />
+              <Binding target="Label" binding="ProcessContext::ReleaseProcessObject.summaryLabel9.text" bindingMode="ONE_WAY" />
               <Binding target="Value" binding="ProcessContext::ReleaseProcessObject.summaryValue9" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
         </GroupElement>
         <GroupElement name="SignatureGroup_1">
           <Bindings>
-            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName1" bindingMode="ONE_WAY " />
+            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName1" bindingMode="ONE_WAY" />
           </Bindings>
           <InputArea name="SignatureName1">
             <Bindings>
@@ -143,7 +143,7 @@
         </GroupElement>
         <GroupElement name="SignatureGroup_2">
           <Bindings>
-            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName2" bindingMode="ONE_WAY " />
+            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName2" bindingMode="ONE_WAY" />
           </Bindings>
           <InputArea name="SignatureName2">
             <Bindings>
@@ -207,7 +207,7 @@
         </GroupElement>
         <GroupElement name="SignatureGroup_3">
           <Bindings>
-            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName3" bindingMode="ONE_WAY " />
+            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName3" bindingMode="ONE_WAY" />
           </Bindings>
           <InputArea name="SignatureName3">
             <Bindings>
@@ -271,7 +271,7 @@
         </GroupElement>
         <GroupElement name="SignatureGroup_4">
           <Bindings>
-            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName4" bindingMode="ONE_WAY " />
+            <Binding target="Title" binding="ProcessContext::ReleaseProcessObject.signatureGroupName4" bindingMode="ONE_WAY" />
           </Bindings>
           <InputArea name="SignatureName4">
             <Bindings>

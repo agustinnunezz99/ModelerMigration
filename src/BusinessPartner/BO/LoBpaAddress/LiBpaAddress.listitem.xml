@@ -1,4 +1,4 @@
-<ListItem name="LiBpaAddress" xmlns="BoSchema.xsd">
+<ListItem name="LiBpaAddress" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="referencePKey" type="DomPKey" dataSourceProperty="referencePKey" />

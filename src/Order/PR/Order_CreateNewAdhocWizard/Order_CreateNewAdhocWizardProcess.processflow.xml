@@ -21,7 +21,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::CreateNewAdhocWizardUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="End" />

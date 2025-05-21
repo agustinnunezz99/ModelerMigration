@@ -55,7 +55,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowInventoryCheck">
+      <Action actionType="VIEW" name="ShowInventoryCheck">
         <UIDescription>Visit::KPIInventoryCheckUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="FilterDetailList" />

@@ -27,6 +27,8 @@
     <Attribute name="stopTimeEffective" table="Visit" column="ActualVisitEndTime" />
     <Attribute name="geolocationLatitude" table="Visit" column="Geolocation__Latitude__s" />
     <Attribute name="geolocationLongitude" table="Visit" column="Geolocation__Longitude__s" />
+    <Attribute name="startGeolocationLatitude" table="Visit" column="Start_Geolocation__Latitude__s" />
+    <Attribute name="startGeolocationLongitude" table="Visit" column="Start_Geolocation__Longitude__s" />
     <Attribute name="tmgMainPKey" table="Visit" column="Tour__c" />
     <Attribute name="durationEffective" table="Visit" column="Duration_Effective__c" />
     <Attribute name="considerModule" table="Account_Extension__c" column="Consider_Modules__c" />
@@ -46,25 +48,9 @@
     <Attribute name="outOfStockRate" table="Visit" column="OOS_Rate_All__c" />
     <Attribute name="outOfStockIssue" table="Visit" column="OOS_Issues__c" />
     <Attribute name="kpiRelevant" table="Visit_Template__c" column="KPI_Relevant__c" />
-<!--FMG-96: OFFLINE - Agenda - Otras Actividades-->
-    <Attribute name="fraccion" table="Visit" column="cgf_FraccionDeTiempo__c" />
-    <Attribute name="taskVisit" table="Visit" column="Task__c" />
-    <Attribute name="actividades" table="Visit" column="cgf_Actividades__c" />
-    <!--FMG-96: OFFLINE - Agenda - Otras Actividades-->
-    <!--Edu: fin Otras actividades y previstos-->
-    <Attribute name="shiftVisit" table="Visit" column="Shift__c" />
-    <Attribute name="typeVisit" table="Visit" column="VisitType__c" />
-    <!--Edu: Fin-->
-    <!--Edu: INI new lookup cartera-->
-    <Attribute name="briefcasePKey" table="Visit" column="cgf_Cartera__c" />
-    <!--Edu: FIN new lookup cartera-->
-    <!--Edu:Variables a retornar en la busqueda del lookup de recordType-->
-    <Attribute name="pKeyRecordType" table="Event" column="RecordType" />
-    <!--Edu: Ini new lookup para instituciones-->
-    <Attribute name="institutionPKey" table="Event" column="cgf_Institucion__c" />
-    <!--Edu: Fin new lookup para instituciones-->
-    <!--Edu: campo cgf_Tipo_de_perfil__c-->
-    <Attribute name="profileType" table="Event" column="cgf_Tipo_de_perfil__c" />  </Attributes>
+    <Attribute name="isVstCmplOsidRange" table="Visit" column="Is_Vst_Cmpl_Osid_Range__c" />
+    <Attribute name="isVstStartOsidRange" table="Visit" column="Is_Vst_Start_Osid_Range__c" />
+  </Attributes>
   <Entities>
     <Entity name="Visit" idAttribute="Id" />
   </Entities>
@@ -86,17 +72,6 @@
      **********************************/
         var sqlStmt = "SELECT Visit.Id AS pKey ";
         sqlStmt += ",Visit.AccountId AS bpaMainPKey ";
-		/*-Edu: INI new lookup cartera*/
-		sqlStmt += ",Visit.cgf_Cartera__c AS briefcasePKey ";
-        /*-Edu: FIN new lookup cartera*/
-        /*-Edu: INI new lookup recordType*/
-		sqlStmt += ",' ' AS pKeyRecordType ";
-        /*-Edu: FIN new lookup recordType*/
-		/*-Edu: INI new lookup instituciones*/
-		sqlStmt += ",' ' AS institutionPKey ";
-        /*-Edu: FIN new lookup instituciones*/
-		/*Edu: Campo tipo perfil*/
-		sqlStmt += ",' ' AS profileType ";
         sqlStmt += ",Visit.PlannedVisitStartTime AS beginTime	";
         sqlStmt += ",Visit.PlannedVisitEndTime AS finishTime ";
         sqlStmt += ",Visit.Creation_Date_and_Time__c AS creationDateTime ";
@@ -136,19 +111,17 @@
         sqlStmt += "Account_Extension__c.Consider_Modules__c AS considerModule, ";
         sqlStmt += "Visit.Geolocation__Longitude__s AS geolocationLongitude, ";
         sqlStmt += "Visit.Geolocation__Latitude__s AS geolocationLatitude, ";
+        sqlStmt += "Visit.Start_Geolocation__Longitude__s AS startGeolocationLongitude, ";
+        sqlStmt += "Visit.Start_Geolocation__Latitude__s AS startGeolocationLatitude, ";
         sqlStmt += "Visit.Creation_Mode__c AS creationMode, ";
 		sqlStmt += "Visit.Distribution_Rate_All__c AS distributionRate, ";
         sqlStmt += "Visit.Distribution_Issues__c AS distributionIssue, ";
         sqlStmt += "Visit.OOS_Rate_All__c AS outOfStockRate, ";
         sqlStmt += "Visit.OOS_Issues__c AS outOfStockIssue, ";
         sqlStmt += "Visit_Template__c.KPI_Relevant__c AS kpiRelevant, ";
-        sqlStmt += "Visit.PlaceId AS placeId ";
-		sqlStmt += ",Visit.cgf_FraccionDeTiempo__c AS fraccion ";
-        sqlStmt += ",Visit.Task__c AS taskVisit ";
-        sqlStmt += ",Visit.cgf_Actividades__c AS actividades ";
-		/*Edu: campo tipo de visita y turno*/
-		sqlStmt += ",Visit.Shift__c AS shiftVisit ";
-		sqlStmt += ",Visit.VisitType__c AS typeVisit ";
+        sqlStmt += "Visit.PlaceId AS placeId, ";
+        sqlStmt += "Visit.Is_Vst_Start_Osid_Range__c AS isVstStartOsidRange, ";
+        sqlStmt += "Visit.Is_Vst_Cmpl_Osid_Range__c AS isVstCmplOsidRange ";
         sqlStmt += "FROM Visit ";
         sqlStmt += "LEFT JOIN Visit_Template__c ";
         sqlStmt += "on Visit_Template__c.Id = Visit.Visit_Template__c ";
@@ -183,17 +156,6 @@
      **************************************/
         sqlStmt += "SELECT Event.Id AS pKey ";
         sqlStmt += ",' ' AS bpaMainPKey ";
-        /*-Edu: INI new lookup cartera*/
-		sqlStmt += ",Event.cgf_Cartera__c AS briefcasePKey ";
-        /*-Edu: FIN new lookup cartera*/
-		/*-Edu: INI new lookup recordType*/
-		sqlStmt += ",Event.RecordTypeId AS pKeyRecordType ";
-        /*-Edu: FIN new lookup recordType*/
-		/*-Edu: INI new lookup instituciones*/
-		sqlStmt += ",Event.cgf_Institucion__c AS institutionPKey ";
-        /*-Edu: FIN new lookup instituciones*/
-   	    /*Edu: Campo tipo perfil*/
-		sqlStmt += ",Event.cgf_Tipo_de_perfil__c AS profileType ";
         sqlStmt += ",Event.StartDateTime AS beginTime	";
         sqlStmt += ",Event.EndDateTime AS finishTime ";
         sqlStmt += ",Event.CreatedDate AS creationDateTime ";
@@ -233,19 +195,17 @@
   		sqlStmt += "'0' As considerModule, ";
         sqlStmt += "0 AS geolocationLongitude, ";
         sqlStmt += "0 AS geolocationLatitude, ";
+        sqlStmt += "0 AS startGeolocationLongitude, ";
+        sqlStmt += "0 AS startGeolocationLatitude, ";
         sqlStmt += "'' AS creationMode, ";
 		sqlStmt += "0 AS distributionRate, ";
         sqlStmt += "'0' AS distributionIssue, ";
         sqlStmt += "0 AS outOfStockRate, ";
         sqlStmt += "'0' AS outOfStockIssue, ";
         sqlStmt += "' ' AS kpiRelevant, ";
-        sqlStmt += "' ' AS placeId ";
-        sqlStmt += ",' ' AS fraccion ";
-        sqlStmt += ",' ' AS taskVisit ";
-        sqlStmt += ",' ' AS actividades ";
-		/*Edu: campo tipo de visita y turno*/
-		sqlStmt += ",' ' AS shiftVisit ";
-		sqlStmt += ",' ' AS typeVisit ";
+        sqlStmt += "' ' AS placeId, ";
+        sqlStmt += "'0' AS isVstStartOsidRange, ";
+        sqlStmt += "'0' AS isVstCmplOsidRange ";
         sqlStmt += "FROM Event ";
         sqlStmt += "LEFT JOIN Visit_Template__c " ;
         sqlStmt += "ON Event.Type = Visit_Template__c.Name ";

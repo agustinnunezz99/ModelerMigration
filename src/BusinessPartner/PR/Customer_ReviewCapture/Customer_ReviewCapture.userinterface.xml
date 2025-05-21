@@ -1,4 +1,4 @@
-<UIDescription name="Customer::ReviewCapture" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" simpleEditorOnly="true">
+<UIDescription name="Customer::ReviewCapture" schemaVersion="0.0.0.5"  simpleEditorOnly="true">
   <Page pagePattern="MasterDetailSectionPage" selectFirstItemInList="true" masterSectionFlex="40" detailSectionFlex="60" cachable="false">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Main" />
@@ -18,8 +18,7 @@
             <ButtonPressedEvent event="createNewCustomer" />
           </Events>
         </MenuItem>
-        <!-- Ocultado por - @JuanFelipe - Historia 88 - NO NECESARIO
-		<MenuItem itemId="SortByDistance" directlyVisible="false">
+        <MenuItem itemId="SortByDistance" directlyVisible="false">
           <Bindings>
             <Resource target="Text" type="Label" id="SortByDistanceId" defaultLabel="Sort by Distance" />
             <Resource target="Icon" type="Image" id="Distance" />
@@ -35,43 +34,6 @@
           </Bindings>
           <Events>
             <ButtonPressedEvent event="sortByAlphabet" />
-          </Events>
-        </MenuItem>-->
-        <!-- FILTROS POR TIPO DE CUENTA - @JuanFelipe - H88 -->
-        <MenuItem itemId="FilterByPharmacies" directlyVisible="false">
-          <Bindings>
-            <Resource target="Text" type="Label" id="FilterByPharmaciesId" defaultLabel="Solo Farmacias" />
-            <Resource target="Icon" type="Image" id="FilterDarkGrey24Inv" />
-          </Bindings>
-          <Events>
-            <ButtonPressedEvent event="filterByPharmacies" />
-          </Events>
-        </MenuItem>
-        <MenuItem itemId="FilterByInstitutions" directlyVisible="false">
-          <Bindings>
-            <Resource target="Text" type="Label" id="FilterByInstitutionsId" defaultLabel="Solo Instituciones" />
-            <Resource target="Icon" type="Image" id="FilterDarkGrey24Inv" />
-          </Bindings>
-          <Events>
-            <ButtonPressedEvent event="filterByInstitutions" />
-          </Events>
-        </MenuItem>
-        <MenuItem itemId="FilterByProfessionals" directlyVisible="false">
-          <Bindings>
-            <Resource target="Text" type="Label" id="FilterByProfessionalsId" defaultLabel="Solo Medicos" />
-            <Resource target="Icon" type="Image" id="FilterDarkGrey24Inv" />
-          </Bindings>
-          <Events>
-            <ButtonPressedEvent event="filterByProfessionals" />
-          </Events>
-        </MenuItem>
-        <MenuItem itemId="ShowAll" directlyVisible="false">
-          <Bindings>
-            <Resource target="Text" type="Label" id="ShowALLId" defaultLabel="Mostrar Todo" />
-            <Resource target="Icon" type="Image" id="FilterDarkGrey24Inv" />
-          </Bindings>
-          <Events>
-            <ButtonPressedEvent event="showAll" />
           </Events>
         </MenuItem>
       </MenuItems>
@@ -126,33 +88,10 @@
                 <Resource target="text" type="Label" id="MainId" defaultLabel="Main" bindingMode="ONE_TIME" />
               </Bindings>
             </Tab>
-            <!-- TAB ESPECIALIDADES  - @JuanFelipe - Historia 88 -->
-            <Tab tabName="Especialidades" backendSystem="both">
+            <Tab tabName="Map" backendSystem="both">
               <Bindings>
-                <Resource target="image" type="Image" id="ShelfGrey24" defaultImage="ShelfGrey24" bindingMode="ONE_TIME" />
-                <Resource target="text" type="Label" id="ESPId" defaultLabel="Especialidades" bindingMode="ONE_TIME" />
-                <Binding target="Visible" type="Visible" binding="ProcessContext::CustomerDetail.IsSpecialtiesTabVisible" />
-              </Bindings>
-            </Tab>
-            <Tab tabName="Contact" backendSystem="both">
-              <Bindings>
-                <Resource target="image" type="Image" id="UserGrey24" defaultImage="UserGrey24" bindingMode="ONE_TIME" />
-                <Resource target="text" type="Label" id="ContactId" defaultLabel="Contact" bindingMode="ONE_TIME" />
-                <Binding target="Visible" type="Visible" binding="ProcessContext::CustomerDetail.IsContactsTabVisible" />
-              </Bindings>
-            </Tab>
-            <Tab tabName="Call" backendSystem="both">
-              <Bindings>
-                <Resource target="image" type="Image" id="SuitcaseGrey24" defaultImage="SuitcaseGrey24" bindingMode="ONE_TIME" />
-                <Resource target="text" type="Label" id="CallOverviewId" defaultLabel="Call" bindingMode="ONE_TIME" />
-                <Binding target="Visible" type="Visible" binding="ProcessContext::CustomerDetail.IsVisitsTabVisible" />
-              </Bindings>
-            </Tab>
-            <Tab tabName="Attachments" backendSystem="both">
-              <Bindings>
-                <Resource target="image" type="Image" id="ClipGrey24" defaultImage="ClipGrey24" bindingMode="ONE_TIME" />
-                <Resource target="text" type="Label" id="AttachmentId" defaultLabel="Attachments" bindingMode="ONE_TIME" />
-                <Binding target="Visible" type="Visible" binding="ProcessContext::CustomerDetail.IsAttachmentsTabVisible" />
+                <Resource target="image" type="Image" id="MapGrey24" defaultImage="MapGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="MapId" defaultLabel="Map" bindingMode="ONE_TIME" />
               </Bindings>
             </Tab>
             <!--Account Harmonization: obsolete
@@ -163,44 +102,54 @@
               </Bindings>
             </Tab>
             Account Harmonization: obsolete-->
-            <!-- Ocultado por @JuanFelipe - Historia 88 - NO NECESARIO 
-                <Tab tabName="OpenHours" backendSystem="both">
-                  <Bindings>
-                    <Resource target="image" type="Image" id="ClockGrey24" defaultImage="ClockGrey24" bindingMode="ONE_TIME" />
-                    <Resource target="text" type="Label" id="OpenHoursId" defaultLabel="Open Hours" bindingMode="ONE_TIME" />
-                  </Bindings>
-                </Tab>
-                <Tab tabName="Revenue" backendSystem="both">
-                  <Bindings>
-                    <Resource target="image" type="Image" id="DollarGrey24" defaultImage="DollarGrey24" bindingMode="ONE_TIME" />
-                    <Resource target="text" type="Label" id="SalesId" defaultLabel="Sales" bindingMode="ONE_TIME" />
-                  </Bindings>
-                </Tab>
-                <Tab tabName="POS" backendSystem="both">
-                  <Bindings>
-                    <Resource target="image" type="Image" id="ShelfGrey24" defaultImage="ShelfGrey24" bindingMode="ONE_TIME" />
-                    <Resource target="text" type="Label" id="POSId" defaultLabel="POS" bindingMode="ONE_TIME" />
-                  </Bindings>
-                </Tab>
-                <Tab tabName="Roles" backendSystem="both">
-                  <Bindings>
-                    <Resource target="image" type="Image" id="UserClipboardGrey24" defaultImage="UserClipboardGrey24" bindingMode="ONE_TIME" />
-                    <Resource target="text" type="Label" id="BpaRolesId" defaultLabel="Roles" bindingMode="ONE_TIME" />
-                  </Bindings>
-                </Tab>
-                <Tab tabName="Relations" backendSystem="both">
-                  <Bindings>
-                    <Resource target="image" type="Image" id="ConnectionGrey24" defaultImage="ConnectionGrey24" bindingMode="ONE_TIME" />
-                    <Resource target="text" type="Label" id="RelationsId" defaultLabel="Relations" bindingMode="ONE_TIME" />
-                  </Bindings>
-                </Tab>
-                <Tab tabName="Map" backendSystem="both">
-                  <Bindings>
-                    <Resource target="image" type="Image" id="MapGrey24" defaultImage="MapGrey24" bindingMode="ONE_TIME" />
-                    <Resource target="text" type="Label" id="MapId" defaultLabel="Map" bindingMode="ONE_TIME" />
-                  </Bindings>
-                </Tab>
-          -->
+            <Tab tabName="OpenHours" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="ClockGrey24" defaultImage="ClockGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="OpenHoursId" defaultLabel="Open Hours" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Contact" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="UserGrey24" defaultImage="UserGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="ContactId" defaultLabel="Contact" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Revenue" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="DollarGrey24" defaultImage="DollarGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="SalesId" defaultLabel="Sales" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="POS" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="ShelfGrey24" defaultImage="ShelfGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="POSId" defaultLabel="POS" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Call" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="SuitcaseGrey24" defaultImage="SuitcaseGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="CallOverviewId" defaultLabel="Call" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Roles" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="UserClipboardGrey24" defaultImage="UserClipboardGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="BpaRolesId" defaultLabel="Roles" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Relations" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="ConnectionGrey24" defaultImage="ConnectionGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="RelationsId" defaultLabel="Relations" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Attachments" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="ClipGrey24" defaultImage="ClipGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="AttachmentId" defaultLabel="Attachments" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
           </Items>
           <Events>
             <ItemSelectedEvent event="tabSelected" storeTabNameIn="currentTabName" />
@@ -233,10 +182,9 @@
               </Events>
             </MenuItem>
           </MenuItems>
-          <!--Edu: Ini nuevo Grupo -->
-          <GroupElement name="AccInfoGroup">
+          <GroupElement name="IdentificationGroup">
             <Bindings>
-              <Resource target="Title" type="Label" id="AccInfoId" defaultLabel="Información de la Cuenta" />
+              <Resource target="Title" type="Label" id="IdentificationId" defaultLabel="Identification" />
             </Bindings>
             <InputArea name="Id" editable="false">
               <Bindings>
@@ -244,153 +192,24 @@
                 <Binding target="Value" binding="ProcessContext::CustomerDetail.customerId" bindingMode="ONE_WAY" />
               </Bindings>
             </InputArea>
-            <Merger name="DNIGroupControl" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1">
-              <SelectionBox name="TipoDocumentos">
-                <Bindings>
-                  <Resource target="Label" type="Label" id="TipoDocumentosId" defaultLabel="Tipos de Documentos" />
-                  <Binding target="DataSource" toggleId="DomTipoDoc" bindingMode="TWO_WAY" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.tipoDoc" bindingMode="TWO_WAY" />
-                </Bindings>
-                <Items>
-                  <Bindings>
-                    <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                    <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-                  </Bindings>
-                </Items>
-              </SelectionBox>
-              <InputArea name="Dni">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="DNI" id="dniId" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.dni" bindingMode="TWO_WAY" />
-                </Bindings>
-              </InputArea>
-            </Merger>
             <InputArea name="Name">
               <Bindings>
-                <Resource target="Label" type="Label" defaultLabel="Nombre" id="NameIdOri" />
+                <Resource target="Label" type="Label" defaultLabel="Name" id="NameId" />
                 <Binding target="Value" binding="ProcessContext::CustomerDetail.name" bindingMode="TWO_WAY" />
               </Bindings>
             </InputArea>
-            <InputArea name="Name1">
+            <InputArea name="SecondName">
               <Bindings>
-                <Resource target="Label" type="Label" defaultLabel="Nombres" id="Name1Id" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.name1" bindingMode="TWO_WAY" />
-              </Bindings>
-            </InputArea>
-            <InputArea name="Name2">
-              <Bindings>
-                <Resource target="Label" type="Label" defaultLabel="Apellidos" id="NameId2" />
+                <Resource target="Label" type="Label" defaultLabel="Second Name" id="Name2Id" />
                 <Binding target="Value" binding="ProcessContext::CustomerDetail.name2" bindingMode="TWO_WAY" />
               </Bindings>
             </InputArea>
-            <InputArea name="RazonSocial">
+            <InputArea name="Matchcode">
               <Bindings>
-                <Resource target="Label" type="Label" defaultLabel="Razón Social" id="RazonSocialId" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.razonSocial" bindingMode="TWO_WAY" />
+                <Resource target="Label" type="Label" defaultLabel="Matchcode" id="MatchcodeId" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.matchcode" bindingMode="TWO_WAY" />
               </Bindings>
             </InputArea>
-            <Merger name="ParentGroupControl" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1">
-              <InputArea name="Parent">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="Cuenta principal" id="parentId" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.luMyParentAccount.paname" bindingMode="TWO_WAY" />
-                </Bindings>
-              </InputArea>
-              <SelectionBox name="GroupAcc">
-                <Bindings>
-                  <Resource target="Label" type="Label" id="GroupId" defaultLabel="Grupo" />
-                  <Binding target="DataSource" toggleId="DomAccGroup" bindingMode="TWO_WAY" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.grupo" bindingMode="TWO_WAY" />
-                </Bindings>
-                <Items>
-                  <Bindings>
-                    <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                    <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-                  </Bindings>
-                </Items>
-              </SelectionBox>
-            </Merger>
-            <InputArea name="TipoInstitucion">
-              <Bindings>
-                <Resource target="Label" type="Label" defaultLabel="Tipo Institución" id="TipoInstitucionId" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.tipoInstitucion" bindingMode="TWO_WAY" />
-              </Bindings>
-            </InputArea>
-            <!--Fin Instituciones-->
-            <Merger name="CuitAndFarmaControl" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1">
-              <InputArea name="Farmanet">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="N° Cuenta Farmanet" id="farmanetId" />
-                  <Binding target="Value" type="Text" binding="ProcessContext::CustomerDetail.farmanet" bindingMode="TWO_WAY" />
-                </Bindings>
-              </InputArea>
-              <InputArea name="Cuit">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="CUIT" id="cuitId" />
-                  <Binding target="Value" type="Text" binding="ProcessContext::CustomerDetail.cuit" bindingMode="TWO_WAY" />
-                </Bindings>
-              </InputArea>
-            </Merger>
-            <Merger name="CPAndCPAControl" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1">
-              <InputArea name="PostalCode" editable="false">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="Código postal" id="PostalCodeId" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.luMyPostalCode.name" bindingMode="TWO_WAY" />
-                </Bindings>
-              </InputArea>
-              <InputArea name="CPA">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="CPA" id="CPAId" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.cpa" bindingMode="TWO_WAY" />
-                </Bindings>
-              </InputArea>
-            </Merger>
-            <Merger name="GenderBirControl" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1">
-              <SelectionBox name="Gender">
-                <Bindings>
-                  <Resource target="Label" type="Label" id="GenderId" defaultLabel="Género" />
-                  <Binding target="DataSource" toggleId="DomAccGender" bindingMode="TWO_WAY" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.gender" bindingMode="TWO_WAY" />
-                </Bindings>
-                <Items>
-                  <Bindings>
-                    <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                    <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-                  </Bindings>
-                </Items>
-              </SelectionBox>
-              <DatePickerField name="Birthdate">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="Fecha de nacimiento" id="birthdateId" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.birthdate" bindingMode="TWO_WAY" />
-                </Bindings>
-              </DatePickerField>
-            </Merger>
-            <CheckBox name="Residente" editable="true">
-              <Bindings>
-                <Resource target="Label" type="Label" id="ResidenteId" defaultLabel="Residente" />
-                <Binding target="checkedValue" binding="ProcessContext::CustomerDetail.residente" bindingMode="TWO_WAY" />
-              </Bindings>
-            </CheckBox>
-            <CheckBox name="Epc" editable="true">
-              <Bindings>
-                <Resource target="Label" type="Label" id="EpcId" defaultLabel="EPC" />
-                <Binding target="checkedValue" binding="ProcessContext::CustomerDetail.epc" bindingMode="TWO_WAY" />
-              </Bindings>
-            </CheckBox>
-            <InputArea name="MatNacAcc">
-              <Bindings>
-                <Resource target="Label" type="Label" defaultLabel="MatNac" id="MatNatId" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.matNacAcc" bindingMode="TWO_WAY" />
-              </Bindings>
-            </InputArea>
-          </GroupElement>
-          <!--Información de domicilio-->
-          <GroupElement name="DomicilioInfoGroup">
-            <Bindings>
-              <Resource target="Title" type="Label" id="DomicilioInfoId" defaultLabel="Información de domicilio" />
-            </Bindings>
-            <!--Farmacia e instituciones-->
             <Merger name="StreetNo" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1">
               <Bindings>
                 <Resource target="Label" type="Label" defaultLabel="Street No." id="StreetNoId" />
@@ -425,36 +244,37 @@
                 </Bindings>
               </InputArea>
             </Merger>
+            <!--Account Harmonization: changed to simple InputArea
+            <SelectionBox name="State">
+              <Bindings>
+                <Resource target="Label" type="Label" id="CountryStateId" defaultLabel="State" />
+                <Binding target="DataSource" toggleId="CountryState" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.LoCustomerAddress.MainAddress.countryState" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            Account Harmonization: changed to simple InputArea-->
             <InputArea name="State">
               <Bindings>
                 <Resource target="Label" type="Label" id="CountryStateId" defaultLabel="State" />
                 <Binding target="Value" binding="ProcessContext::CustomerDetail.LoCustomerAddress.MainAddress.countryState" bindingMode="TWO_WAY" />
               </Bindings>
             </InputArea>
-            <InputArea name="Country">
-              <Bindings>
-                <Resource target="Label" type="Label" id="McountryId" defaultLabel="País" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.LoCustomerAddress.MainAddress.country" bindingMode="TWO_WAY" />
-              </Bindings>
-            </InputArea>
-            <!--Fin Farmacia-->
           </GroupElement>
-          <!--Información de contacto-->
-          <GroupElement name="ContactInfoGroup">
+          <GroupElement name="CommunicationGroup">
             <Bindings>
-              <Resource target="Title" type="Label" id="ContactInfoId" defaultLabel="Información de contacto" />
+              <Resource target="Title" type="Label" id="CommunicationId" defaultLabel="Communication" />
             </Bindings>
             <Merger name="CustomerPhoneMerger" pattern="oneInputControlTwoButtonsMax">
               <InputArea name="CustomerPhone">
                 <Bindings>
                   <Resource target="Label" type="Label" defaultLabel="Phone" id="PhoneId" />
                   <Binding target="Value" binding="ProcessContext::CustomerDetail.phone1" bindingMode="TWO_WAY" />
-                </Bindings>
-              </InputArea>
-              <InputArea name="CustomerPhone2">
-                <Bindings>
-                  <Resource target="Label" type="Label" defaultLabel="Phone" id="PhoneId2" />
-                  <Binding target="Value" binding="ProcessContext::CustomerDetail.phone2" bindingMode="TWO_WAY" />
                 </Bindings>
               </InputArea>
               <ImageButton name="CustomerPhoneSMS">
@@ -485,7 +305,6 @@
                 <Bindings>
                   <Resource target="Label" type="Label" defaultLabel="EMail" id="EmailId" />
                   <Binding target="Value" binding="ProcessContext::CustomerDetail.email1" bindingMode="TWO_WAY" />
-                  <!--<Binding target="Value" binding="ProcessContext::CustomerDetail.email2" bindingMode="TWO_WAY" />-->
                 </Bindings>
               </InputArea>
               <ImageButton name="CustomerEmailImage">
@@ -497,25 +316,16 @@
                 </Events>
               </ImageButton>
             </Merger>
-            <!--Farmacia-->
-            <InputArea name="WebSite">
-              <Bindings>
-                <Resource target="Label" type="Label" id="WebSiteId" defaultLabel="Sitio web" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.webSite" bindingMode="TWO_WAY" />
-              </Bindings>
-            </InputArea>
-            <!--Fin Farmacia-->
           </GroupElement>
-          <!--Información Adicional-->
-          <GroupElement name="AddInfoGroup">
+          <GroupElement name="ClassificationGroup">
             <Bindings>
-              <Resource target="Title" type="Label" id="AddInfoId" defaultLabel="Información adicional" />
+              <Resource target="Title" type="Label" id="ClassificationId" defaultLabel="Classification" />
             </Bindings>
-            <SelectionBox name="Obras">
+            <SelectionBox name="Prio">
               <Bindings>
-                <Resource target="Label" type="Label" id="ObrasSocialesId" defaultLabel="Obras Sociales" />
-                <Binding target="DataSource" toggleId="DomAccObrasSoc" bindingMode="TWO_WAY" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.obrasSociales" bindingMode="TWO_WAY" />
+                <Resource target="Label" type="Label" id="PrioId" defaultLabel="Prio" />
+                <Binding target="DataSource" toggleId="ABC" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.priority" bindingMode="TWO_WAY" />
               </Bindings>
               <Items>
                 <Bindings>
@@ -524,12 +334,11 @@
                 </Bindings>
               </Items>
             </SelectionBox>
-            <!--INI FARMACIAS-->
-            <SelectionBox name="Status">
+            <SelectionBox name="ClassOfTrade">
               <Bindings>
-                <Resource target="Label" type="Label" id="StatusId" defaultLabel="Estado" />
-                <Binding target="DataSource" toggleId="DomAccStatus" bindingMode="TWO_WAY" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.statusAcc" bindingMode="TWO_WAY" />
+                <Resource target="Label" type="Label" id="ClassOfTradeId" defaultLabel="Class Of Trade" />
+                <Binding target="DataSource" toggleId="BpaClassOfTrade" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.classOfTrade" bindingMode="TWO_WAY" />
               </Bindings>
               <Items>
                 <Bindings>
@@ -538,15 +347,108 @@
                 </Bindings>
               </Items>
             </SelectionBox>
-            <InputArea name="Hierarchy">
+            <SelectionBox name="Type">
               <Bindings>
-                <Resource target="Label" type="Label" defaultLabel="Tipo de Jerarquía" id="HierarchyId" />
-                <Binding target="Value" binding="ProcessContext::CustomerDetail.hierarchyType" bindingMode="TWO_WAY" />
+                <Resource target="Label" type="Label" id="TypeId" defaultLabel="Customer Type" />
+                <Binding target="DataSource" toggleId="BpaCompanyType" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.companyType" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+          </GroupElement>
+          <GroupElement name="StatusGroup">
+            <Bindings>
+              <Resource target="Title" type="Label" id="StatusId" defaultLabel="Status" />
+            </Bindings>
+            <SelectionBox name="Phase">
+              <Bindings>
+                <Resource target="Label" type="Label" id="PhaseId" defaultLabel="Phase" />
+                <Binding target="DataSource" toggleId="BpaPhase" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.phase" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <SelectionBox name="SalesRelevant">
+              <Bindings>
+                <Resource target="Label" type="Label" id="SalesRelevantId" defaultLabel="Sales Relevant" />
+                <Binding target="DataSource" toggleId="BpaSalesRelevant" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.salesRelevant" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <DatePickerField name="DateClosure">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Closure Date" id="DateClosure" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.dateClosure" bindingMode="TWO_WAY" />
+              </Bindings>
+            </DatePickerField>
+            <CheckBox name="IsDeleted" disabled="true">
+              <Bindings>
+                <Resource target="Label" type="Label" id="Deleted" defaultLabel="Deleted" />
+                <Binding target="checkedValue" binding="ProcessContext::CustomerDetail.deleted" bindingMode="ONE_WAY" />
+              </Bindings>
+            </CheckBox>
+          </GroupElement>
+          <GroupElement name="LocationGroup">
+            <Bindings>
+              <Resource target="Title" type="Label" id="LocationId" defaultLabel="Location" />
+            </Bindings>
+            <Merger name="Coordinates" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Latitude / Longitude" id="Coordinates" />
+              </Bindings>
+              <InputArea name="Latitude" disabled="true">
+                <Bindings>
+                  <Resource target="Label" type="Label" defaultLabel="Latitude" id="LatitudeId" />
+                  <Binding target="Value" type="Decimal" binding="ProcessContext::CustomerDetail.LoCustomerAddress.MainAddress.latitude" bindingMode="TWO_WAY" />
+                </Bindings>
+              </InputArea>
+              <InputArea name="Longitude" disabled="true">
+                <Bindings>
+                  <Resource target="Label" type="Label" defaultLabel="Longitude" id="LongitudeId" />
+                  <Binding target="Value" type="Decimal" binding="ProcessContext::CustomerDetail.LoCustomerAddress.MainAddress.longitude" bindingMode="TWO_WAY" />
+                </Bindings>
+              </InputArea>
+            </Merger>
+          </GroupElement>
+          <GroupElement name="TradeOrgGroup">
+            <Bindings>
+              <Resource target="Title" type="Label" id="TradeOrgId" defaultLabel="Trade Org." />
+            </Bindings>
+            <InputArea name="Name" disabled="true">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Name" id="TradeOrgNameId" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.LuCustomerTradeOrg.name" bindingMode="TWO_WAY" />
               </Bindings>
             </InputArea>
-            <!--FIN FARMACIAS-->
+            <InputArea name="City" disabled="true">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="City" id="TradeOrgCityId" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.LuCustomerTradeOrg.city" bindingMode="TWO_WAY" />
+              </Bindings>
+            </InputArea>
+            <InputArea name="ID" disabled="true">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="ID" id="TradeOrgIdId" />
+                <Binding target="Value" binding="ProcessContext::CustomerDetail.LuCustomerTradeOrg.id" bindingMode="TWO_WAY" />
+              </Bindings>
+            </InputArea>
           </GroupElement>
-          <!--Edu: Fin nuevo Grupo -->
         </Area>
       </Area>
       <Area areaName="Map" areaPattern="SingleElementArea" lazyLoading="true">
@@ -793,37 +695,127 @@
         </Area>
       </Area>
       Account Harmonization: obsolete-->
-      <Area areaName="OpenHours" areaPattern="SingleElementArea">
-        <GroupedList name="OpenHoursList" groupBy="groupText" searchable="false" dataSource="ProcessContext::CustomerDetail.loOpenHours.items[]">
-          <Items name="Items" itemPattern="CustomerOpenHoursPattern">
+      <!-- ###################### Opening Hours ###################### -->
+      <Area areaName="OpenHours" areaPattern="MultiArea" lazyLoading="true">
+        <Area areaName="OpenHoursOverview" areaPattern="SingleElementArea">
+          <MenuItems>
+            <MenuItem itemId="NewTimeSlot" directlyVisible="true">
+              <Bindings>
+                <Resource target="Text" type="Label" id="NewTimeSlotId" defaultLabel="New" />
+                <Resource target="Icon" type="Image" id="PlusDarkGrey24" defaultImage="PlusDarkGrey24" />
+                <Binding type="Visible" target="Visible" call="ProcessContext::AccountOperatingHourEnabled.getValue" />
+              </Bindings>
+              <Events>
+                <ButtonPressedEvent event="newTimeSlot">
+                  <SelectArea name="TimeSlotEdit" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <GroupedList name="OpenHoursList" groupBy="groupText" searchable="false" dataSource="ProcessContext::CustomerDetail.loOpenHours.items[]">
+            <Items name="Items" itemPattern="CustomerOpenHoursPattern">
+              <Bindings>
+                <Binding target="dayOfWeek" type="Text" binding=".dayOfWeek.text" bindingMode="ONE_WAY" />
+                <Binding target="dayOfWeekValue" type="Text" binding=".dayOfWeek.code" bindingMode="ONE_WAY" />
+                <Binding target="startTime" type="Text" binding=".startTime" bindingMode="ONE_WAY" />
+                <Binding target="endTime" type="Text" binding=".endTime" bindingMode="ONE_WAY" />
+                <Resource target="startTimeHeader" type="Label" id="OpenHoursStartTime" defaultLabel="Start time" />
+                <Resource target="endTimeHeader" type="Label" id="OpenHoursEndTime" defaultLabel="End time" />
+              </Bindings>
+              <ItemListLayout>
+                <Default>
+                  <Col>
+                    <Row layoutType="itemIdentifier" bindingId="dayOfWeek" />
+                    <Row layoutType="itemSecondary" bindingId="startTimeHeader" />
+                    <Row layoutType="itemSecondary" bindingId="endTimeHeader" />
+                  </Col>
+                  <Col>
+                    <Row />
+                    <Row layoutType="itemValueSmall" bindingId="startTime" />
+                    <Row layoutType="itemValueSmall" bindingId="endTime" />
+                  </Col>
+                </Default>
+              </ItemListLayout>
+              <ContextMenu>
+                <Bindings>
+                  <Binding target="DataSource" binding="ProcessContext::TimeSlotContextMenu.Items[]" bindingMode="ONE_WAY" />
+                </Bindings>
+                <Items name="TimeSlotContextMenutems">
+                  <Bindings>
+                    <Binding target="Icon" type="Image" binding=".actionImg" />
+                    <Binding target="Text" type="Label" binding=".actionId" />
+                    <Binding target="Editable" type="Editable" binding=".actionEnabled" />
+                  </Bindings>
+                </Items>
+              </ContextMenu>
+            </Items>
+            <Events>
+              <ItemSelectedEvent event="timeSlotSelected">
+                <SelectArea name="TimeSlotEdit" />
+                <Params>
+                  <Param name="pKey" value=".pKey" />
+                  <Param name="dayOfWeek" value=".dayOfWeekValue" />
+                  <Param name="startTime" value=".startTimeToSave" />
+                  <Param name="endTime" value=".endTimeToSave" />
+                  <Param name="operatingHoursId" value=".operatingHoursId" />
+                </Params>
+              </ItemSelectedEvent>
+              <ContextOpeningEvent event="timeSlotContextMenuOpened" />
+              <ContextSelectedEvent event="timeSlotContextMenuItemSelected">
+                <Params>
+                  <Param name="pKey" value=".pKey" />
+                </Params>
+              </ContextSelectedEvent>
+            </Events>
+          </GroupedList>
+        </Area>
+        <Area areaName="TimeSlotEdit" areaPattern="GroupedElementsArea">
+          <MenuItems>
+            <MenuItem itemId="AcceptTimeSlotChanges" directlyVisible="true">
+              <Bindings>
+                <Resource target="Text" type="Label" id="AcceptTimeSlotChangesId" defaultLabel="Done" />
+                <Resource target="Icon" type="Image" id="CheckDarkGrey24" />
+              </Bindings>
+              <Events>
+                <ButtonPressedEvent event="acceptTimeSlotChanges">
+                  <ValidateAndSelectArea name="OpenHoursOverview" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <GroupElement name="TimeSlotGroup">
             <Bindings>
-              <Binding target="dayOfWeek" type="Text" binding=".dayOfWeek" bindingMode="ONE_WAY" />
-              <Binding target="startTime" type="Text" binding=".startTime" bindingMode="ONE_WAY" />
-              <Binding target="endTime" type="Text" binding=".endTime" bindingMode="ONE_WAY" />
-              <Binding target="type" type="Text" binding=".type" bindingMode="ONE_WAY" />
-              <Resource target="startTimeHeader" type="Label" id="OpenHoursStartTime" defaultLabel="Start time" />
-              <Resource target="endTimeHeader" type="Label" id="OpenHoursEndTime" defaultLabel="End time" />
-              <Resource target="typeHeader" type="Label" id="OpenHoursType" defaultLabel="Type" />
+              <Resource target="Title" type="Label" id="TimeSlotGroupId" defaultLabel="Time Slot" />
             </Bindings>
-            <ItemListLayout>
-              <Default>
-                <Col>
-                  <Row layoutType="itemIdentifier" bindingId="dayOfWeek" />
-                  <Row layoutType="itemSecondary" bindingId="startTimeHeader" />
-                  <Row layoutType="itemSecondary" bindingId="endTimeHeader" />
-                  <Row layoutType="itemSecondary" bindingId="typeHeader" />
-                </Col>
-                <Col>
-                  <Row />
-                  <Row layoutType="itemValueSmall" bindingId="startTime" />
-                  <Row layoutType="itemValueSmall" bindingId="endTime" />
-                  <Row layoutType="itemValueSmall" bindingId="type" />
-                </Col>
-              </Default>
-            </ItemListLayout>
-          </Items>
-        </GroupedList>
+            <SelectionBox name="DayOfWeek">
+              <Bindings>
+                <Resource target="Label" type="Label" id="dayOfWeek" defaultLabel="Day of week" />
+                <Binding target="DataSource" toggleId="DayOfWeek" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::TimeSlot.dayOfWeek" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <TimePickerField name="StartTimeTimeSlot">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Start time" id="TimeFromTimeSlot" />
+                <Binding target="Value" binding="ProcessContext::TimeSlot.startTime" bindingMode="TWO_WAY" />
+              </Bindings>
+            </TimePickerField>
+            <TimePickerField name="EndTimeTimeSlot">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="End time" id="TimeThruTimeSlot" />
+                <Binding target="Value" binding="ProcessContext::TimeSlot.endTime" bindingMode="TWO_WAY" />
+              </Bindings>
+            </TimePickerField>
+          </GroupElement>
+        </Area>
       </Area>
+      <!-- ###################### Contact ###################### -->
       <Area areaName="Contact" areaPattern="MultiArea" lazyLoading="true">
         <Area areaName="ContactOverview" areaPattern="SingleElementArea">
           <MenuItems>
@@ -2244,47 +2236,6 @@
             <Binding target="Type" type="Text" binding=".type" bindingMode="ONE_WAY" />
           </Bindings>
         </MediaListControl>
-      </Area>
-      <!-- ESPECIALIDAD TAB -->
-      <Area areaName="Especialidades" areaPattern="MultiArea" lazyLoading="true">
-        <!-- Area donde se CARGAN todas las especialidades -->
-        <Area areaName="ESPOverview" areaPattern="SingleElementArea">
-          <MenuItems>
-            <!-- Menu superior en donde ubicamos el boton 'Nueva especialidad' -->
-            <MenuItem itemId="NewESP" directlyVisible="true">
-              <Bindings>
-                <!-- Label e imagen mostrada en el boton 'Nueva Especialidad' -->
-                <Resource target="Text" type="Label" id="NewEspecialidadCuentaId" defaultLabel="Nueva Especialidad" />
-                <Resource target="Icon" type="Image" id="PlusDarkGrey24" defaultImage="PlusDarkGrey24" />
-              </Bindings>
-              <Events>
-                <!-- Cuando se presiona el boton lanza el evento 'newESP'  -->
-                <ButtonPressedEvent event="newESP">
-                  <ValidateAndSelectArea name="ESPOverview" />
-                </ButtonPressedEvent>
-              </Events>
-            </MenuItem>
-          </MenuItems>
-          <!-- Grupo donde se obtienen y muestran la lista de Especialidades ya asignadas al cliente -->
-          <GroupedList name="ESPListOverview" searchable="false" groupBy="" dataSource="ProcessContext::CustomerDetail.LoMyCustomerESPRelation.Items[]" hasBorder="true">
-            <Items name="Items" itemPattern="CustomerESPRelationItem">
-              <ItemListLayout>
-                <Default>
-                  <!--  Mostrar el nombre de la especialidad-->
-                  <Col width="8em">
-                    <Row layoutType="itemIdentifier" bindingId="espName" />
-                  </Col>
-                </Default>
-              </ItemListLayout>
-              <!-- Bindings son los que asocian los valores de la lista y los asocian a los targets en el 'ItemListLayout'-->
-              <Bindings>
-                <Binding target="espName" type="Text" binding=".espName" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-            <Events>
-            </Events>
-          </GroupedList>
-        </Area>
       </Area>
     </Section>
   </Page>

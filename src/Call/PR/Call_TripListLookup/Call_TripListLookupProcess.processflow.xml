@@ -23,7 +23,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::TripListLookupUI</UIDescription>
         <Events>
           <Event name="TripListItemSelected" action="LoadSelectedTripListDetail" />

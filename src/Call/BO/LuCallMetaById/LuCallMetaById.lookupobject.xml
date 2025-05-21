@@ -19,6 +19,8 @@
     <SimpleProperty name="prmFindingLeadTime" type="DomInteger" dataSourceProperty="prmFindingLeadTime" />
     <SimpleProperty name="updatePlannedTimes" type="DomBool" dataSourceProperty="updatePlannedTimes" />
     <SimpleProperty name="historicalProducts" type="DomClbMetaHistorical" dataSourceProperty="historicalProducts" />
+    <SimpleProperty name="cmplVstGeolcValidation" type="DomGeofenceValidation" dataSourceProperty="cmplVstGeolcValidation" />
+    <SimpleProperty name="startVstGeolcValidation" type="DomGeofenceValidation" dataSourceProperty="startVstGeolcValidation" />
   </SimpleProperties>
   <Methods>
     <Method name="afterLoadAsync" />

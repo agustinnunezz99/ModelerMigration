@@ -1,4 +1,4 @@
-<LookupObject name="LuProduct">
+<LookupObject name="LuProduct" generateLoadMethod="true" schemaVersion="1.1">
   <DataSource name="DsLuProduct" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
@@ -10,6 +10,14 @@
     <SimpleProperty name="groupShortText" type="DomText" dataSourceProperty="groupShortText" />
     <SimpleProperty name="eAN" type="DomPrdNumber" dataSourceProperty="eAN" />
     <SimpleProperty name="category" type="DomPrdCategory" dataSourceProperty="category" />
+    <SimpleProperty name="prdType" type="DomPrdType" dataSourceProperty="productType" />
+    <SimpleProperty name="criterion3ProductDescription" type="DomText" dataSourceProperty="criterion3ProductDescription" />
+    <SimpleProperty name="piecesPerSmallestUnitForBasePrice" type="DomDecimal" storable="false" dataSourceProperty="piecesPerSmallestUnitForBasePrice" />
+    <SimpleProperty name="piecesPerSmallestUnit" type="DomDecimal" storable="false" dataSourceProperty="piecesPerSmallestUnit" />
+    <SimpleProperty name="simplePricingBasePrice" type="DomMoney" storable="false" />
   </SimpleProperties>
-  <Methods></Methods>
+  <Methods>
+    <Method name="afterLoadAsync" />
+    <Method name="beforeLoadAsync" />
+  </Methods>
 </LookupObject>

@@ -12,7 +12,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowClipboard">
+      <Action actionType="VIEW" name="ShowClipboard">
         <UIDescription>Order::PasteFromClipboardUI</UIDescription>
         <Events>
           <Event name="ReloadFromClipboard" action="ReloadFromClipboard" />

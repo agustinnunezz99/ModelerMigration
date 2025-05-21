@@ -253,7 +253,7 @@
         </ReturnValues>
         <TransitionTo action="ReloadCustomer" />
       </Action>
-      <Action name="ReloadCustomer" actionType="Logic" call="ProcessContext::CallBO.updateCustomerInfo">
+      <Action name="ReloadCustomer" actionType="LOGIC" call="ProcessContext::CallBO.updateCustomerInfo">
         <Parameters>
           <Input name="customerObjectStatus" value="ProcessContext::CustomerObjectStatus" />
           <Input name="saveFlag" value="ProcessContext::SaveFlag" />

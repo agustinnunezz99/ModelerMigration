@@ -84,7 +84,7 @@
       </BannerFilter>
     </Banner>
     <HeaderLine>
-      <Dropdown name="CategoryFilter" dataSource="ProcessContext::MainBO.LoProductCategoryFilter.items[]" textLines="2">
+      <!-- <Dropdown name="CategoryFilter" dataSource="ProcessContext::MainBO.LoProductCategoryFilter.items[]" textLines="2">
         <Bindings>
           <Resource target="Label" type="Label" id="CategoryId" defaultLabel="Category" />
           <Resource target="Headline" type="Label" id="FilterCategoryId" defaultLabel="Filter Category" />
@@ -139,7 +139,7 @@
             </Params>
           </ItemsSelectedEvent>
         </Events>
-      </Dropdown>
+      </Dropdown> -->
       <ImageButton name="Rewards">
         <Bindings>
           <Resource target="Text" type="Label" id="Rewards" defaultLabel="Rewards" />
@@ -194,27 +194,22 @@
             <ItemListLayout>
               <Tablet>
                 <Default>
-                  <Col width="0.1em">
+                  <Col width="0.1em" >
                     <Row layoutType="Image" bindingId="ModReasonEntered" />
                     <Row layoutType="itemSecondary" bindingId="Spacer" />
                     <Row layoutType="itemSecondary" bindingId="Spacer" />
                   </Col>
                   <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="ProductName" />
                     <Row>
-                      <Col flex="1" layoutType="itemTitle" bindingId="ProductName" />
-                    </Row>
-                    <Row layoutType="itemCenter">
-                      <Col width="5.5em">
-                        <Row bindingId="OrderUnitInfo" layoutType="itemSecondary itemPaddingTop" />
-                        <Row bindingId="UnitInfo" layoutType="itemSecondary itemPaddingTop" />
+                      <Col flex="1">
+                        <Row layoutType="itemSecondary" bindingId="OrderUnitInfo" /> 
+                        <Row layoutType="itemSecondary" bindingId="UnitInfo" />
                       </Col>
-                      <Col width="1.5em" layoutType="itemSecondary itemPaddingTop" bindingId="Type" />
-                      <Col width="1.5em" height="2em" layoutType="Image" bindingId="ItemState" />
-                      <Col width="1em" height="1em" layoutType="Image" bindingId="SpecialPromotionIcon" />
-                      <Col width="1em" layoutType="itemSecondary itemPaddingTop" bindingId="SpecialQuantity" />
+                      <Col layoutType="itemSecondary" bindingId="Type" />
                     </Row>
                   </Col>
-                  <Col width="9em" bindingId="Quantity" />
+                  <Col layoutType="itemRight" bindingId="Quantity" />
                 </Default>
               </Tablet>
               <Phone>
@@ -225,34 +220,26 @@
                     <Row layoutType="itemSecondary" bindingId="Spacer" />
                   </Col>
                   <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="ProductName" />
                     <Row>
-                      <Col layoutType="itemImportantValueSmall" bindingId="ProductName" />
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Row bindingId="OrderUnitInfo" layoutType="itemSecondary itemPaddingTop" />
-                        <Row bindingId="UnitInfo" layoutType="itemSecondary itemPaddingTop" />
+                      <Col flex="1">
+                        <Row layoutType="itemSecondary" bindingId="OrderUnitInfo" /> 
+                        <Row layoutType="itemSecondary" bindingId="UnitInfo" />
                       </Col>
-                      <Col layoutType="itemSecondary itemPaddingTop" bindingId="Type" />
-                      <Col layoutType="Image" bindingId="ItemState" />
-                      <Col layoutType="Image" bindingId="SpecialPromotionIcon" />
-                      <Col layoutType="itemSecondary itemPaddingTop" bindingId="SpecialQuantity" />
+                      <Col layoutType="itemSecondary" bindingId="Type" />
                     </Row>
                   </Col>
-                  <Col width="9em" bindingId="Quantity" />
+                  <Col layoutType="itemRight" bindingId="Quantity" />
                 </Default>
               </Phone>
             </ItemListLayout>
             <Bindings>
               <Binding target="ProductName" type="Text" binding=".text1" bindingMode="ONE_WAY" />
-              <Binding target="ItemState" type="Image" binding=".itemState.imageId" bindingMode="ONE_WAY" />
               <Binding target="Type" type="Text" binding=".shortType" bindingMode="ONE_WAY" />
               <Binding target="Quantity" type="Stepper" binding=".quantity" minValue="0" maxValue="9999" minBinding="minStepperValue" bindingMode="TWO_WAY" formatV2="4.0" stepperCorrelationId=".pKey" />
               <Binding target="ModReasonEntered" type="Image" binding=".modReasonEntered" bindingMode="ONE_WAY" />
               <Binding target="OrderUnitInfo" type="Text" binding=".orderUnitInformation" bindingMode="ONE_WAY" />
               <Binding target="UnitInfo" type="Text" binding=".unitInformation" bindingMode="ONE_WAY" />
-              <Binding target="SpecialPromotionIcon" type="Image" binding=".specialPromotionIcon" bindingMode="ONE_WAY" />
-              <Binding target="SpecialQuantity" type="Text" binding=".specialQuantity" bindingMode="ONE_WAY" />
               <Resource target="Spacer" type="Label" id="Spacer" defaultLabel="    " />
             </Bindings>
           </Items>
@@ -296,23 +283,21 @@
             </Bindings>
           </InputArea>
           <!-- Item Type -->
-          <SelectionBox name="Type" disabled="true">
+          <InputArea name="Id" disabled="true">
             <Bindings>
-              <Binding target="Value" binding="ProcessContext::MainBO.LoItems.Current.sdoItemMetaPKey" bindingMode="TWO_WAY" />
-              <Binding target="DataSource" binding="ProcessContext::MainBO.boOrderMeta.loOrderItemMetas" bindingMode="TWO_WAY" />
               <Resource target="Label" type="Label" id="ItemTypeId" defaultLabel="Type" />
+              <Binding target="Value" binding="ProcessContext::MainBO.LoItems.Current.type" bindingMode="ONE_WAY" />
             </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".pKey" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
+          </InputArea>
+        </GroupElement>
+        <GroupElement name="IdentificationGroup">
+          <Bindings>
+            <Resource target="Title" type="Label" id="truckInv" defaultLabel="Inventory on Truck" />
+          </Bindings>
           <!-- Stock -->
-          <Merger name="StockMerger" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="2" disabled="true">
+          <Merger name="StockMerger" pattern="twoInputControls" labelHandling="Own" leftRatio="40" rightRatio="60" disabled="true">
             <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Stock" id="StockId" />
+              <Resource target="Label" type="Label" defaultLabel="Actual Inventory" id="ActualInventory" />
             </Bindings>
             <InputArea name="Stock" disabled="true">
               <Bindings>
@@ -337,8 +322,12 @@
                 <Col>
                   <Row>
                     <Col width="8em">
-                      <Row width="10em" layoutType="itemImportantValueSmall" bindingId="UoM" />
-                      <Row width="10em" layoutType="itemValueVerySmall" bindingId="OQty" />
+                      <Row width="10em" layoutType="itemIdentifier" bindingId="UoM" />
+                      <Row>
+                        <Col layoutType="itemValueVerySmall" bindingId="ShippedQtyLabel" />
+                        <Col layoutType="Image" width="0.2em" bindingId="Spacer" />
+                        <Col layoutType="itemValueVerySmall" bindingId="TargetQuantity" />
+                      </Row>
                     </Col>
                     <Col flex="1" bindingId="Quantity" />
                   </Row>
@@ -356,8 +345,12 @@
                   <Col>
                     <Row>
                       <Col width="8em">
-                        <Row width="10em" layoutType="itemImportantValueSmall" bindingId="UoM" />
-                        <Row width="10em" layoutType="itemValueVerySmall" bindingId="OQty" />
+                        <Row width="10em" layoutType="itemIdentifier" bindingId="UoM" />
+                        <Row>
+                          <Col layoutType="itemValueVerySmall" bindingId="ShippedQtyLabel" />
+                          <Col layoutType="Image" width="0.2em" bindingId="Spacer" />
+                          <Col layoutType="itemValueVerySmall" bindingId="TargetQuantity" />
+                        </Row>
                       </Col>
                       <Col flex="1" bindingId="Quantity" />
                     </Row>
@@ -379,15 +372,18 @@
               <Binding target="Quantity" type="Stepper" binding=".quantity" minValue="0" maxValue="9999" minBinding="minStepperValue" bindingMode="TWO_WAY" formatV2="4.0" stepperCorrelationId=".pKey" />
               <Resource target="PriceLabel" type="Label" id="PriceId" defaultLabel="Price" />
               <Resource target="ReceiptLabel" type="Label" id="ReceiptId" defaultLabel="Receipt Value" />
+              <Binding target="TargetQuantity" type="Text" binding=".targetQuantity" bindingMode="ONE_WAY" />
+              <Resource target="ShippedQtyLabel" type="Label" id="ShippedQtyLabel" defaultLabel="Shipped Quantity:" />
+              <Resource target="Spacer" type="Label" id="Spacer" defaultLabel="   " />
             </Bindings>
           </Items>
         </EmbeddedList>
-        <GroupElement name="AdvancedSettingsGroup">
+        <!-- <GroupElement name="AdvancedSettingsGroup">
           <Bindings>
             <Resource target="Title" type="Label" id="AdvSettingsGroupId" defaultLabel="Advanced Settings" />
-          </Bindings>
+          </Bindings> -->
           <!-- Reason  -->
-          <SelectionBox name="Reason" disabled="false">
+          <!-- <SelectionBox name="Reason" disabled="false">
             <Bindings>
               <Resource target="Label" type="Label" id="ReasonId" defaultLabel="Reason Code" />
               <Binding target="DataSource" binding="ProcessContext::MainBO.boItemTabManager.loModReasonSelectionBox" bindingMode="ONE_WAY" />
@@ -399,24 +395,24 @@
                 <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
               </Bindings>
             </Items>
-          </SelectionBox>
+          </SelectionBox> -->
           <!-- Discount -->
-          <Stepper name="Discount" minValue="0" maxValue="100">
+          <!-- <Stepper name="Discount" minValue="0" maxValue="100">
             <Bindings>
               <Resource target="Label" type="Label" defaultLabel="Discount" id="DiscountId" />
               <Binding target="Value" type="Decimal" formatV2="3.1" binding="ProcessContext::MainBO.boItemTabManager.loUnitOfMeasure.Current.discount" bindingMode="TWO_WAY" />
               <Binding target="StepSize" value="0.1" />
             </Bindings>
-          </Stepper>
+          </Stepper> -->
           <!-- Special Price -->
-          <Stepper name="SpecialPrice" minValue="0">
+          <!-- <Stepper name="SpecialPrice" minValue="0">
             <Bindings>
               <Resource target="Label" type="Label" defaultLabel="Sp. Price" id="SpecialPriceId" />
               <Binding target="Value" type="Decimal" formatV2="10.2" binding="ProcessContext::MainBO.boItemTabManager.loUnitOfMeasure.Current.specialPriceReceipt" bindingMode="TWO_WAY" />
               <Binding target="StepSize" value="0.01" />
             </Bindings>
           </Stepper>
-        </GroupElement>
+        </GroupElement> -->
         <GroupElement name="SelectablePromotion">
           <Bindings>
             <Resource target="Title" type="Label" id="SelectablePromotionId" defaultLabel="Selectable Promotion" />

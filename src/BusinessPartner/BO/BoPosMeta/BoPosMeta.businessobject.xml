@@ -1,4 +1,4 @@
-<BusinessObject name="BoPosMeta" xmlns="BoSchema.xsd" generateLoadMethod="true" OERReference="BpaPOSMeta">
+<BusinessObject name="BoPosMeta"  generateLoadMethod="true" OERReference="BpaPOSMeta">
   <DataSource name="DsBoPosMeta" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />

@@ -46,7 +46,7 @@
         <TransitionTo action="EndCopyTodo" />
       </Action>
       <!-- Show Copy Wizard -->
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Todo::CopyFlyoutUI</UIDescription>
         <Events>
           <Event name="FinishWizard" action="setDirty" />

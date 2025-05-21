@@ -66,7 +66,7 @@
     <SimpleProperty name="cndCpCalculationSchemaPKey" type="DomPKey" dataSourceProperty="cndCpCalculationSchemaPKey" />
     <SimpleProperty name="calculationStatus" type="DomSdoCalculationStatus" dataSourceProperty="calculationStatus" />
     <SimpleProperty name="calculationTime" type="DomDateTime" dataSourceProperty="calculationTime" />
-    <SimpleProperty name="pricingDate" type="DomDateTime" dataSourceProperty="pricingDate" />
+    <SimpleProperty name="pricingDate" type="DomDate" dataSourceProperty="pricingDate" />
     <SimpleProperty name="isRoundingOn" type="DomBool" dataSourceProperty="isRoundingOn" />
     <SimpleProperty name="isRoundingToggleChanged" type="DomBool" dataSourceProperty="isRoundingToggleChanged" />
     <SimpleProperty name="firstCalculation" type="DomBool" />
@@ -151,6 +151,7 @@
     <ObjectLookup name="luResponsible" objectClass="LuUser" dataSourceProperty="responsiblePKey" lookupProperty="pKey" />
     <ObjectLookup name="luTour" objectClass="LuTourInformation" dataSourceProperty="tmgMainPKey" lookupProperty="pKey" />
     <ObjectLookup name="luEtpWarehouse" objectClass="LuEtpWarehouse" dataSourceProperty="etpWarehousePKey" lookupProperty="pKey" />
+    <ObjectLookup name="luVisit" objectClass="LuCall" dataSourceProperty="clbMainPKey" lookupProperty="pKey" />
   </ObjectLookups>
   <NestedObjects>
     <NestedObject name="hurdleEvaluationHelper" objectClass="BoHurdleEvaluationHelper" dataSourceProperty="empty" nestingProperty="empty" />
@@ -279,8 +280,8 @@
     <Method name="cpCreateSdoConditions" />
     <Method name="cpHandleCalculateResult" />
     <Method name="createPricingInformationForList" />
-    <Method name="cpPrepareContext"/>
-    <Method name="executeRequestsAsync"/>
+    <Method name="cpPrepareContext" />
+    <Method name="executeRequestsAsync" />
     <!-- Splitting Invoice -->
     <Method name="determineSplittingOption" />
     <Method name="determineSplittingRule" />

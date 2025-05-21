@@ -14,7 +14,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Visit::ShowMapUI</UIDescription>
       </Action>
       

@@ -27,7 +27,7 @@
           <Condition leftSideValue="Visit.Responsible__c" comparator="eq" rightSideType="Parameter" rightSideValue="'#ownerPKey#'" />
         </SimpleJoin>
         <ComplexJoin><![CDATA[
-             (Visit.Status = 'Planned' Or Visit.Status = 'Completed')
+             (Visit.Status = 'Planned' Or Visit.Status = 'Completed' Or Visit.Status = 'InProgress')
           ]]></ComplexJoin>
       </Join>
     </Entity>

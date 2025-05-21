@@ -17,7 +17,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Customer::ContactPartnerLookupUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndWithNewValue" />

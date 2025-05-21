@@ -36,7 +36,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::ChooseUserUI</UIDescription>
         <Events>
           <Event name="UserSelected" action="AssignUserPKey" />

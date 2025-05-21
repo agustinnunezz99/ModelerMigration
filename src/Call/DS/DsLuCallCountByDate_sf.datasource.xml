@@ -22,7 +22,7 @@
               sqlStmt_calls +=    "Select Count(*) AS callCount ";
               sqlStmt_calls +=    "from Visit ";
               sqlStmt_calls +=    "JOIN Visit_Template__c ON Visit.Visit_Template__c = Visit_Template__c.Id ";
-              sqlStmt_calls +=    "where Visit.Status = 'Planned' ";
+              sqlStmt_calls +=    "where (Visit.Status = '" + BLConstants.VISIT.STATUS_PLANNED + "' OR Visit.Status = '" + BLConstants.VISIT.STATUS_INPROGRESS + "' ) ";
               sqlStmt_calls +=    "AND Visit.IsDeleted = '0' ";
               sqlStmt_calls +=    "AND Visit.Tour__c = #tmgMainPKey#";
 			}
@@ -30,7 +30,7 @@
               sqlStmt_calls +=    "Select ( ";
               sqlStmt_calls +=    "Select Count(*) from Visit ";
               sqlStmt_calls +=    "JOIN Visit_Template__c ON Visit.Visit_Template__c = Visit_Template__c.Id ";
-              sqlStmt_calls +=    "where Visit.Status = 'Planned' ";
+              sqlStmt_calls +=    "where (Visit.Status = '" + BLConstants.VISIT.STATUS_PLANNED + "' OR Visit.Status = '" + BLConstants.VISIT.STATUS_INPROGRESS + "'  ) ";
               sqlStmt_calls +=    "AND #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','<=',#currentDate#, 'Date')# ";
               sqlStmt_calls +=    "AND #compareAsDate('Visit.PlannedVisitEndTime', 'DateTime','>=',#currentDate#, 'Date')# ";    
               sqlStmt_calls +=    "AND Visit.Responsible__c = '#UserPKey#' ";
@@ -64,7 +64,7 @@
             sqlStmt_sub_calls += "AND #compareAsDate('SubMain.Valid_Thru__c', 'Date', '>=', 'Visit.PlannedVisitStartTime', 'DateTime')# "; 
             sqlStmt_sub_calls += "AND #compareAsDate('SubBpaRel.Valid_From__c', 'Date','<=' ,'Visit.PlannedVisitStartTime', 'DateTime')# ";
             sqlStmt_sub_calls += "AND #compareAsDate('SubBpaRel.Valid_Thru__c', 'Date','>=' ,'Visit.PlannedVisitStartTime', 'DateTime')# ";
-			sqlStmt_sub_calls += "AND Visit.Status = 'Planned' ";
+			sqlStmt_sub_calls += "AND (Visit.Status = '" + BLConstants.VISIT.STATUS_PLANNED + "' OR Visit.Status = '" + BLConstants.VISIT.STATUS_INPROGRESS + "') ";
 
 			if (Utils.isEmptyString(tmgMainPKey)){
               sqlStmt_sub_calls += "AND #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','<=',#currentDate#, 'Date')# ";

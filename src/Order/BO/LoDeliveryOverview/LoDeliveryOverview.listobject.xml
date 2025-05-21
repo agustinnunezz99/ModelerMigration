@@ -1,4 +1,4 @@
-<ListObject name="LoDeliveryOverview" generateLoadMethod="false" filter="InDatabase" paging="true" xmlns="BoSchema.xsd">
+<ListObject name="LoDeliveryOverview" generateLoadMethod="false" filter="InDatabase" paging="true" >
   <DataSource name="DsLoDeliveryOverview" />
   <Item objectClass="LiDeliveryOverview" />
   <Methods>

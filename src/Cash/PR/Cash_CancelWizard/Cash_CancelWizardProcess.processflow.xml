@@ -32,7 +32,7 @@
         <Return name="ProcessContext::CancelReasons" />
         <TransitionTo action="ShowCancelReasonSelectionView" />
       </Action>
-      <Action actionType="View" name="ShowCancelReasonSelectionView">
+      <Action actionType="VIEW" name="ShowCancelReasonSelectionView">
         <UIDescription>Cash::CancelWizardUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="CancelCash" />

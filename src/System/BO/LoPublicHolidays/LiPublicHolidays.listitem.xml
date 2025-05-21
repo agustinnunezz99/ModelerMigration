@@ -1,4 +1,4 @@
-<ListItem name="LiPublicHolidays" xmlns="BoSchema.xsd">
+<ListItem name="LiPublicHolidays" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="holiday" type="DomDate" storable="false" dataSourceProperty="holiday" />

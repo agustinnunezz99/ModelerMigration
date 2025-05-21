@@ -33,79 +33,6 @@
             </Events>
           </Lookup>
         </GroupElement>
-        <!--Edu: Ini adicionar picklist para visitas-->
-        <GroupElement name="TypeVisitGE">
-          <SelectionBox name="TypeVisit">
-            <Bindings>
-              <Resource target="Label" type="Label" id="TypeVisitId" defaultLabel="Tipo de visita" />
-              <Binding target="DataSource" toggleId="DomTypeVisit" bindingMode="TWO_WAY" />
-              <Binding target="Value" binding="ProcessContext::WizardBO.typeVisit" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-        </GroupElement>
-        <!--Edu: Fin adicionar picklist para visitas-->
-        <!--Edu: Ini GroupElement Carteras-->
-        <GroupElement name="Briefcase">
-          <Lookup name="BriefcaseName">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Cartera" id="BriefcaseName" />
-              <Binding target="Value" binding="ProcessContext::WizardBO.briefcaseLookup.name" bindingMode="ONE_WAY" />
-            </Bindings>
-            <Events>
-              <LookupEvent event="OpenBriefcaseNameLookup" />
-            </Events>
-          </Lookup>
-        </GroupElement>
-        <!--Edu: Fin GroupElement Carteras-->
-        <!--FMG-96: OFFLINE - Agenda - Otras Actividades-->
-        <GroupElement name="TimeVisit">
-          <SelectionBox name="TaskVisit">
-            <Bindings>
-              <Resource target="Label" type="Label" id="TaskVisitId" defaultLabel="Tarea" />
-              <Binding target="DataSource" toggleId="DomTaskVisit" bindingMode="TWO_WAY" />
-              <Binding target="Value" binding="ProcessContext::WizardBO.taskVisit" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-          <SelectionBox name="FraccionVisit">
-            <Bindings>
-              <Resource target="Label" type="Label" id="FraccionVisitId" defaultLabel="Porcentaje de Tiempo" />
-              <Binding target="DataSource" toggleId="DomFraccionVisit" bindingMode="TWO_WAY" />
-              <Binding target="Value" binding="ProcessContext::WizardBO.fraccion" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-          <SelectionBox name="OtrasActividades">
-            <Bindings>
-              <Resource target="Label" type="Label" id="OtrasActividadesId" defaultLabel="Actividad" />
-              <Binding target="DataSource" toggleId="DomActividadesVisit" bindingMode="TWO_WAY" />
-              <Binding target="Value" binding="ProcessContext::WizardBO.actividades" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-        </GroupElement>
-        <!--FMG-96: OFFLINE - Agenda - Otras Actividades-->
         <GroupElement name="DateTime">
           <DatePickerField name="VisitDate">
             <Bindings>
@@ -140,19 +67,6 @@
             </Events>
           </Lookup>
         </GroupElement>
-        <!--Edu: Ini GroupElement Instituciones-->
-        <GroupElement name="Institution">
-          <Lookup name="InstitutionName">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Institución" id="InstitutionName" />
-              <Binding target="Value" binding="ProcessContext::WizardBO.institutionLookup.name" bindingMode="ONE_WAY" />
-            </Bindings>
-            <Events>
-              <LookupEvent event="OpenInstitutionNameLookup" />
-            </Events>
-          </Lookup>
-        </GroupElement>
-        <!--Edu: Fin GroupElement Instituciones-->
         <GroupElement name="TripListInfo">
           <Lookup name="TripListName">
             <Bindings>

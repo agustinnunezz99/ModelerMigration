@@ -1,4 +1,4 @@
-<UIDescription xmlns="UISchema.xsd" name="Contract::CustomerContractUI" schemaVersion="1.1">
+<UIDescription  name="Contract::CustomerContractUI" schemaVersion="1.1">
   <Page pagePattern="MasterDetailSectionPage" masterSectionFlex="40" detailSectionFlex="60">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Main" />

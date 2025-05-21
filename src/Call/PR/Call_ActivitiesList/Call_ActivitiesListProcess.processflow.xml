@@ -22,7 +22,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::ActivitiesListUI</UIDescription>
         <Events></Events>
       </Action>

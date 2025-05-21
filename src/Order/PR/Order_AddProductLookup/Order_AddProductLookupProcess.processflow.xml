@@ -11,7 +11,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::AddProductLookup</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndWithNewValue" />

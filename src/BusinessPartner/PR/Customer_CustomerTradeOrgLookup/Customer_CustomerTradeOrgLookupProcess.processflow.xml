@@ -13,7 +13,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Customer::CustomerTradeOrgAdvSearchUI</UIDescription>
         <Events>
           <Event name="TradeOrgItemSelected" action="End" />

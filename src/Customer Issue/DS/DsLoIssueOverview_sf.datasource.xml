@@ -152,6 +152,7 @@
 			sqlStmt1 += "Account_Task__c.Account_Task_Template__c as svcMetaPKey, ";
 			sqlStmt1 += "'0' as isPrivate, ";
 			sqlStmt1 += "Account_Task_Template__c.Active__c as isActive, ";
+			sqlStmt1 += "Account_Task_Template__c.Description__c as templateName, ";
 			sqlStmt1 += "UsrResp.LastName || ', ' || UsrResp.FirstName as responsibleName, ";
 			sqlStmt1 += "UsrOwner.LastName || ', ' || UsrOwner.FirstName as ownerName, ";
 			sqlStmt1 += "Account.Name as customerName, ";

@@ -1,4 +1,4 @@
-<ListObject name="LoCustomerPOSRelation" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoCustomerPOSRelation" generateLoadMethod="true" >
   <DataSource name="DsLoCustomerPOSRelation" />
   <Item objectClass="LiCustomerPOSRelation" />
   <Methods>

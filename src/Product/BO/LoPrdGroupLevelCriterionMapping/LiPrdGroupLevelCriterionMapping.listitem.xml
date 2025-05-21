@@ -1,4 +1,4 @@
-<ListItem name="LiPrdGroupLevelCriterionMapping" xmlns="BoSchema.xsd">
+<ListItem name="LiPrdGroupLevelCriterionMapping" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="groupLevel" type="DomPrdGroupLevel" storable="false" dataSourceProperty="groupLevel" />

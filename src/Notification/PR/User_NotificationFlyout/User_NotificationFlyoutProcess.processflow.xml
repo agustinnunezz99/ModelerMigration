@@ -19,7 +19,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowNotificationInfo">
+      <Action actionType="VIEW" name="ShowNotificationInfo">
         <UIDescription>User::NotificationFlyoutUI</UIDescription>
         <Events>
           <Event name="MarkNotificationAsRead" action="setNotificationAsRead" />

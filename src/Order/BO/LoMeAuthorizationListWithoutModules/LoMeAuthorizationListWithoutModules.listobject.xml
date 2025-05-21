@@ -1,4 +1,4 @@
-<ListObject name="LoMeAuthorizationListWithoutModules" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoMeAuthorizationListWithoutModules" generateLoadMethod="true" >
   <DataSource name="DsLoMeAuthorizationListWithoutModules" />
   <Item objectClass="LiMeAuthorizationListWithoutModules" />
   <Methods>

@@ -24,7 +24,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowNoteInfo">
+      <Action actionType="VIEW" name="ShowNoteInfo">
         <UIDescription>Call::VisitNotesWizardUI</UIDescription>
       </Action>
       <Action actionType="END" name="End">

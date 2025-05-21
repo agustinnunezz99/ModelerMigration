@@ -1,4 +1,4 @@
-<BusinessObject name="BoOrderMeta" xmlns="BoSchema.xsd" generateLoadMethod="false" OERReference="SdoMeta" schemaVersion="2.0">
+<BusinessObject name="BoOrderMeta"  generateLoadMethod="false" OERReference="SdoMeta" schemaVersion="2.0">
   <DataSource name="DsBoOrderMeta" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="false" dataSourceProperty="pKey" />
@@ -86,6 +86,8 @@
     <SimpleProperty name="generateRewardsLog" type="DomSdoGenerateRewardsLog" storable="false" dataSourceProperty="generateRewardsLog" />
     <SimpleProperty name="cashFloatRecordTypeId" type="DomPKey" storable="false" />
     <SimpleProperty name="productInventoryRecordTypeId" type="DomPKey" storable="false" />
+    <SimpleProperty name="checkOutType" type="DomText" dataSourceProperty="checkOutType" />
+    <SimpleProperty name="invoiceNumberDefinitionId" type="DomPKey" storable="false" dataSourceProperty="invoiceNumberDefinitionId" />
   </SimpleProperties>
   <ListObjects>
     <ListObject name="loOrderItemMetas" objectClass="LoOrderItemMetas" dataSourceProperty="pKey" listProperty="sdoMetaPKey" loadMode="LoadImmediate" />

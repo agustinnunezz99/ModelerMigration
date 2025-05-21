@@ -1,4 +1,4 @@
-<BusinessObject name="BoTodo" xmlns="BoSchema.xsd" generateLoadMethod="false" generateCreateMethod="false" OERReference="SvcTodo" schemaVersion="1.1">
+<BusinessObject name="BoTodo"  generateLoadMethod="false" generateCreateMethod="false" OERReference="SvcTodo" schemaVersion="1.1">
   <DataSource name="DsBoTodo" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="false" dataSourceProperty="pKey" />

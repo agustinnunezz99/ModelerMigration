@@ -1,4 +1,4 @@
-<UIDescription name="Reporting::CardExceptionsMaximizedUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank" simpleEditorOnly="true">
+<UIDescription name="Reporting::CardExceptionsMaximizedUI" schemaVersion="0.0.0.5"  layoutType="blank" simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage" onBackDiscard="true" useSolidBackground="true">
     <PageHeader>
       <Bindings>

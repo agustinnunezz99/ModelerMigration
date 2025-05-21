@@ -1,4 +1,4 @@
-<BusinessObject name="BoUnitConversion" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="false">
+<BusinessObject name="BoUnitConversion"  generateLoadMethod="true" generateCreateMethod="false">
   <DataSource name="DsBoUnitConversion" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />

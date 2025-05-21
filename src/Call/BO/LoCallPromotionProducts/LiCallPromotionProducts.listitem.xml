@@ -1,4 +1,4 @@
-<ListItem name="LiCallPromotionProducts" xmlns="BoSchema.xsd">
+<ListItem name="LiCallPromotionProducts" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="groupFlag" type="DomText" dataSourceProperty="groupFlag" />

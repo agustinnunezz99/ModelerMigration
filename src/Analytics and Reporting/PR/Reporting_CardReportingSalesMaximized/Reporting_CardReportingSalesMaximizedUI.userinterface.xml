@@ -1,4 +1,4 @@
-<UIDescription name="Reporting::CardReportingSalesMaximizedUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank" simpleEditorOnly="true">
+<UIDescription name="Reporting::CardReportingSalesMaximizedUI" schemaVersion="0.0.0.5"  layoutType="blank" simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage" onBackDiscard="true" useSolidBackground="true">
     <PageHeader>
       <Bindings>
@@ -15,6 +15,7 @@
             <Binding target="visitRate" type="Text" binding="ProcessContext::CardReportingVisitRate_Rate" bindingMode="ONE_WAY" />
             <Binding target="selectedDate" type="Text" binding="ProcessContext::SelectedDate" bindingMode="ONE_WAY" />
             <Binding target="currentDate" type="Text" binding="ProcessContext::CurrentDate" bindingMode="ONE_WAY" />
+            <Binding target="currency" type="Text" binding="ApplicationContext::User.translatedCurrency" bindingMode="ONE_WAY" />
             <List target="salesData" dataSource="ProcessContext::CardReportingSales_SalesData.Items[]">
               <Binding target="pKey" type="Text" binding=".pKey" />
               <Binding target="netSales" type="Text" binding=".netSales" />

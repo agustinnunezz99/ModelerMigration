@@ -42,15 +42,34 @@
       <Action name="CreateReplicationCallBacksBo" actionType="CREATE" type="BoSfReplicationCallbacks">
         <Return name="ProcessContext::SfReplicationCallbacks" />
       </Action>
+      <Action name="LoadTourUserRole" actionType="LOAD" type="LuUserHasRoleById">
+        <Parameters>
+          <Input name="usrRole" type="Literal" value="TourUser" />
+          <Input name="usrPKey" value="ApplicationContext::User.pKey" />
+        </Parameters>
+        <Return name="ProcessContext::TourUserRole" />
+      </Action>
     </EntryActions>
   </Entry>
   <Body>
     <Actions>
       <Action name="IsInvalidOrder_Decision" actionType="DECISION" parameter="ProcessContext::OrderBo.isInvalidOrder">
         <Case value="1" action="End" />
-        <CaseElse action="CheckDataAvailability" />
+        <CaseElse action="DSD_Decision" />
       </Action>
-      <!-- SF/CASDIF Start -->
+      <Action name="DSD_Decision" actionType="DECISION" parameter="ProcessContext::TourUserRole.pKey">
+        <CaseEmpty action="CheckDataAvailability" />
+        <CaseElse action="CheckIfDSDDataIsAvailable" />
+      </Action>
+
+      <Action name="CheckIfDSDDataIsAvailable" actionType="LOGIC" call="ProcessContext::SfReplicationCallbacks.isDSDOrderOnDemandDataAvailable">
+        <Parameters>
+          <Input name="orderId" type="Literal" value="" />
+          <Input name="customerId" value="ProcessContext::OrdererPKey" />
+        </Parameters>
+        <Return name="ProcessContext::IsOrderDataAvailable" />
+        <TransitionTo action="DataAvailability_Decision" />
+      </Action>
       <Action name="CheckDataAvailability" actionType="LOGIC" call="ProcessContext::SfReplicationCallbacks.isOrderOnDemandDataAvailable">
         <Parameters>
           <Input name="customerPKey" value="ProcessContext::OrdererPKey" />
@@ -61,12 +80,23 @@
       <Action name="DataAvailability_Decision" actionType="DECISION" parameter="ProcessContext::isOrderDataAvailable">
         <Case value="1" action="StartNavigation" />
         <Case value="2" action="Message_OrderDataNotOnDevice" />
-        <CaseElse action="LoadOrderOnDemandData" />
+        <CaseElse action="RequestOnDemandData_DSD_Decision" />
       </Action>
       <Action name="StartNavigation" actionType="DECISION" parameter="ProcessContext::OrderBo.boOrderMeta.sdoSubType">
         <Case value="Delivery" action="StartNavigation_Delivery" />
         <CaseElse action="StartNavigation_Order" />
         <CaseEmpty action="StartNavigation_Order" />
+      </Action>
+      <Action name="RequestOnDemandData_DSD_Decision" actionType="DECISION" parameter="ProcessContext::TourUserRole.pKey">
+        <CaseEmpty action="LoadOrderOnDemandData" />
+        <CaseElse action="LoadDSDOrderOnDemandData" />
+      </Action>
+      <Action name="LoadDSDOrderOnDemandData" actionType="LOGIC" call="ProcessContext::SfReplicationCallbacks.requestDSDOrderOnDemandDataAsync">
+        <Parameters>
+          <Input name="orderId" type="Literal" value="" />
+          <Input name="customerId" value="ProcessContext::OrdererPKey" />
+        </Parameters>
+        <TransitionTo action="Message_OrderDataNotOnDevice" />
       </Action>
       <Action name="LoadOrderOnDemandData" actionType="LOGIC" call="ProcessContext::SfReplicationCallbacks.requestOrderOnDemandDataAsync">
         <Parameters>
@@ -85,7 +115,6 @@
           <Input name="MainBO" value="ProcessContext::OrderBo" />
         </Parameters>
       </Action>
-      <!-- SF/CASDIF End -->
       <Action name="StartNavigation_Order" actionType="PROCESS" process="Order::PreOrderNavigationProcess">
         <Parameters>
           <Input name="MainBO" value="ProcessContext::OrderBo" />

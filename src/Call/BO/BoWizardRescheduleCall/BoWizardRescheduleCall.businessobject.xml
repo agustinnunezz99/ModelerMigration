@@ -1,4 +1,4 @@
-<BusinessObject name="BoWizardRescheduleCall" schemaVersion="1.1" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="true">
+<BusinessObject name="BoWizardRescheduleCall" schemaVersion="1.1"  generateLoadMethod="true" generateCreateMethod="true">
   <DataSource name="DsBoCall" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />

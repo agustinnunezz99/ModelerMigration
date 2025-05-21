@@ -16,7 +16,8 @@
     <DerivedAttribute name="showTimecardInfo" value="'0'" />
     <DerivedAttribute name="password" value="' '" />
     <Attribute name="currency" table="Sales_Organization__c" column="Currency__c" />
-    <DerivedAttribute name="distanceUnit" value="CASE WHEN Sales_Organization__c.Distance_Unit__c = 'km' THEN 'kilometers' ELSE Sales_Organization__c.Distance_Unit__c END " />
+    <Attribute name="distanceUnit" table="Sales_Organization__c" column="Distance_Unit__c" />
+    <Attribute name="geofenceDistance" table="Sales_Organization__c" column="Geofence_Distance__c" />
     <Attribute name="sfId" table="User" column="Id" />
     <DerivedAttribute name="sfLanguagePostfix" value="CASE WHEN Sales_Organization__c.Language_1__c = User.LanguageLocaleKey Then 'Language_1' WHEN Sales_Organization__c.Language_2__c = User.LanguageLocaleKey Then 'Language_2' WHEN Sales_Organization__c.Language_3__c = User.LanguageLocaleKey Then 'Language_3' WHEN Sales_Organization__c.Language_4__c = User.LanguageLocaleKey Then 'Language_4' WHEN Sales_Organization__c.Language_1__c = 'en' AND User.LanguageLocaleKey = 'en_US' Then 'Language_1' WHEN Sales_Organization__c.Language_2__c = 'en' AND User.LanguageLocaleKey = 'en_US' Then 'Language_2' WHEN Sales_Organization__c.Language_3__c = 'en' AND User.LanguageLocaleKey = 'en_US' Then 'Language_3' WHEN Sales_Organization__c.Language_4__c = 'en' AND User.LanguageLocaleKey = 'en_US' Then 'Language_4' ELSE 'Language_1'  END " />
   </Attributes>

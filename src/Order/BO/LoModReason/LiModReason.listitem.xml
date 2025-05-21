@@ -1,4 +1,4 @@
-<ListItem name="LiModReason" xmlns="BoSchema.xsd">
+<ListItem name="LiModReason" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" />
     <SimpleProperty name="modReason" type="DomSdoModReason" storable="false" dataSourceProperty="modReason" />

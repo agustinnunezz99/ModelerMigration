@@ -69,11 +69,11 @@
     <Attribute name="considerBpaDocTaType" table="Order_Template__c" column="Use_Customer_Document_TA_Type__c" />
     <Attribute name="cndCpCalculationSchemaPKey" table="Order_Template__c" column="Calculation_Schema__c" />
     <Attribute name="paymentModReasonRequired" table="Order_Template__c" column="Payment_Modification_Reason__c" />
+    <Attribute name="filterByCurrentInventory" table="Order_Template__c" column="Inventory_Filter__c" />
     <DerivedAttribute name="splittingOption" value="'No'" />
     <DerivedAttribute name="splittingRule" value="''" />
     <DerivedAttribute name="usrNotificationMetaPKey" value="''" />
     <DerivedAttribute name="numberOfHistValues" value="Order_Template__c.Number_Of_Historic_Quantities__c" />
-    <DerivedAttribute name="filterByCurrentInventory" value="'0'" />
     <Attribute name="itemPresettingPolicy" table="Order_Template__c" column="Item_Presetting_Policy__c" />
     <DerivedAttribute name="generatePricingLog" value="CASE Generate_Pricing_Log__c WHEN ' ' THEN 'Yes' ELSE Generate_Pricing_Log__c END" />
     <DerivedAttribute name="generatePricingInformation" value="CASE Generate_Pricing_Information__c WHEN ' ' THEN 'No' ELSE Generate_Pricing_Information__c END" />
@@ -81,6 +81,8 @@
     <Attribute name="promotionFilterSelection" table="Order_Template__c" column="Promotion_Filter_Selection__c" />
     <Attribute name="specialOrderHandling" table="Order_Template__c" column="Special_Order_Handling__c" />
     <DerivedAttribute name="generateRewardsLog" value="CASE Generate_Rewards_Log__c WHEN ' ' THEN 'Yes' ELSE Generate_Rewards_Log__c END" />
+    <Attribute name="checkOutType" table="Order_Template__c" column="Check_Out_Type__c" />
+    <Attribute name="invoiceNumberDefinitionId" table="Order_Template__c" column="Invoice_Number_Definition__c" />
   </Attributes>
   <Entities>
     <Entity name="Order_Template__c" alias="" idAttribute="Id" />

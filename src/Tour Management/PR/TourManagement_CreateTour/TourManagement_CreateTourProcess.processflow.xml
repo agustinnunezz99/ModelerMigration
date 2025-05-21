@@ -18,7 +18,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>TourManagement::CreateTourUI</UIDescription>
         <Events>
           <Event name="warehouseLookup" action="OpenWarehouseLookup" />

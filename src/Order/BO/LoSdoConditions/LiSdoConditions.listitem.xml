@@ -1,4 +1,4 @@
-<ListItem name="LiSdoConditions" xmlns="BoSchema.xsd">
+<ListItem name="LiSdoConditions" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="sdoMainPKey" type="DomPKey" storable="true" dataSourceProperty="sdoMainPKey" />

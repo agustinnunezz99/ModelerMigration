@@ -155,7 +155,7 @@
           <Input name="Mail" value="ProcessContext::RetailStoreDetail.LuContact.email" />
         </Parameters>
       </Action>
-      <Action actionType="Logic" name="StartPhoneCall" call="ProcessContext::RetailStoreDetail.processPhoneCall">
+      <Action actionType="LOGIC" name="StartPhoneCall" call="ProcessContext::RetailStoreDetail.processPhoneCall">
         <Parameters>
           <Input name="phoneNumber" value="Event.phoneNumber" />
         </Parameters>

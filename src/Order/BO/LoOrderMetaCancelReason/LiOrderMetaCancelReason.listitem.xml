@@ -1,4 +1,4 @@
-<ListItem name="LiOrderMetaCancelReason" xmlns="BoSchema.xsd">
+<ListItem name="LiOrderMetaCancelReason" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="false" dataSourceProperty="pKey" />
     <SimpleProperty name="reasonCode" type="DomSdoCancelReason" storable="false" dataSourceProperty="reasonCode" />

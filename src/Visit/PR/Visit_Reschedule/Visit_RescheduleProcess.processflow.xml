@@ -96,7 +96,7 @@
         </Parameters>
         <TransitionTo action="End" />
       </Action>
-      <Action actionType="View" name="ShowDetail">
+      <Action actionType="VIEW" name="ShowDetail">
         <UIDescription>Visit::RescheduleUI</UIDescription>
         <Events>
           <Event name="rescheduleVisit" action="WizardValidation" />

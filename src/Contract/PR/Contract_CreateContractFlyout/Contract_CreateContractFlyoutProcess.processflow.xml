@@ -35,7 +35,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Contract::CreateContractFlyoutUI</UIDescription>
         <Events>
           <Event name="FinishWizard" action="setDirty" />

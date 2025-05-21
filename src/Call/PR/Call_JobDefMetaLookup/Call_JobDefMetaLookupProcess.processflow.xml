@@ -21,7 +21,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::JobDefMetaLookupUI</UIDescription>
         <Events>
           <Event name="JobDefMetaItemSelected" action="End" />

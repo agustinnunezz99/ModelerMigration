@@ -1,4 +1,4 @@
-<BusinessObject name="BoWizardAddProduct" xmlns="BoSchema.xsd" generateLoadMethod="true">
+<BusinessObject name="BoWizardAddProduct"  generateLoadMethod="true">
   <DataSource name="DsBoWizardAddProduct" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" storable="false" dataSourceProperty="pKey" />

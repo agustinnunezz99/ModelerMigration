@@ -39,7 +39,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowStoreCheck">
+      <Action actionType="VIEW" name="ShowStoreCheck">
         <UIDescription>Visit::KPIStoreCheckUI</UIDescription>
         <Events>
           <Event name="contextMenuOpening" action="GetContextMenu" />

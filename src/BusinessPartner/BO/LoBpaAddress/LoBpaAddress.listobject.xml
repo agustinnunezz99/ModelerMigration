@@ -1,4 +1,4 @@
-<ListObject name="LoBpaAddress" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoBpaAddress" generateLoadMethod="true" >
   <DataSource name="DsLoBpaAddress" />
   <Item objectClass="LiBpaAddress" />
   <Methods>

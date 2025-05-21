@@ -1,4 +1,4 @@
-<UIDescription name="Order::ReplenishmentItemListTabUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="Order::ReplenishmentItemListTabUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="MasterDetailSectionPage" masterSectionFlex="4.6" detailSectionFlex="3.7" cachable="false">
     <PageHeader>
       <Bindings>

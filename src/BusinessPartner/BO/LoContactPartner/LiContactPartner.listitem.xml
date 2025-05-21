@@ -1,4 +1,4 @@
-<ListItem name="LiContactPartner" xmlns="BoSchema.xsd">
+<ListItem name="LiContactPartner" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="bpaContactPartnerPKey" type="DomPKey" dataSourceProperty="bpaContactPartnerPKey" />

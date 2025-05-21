@@ -1,4 +1,4 @@
-<Process name="Order::CreateNewWizardProcess" defaultAction="HasNoOrderRole" schemaVersion="0.0.0.5">
+<Process name="Order::CreateNewWizardProcess" defaultAction="DocumentTypeDecision" schemaVersion="0.0.0.5">
   <Entry>
     <ProcessContext>
       <Declarations>
@@ -8,6 +8,7 @@
       </Declarations>
       <Parameters>
         <Input name="OrdererPKey" type="DomPKey" />
+        <Input name="DocumentType" type="DomPKey" />
       </Parameters>
     </ProcessContext>
     <EntryActions>
@@ -21,6 +22,11 @@
   </Entry>
   <Body>
     <Actions>
+      <Action name="DocumentTypeDecision" actionType="DECISION" parameter="ProcessContext::DocumentType">
+        <Case value="ProductCheckIn" action="GetTemplateList" />
+        <CaseElse action="HasNoOrderRole" />
+        <CaseEmpty  action="HasNoOrderRole"/>
+      </Action>
       <!-- Order Role Check -->
       <Action name="HasNoOrderRole" actionType="LOGIC" call="Utils.isEmptyString">
         <Parameters>
@@ -46,11 +52,12 @@
       <Action name="GetTemplateList" actionType="LOAD" type="LoOrderMeta">
         <Parameters>
           <Input name="customerPKey" value="ProcessContext::OrdererPKey" />
+          <Input name="documentType" value="ProcessContext::DocumentType" />
         </Parameters>
         <Return name="ProcessContext::OrderMetaList" />
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::CreateNewWizard</UIDescription>
         <Events>
           <Event name="itemSelected" action="End" />

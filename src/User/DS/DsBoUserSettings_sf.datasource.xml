@@ -17,6 +17,7 @@
     <Attribute name="clbShowCalendarWeekMobility" table="User_Setting__c" column="Show_Calendar_Week__c" />
     <Attribute name="clbAgendaDisplayTimeMobility" table="User_Setting__c" column="Show_Agenda_Time__c" />
     <Attribute name="displayWeekend" table="User_Setting__c" column="Display_Weekend__c" />
+    <Attribute name="mobileBluetoothDevice" table="User_Setting__c" column="Mobile_Bluetooth_Device__c" />
   </Attributes>
   <Entities>
     <Entity name="User_Setting__c" alias="" idAttribute="Id" />

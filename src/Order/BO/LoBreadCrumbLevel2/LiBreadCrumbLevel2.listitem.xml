@@ -1,4 +1,4 @@
-<ListItem name="LiBreadCrumbLevel2" xmlns="BoSchema.xsd">
+<ListItem name="LiBreadCrumbLevel2" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="id" type="DomId" storable="false" dataSourceProperty="id" />

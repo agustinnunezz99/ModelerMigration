@@ -34,7 +34,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowCallInfo">
+      <Action actionType="VIEW" name="ShowCallInfo">
         <UIDescription>Call::InfoTabUI</UIDescription>
       </Action>
     </Actions>

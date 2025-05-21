@@ -38,7 +38,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::PromotionReview</UIDescription>
         <Events>
           <Event name="itemSelected" action="actDependendFromTabName_Decision" />

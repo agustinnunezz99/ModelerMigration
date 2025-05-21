@@ -10,10 +10,12 @@
     <Attribute name="bpaCustomerPKey" table="Signature__c" column="Account__c" />
     <Attribute name="name" table="Signature__c" column="Name__c" />
     <Attribute name="referencePKey" table="Signature__c" column="Order__c" />
+    <Attribute name="tourReferenceKey" table="Signature__c" column="Tour__c" />
     <Attribute name="referenceObjectPhase" table="Signature__c" column="Reference_Object_Phase__c" />
     <Attribute name="sysReleaseProcessStepPKey" table="Signature__c" column="Signature_Flow_Step__c" />
     <Attribute name="usrUserPKey" table="Signature__c" column="User__c" />
     <Attribute name="sysReleaseStepText" table="Signature_Flow_Step__c" column="Description_#Language#__c" />
+    <Attribute name="sysSort" table="Signature_Flow_Step__c" column="Sort__c" />
   </Attributes>
   <Entities>
     <Entity name="SF_File" idAttribute="Id" />
@@ -42,8 +44,10 @@
   <QueryCondition><![CDATA[
         Signature__c.Order__c = #referencePKey#
       ]]></QueryCondition>
-  <OrderCriteria />
+  <OrderCriteria>
+    <OrderCriterion entity="Signature_Flow_Step__c" attribute="Sort__c" direction="ASC" />
+  </OrderCriteria>
   <Parameters>
-    <Parameter name="referencePKey" type="TEXT"/>
+    <Parameter name="referencePKey" type="TEXT" />
   </Parameters>
 </DataSource>

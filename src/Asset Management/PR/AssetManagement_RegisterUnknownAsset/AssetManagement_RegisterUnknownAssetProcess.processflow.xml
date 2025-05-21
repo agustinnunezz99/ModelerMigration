@@ -29,7 +29,7 @@
         <CaseEmpty action="ShowRegisterNewAsset" />
         <CaseElse action="setRegisterAsset" />
       </Action>
-      <Action actionType="View" name="ShowRegisterNewAsset">
+      <Action actionType="VIEW" name="ShowRegisterNewAsset">
         <UIDescription>AssetManagement::RegisterUnknownAssetUI</UIDescription>
         <Events>
           <Event name="registerNewAsset" action="setRegisterAssetForEvent" />

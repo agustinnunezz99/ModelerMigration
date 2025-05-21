@@ -6,11 +6,6 @@
         <Declaration name="DateFrom" type="String" />
         <Declaration name="TimeFrom" type="String" />
         <Declaration name="AllDay" type="String" />
-		<!--Edu: Otras actividades y previstos-->
-        <Declaration name="Fraccion" type="String" />
-        <Declaration name="TaskVisit" type="String" />
-        <Declaration name="Actividades" type="String" />
-        <!--Edu: fin Otras actividades y previstos-->
         <Declaration name="currentCallFilter" type="String" />
         <Declaration name="currentTime" type="String" />
         <Declaration name="ContextMenuList" type="LoAgendaOverviewContextMenu" />
@@ -83,21 +78,6 @@
         <Declaration name="Map_ButtonPressed" type="String" />
         <Declaration name="Map_SubstitutedUsrPKey" type="String" />
         <Declaration name="Map_IsManagedCustomer" type="DomBool" />
-        <!--Edu: INI new lookup cartera-->
-        <Declaration name="briefcasePKey" type="String" />
-        <Declaration name="briefcaseName" type="String" />
-        <Declaration name="accountId" type="String" />
-        <Declaration name="cgfTarea" type="String" />
-        <Declaration name="recordType" type="String" />
-        <Declaration name="retailStoreId" type="String" />
-        <!--Edu: FIN new lookup cartera-->
-        <!--Edu: INI new lookup recordType-->
-        <Declaration name="pKeyRecordType" type="String" />
-        <!--Edu: FIN new lookup recordType-->
-        <!--Edu: INI new lookup instituciones-->
-        <Declaration name="institutionPKey" type="String" />
-        <Declaration name="institutionName" type="String" />
-        <!--Edu: FIN new lookup instituciones-->
       </Declarations>
       <Parameters>
         <Input name="AgendaView" type="String" />
@@ -548,6 +528,7 @@
           <Input name="pKey" value="Event.pKey" />
           <Input name="clbStatus" value="Event.clbStatus" />
           <Input name="deleteAllowed" value="Event.deleteAllowed" />
+          <Input name="isStartVisitRqrToCheckIn" value="Event.isStartVisitRqrToCheckIn" />
           <Input name="referenceUserPKey" value="ProcessContext::CurrentResponsiblePKey" />
           <Input name="responsiblePKey" value="Event.responsiblePKey" />
           <Input name="referenceDate" value="Event.dateFrom" />
@@ -571,6 +552,8 @@
         <Case value="Re-Schedule" action="RescheduleVisit" />
         <Case value="Info" action="VisitInfo" />
         <Case value="NavigateToCustomer" action="NavigateToCustomer" />
+        <Case value="Open" action="LoadCall_Decision" />
+        <Case value="Start" action="LoadCall_Decision" />
         <CaseElse action="ShowCalendarView_Decision" />
       </Action>
       <Action name="LoadCall_Decision" actionType="DECISION" parameter="Event.customerOnDevice">
@@ -621,6 +604,7 @@
         <Parameters>
           <Input name="CallPKey" value="Event.pKey" />
           <Input name="ResponsiblePKey" value="ProcessContext::CurrentResponsiblePKey" />
+          <Input name="ActionName" value="Event.selected" />
         </Parameters>
         <TransitionTo action="RefreshCurrentViewByView_Decision" />
       </Action>
@@ -710,6 +694,7 @@
       <Action name="LoadMainBO" actionType="LOAD" type="BoCall">
         <Parameters>
           <Input name="pKey" value="Event.pKey" />
+          <Input name="referenceUserPKey" value="ProcessContext::CurrentResponsiblePKey" />
         </Parameters>
         <Return name="ProcessContext::MainBO" />
         <TransitionTo action="ValidateBeforeComplete_SaveStatus" />
@@ -722,7 +707,24 @@
         <Parameters>
           <Input name="targetClbStatus" value="Completed" type="Literal" />
         </Parameters>
+        <TransitionTo action="ValidateLocationBeforeComplete" />
+      </Action>
+      <Action actionType="LOGIC" name="ValidateLocationBeforeComplete" call="ProcessContext::MainBO.validGeoLocationVisit">
+        <Return name="ProcessContext::ValidationLocationResult" />
+        <TransitionTo action="ValidateLocationBeforeComplete_Decision" />
+      </Action>
+      <Action name="ValidateLocationBeforeComplete_Decision" actionType="DECISION" parameter="ProcessContext::ValidationLocationResult">
+        <Case value="valid" action="SaveBoCall" />
+        <CaseElse action="ValidateLocationBeforeComplete_ResetStatus" />
+      </Action>
+      <Action name="SaveBoCall" actionType="SAVE" >
         <TransitionTo action="ValidateBeforeComplete" />
+      </Action>
+      <Action actionType="LOGIC" name="ValidateLocationBeforeComplete_ResetStatus" call="ProcessContext::MainBO.setClbStatus">
+        <Parameters>
+          <Input name="targetClbStatus" value="ProcessContext::SaveClbStatus" />
+        </Parameters>
+        <TransitionTo action="ShowCalendarView_Decision_From_InputParam" />                
       </Action>
       <Action actionType="LOGIC" name="ValidateBeforeComplete" call="ProcessContext::MainBO.validateMandatoryQuestions">
         <Return name="ProcessContext::ValidationResult" />
@@ -961,25 +963,7 @@
           <Return name="ProcessContext::DateFrom" value="dateFrom" />
           <Return name="ProcessContext::TimeFrom" value="timeFrom" />
           <Return name="ProcessContext::AllDay" value="allDay" />
-		  <!--Edu: Otras actividades y previstos-->
-          <Return name="ProcessContext::Fraccion" value="fraccion" />
-          <Return name="ProcessContext::TaskVisit" value="taskVisit" />
-          <Return name="ProcessContext::Actividades" value="actividades" />
-          <!--Edu: fin Otras actividades y previstos-->
-          <!--Edu: fin Otras actividades y previstos-->
-          <Return name="ProcessContext::ShiftVisit" value="shiftVisit" />
-          <Return name="ProcessContext::TypeVisit" value="typeVisit" />
-          <!--Edu: fin-->
-          <!--Edu: INI new lookup cartera-->
-          <Return name="ProcessContext::briefcasePKey" value="briefcasePKey" />
-          <!--Edu: FIN new lookup cartera-->
-          <!--Edu: INI new lookup recordType-->
-          <Return name="ProcessContext::pKeyRecordType" value="pKeyRecordType" />
-          <!--Edu: FIN new lookup recordType-->
-          <!--Edu: INI new lookup instituciones-->
-          <Return name="ProcessContext::institutionPKey" value="institutionPKey" />
-          <Return name="ProcessContext::institutionName" value="institutionName" />
-          <!--Edu: FIN new lookup instituciones-->          <Return name="ProcessContext::ButtonPressed" value="buttonPressed" />
+          <Return name="ProcessContext::ButtonPressed" value="buttonPressed" />
           <Return name="ProcessContext::SubstitutedUsrPKey" value="substitutedUsrPKey" />
           <Return name="ProcessContext::IsManagedCustomer" value="isManagedCustomer" />
           <Return name="ProcessContext::IsSubstituted" value="isSubstituted" />
@@ -1012,30 +996,7 @@
           <Return name="ProcessContext::SubstitutedUsrPKey" value="substitutedUsrPKey" />
           <Return name="ProcessContext::IsManagedCustomer" value="isManagedCustomer" />
           <Return name="ProcessContext::IsSubstituted" value="isSubstituted" />
-          <!--Edu: Otras actividades y previstos-->
-          <Return name="ProcessContext::Fraccion" value="fraccion" />
-          <Return name="ProcessContext::TaskVisit" value="taskVisit" />
-          <Return name="ProcessContext::Actividades" value="actividades" />
-          <!--Edu: fin Otras actividades y previstos-->
-          <!--Edu: fin Otras actividades y previstos-->
-          <Return name="ProcessContext::ShiftVisit" value="shiftVisit" />
-          <Return name="ProcessContext::TypeVisit" value="typeVisit" />
-          <!--Edu: fin-->
-          <!--Edu: INI new lookup cartera-->
-          <Return name="ProcessContext::briefcasePKey" value="briefcasePKey" />
-          <Return name="ProcessContext::briefcaseName" value="briefcaseName" />
-          <Return name="ProcessContext::accountId" value="accountId" />
-          <Return name="ProcessContext::cgfTarea" value="cgfTarea" />
-          <Return name="ProcessContext::recordType" value="recordType" />
-          <Return name="ProcessContext::retailStoreId" value="retailStoreId" />
-          <!--Edu: FIN new lookup cartera-->
-          <!--Edu: INI new lookup recordType-->
-          <Return name="ProcessContext::pKeyRecordType" value="pKeyRecordType" />
-          <!--Edu: FIN new lookup recordType-->
-          <!--Edu: INI new lookup institución-->
-          <Return name="ProcessContext::institutionPKey" value="institutionPKey" />
-          <Return name="ProcessContext::institutionName" value="institutionName" />
-          <!--Edu: FIN new lookup institución-->        </ReturnValues>
+        </ReturnValues>
       </Action>
       <Action name="CreateNewCall_Decision" actionType="DECISION" parameter="ProcessContext::ButtonPressed">
         <Case value="createCall" action="CreateNewCallWithCustomer_Decision" />
@@ -1055,24 +1016,7 @@
           <Input name="responsiblePKey" value="ProcessContext::CurrentResponsiblePKey" />
           <!-- SF/CASDIF -->
           <Input name="boSfReplicationCallbacks" value="ProcessContext::SfReplicationCallbacks" />
-		  <!--Edu: Otras actividades y previstos-->
-          <Input name="fraccion" value="ProcessContext::Fraccion" />
-          <Input name="taskVisit" value="ProcessContext::TaskVisit" />
-          <Input name="actividades" value="ProcessContext::Actividades" />
-          <!--Edu: fin Otras actividades y previstos-->
-          <!--Edu: fin Otras actividades y previstos-->
-          <Input name="shiftVisit" value="ProcessContext::ShiftVisit" />
-          <Input name="typeVisit" value="ProcessContext::TypeVisit" />
-          <!--Edu: fin-->
-          <!--Edu: INI new lookup cartera-->
-          <Input name="briefcasePKey" value="ProcessContext::briefcasePKey" />
-          <!--Edu: FIN new lookup cartera-->
-          <!--Edu: INI new lookup recordType-->
-          <Input name="pKeyRecordType" value="ProcessContext::pKeyRecordType" />
-          <!--Edu: FIN new lookup recordType-->
-          <!--Edu: INI new lookup institución-->
-          <Input name="institutionPKey" value="ProcessContext::institutionPKey" />
-          <!--Edu: FIN new lookup institución-->        </Parameters>
+        </Parameters>
         <TransitionTo action="RefreshCurrentView_Decision" />
       </Action>
       <Action name="CreateNewCallWithCustomer" actionType="PROCESS" process="Call::CreateNewCallProcess">
@@ -1088,24 +1032,6 @@
           <Input name="isSubstituted" value="ProcessContext::IsSubstituted" />
           <!-- SF/CASDIF -->
           <Input name="boSfReplicationCallbacks" value="ProcessContext::SfReplicationCallbacks" />
-          <!--Edu: Otras actividades y previstos-->
-          <Input name="fraccion" value="ProcessContext::Fraccion" />
-          <Input name="taskVisit" value="ProcessContext::TaskVisit" />
-          <Input name="actividades" value="ProcessContext::Actividades" />
-          <!--Edu: fin Otras actividades y previstos-->
-          <!--Edu: fin Otras actividades y previstos-->
-          <Input name="shiftVisit" value="ProcessContext::ShiftVisit" />
-          <Input name="typeVisit" value="ProcessContext::TypeVisit" />
-          <!--Edu: fin-->
-          <!--Edu: INI new lookup cartera-->
-          <Input name="briefcasePKey" value="ProcessContext::briefcasePKey" />
-          <!--Edu: FIN new lookup cartera-->
-          <!--Edu: INI new lookup recordType-->
-          <Input name="pKeyRecordType" value="ProcessContext::pKeyRecordType" />
-          <!--Edu: FIN new lookup recordType-->
-          <!--Edu: INI new lookup institución-->
-          <Input name="institutionPKey" value="ProcessContext::institutionPKey" />
-          <!--Edu: FIN new lookup institución-->
         </Parameters>
         <TransitionTo action="RefreshCurrentView_Decision" />
       </Action>

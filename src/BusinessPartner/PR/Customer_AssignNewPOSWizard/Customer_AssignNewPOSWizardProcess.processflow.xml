@@ -47,7 +47,7 @@
         <Return name="ProcessContext::ValidationBo" />
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Customer::AssignNewPOSWizardUI</UIDescription>
         <Events>
           <Event name="createPOS" action="setDirty" />

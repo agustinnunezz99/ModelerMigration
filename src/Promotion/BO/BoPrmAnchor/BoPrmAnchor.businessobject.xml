@@ -1,4 +1,4 @@
-<BusinessObject name="BoPrmAnchor" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="true">
+<BusinessObject name="BoPrmAnchor"  generateLoadMethod="true" generateCreateMethod="true">
   <DataSource name="DsBoPrmAnchor" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />

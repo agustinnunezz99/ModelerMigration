@@ -1,4 +1,4 @@
-<UIDescription name="Order::ShowPrintInvoiceUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd">
+<UIDescription name="Order::ShowPrintInvoiceUI" schemaVersion="0.0.0.5" >
   <Page pagePattern="SingleSectionPage">
     <PageHeader>
       <Bindings>

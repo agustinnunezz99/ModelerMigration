@@ -1,4 +1,4 @@
-<ListItem name="LiUserDocMeta" xmlns="BoSchema.xsd">
+<ListItem name="LiUserDocMeta" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="text" type="DomString" dataSourceProperty="text" />

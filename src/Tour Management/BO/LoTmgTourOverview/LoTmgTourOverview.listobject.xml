@@ -1,4 +1,4 @@
-<ListObject name="LoTmgTourOverview" filter="InDatabase" generateLoadMethod="true" xmlns="BoSchema.xsd" schemaVersion="1.1">
+<ListObject name="LoTmgTourOverview" filter="InDatabase" generateLoadMethod="true"  schemaVersion="1.1">
   <DataSource name="DsLoTmgTourOverview" />
   <Item objectClass="LiTmgTourOverview" />
   <Methods>

@@ -1,4 +1,4 @@
-<ListItem name="LiMeSdoAssortment" xmlns="BoSchema.xsd">
+<ListItem name="LiMeSdoAssortment" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty id="true" name="prdMainPKey" type="DomPKey" storable="false" dataSourceProperty="prdMainPKey" />

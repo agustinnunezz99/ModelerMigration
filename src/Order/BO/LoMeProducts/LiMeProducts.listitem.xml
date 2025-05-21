@@ -1,4 +1,4 @@
-<ListItem name="LiMeProducts" xmlns="BoSchema.xsd">
+<ListItem name="LiMeProducts" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="text1" type="DomText" storable="false" dataSourceProperty="text1" />

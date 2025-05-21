@@ -1,4 +1,4 @@
-<UIDescription name="TruckLoad::FlyoutSelectRecipientDriverUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="TruckLoad::FlyoutSelectRecipientDriverUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionDialogPage" onBackDiscard="true">
     <PageHeader>
       <Bindings>

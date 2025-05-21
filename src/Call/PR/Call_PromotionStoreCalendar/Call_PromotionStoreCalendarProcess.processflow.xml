@@ -31,7 +31,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::PromotionStoreCalendarUI</UIDescription>
         <Events></Events>
       </Action>

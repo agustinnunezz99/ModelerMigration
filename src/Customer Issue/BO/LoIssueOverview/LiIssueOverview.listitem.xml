@@ -15,6 +15,7 @@
     <SimpleProperty name="customerName" type="DomBpaName" storable="false" dataSourceProperty="customerName" />
     <SimpleProperty name="ownerBpaMainPKey" type="DomPKey" storable="false" dataSourceProperty="ownerBpaMainPKey" />
     <SimpleProperty name="isActive" type="DomBool" storable="false" dataSourceProperty="isActive" />
+    <SimpleProperty name="templateName" type="DomText" storable="false" dataSourceProperty="templateName" />
     <SimpleProperty name="filterOpen" type="DomBool" storable="false" dataSourceProperty="filterOpen" />
     <SimpleProperty name="businessModified" type="DomBusinessModified" storable="false" dataSourceProperty="businessModified" />
     <SimpleProperty name="svcMetaPKey" type="DomPKey" storable="false" dataSourceProperty="svcMetaPKey" />

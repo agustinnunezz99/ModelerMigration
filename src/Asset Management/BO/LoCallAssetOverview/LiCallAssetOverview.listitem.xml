@@ -1,4 +1,4 @@
-<ListItem name="LiCallAssetOverview" xmlns="BoSchema.xsd">
+<ListItem name="LiCallAssetOverview" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="serialNumber" type="DomId" dataSourceProperty="serialNumber" />
@@ -30,7 +30,7 @@
     <SimpleProperty name="noteHist" type="DomText" />
     <SimpleProperty name="condition" type="DomAstCondition" dataSourceProperty="astSurveyCondition" />
     <SimpleProperty name="conditionHist" type="DomAstCondition" />
-    <SimpleProperty name="method" type="DomText" dataSourceProperty="astSurveyMethod" />
+    <SimpleProperty name="method" type="DomAstSurveyMethod" dataSourceProperty="astSurveyMethod" />
     <SimpleProperty name="bpaCustomerPKey" type="DomPKey" dataSourceProperty="astSurveyCustomer" />
     <SimpleProperty name="isNewSurvey" type="DomBool" dataSourceProperty="presence" />
     <SimpleProperty name="posName" type="DomBpaName" storable="false" dataSourceProperty="posName" />

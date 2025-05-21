@@ -1,4 +1,4 @@
-<UIDescription name="TruckLoad::RejectWizardUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd">
+<UIDescription name="TruckLoad::RejectWizardUI" schemaVersion="0.0.0.5" >
   <Page pagePattern="SingleSectionDialogPage">
     <PageHeader>
       <Bindings>

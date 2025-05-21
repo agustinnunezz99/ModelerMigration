@@ -1,4 +1,4 @@
-<UIDescription xmlns="UISchema.xsd" name="Issue::OverviewUI" schemaVersion="0.0.0.5" simpleEditorOnly="true">
+<UIDescription  name="Issue::OverviewUI" schemaVersion="0.0.0.5" simpleEditorOnly="true">
   <Page pagePattern="MasterDetailSectionPage" selectFirstItemInList="true" masterSectionFlex="45" detailSectionFlex="55">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Main" />

@@ -1,4 +1,4 @@
-<UIDescription name="DailyReport::TimeEntryTypeUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="DailyReport::TimeEntryTypeUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionDialogPage">
     <PageHeader>
       <Bindings>

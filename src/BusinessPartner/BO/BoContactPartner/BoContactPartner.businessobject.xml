@@ -1,4 +1,4 @@
-<BusinessObject name="BoContactPartner" xmlns="BoSchema.xsd" generateLoadMethod="false" generateCreateMethod="false" OERReference="BpaContactPartner">
+<BusinessObject name="BoContactPartner"  generateLoadMethod="false" generateCreateMethod="false" OERReference="BpaContactPartner">
   <DataSource name="DsBoContactPartner" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />

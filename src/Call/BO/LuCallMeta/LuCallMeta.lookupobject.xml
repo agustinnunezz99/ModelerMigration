@@ -9,6 +9,7 @@
     <SimpleProperty name="cancelReasonRequired" type="DomBool" dataSourceProperty="cancelReasonRequired" />
     <SimpleProperty name="locCaptureDuringCancel" type="DomBool" dataSourceProperty="locCaptureDuringCancel" />
     <SimpleProperty name="locCaptureDuringComplete" type="DomBool" dataSourceProperty="locCaptureDuringComplete" />
+    <SimpleProperty name="locCaptureDuringStart" type="DomBool" dataSourceProperty="locCaptureDuringStart" />
     <SimpleProperty name="captureProceedingTime" type="DomBool" dataSourceProperty="captureProceedingTime" />
     <SimpleProperty name="defaultDuration" type="DomDurationUnit" dataSourceProperty="defaultDuration" />
     <SimpleProperty name="considerPOSCheck" type="DomBool" dataSourceProperty="considerPOSCheck" />
@@ -25,11 +26,12 @@
     <SimpleProperty name="maxPictures" type="DomSmallInteger" dataSourceProperty="maxPictures" />
     <SimpleProperty name="usrTimeEntryMetaPKey" type="DomPKey" dataSourceProperty="usrTimeEntryMetaPKey" />
     <SimpleProperty name="mobilityUserGuidance" type="DomClbMobilityUserGuidance" dataSourceProperty="mobilityUserGuidance" />
-    <!--Edu: Hora de inicio y fin laboral de la mañana y tarde-->
-	<SimpleProperty name="feStartMor" type="DomText" dataSourceProperty="feStartMor" />
-    <SimpleProperty name="feEndMor" type="DomText" dataSourceProperty="feEndMot" />
-    <SimpleProperty name="feStartAft" type="DomText" dataSourceProperty="feStartAft" />
-    <SimpleProperty name="feEndAft" type="DomText" dataSourceProperty="feEndAft" />
+    <!-- Start Visit Props-->
+    <SimpleProperty name="isStartVisitRqrToCheckIn" type="DomBool" dataSourceProperty="isStartVisitRqrToCheckIn" />
+    <SimpleProperty name="doesShowReadOnlyVisitInfo" type="DomBool" dataSourceProperty="doesShowReadOnlyVisitInfo" />
+    <SimpleProperty name="limitToOneVisitInProgress" type="DomBool" dataSourceProperty="limitToOneVisitInProgress" />
+    <SimpleProperty name="cmplVstGeolcValidation" type="DomGeofenceValidation" dataSourceProperty="cmplVstGeolcValidation" />
+    <SimpleProperty name="startVstGeolcValidation" type="DomGeofenceValidation" dataSourceProperty="startVstGeolcValidation" />
   </SimpleProperties>
   <Methods></Methods>
 </LookupObject>

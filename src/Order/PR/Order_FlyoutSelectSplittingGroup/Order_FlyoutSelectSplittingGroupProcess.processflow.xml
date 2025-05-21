@@ -10,7 +10,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::FlyoutSelectSplittingGroupUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="SelectSplittingGroup" />

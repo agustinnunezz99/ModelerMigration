@@ -1,4 +1,4 @@
-<BusinessObject name="BoTripList" xmlns="BoSchema.xsd" generateLoadMethod="false">
+<BusinessObject name="BoTripList"  generateLoadMethod="false">
   <DataSource name="DsBoTripList" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />

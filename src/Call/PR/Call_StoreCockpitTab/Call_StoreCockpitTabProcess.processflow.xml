@@ -89,6 +89,7 @@
         <!--Declaration for call complete-->
         <Declaration name="Completed" type="String" />
         <Declaration name="isReadOnly" type="DomBool" />
+        <Declaration name="isNoteReadOnly" type="DomBool" />
       </Declarations>
       <Parameters>
         <Input name="MainBO" type="BoCall" />
@@ -166,6 +167,10 @@
       <Action name="IsCallReadOnly" actionType="LOGIC" call="ProcessContext::MainBO.isReadOnly">
         <Return name="ProcessContext::isReadOnly" />
       </Action>
+      <!-- Note readonly check-->
+      <Action name="IsNoteReadOnly" actionType="LOGIC" call="ProcessContext::MainBO.isNoteReadOnly">
+        <Return name="ProcessContext::isNoteReadOnly" />
+      </Action>
     </EntryActions>
   </Entry>
   <Body>
@@ -178,6 +183,7 @@
           <Event name="cardHeader_showDetails" action="CardHeader_showDetail" />
           <Event name="mailPressed" action="StartMail" />
           <Event name="completeCall" action="CheckForEmptyDateFields" />
+          <Event name="StartCall" action="ProcessValidationInProgressAction" />
           <Event name="StartPhoneCall" action="StartPhoneCall" />
           <!-- Card: Sell-In's-->
           <Event name="CardSellIns_loadData" action="CardSellIns_LoadSellIns_Decision" />
@@ -234,6 +240,7 @@
           <Event name="CardFollowUpVisits_contextMenuItemSelected" action="ContextMenu_CustomerOnDevice_Decision" />
           <!-- Cockpit Menu Events -->
           <Event name="CockpitMenu_StartStoreCheckProcess" action="StartStoreCheckProcess" />
+          <Event name="CockpitMenu_StartPreviewPDFProcess" action="StartPreviewPDFProcess" />
           <Event name="CockpitMenu_StartSurveyProcess" action="StartSurveyProcess" />
           <Event name="CockpitMenu_StartPromotionCalendarProcess" action="StartPromotionCalendarProcess" />
           <Event name="CockpitMenu_StartPromotionsProcess" action="StartPromotionReviewProcess" />
@@ -254,6 +261,24 @@
         </Parameters>
         <TransitionTo action="ResetLoPOSAfterQuestionTabProcess" />
       </Action>
+      <Action name="StartPreviewPDFProcess" actionType="PRINTV2" printId="MyPreviewPDF" locale="ApplicationContext::user.languageSpoken" showShareButton="true">
+        <Parameters>
+          <Input name="customer" value="ProcessContext::CustomerDetail" />
+          <Input name="tasks" value="ProcessContext::CardCustomerTasks_TasksList" />
+          <Input name="notes" value="ProcessContext::MainBO" />
+          <!-- <Input name="CustomerName" value="ProcessContext::CurrentCustomerName" /> -->
+          <!-- <Input name="CallDate" value="ProcessContext::MainBO.DateFrom" />
+          <Input name="CallDateThru" value="ProcessContext::MainBO.DateThru" /> -->
+          <!-- <Input name="taskDetail" value="ProcessContext::CardCustomerTasks_TasksDetail" /> -->
+          <!-- <Input name="note" value="ProcessContext::MainBO" /> -->
+        </Parameters>
+      </Action>
+      <!-- <Action actionType="PROCESS" name="StartPreviewPDFProcess" process="Call::PreviewPDFTabProcess">
+        <Parameters>
+          <Input name="MainBO" value="ProcessContext::MainBO" />
+        </Parameters> -->
+        <!-- <TransitionTo action="ResetLoPOSAfterQuestionTabProcess" /> -->
+      <!-- </Action> -->
       <Action actionType="PROCESS" name="StartSurveyProcess" process="Call::SurveyTabProcess">
         <Parameters>
           <Input name="MainBO" value="ProcessContext::MainBO" />
@@ -365,7 +390,7 @@
         <TransitionTo action="EndDecision" />
       </Action>
       <!-- Card: Header -->
-      <Action actionType="Logic" name="StartPhoneCall" call="ProcessContext::CustomerDetail.processPhoneCall">
+      <Action actionType="LOGIC" name="StartPhoneCall" call="ProcessContext::CustomerDetail.processPhoneCall">
         <Parameters>
           <Input name="phoneNumber" value="Event.phoneNumber" />
         </Parameters>
@@ -405,7 +430,7 @@
         </ReturnValues>
         <TransitionTo action="ReloadCustomer" />
       </Action>
-      <Action name="ReloadCustomer" actionType="Logic" call="ProcessContext::MainBO.updateCustomerInfo">
+      <Action name="ReloadCustomer" actionType="LOGIC" call="ProcessContext::MainBO.updateCustomerInfo">
         <Parameters>
           <Input name="customerObjectStatus" value="ProcessContext::CustomerObjectStatus" />
           <Input name="saveFlag" value="ProcessContext::SaveFlag" />
@@ -448,6 +473,30 @@
         <CaseElse action="ShowCockpit" />
       </Action>
       <!-- END - Complete Call Check -->
+      <!-- START - Start Call -->
+      <Action name="ProcessValidationInProgressAction" actionType="LOGIC" call="ProcessContext::MainBO.checkForInProgressVisit">
+        <Return name="ProcessContext::ValidationInProgressResult" />
+        <TransitionTo action="ValidateInProgressBeforeStart_Decision" />
+      </Action>
+      <Action name="ValidateInProgressBeforeStart_Decision" actionType="DECISION" parameter="ProcessContext::ValidationInProgressResult">
+        <Case value="false" action="ProcessValidationGeoLocationAction" />
+        <CaseElse action="ShowCockpit" />
+      </Action>
+      <Action name="ProcessValidationGeoLocationAction" actionType="LOGIC" call="ProcessContext::MainBO.validGeoLocationVisit">
+        <Return name="ProcessContext::ValidationLocationResult" />
+        <TransitionTo action="ValidateLocationBeforeStart_Decision" />
+      </Action>
+      <Action name="ValidateLocationBeforeStart_Decision" actionType="DECISION" parameter="ProcessContext::ValidationLocationResult">
+        <Case value="valid" action="ProcessStartAction" />
+        <CaseElse action="ShowCockpit" />
+      </Action>
+      <Action name="ProcessStartAction" actionType="LOGIC" call="ProcessContext::MainBO.ProcessStartAction">
+        <Parameters>
+          <Input name="isCallFromDSD" value="false" type="Literal" />
+        </Parameters>
+        <TransitionTo action="ShowCockpit" />
+      </Action>
+      <!-- END - Start Call -->
       <!-- Card: Sell-In's-->
       <Action name="CardSellIns_LoadSellIns_Decision" actionType="DECISION" parameter="ProcessContext::IsSfBackend">
         <Case value="true" action="CardSellIns_LoadSellIns_SF" />
@@ -505,6 +554,7 @@
         <Parameters>
           <Input name="CallStatus" value="ProcessContext::MainBO.clbStatus" />
           <Input name="mobilityUserGuidance" value="ProcessContext::MobilityUserGuidance" />
+          <Input name="isReadOnly" value="ProcessContext::isReadOnly" />
         </Parameters>
         <Return name="ProcessContext::CardActivities_List" />
         <TransitionTo action="setCardActivitiesLoadData" />
@@ -654,6 +704,7 @@
           <Input name="svcMetaPKey" value="Event.svcMetaPKey" />
           <Input name="isManagedCustomer" value="ProcessContext::IsManagedCustomer" />
           <Input name="substitutionStatus" value="Event.substitutionStatus" />
+          <Input name="isVisitReadOnly" value="ProcessContext::isReadOnly" />
         </Parameters>
         <Return name="ProcessContext::CardCustomerTasks_ContextMenuList" />
       </Action>
@@ -834,6 +885,7 @@
           <Input name="responsiblePKey" value="Event.responsiblePKey" />
           <Input name="pKey" value="Event.pKey" />
           <Input name="syncStatus" value="Event.syncStatus" />
+          <Input name="isVisitReadOnly" value="ProcessContext::isReadOnly" />
         </Parameters>
         <Return name="ProcessContext::CardOrderHistory_ContextMenuList" />
       </Action>
@@ -1151,7 +1203,7 @@
         <Parameters>
           <Input name="NoteDetail" value="ProcessContext::NoteDetail" />
           <Input name="clbMainPKey" value="ProcessContext::MainBO.pKey" />
-          <Input name="isReadOnly" value="ProcessContext::isReadOnly" />
+          <Input name="isReadOnly" value="ProcessContext::isNoteReadOnly" />
         </Parameters>
         <TransitionTo action="CardNotes_UpdateDecision" />
         <ReturnValues>
@@ -1321,6 +1373,7 @@
           <Input name="pKey" value="Event.pKey" />
           <Input name="clbStatus" value="Event.clbStatus" />
           <Input name="deleteAllowed" value="Event.deleteAllowed" />
+          <Input name="isStartVisitRqrToCheckIn" value="Event.isStartVisitRqrToCheckIn" />
           <Input name="referenceUserPKey" value="ProcessContext::CurrentUser" />
           <Input name="responsiblePKey" value="Event.responsiblePKey" />
           <Input name="referenceDate" value="Event.dateFrom" />

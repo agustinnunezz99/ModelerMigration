@@ -1,20 +1,16 @@
-<Process name="Order::PreOrderNavigationProcess" defaultAction="Backend_Decision" schemaVersion="0.0.0.5">
+<Process name="Order::PreOrderNavigationProcess" defaultAction="StartSfNavigation" schemaVersion="0.0.0.5">
   <Entry>
     <ProcessContext>
       <Declarations>
         <Declaration name="MainBO" type="BoOrder" />
         <Declaration name="currentTabPage" type="String" />
         <Declaration name="CurrentItemFilterId" type="String" />
-        <Declaration name="IsSfBackend" type="DomBool" />
       </Declarations>
       <Parameters>
         <Input name="MainBO" type="BoOrder" />
       </Parameters>
     </ProcessContext>
     <EntryActions>
-      <Action actionType="LOGIC" name="DetermineBackend" call="Utils.isSfBackend">
-        <Return name="ProcessContext::IsSfBackend" />
-      </Action>
       <Action actionType="LOGIC" name="ResetDeliveryDateForReplenishment" call="ProcessContext::MainBO.resetDeliveryDate">
         <Parameters></Parameters>
       </Action>
@@ -22,35 +18,6 @@
   </Entry>
   <Body>
     <Actions>
-      <Action name="Backend_Decision" actionType="DECISION" parameter="ProcessContext::IsSfBackend">
-        <Case value="true" action="StartSfNavigation" />
-        <CaseElse action="Navigation_Decision" />
-      </Action>
-      <Action name="Navigation_Decision" actionType="DECISION" parameter="ProcessContext::MainBO.message">
-        <CaseEmpty action="StartNavigation" />
-        <CaseElse action="StartMessageNavigation" />
-      </Action>
-      <Action actionType="NAVIGATION" name="StartMessageNavigation">
-        <Parameters name="ProcessContext::NavigationName">
-          <Processes defaultProcess="Message">
-            <Process id="Message" image="Envelope" label="message" defaultLabel="Message" process="Order::MessageTabProcess" action="StartMessageProcess" />
-            <Process id="ItemList" image="ShoppingCartItem" label="orderItems" defaultLabel="Items" process="Order::ItemListTabProcess" action="setCurrentTabName_itemList" />
-            <Process id="Notes" image="Note" label="notes" defaultLabel="Notes" process="Order::NotesTabProcess" action="Notes_Load_Decision" />
-            <Process id="Header" image="Info" label="orderHeader" defaultLabel="Header" process="Order::HeaderTabProcess" action="Workflow_Load_Decision" />
-          </Processes>
-        </Parameters>
-        <TransitionTo action="setCurrentTabName_message" />
-      </Action>
-      <Action actionType="NAVIGATION" name="StartNavigation">
-        <Parameters name="ProcessContext::NavigationName">
-          <Processes defaultProcess="ItemList">
-            <Process id="ItemList" image="ShoppingCartItem" label="orderItems" defaultLabel="Items" process="Order::ItemListTabProcess" action="setCurrentTabName_itemList" />
-            <Process id="Notes" image="Note" label="notes" defaultLabel="Notes" process="Order::NotesTabProcess" action="Notes_Load_Decision" />
-            <Process id="Header" image="Info" label="orderHeader" defaultLabel="Header" process="Order::HeaderTabProcess" action="Workflow_Load_Decision" />
-          </Processes>
-        </Parameters>
-        <TransitionTo action="setCurrentTabName_itemList" />
-      </Action>
       <Action actionType="NAVIGATION" name="StartSfNavigation">
         <Parameters name="ProcessContext::NavigationName">
           <Processes defaultProcess="ItemList">
@@ -135,7 +102,7 @@
         <Case value="tab_Notes" action="StartNotesProcess" />
         <Case value="tab_Header" action="StartHeaderProcess" />
         <Case value="tab_Message" action="StartMessageProcess" />
-        <CaseElse action="StartNavigation" />
+        <CaseElse action="StartSfNavigation" />
       </Action>
       <!-- Message Tab Process -->
       <Action actionType="LOGIC" name="setCurrentTabName_message" call="Utils.identity">

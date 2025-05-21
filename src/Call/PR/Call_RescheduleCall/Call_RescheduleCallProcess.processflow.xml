@@ -47,7 +47,7 @@
         <CaseElse action="ShowDetail" />
         <CaseEmpty action="ShowDetail" />
       </Action>
-      <Action actionType="View" name="ShowDetail">
+      <Action actionType="VIEW" name="ShowDetail">
         <UIDescription>Call::RescheduleCallUI</UIDescription>
         <Events>
           <Event name="rescheduleCall" action="LoadManagementInformation" />

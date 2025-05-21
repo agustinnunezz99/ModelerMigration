@@ -1,4 +1,4 @@
-<ListItem name="LiInventoryMetaByItemMeta" xmlns="BoSchema.xsd">
+<ListItem name="LiInventoryMetaByItemMeta" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <!-- Attributes to be filled via datasource -->

@@ -1,4 +1,4 @@
-<BusinessObject name="BoStoreRole" xmlns="BoSchema.xsd" generateLoadMethod="true">
+<BusinessObject name="BoStoreRole"  generateLoadMethod="true">
   <DataSource name="DsBoStoreRole" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />

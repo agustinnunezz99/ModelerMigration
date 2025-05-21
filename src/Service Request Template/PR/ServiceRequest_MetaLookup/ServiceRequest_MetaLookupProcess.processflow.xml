@@ -35,7 +35,7 @@
         <Return name="ProcessContext::WizardHeaderLabel" />
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>ServiceRequest::MetaLookupUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndWithReturnValues" />

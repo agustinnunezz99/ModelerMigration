@@ -41,7 +41,7 @@
     <Attribute name="grossValueReceipt" table="Order_Item__c" column="Gross_Value_Receipt__c" />
     <Attribute name="erpId" table="Order_Item__c" column="Erp_Id__c" />
     <DerivedAttribute name="modReason" value="''" />
-    <DerivedAttribute name="targetQuantity" value="''" />
+    <Attribute name="targetQuantity" table="Order_Item__c" column="Target_Quantity__c" />
     <Attribute name="prdType" table="TmpOrderItemMergeResult_T" column="PrdType" />
     <Attribute name="movementDirection" table="Order_Item_Template__c" column="Movement_Direction__c" />
     <Attribute name="suggestedQuantity" table="TmpOrderItemMergeResult_T" column="SuggestedQuantity" />
@@ -144,6 +144,7 @@ var selectPromotionSqlQuery = Facade.myProxy.getLoadStatement("LoMeSelectablePro
 //Select Order Items
 selectAttributes += " persistedProduct.pKey AS pKey ";
 selectAttributes += "	,IFNULL(proposedProduct.prdMainPKey, persistedProduct.prdMainPKey) AS prdMainPKey ";
+selectAttributes += "	,CASE WHEN proposedProduct.IsAvailableInventory = '1' THEN  '1' ELSE '0' END AS isAvailableInventory ";
 selectAttributes += "	,IFNULL(proposedProduct.Listed, persistedProduct.Listed) AS listed ";
 selectAttributes += "	,proposedProduct.CustomerProductNumber AS customerProductNumber ";
 selectAttributes += "	,proposedProduct.FocusProductType AS focusProductType ";
@@ -209,6 +210,7 @@ selectAttributes += "	,'0' AS deletedFreeItem ";
 selectAttributes += "	,IFNULL(persistedProduct.sdoParentItemPKey, ' ') AS sdoParentItemPKey ";
 selectAttributes += "	,persistedProduct.parentType AS parentType ";
 selectAttributes += "	,persistedProduct.quantity AS quantity ";
+selectAttributes += "	,persistedProduct.targetQuantity AS targetQuantity ";
 selectAttributes += "	,persistedProduct.discount AS discount ";
 selectAttributes += "	,persistedProduct.price AS price ";
 selectAttributes += "	,persistedProduct.priceReceipt AS priceReceipt ";
@@ -246,6 +248,7 @@ selectAttributes += "	,IFNULL(persistedProduct.refPKey, proposedProduct.prdMainP
 
 //Select relevant data from UoM table
 proposedSqlQuery += "SELECT proposedProductWithoutUoM.PrdMainPKey AS prdMainPKey ";
+proposedSqlQuery += "	,CASE WHEN proposedProductWithoutUoM.IsAvailableInventory = '1' THEN  '1' ELSE '0' END AS isAvailableInventory ";
 proposedSqlQuery += "	,CASE WHEN proposedProductWithoutUoM.Listed = '1' THEN  '1' ELSE '0' END AS listed ";
 proposedSqlQuery += "	,proposedProductWithoutUoM.CustomerProductNumber AS customerProductNumber ";
 proposedSqlQuery += "	,proposedProductWithoutUoM.FocusProductType AS focusProductType ";
@@ -300,6 +303,7 @@ proposedSqlQuery += " FROM ( ";
 
 //Select data from Temporary Table
 proposedSqlQuery += "SELECT TmpOrderItemMergeResult_T.PrdMainPKey AS prdMainPKey ";
+proposedSqlQuery += "	,CASE WHEN TmpOrderItemMergeResult_T.IsAvailableInventory = '1' THEN  '1' ELSE '0' END AS isAvailableInventory ";
 proposedSqlQuery += "	,CASE WHEN TmpOrderItemMergeResult_T.Listed = '1' THEN  '1' ELSE '0' END AS listed ";
 proposedSqlQuery += "	,TmpOrderItemMergeResult_T.CustomerProductNumber AS customerProductNumber ";
 proposedSqlQuery += "	,TmpOrderItemMergeResult_T.FocusProductType AS focusProductType ";
@@ -348,6 +352,7 @@ if(jsonQuerySelectPromotion.considerSelectablePromotion == "1"){
 
   //Select data from Selectable Promotions
   proposedSqlQuery += "SELECT selectablePromotion.prdMainPKey AS prdMainPKey ";
+  proposedSqlQuery += "	,CASE WHEN TmpOrderItemMergeResult_T.IsAvailableInventory = '1' THEN  '1' ELSE '0' END AS isAvailableInventory ";
   proposedSqlQuery += "	,CASE WHEN TmpOrderItemMergeResult_T.Listed = '1' THEN  '1' ELSE '0' END AS listed ";
   proposedSqlQuery += "	,TmpOrderItemMergeResult_T.CustomerProductNumber AS customerProductNumber ";
   proposedSqlQuery += "	,TmpOrderItemMergeResult_T.FocusProductType AS focusProductType ";
@@ -422,6 +427,7 @@ sqlstmt += " proposedProduct.prdMainPKey = persistedProduct.prdMainPKey ";
 sqlstmt += " AND proposedProduct.promotionPKey = persistedProduct.promotionPKey ";
 sqlstmt += " AND proposedProduct.quantityLogisticUnit = persistedProduct.quantityLogisticUnit ";
 sqlstmt += " WHERE proposedProduct.prdMainPKey IS NULL ";
+// Apply filter and proposal logic only for persisted products in main order item template
 sqlstmt += " OR persistedProduct.sdoItemMetaPKey <> #sdoItemMetaPKey# ";
 sqlstmt += " ORDER BY refPKey ASC, ";
 sqlstmt += " sdoParentItemPKey ASC, ";

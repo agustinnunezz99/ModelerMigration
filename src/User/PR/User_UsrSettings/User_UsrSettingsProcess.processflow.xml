@@ -30,9 +30,12 @@
         <Parameters>
           <Input name="pKey" value="ApplicationContext::User" />
         </Parameters>
+        <TransitionTo action="SetEARights" />
+      </Action>
+      <Action actionType="LOGIC" name="SetEARights" call="ApplicationContext::User.boUserSettings.setEARights">
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>User::UsrSettingsUI</UIDescription>
         <Events>
           <Event name="OpenCallMetaLookup" action="OpenCallMetaLookup" />

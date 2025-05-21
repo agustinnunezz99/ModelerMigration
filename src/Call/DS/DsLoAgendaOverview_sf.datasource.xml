@@ -18,6 +18,7 @@
     <Attribute name="longitude" table="Account" column="ShippingLongitude" />
     <Attribute name="address" table="Account" column="ShippingCity" />
     <Attribute name="deleteAllowed" table="Visit_Template__c" column="Delete_Allowed__c" />
+    <Attribute name="isStartVisitRqrToCheckIn" table="Visit_Template__c" column="Is_Start_Visit_Rqr_To_Check_In__c" />
     <Attribute name="color" table="Visit_Template__c" column="Mobility_Color__c" />
     <Attribute name="companyRequired" table="Visit_Template__c" column="Company_Required__c" />
     <Attribute name="clbMetaPKey" table="Visit_Template__c" column="Id" />
@@ -99,10 +100,9 @@
           usrMainPKey = ApplicationContext.get('user').getPKey();
       }
 
-      /* TODO: verificar configuracion de la validacion
-	  if (ApplicationContext.get('user').hasRole('TourUser') && Utils.isEmptyString(tmgMainPKey)){
+      if (ApplicationContext.get('user').hasRole('TourUser') && Utils.isEmptyString(tmgMainPKey)){
 	     tmgMainPKey = 'NoTourSelected';
-      }*/   
+      }   
      
       if(Utils.isDefined(jsonQuery.currentLatitude)) {
          currentLatitude = Utils.convertForDBParam(jsonQuery.currentLatitude, "DomDecimal");
@@ -166,6 +166,7 @@
        sqlStmt1 += "END AS customerOnDevice ";
        sqlStmt1 += ",Visit_Template__c.Meta_Type__c AS clbMetaType ";
        sqlStmt1 += ",Visit_Template__c.Delete_Allowed__c AS deleteAllowed ";
+       sqlStmt1 += ",Visit_Template__c.Is_Start_Visit_Rqr_To_Check_In__c AS isStartVisitRqrToCheckIn ";
        sqlStmt1 += ",Visit_Template__c.Mobility_Color__c AS color ";
        sqlStmt1 += ",Visit.Subject__c AS subject ";
        sqlStmt1 += ",Visit.Status AS clbStatus ";
@@ -304,6 +305,7 @@
       sqlStmt2 += "END AS customerOnDevice ";
       sqlStmt2 += ",Visit_Template__c.Meta_Type__c AS clbMetaType ";
       sqlStmt2 += ",Visit_Template__c.Delete_Allowed__c AS deleteAllowed ";
+      sqlStmt2 += ",Visit_Template__c.Is_Start_Visit_Rqr_To_Check_In__c AS isStartVisitRqrToCheckIn ";
       sqlStmt2 += ",Visit_Template__c.Mobility_Color__c AS color ";
       sqlStmt2 += ",Visit.Subject__c AS subject ";
       sqlStmt2 += ",Visit.Status AS clbStatus ";
@@ -432,6 +434,7 @@
   	  sqlStmt3 += ",'1' AS customerOnDevice ";                         
         sqlStmt3 += ",Event.Type AS clbMetaType ";
         sqlStmt3 += ",Visit_Template__c.Delete_Allowed__c AS deleteAllowed ";
+        sqlStmt3 += ",Visit_Template__c.Is_Start_Visit_Rqr_To_Check_In__c AS isStartVisitRqrToCheckIn ";
         sqlStmt3 += ",Visit_Template__c.Mobility_Color__c AS color ";
         sqlStmt3 += ",Event.Subject AS subject ";
         sqlStmt3 += ",'Planned' AS clbStatus ";                           
@@ -524,6 +527,7 @@
       sqlStmt3 += ",'1' AS customerOnDevice ";
       sqlStmt3 += ",Event.Type AS clbMetaType ";
       sqlStmt3 += ",Visit_Template__c.Delete_Allowed__c AS deleteAllowed ";
+      sqlStmt3 += ",Visit_Template__c.Is_Start_Visit_Rqr_To_Check_In__c AS isStartVisitRqrToCheckIn ";
       sqlStmt3 += ",Visit_Template__c.Mobility_Color__c AS color ";
       sqlStmt3 += ",Event.Subject AS subject ";
       sqlStmt3 += ",'Planned' AS clbStatus ";

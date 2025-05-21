@@ -1,4 +1,4 @@
-<BusinessObject name="BoTodoNote" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="true" schemaVersion="1.1">
+<BusinessObject name="BoTodoNote"  generateLoadMethod="true" generateCreateMethod="true" schemaVersion="1.1">
   <DataSource name="DsBoTodoNote" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="false" dataSourceProperty="pKey" />

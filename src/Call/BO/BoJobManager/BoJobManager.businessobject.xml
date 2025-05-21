@@ -1,4 +1,4 @@
-<BusinessObject name="BoJobManager" generateLoadMethod="false" xmlns="BoSchema.xsd">
+<BusinessObject name="BoJobManager" generateLoadMethod="false" >
   <DataSource name="DsBoJobManager" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="false" dataSourceProperty="pKey" />

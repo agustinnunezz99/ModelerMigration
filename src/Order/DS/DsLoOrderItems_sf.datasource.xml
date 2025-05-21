@@ -36,7 +36,7 @@
     <Attribute name="rewardPKey" table="Order_Item__c" column="Promotion_Reward__c" />
     <DerivedAttribute name="splittingGroup" value="''" />
     <DerivedAttribute name="modReason" value="''" />
-    <DerivedAttribute name="targetQuantity" value="''" />
+    <Attribute name="targetQuantity" table="Order_Item__c" column="Target_Quantity__c"/>
     <Attribute name="pricingInfo1" table="Order_Item__c" column="Pricing_Info_1__c" />
     <Attribute name="pricingInfo2" table="Order_Item__c" column="Pricing_Info_2__c" />
     <Attribute name="pricingInfo3" table="Order_Item__c" column="Pricing_Info_3__c" />

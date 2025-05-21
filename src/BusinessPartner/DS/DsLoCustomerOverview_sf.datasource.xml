@@ -19,7 +19,6 @@
     <Attribute name="longitude" table="Account" column="ShippingLongitude" />
     <Attribute name="distributionIssue" table="Account_Extension__c" column="Distribution_Issue__c" />
     <Attribute name="outOfStockIssue" table="Account_Extension__c" column="OOS_Issue__c" />
-    <Attribute name="recordTypeDeveloperName" table="RecordType" column="DeveloperName" />
     <DerivedAttribute name="prio" value="''" />
     <DerivedAttribute name="grouping1" value="''" />
     <DerivedAttribute name="substitutedUsrPKey" value="''" />
@@ -29,7 +28,6 @@
     <DerivedAttribute name="mapIcon" value="'PurpleGoogleMarkerEmpty'" />
     <DerivedAttribute name="hasActivity" value="'0'" />
     <DerivedAttribute name="hasPromotion" value="'0'" />
-    <DerivedAttribute name="recordTypeId" value="''" />
   </Attributes>
   <Entities>
     <Entity name="Account" alias="" idAttribute="Id" />
@@ -73,14 +71,6 @@
             var currentLongitude = 0; 
             var currentLatitude = 0;
 			var distance = 0;
-/**H88 */   var recordTypeDeveloperName = "";
-/**H88 */   var recordTypeCond = "";
-
-            
-/**H88 */   if(Utils.isDefined(newParams.recordTypeDeveloperName)){
-/**H88 */       recordTypeDeveloperName = newParams.recordTypeDeveloperName;
-/**H88 */   	recordTypeCond += " AND customers.recordTypeDeveloperName = #recordTypeDeveloperName# ";
-			}
 
 			if(Utils.isDefined(newParams.addCond_LeadTimeFollowUpTime)){
 				addCond_LeadTimeFollowUpTime = newParams.addCond_LeadTimeFollowUpTime;
@@ -219,8 +209,8 @@
                 addCondSearch += " AND DISTANCE(#currentLatitude#, #currentLongitude#, " + latitudeProperty + ", " + longitudeProperty + ") " + Utils.replaceOperator(newParams.Distance_1Comp) + " #distance# ";
             }
 
-        	var sqlParams1 = {referenceDateThru, referenceDateFrom, currentLatitude, currentLongitude, distance};
-/**H88 */	var sqlParams2 = {referenceDateThru, referenceDateFrom, customerId, name, street, zipCode, city, countryState, prio, classOfTrade, substituted, tradeOrgPKey, currentDate, overdue, distributionIssue, outOfStockIssue, hasActivity, hasPromotion, currentLatitude, currentLongitude, referenceUserPKey, distance, recordTypeDeveloperName};
+			var sqlParams1 = {referenceDateThru, referenceDateFrom, currentLatitude, currentLongitude, distance};
+			var sqlParams2 = {referenceDateThru, referenceDateFrom, customerId, name, street, zipCode, city, countryState, prio, classOfTrade, substituted, tradeOrgPKey, currentDate, overdue, distributionIssue, outOfStockIssue, hasActivity, hasPromotion, currentLatitude, currentLongitude, referenceUserPKey, distance};
 
 			var sqlStmt1 = "SELECT ";
 			sqlStmt1 +=      "customers.pKey AS pKey, ";
@@ -249,15 +239,11 @@
             sqlStmt1 +=      "customers.distributionIssue as distributionIssue, ";
             sqlStmt1 +=      "customers.outOfStockIssue as outOfStockIssue, ";
             sqlStmt1 +=      "customers.hasActivity as hasActivity, ";
-            sqlStmt1 +=      "customers.hasPromotion as hasPromotion, ";
-/**H88 */   sqlStmt1 +=      "customers.recordTypeId as recordTypeId, "; 
-/**H88 */   sqlStmt1 +=      "customers.recordTypeDeveloperName as recordTypeDeveloperName "; 
+            sqlStmt1 +=      "customers.hasPromotion as hasPromotion ";
 			sqlStmt1 +=      "FROM ( ";
 			sqlStmt1 +=      " SELECT  ";
 			sqlStmt1 +=          "Account.Id AS pKey, ";
 			sqlStmt1 +=          "Account.Name as name, ";
-/**H88 */   sqlStmt1 +=          "Account.RecordTypeId as recordTypeId, ";
-/**H88 */   sqlStmt1 +=          "RecordType.DeveloperName as recordTypeDeveloperName, ";
 			sqlStmt1 +=          "Account.Account_Number__c as customerId,";
 			sqlStmt1 +=          "#toggleMapping('Account_Extension__c', 'Priority__c')# as prio, ";
 			sqlStmt1 +=          "Account_Extension__c.Class_Of_Trade__c as ClassOfTrade,   ";
@@ -283,12 +269,6 @@
             sqlStmt1 +=          "OR EXISTS (SELECT Null FROM Account_Set_Account__c, Promotion__c WHERE Promotion__c.Anchor_Account_Set__c = Account_Set_Account__c.Account_Set__c AND Account_Set_Account__c.Account_Set_Account__c = Account.Id AND Promotion__c.Active__c ='1' AND Promotion__c.Phase__c='Committed') THEN '1' ELSE '0' END as hasPromotion ";
 			sqlStmt1 +=      " FROM  ";
 			sqlStmt1 +=          "Account";
-/**H88 */   sqlStmt1 +=       " INNER JOIN RecordType ON RecordType.Id = Account.RecordTypeId ";
-/**H88 */   sqlStmt1 +=        " AND ( ";
-/**H88 */   sqlStmt1 +=          " Account.IsDeleted <> '1'  ";
-/**H88 */   sqlStmt1 +=          " OR Account.IsDeleted IS NULL ";
-/**H88 */   sqlStmt1 +=         " ) ";
-
 			sqlStmt1 +=      " JOIN ";
 			sqlStmt1 +=          "Account_Extension__c ";
 			sqlStmt1 +=              "ON Account.Id = Account_Extension__c.Account__c ";
@@ -357,7 +337,7 @@
 			sqlStmt2 +=      ") customers ";
 			sqlStmt2 +=    "WHERE 1=1 ";
             sqlStmt2 +=    addCond_OverdueCustomers;
-/**H88 */   sqlStmt2 +=    recordTypeCond;
+
 			sqlStmt2 +=    addCondSearch;
 			sqlStmt2 +=    "GROUP BY ";
 			sqlStmt2 +=      "pKey ";

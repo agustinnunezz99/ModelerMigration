@@ -1,4 +1,4 @@
-<ListItem name="LiLogisticUnitMultipleItems" xmlns="BoSchema.xsd">
+<ListItem name="LiLogisticUnitMultipleItems" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="prdMainPKey" type="DomPKey" dataSourceProperty="prdMainPKey" />

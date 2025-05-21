@@ -1,4 +1,4 @@
-<ListObject name="LoCssBLProcessingSchedule" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoCssBLProcessingSchedule" generateLoadMethod="true" >
   <DataSource name="DsLoCssBLProcessingSchedule" />
   <Item objectClass="LiCssBLProcessingSchedule" />
   <Methods>

@@ -1,4 +1,4 @@
-<ListItem name="LiUserDRCallStatistic" xmlns="BoSchema.xsd">
+<ListItem name="LiUserDRCallStatistic" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="duration" type="DomText" dataSourceProperty="duration" />

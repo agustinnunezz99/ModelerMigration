@@ -42,7 +42,7 @@
             </Events>
           </MenuItem>
         </MenuItems>
-        <GroupedList name="QuestionsList" searchable="false" groupBy="jobDefinitionListText" hasBorder="true" master="true" flex="true" itemAnimation="leftToRight" dataSource="ProcessContext::MainBO.boJobManager.loQuestions.Items[]">
+        <GroupedList name="QuestionsList" searchable="false" groupBy="jobDefinitionListText" hasBorder="true" flex="true" itemAnimation="leftToRight" dataSource="ProcessContext::MainBO.boJobManager.loQuestions.Items[]">
           <Items name="Items" itemPattern="QuestionListItem">
             <ItemListLayout>
               <Tablet>

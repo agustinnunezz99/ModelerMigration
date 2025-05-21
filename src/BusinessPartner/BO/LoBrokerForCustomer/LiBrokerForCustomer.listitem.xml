@@ -1,4 +1,4 @@
-<ListItem name="LiBrokerForCustomer" xmlns="BoSchema.xsd" >
+<ListItem name="LiBrokerForCustomer"  >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="salesOrg" type="DomSalesOrg" storable="false" dataSourceProperty="salesOrg" />

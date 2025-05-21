@@ -43,7 +43,7 @@
         </Parameters>
         <TransitionTo action="ShowNotes" />
       </Action>
-      <Action actionType="View" name="ShowNotes">
+      <Action actionType="VIEW" name="ShowNotes">
         <UIDescription>Call::NotesTabUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="SetDetailItem" />

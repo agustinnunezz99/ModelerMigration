@@ -35,7 +35,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Replenishment::CreateNewWizardUI</UIDescription>
         <Events>
           <Event name="createDocument" action="EndCreate" />

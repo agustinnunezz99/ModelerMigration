@@ -22,7 +22,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Product::Lookup</UIDescription>
         <Events>
           <Event name="itemSelected" action="End" />

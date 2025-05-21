@@ -1,4 +1,4 @@
-<ListItem name="LiInventoryFinding" xmlns="BoSchema.xsd">
+<ListItem name="LiInventoryFinding" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="ivcMainPKey" type="DomPKey" storable="false" dataSourceProperty="ivcMainPKey" />

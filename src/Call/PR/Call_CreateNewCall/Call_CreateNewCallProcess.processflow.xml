@@ -11,15 +11,6 @@
         <Input name="CustomerPKey" type="String" />
         <Input name="DateFrom" type="String" />
         <Input name="TimeFrom" type="String" />
-        <!--Edu: -->
-        <Input name="Fraccion" type="String" />
-        <Input name="taskVisit" type="String" />
-        <Input name="actividades" type="String" />
-        <!--fin Edu: -->
-        <!--Edu: Ini Otras actividades y previstos-->
-        <Input name="ShiftVisit" type="String" />
-        <Input name="TypeVisit" type="String" />
-        <!--fin Edu: -->
         <Input name="AllDay" type="String" />
         <Input name="SubstitutedUsrPKey" type="DomPKey" />
         <Input name="responsiblePKey" type="DomPKey" />
@@ -28,15 +19,6 @@
         <Input name="Mode" type="String" />
         <Input name="fromCockpitUI" type="String" />
         <Input name="BoSfReplicationCallbacks" type="BoSfReplicationCallbacks" />
-        <!--Edu: INI new lookup cartera-->
-        <Input name="BriefcasePKey" type="String" />
-        <!--Edu: FIN new lookup cartera-->
-        <!--Edu: INI new lookup RecordType-->
-        <Input name="PKeyRecordType" type="String" />
-        <!--Edu: FIN new lookup RecordType-->
-        <!--Edu: INI new lookup Instituciones-->
-        <Input name="InstitutionPKey" type="String" />
-        <!--Edu: FIN new lookup Instituciones-->
       </Parameters>
     </ProcessContext>
     <EntryActions>
@@ -49,15 +31,6 @@
           <Input name="clbMetaPKey" value="ProcessContext::CallMetaPKey" />
           <Input name="dateFrom" value="ProcessContext::DateFrom" />
           <Input name="timeFrom" value="ProcessContext::TimeFrom" />
-          <!--Edu: -->
-          <Input name="fraccion" value="ProcessContext::Fraccion" />
-          <Input name="taskVisit" value="ProcessContext::TaskVisit" />
-          <Input name="actividades" value="ProcessContext::Actividades" />
-          <!--fin Edu: -->
-          <!--Edu: Ini Otras actividades y previstos-->
-          <Input name="shiftVisit" value="ProcessContext::ShiftVisit" />
-          <Input name="typeVisit" value="ProcessContext::TypeVisit" />
-          <!--Edu: fin Otras actividades y previstos-->
           <Input name="allDay" value="ProcessContext::AllDay" />
           <Input name="substitutedUsrPKey" value="ProcessContext::substitutedUsrPKey" />
           <Input name="responsiblePKey" value="ProcessContext::responsiblePKey" />
@@ -65,15 +38,6 @@
           <Input name="isSubstituted" value="ProcessContext::IsSubstituted" />
           <Input name="Mode" value="ProcessContext::Mode" />
           <Input name="LocationsList" value="ProcessContext::LocationsList" />
-          <!--Edu: INI new lookup cartera-->
-          <Input name="briefcasePKey" value="ProcessContext::BriefcasePKey" />
-          <!--Edu: FIN new lookup cartera-->
-          <!--Edu: INI new lookup RecordType-->
-          <Input name="pKeyRecordType" value="ProcessContext::PKeyRecordType" />
-          <!--Edu: FIN new lookup RecordType-->
-          <!--Edu: INI new lookup Instituciones-->
-          <Input name="institutionPKey" value="ProcessContext::InstitutionPKey" />
-          <!--Edu: FIN new lookup Instituciones-->
         </Parameters>
         <Return name="ProcessContext::CallBO" />
       </Action>

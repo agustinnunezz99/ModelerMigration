@@ -1,4 +1,4 @@
-<ListItem name="LiPromotionsForProduct" xmlns="BoSchema.xsd">
+<ListItem name="LiPromotionsForProduct" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="promotionPKey" type="DomPKey" storable="true" dataSourceProperty="promotionPKey" />

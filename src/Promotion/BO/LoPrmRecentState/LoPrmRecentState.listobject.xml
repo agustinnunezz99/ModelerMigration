@@ -1,4 +1,4 @@
-<ListObject name="LoPrmRecentState" generateLoadMethod="true" xmlns="BoSchema.xsd" schemaVersion="1.1">
+<ListObject name="LoPrmRecentState" generateLoadMethod="true"  schemaVersion="1.1">
   <DataSource name="DsLoPrmRecentState" />
   <Item objectClass="LiPrmRecentState" />
   <Methods>

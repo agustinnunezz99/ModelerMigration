@@ -1,4 +1,4 @@
-<ListObject name="LoBreadCrumbLevel1" generateLoadMethod="true" xmlns="BoSchema.xsd" schemaVersion="1.1">
+<ListObject name="LoBreadCrumbLevel1" generateLoadMethod="true"  schemaVersion="1.1">
   <DataSource name="DsLoBreadCrumbLevel1" />
   <Item objectClass="LiBreadCrumbLevel1" />
   <Methods>

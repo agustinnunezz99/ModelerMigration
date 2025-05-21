@@ -17,7 +17,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>TourManagement::CancelWizardUI</UIDescription>
         <Events>
           <Event name="cancelTour" action="setValidateForCancelTour" />

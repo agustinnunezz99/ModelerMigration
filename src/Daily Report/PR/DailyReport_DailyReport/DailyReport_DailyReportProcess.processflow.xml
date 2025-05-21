@@ -63,7 +63,7 @@
         <Return name="ProcessContext::DailyReportList" />
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>DailyReport::DailyReportUI</UIDescription>
         <Events>
           <!-- Handle Selected Events -->

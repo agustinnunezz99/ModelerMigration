@@ -1,4 +1,4 @@
-<UIDescription name="Call::StoreCockpitTabUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank" simpleEditorOnly="true">
+<UIDescription name="Call::StoreCockpitTabUI" schemaVersion="0.0.0.5"  layoutType="blank" simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="StoreCockpit" />
@@ -23,11 +23,55 @@
             <ButtonPressedEvent event="completeCall" />
           </Events>
         </MenuItem>
+        <MenuItem itemId="PreviewPDFCall" directlyVisible="true">
+          <Bindings>
+            <Resource target="Text" type="Label" id="PreviewPDFCallId" defaultLabel="Prefiew PDF" />
+            <Resource target="Icon" type="Image" id="PrintPreviewDarkGrey24" />
+            <Binding type="Visible" target="Visible" call="ProcessContext::MainBO.getButtonVisibility">
+              <Parameters>
+                <Input name="token" type="Literal" value="btnComplete" />
+              </Parameters>
+            </Binding>
+          </Bindings>
+          <Events>
+            <ButtonPressedEvent event="CockpitMenu_StartPreviewPDFProcess" />
+          </Events>
+        </MenuItem>
+        <!-- Complete Call Button -->
+        <MenuItem itemId="startCall" directlyVisible="true">
+          <Bindings>
+            <Resource target="Text" type="Label" id="startVisitId" defaultLabel="Start Visit" />
+            <Resource target="Icon" type="Image" id="TourStart_White" defaultImage="TourStart_White" />
+            <Binding type="Visible" target="Visible" call="ProcessContext::MainBO.getButtonVisibility">
+              <Parameters>
+                <Input name="token" type="Literal" value="btnStart" />
+              </Parameters>
+            </Binding>
+          </Bindings>
+          <Events>
+            <ButtonPressedEvent event="StartCall" />
+          </Events>
+        </MenuItem>
       </MenuItems>
     </PageHeader>
     <Section>
       <Area areaName="mainArea" areaPattern="Card">
         <NavigationMenuContainer name="CockpitMenu">
+          <!-- <NavigationMenuItem name="PrintPDFMenuItem">
+            <Bindings>
+              <Resource id="PrintPDFMenuItem" type="Image" target="Image" />
+              <Resource defaultLabel="Preview PDF" id="PrintPDFMenuLabel" type="Label" target="Title" />
+              <Binding type="Visible" target="Visible" call="ProcessContext::MainBO.getCockpitMenuVisibility">
+                <Parameters>
+                  <Input name="token" type="Literal" value="PrintPDFMenuItem" />
+                </Parameters>
+              </Binding>
+            </Bindings>
+            <Events>
+              <ButtonPressedEvent event="CockpitMenu_StartPreviewPDFProcess" />
+            </Events>
+            <VisibilityRoles allRoles="true" />
+          </NavigationMenuItem> -->
           <NavigationMenuItem name="StoreCheckMenuItem">
             <Bindings>
               <Resource id="StoreCheck_LM" type="Image" target="Image" />
@@ -563,13 +607,15 @@
               </Events>
             </ImageButton>
           </ActionBar>
-          <NoDataMessage name="CardLatestPictureUiPlugin">
+          <CockpitImage name="CardLatestPictureUiPlugin">
             <Bindings>
-              <!-- mandatory bindings -->
-              <Resource target="infoIcon" type="Image" id="ReviewPictures_HB" />
-              <Resource target="maintext" type="Label" id="CardLatestPicture_HasPicturesMainText" defaultLabel="Some pictures are available for your review." />
+              <Binding target="Type" type="Text" binding="ProcessContext::CardLatestPicture_LastAddedPicture.fileType" />
+              <Binding target="MediaPath" type="Text" binding="ProcessContext::CardLatestPicture_LastAddedPicture.attachmentBlob" />
             </Bindings>
-          </NoDataMessage>
+            <Events>
+              <ImagePressedEvent event="CardLatestPicture_ShowMaximizedPicture" />
+            </Events>
+          </CockpitImage>
           <LinkBar>
             <ImageButton name="AllPicturesLink">
               <Bindings>
@@ -1013,6 +1059,11 @@
               <Bindings>
                 <Resource target="Text" type="Label" id="CreateFollowUpVisitId" defaultLabel="Create Follow-up Visit" />
                 <Resource target="Image" type="Image" id="Plus" defaultImage="Plus" />
+                <Binding type="Visible" target="Visible" call="ProcessContext::MainBO.getButtonVisibility">
+                  <Parameters>
+                    <Input name="token" type="Literal" value="btnFollowUpVisits" />
+                  </Parameters>
+                </Binding>
               </Bindings>
               <Events>
                 <ButtonPressedEvent event="CardFollowUpVisits_createFollowUpVisitPressed" />
@@ -1103,6 +1154,7 @@
                   <Param name="pKey" value=".pKey" />
                   <Param name="clbStatus" value=".clbStatus" />
                   <Param name="deleteAllowed" value=".deleteAllowed" />
+                  <Param name="isStartVisitRqrToCheckIn" value=".isStartVisitRqrToCheckIn" />
                   <Param name="dateFrom" value=".dateFrom" />
                   <Param name="bpaMainPKey" value=".bpaMainPKey" />
                   <Param name="responsiblePKey" value=".responsiblePKey" />

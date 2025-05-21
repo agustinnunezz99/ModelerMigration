@@ -67,7 +67,7 @@
           <Items>
             <Tab tabName="PlannedVisits">
               <Bindings>
-                <Resource target="text" type="Label" id="PlannedVisitsId" defaultLabel="Planned Visits" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="VisitsId" defaultLabel="Visits" bindingMode="ONE_TIME" />
               </Bindings>
             </Tab>
           </Items>

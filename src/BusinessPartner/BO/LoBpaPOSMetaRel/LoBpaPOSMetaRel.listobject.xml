@@ -1,4 +1,4 @@
-<ListObject name="LoBpaPOSMetaRel" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoBpaPOSMetaRel" generateLoadMethod="true" >
   <DataSource name="DsLoBpaPOSMetaRel" />
   <Item objectClass="LiBpaPOSMetaRel" />
   <Methods>

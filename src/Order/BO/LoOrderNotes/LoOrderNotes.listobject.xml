@@ -1,4 +1,4 @@
-<ListObject name="LoOrderNotes" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoOrderNotes" generateLoadMethod="true" >
   <DataSource name="DsLoOrderNotes" />
   <Item objectClass="LiOrderNote" />
   <Methods>

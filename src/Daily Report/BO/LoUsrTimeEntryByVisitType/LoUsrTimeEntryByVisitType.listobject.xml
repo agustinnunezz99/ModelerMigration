@@ -1,4 +1,4 @@
-<ListObject name="LoUsrTimeEntryByVisitType" generateLoadMethod="true" xmlns="BoSchema.xsd" schemaVersion="1.1">
+<ListObject name="LoUsrTimeEntryByVisitType" generateLoadMethod="true"  schemaVersion="1.1">
   <DataSource name="DsLoUsrTimeEntryByVisitType" />
   <Item objectClass="LiUsrTimeEntryByVisitType" />
   <Methods>
