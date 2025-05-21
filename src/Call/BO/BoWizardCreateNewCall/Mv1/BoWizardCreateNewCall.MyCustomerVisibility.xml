@@ -1,0 +1,8 @@
+<BusinessLogic methodName="mycustomerVisibility" businessObjectClass="BoWizardCreateNewCall" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters />
+<Code language="JavaScript">
+<![CDATA[var acl = me.getACL();
+me.getCustomerLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);]]>
+</Code>
+  <Return name="" value="" />
+</BusinessLogic>

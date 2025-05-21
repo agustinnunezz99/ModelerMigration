@@ -1,0 +1,23 @@
+<DataSource name="DsLuMyParentAccount" backendSystem="sf" businessObjectClass="LuMyParentAccount" external="false" editableEntity="" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="paname" table="parent" column="Name" />
+    <Attribute name="id" table="parent" column="Id" />
+  </Attributes>
+  <Entities>
+    <Entity name="Account" idAttribute="Id" />
+    <Entity name="Account" alias="parent">
+      <Join Type="inner">
+        <SimpleJoin>
+          <Condition leftSideValue="parent.Id" comparator="eq" rightSideType="Attribute" rightSideValue="Account.ParentId" />
+        </SimpleJoin>
+      </Join>
+    </Entity>
+  </Entities>
+  <QueryCondition><![CDATA[
+   Account.Id = #pKey#
+          ]]></QueryCondition>
+  <OrderCriteria></OrderCriteria>
+  <Parameters>
+    <Parameter name="pKey" type="TEXT" />
+  </Parameters>
+</DataSource>

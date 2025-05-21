@@ -1,0 +1,72 @@
+<DataSource name="DsLoMyCustomerESPRelation" backendSystem="sf" businessObjectClass="LoMyCustomerESPRelation" external="true" editableEntity="cgf_Especialidad_Cuenta__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="cgf_Especialidad_Cuenta__c" column="Id" />
+    <Attribute name="espPKey" table="cgf_Especialidad_Cuenta__c" column="Id" />
+    <Attribute name="espName" table="cgf_Especialidad_Cuenta__c" column="Name" />
+    <Attribute name="customerPKey" table="cgf_Especialidad_Cuenta__c" column="cgf_Cuenta__c" />
+  </Attributes>
+  <Entities>
+    <Entity name="cgf_Especialidad_Cuenta__c" idAttribute="Id" />
+  </Entities>
+  <Database platform="SQLite">
+    <Load><![CDATA[
+
+      var index = 0;
+	  var customerPKey = "";
+	  var espPKey = "";
+      var additionalCond = "";
+
+	  if(Utils.isDefined(jsonQuery.customerPKey)){
+        customerPKey =  Utils.convertForDBParam(jsonQuery.customerPKey, "DomPKey");
+        additionalCond += "AND cgf_Especialidad_Cuenta__c.cgf_Cuenta__c = #customerPKey# ";
+	  }
+	  if(Utils.isDefined(jsonQuery.espPKey)){
+        espPKey = Utils.convertForDBParam(jsonQuery.espPKey, "DomPKey");
+        additionalCond += "AND cgf_Especialidad_Cuenta__c.Id = #espPKey# ";
+      }
+
+      var sqlParams = {customerPKey, espPKey};
+
+      var sqlStmt = "SELECT ";
+      sqlStmt += "cgf_Especialidad_Cuenta__c.Id AS pKey, ";
+      sqlStmt += "cgf_Especialidad_Cuenta__c.Name AS espName, ";
+      sqlStmt += "cgf_Especialidad_Cuenta__c.cgf_Cuenta__c AS customerPKey, ";
+      sqlStmt += "cgf_Especialidad_Cuenta__c.Id as espPKey ";
+      sqlStmt += "FROM cgf_Especialidad_Cuenta__c ";
+      sqlStmt += "WHERE ";
+      sqlStmt += "cgf_Especialidad_Cuenta__c.IsDeleted = '0' ";
+      sqlStmt += additionalCond;
+      sqlStmt += "ORDER BY espName ";
+
+      return Utils.replaceMacrosParam(sqlStmt, sqlParams);
+	]]></Load>
+  </Database>
+</DataSource>
+    
+    <!--   Atributos del ds original POS
+    ***********************************************************************************************************
+    <Attribute name="customerPKey" table="POS__c" column="Account__c" />
+    <Attribute name="posMetaPKey" table="POS__c" column="POS_Template__c" />
+    <Attribute name="validFrom" table="POS__c" column="Valid_From__c" />
+    <Attribute name="validThru" table="POS__c" column="Valid_Thru__c" />
+    <Attribute name="posPKey" table="POS__c" column="Id" />
+    <DerivedAttribute name="name" value="POS__c.Description_#Language#__c || '  -  (' || POS_Template__c.Description_#Language#__c  || ')'" />
+    <DerivedAttribute name="bpaRelMetaPKey" value="''" />
+    <DerivedAttribute name="salesOrg" value="'#SALESORG#'" />
+    <DerivedAttribute name="listingModule" value="' '" />
+    <DerivedAttribute name="text" value="'Location'" />
+    <DerivedAttribute name="mandatory" value="'0'" />
+    <DerivedAttribute name="mandatoryImage" value="' '" />
+    <DerivedAttribute name="continued" value="'0'" /> 
+    <Attribute name="posName" table="POS__c" column="Description_#Language#__c" />
+
+  *********************************************************************************************************** 
+  NOTA: Se comenta porque no he encontrado como hacerlo funcionar con una query Condition y los parametros. 
+
+  <QueryCondition><![CDATA[cgf_Especialidad_Cuenta__c.cgf_Cuenta__c = #customerPKey#]]></QueryCondition>
+  <OrderCriteria />
+  <Parameters>
+        <Parameter name="customerPKey" type="TEXT" />
+  </Parameters>
+  ***********************************************************************************************************
+-->

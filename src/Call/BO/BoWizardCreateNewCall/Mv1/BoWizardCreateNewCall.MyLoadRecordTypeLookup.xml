@@ -1,0 +1,15 @@
+<BusinessLogic methodName="myLoadRecordTypeLookup" businessObjectClass="BoWizardCreateNewCall" businessObjectType="businessobject" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="pKey" type="String" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[me.setRecordTypeNamePKey(pKey);
+me.setPKeyRecordType(me.getRecordTypeLookup().getPKey());
+var promise = BoFactory.loadObjectByParamsAsync("LuMyRecordType", me.getQueryBy("pKey", pKey)).then(
+  function (lookup) {
+    me.setRecordTypeLookup(lookup);
+    me.setObjectStatus(STATE.NEW);
+  });]]>
+</Code>
+  <Return name="promise" value="promise" />
+</BusinessLogic>

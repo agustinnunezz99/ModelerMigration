@@ -1,0 +1,721 @@
+<UIDescription name="Portfolio::MyOverviewUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" simpleEditorOnly="true">
+  <Page pagePattern="MasterDetailSectionPage" selectFirstItemInList="true" masterSectionFlex="40" detailSectionFlex="60" cachable="false">
+    <ViewVariables>
+      <ViewVariable name="currentTabName" value="Main" />
+    </ViewVariables>
+    <PageHeader>
+      <Bindings>
+        <Resource target="title" type="Label" id="PortfolioTitleId" defaultLabel="Cartera" bindingMode="ONE_TIME" />
+      </Bindings>
+    </PageHeader>
+    <Section sectionName="masterSection" sectionPattern="SingleAreaSection">
+      <Area areaName="mainArea" areaPattern="SingleElementArea">
+        <GroupedList name="PortfolioList" searchable="true" groupBy="grouping1" master="true" dataSource="ProcessContext::PortfolioList.Items[]" indexBar="true">
+          <SearchAttributes>
+            <SearchAttribute name="Name" />
+            <SearchAttribute name="SalesZone" />
+          </SearchAttributes>
+          <Items name="PortfolioItems" itemPattern="PortfolioOverviewItem">
+            <ItemListLayout>
+              <Default>
+                <Col>
+                  <Row layoutType="itemIdentifier" bindingId="Name" />
+                  <Row layoutType="itemSecondary" bindingId="Shift" />
+                </Col>
+                <Col width="1em">
+                  <Row layoutType="itemValue" bindingId="Spacer" />
+                </Col>
+                <Col align="right">
+                  <Row layoutType="itemIdentifier pull-right" bindingId="Coverage" />
+                </Col>
+              </Default>
+            </ItemListLayout>
+            <Bindings>
+              <Binding target="Name" type="Text" binding=".name" bindingMode="ONE_WAY" />
+              <Binding target="SalesZone" type="Text" binding=".salesZone" bindingMode="ONE_WAY" />
+              <Binding target="Shift" type="Text" binding=".shift" bindingMode="ONE_WAY" />
+              <Binding target="Coverage" type="Image" binding=".coverageImage" bindingMode="ONE_WAY" />
+            </Bindings>
+          </Items>
+          <Events>
+            <ItemSelectedEvent event="itemSelected" resetMultiAreas="true">
+              <Params>
+                <Param name="pKey" value=".pKey" />
+                <Param name="tabName" value="View::currentTabName" />
+              </Params>
+            </ItemSelectedEvent>
+          </Events>
+        </GroupedList>
+      </Area>
+    </Section>
+    <Section sectionName="detailSection" sectionPattern="TabbedViewAreaSection" currentTab="View::currentTabName">
+      <Area areaName="tabArea" areaPattern="TabElementArea">
+        <TabSelector name="TabSelector">
+          <Items>
+            <Tab tabName="Main" backendSystem="both">
+              <Bindings>
+                <Resource target="image" type="Image" id="MainGrey24" defaultImage="MainGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="MainId" defaultLabel="Main" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Visits" backendSystem="both">
+              <Bindings>
+                <Binding type="Visible" target="Visible" binding="ProcessContext::VisitTabVisible" />
+                <Resource target="image" type="Image" id="SuitcaseGrey24" defaultImage="SuitcaseGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="VisitasId" defaultLabel="Visitas" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Previstos" backendSystem="both">
+              <Bindings>
+                <Binding type="Visible" target="Visible" binding="ProcessContext::PrevistosTabVisible" />
+                <Resource target="image" type="Image" id="MyActivityBlueGray24" defaultImage="MyActivityBlueGray24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="PrevistoId" defaultLabel="Previstos" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Especialidades" backendSystem="both">
+              <Bindings>
+                <Binding type="Visible" target="Visible" binding="ProcessContext::SpecialtiesTabVisible" />
+                <Resource target="image" type="Image" id="ShelfGrey24" defaultImage="ShelfGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="EspecialidadesId" defaultLabel="Especialidades" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Horarios" backendSystem="both">
+              <Bindings>
+                <Binding type="Visible" target="Visible" binding="ProcessContext::HoursTabVisible" />
+                <Resource target="image" type="Image" id="ClockGrey24" defaultImage="ClockGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="HorariosId" defaultLabel="Horarios" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+            <Tab tabName="Secretarias" backendSystem="both">
+              <Bindings>
+                <Binding type="Visible" target="Visible" binding="ProcessContext::SecretariesTabVisible" />
+                <Resource target="image" type="Image" id="UserGrey24" defaultImage="UserGrey24" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="SecretariesId" defaultLabel="Secretarias" bindingMode="ONE_TIME" />
+              </Bindings>
+            </Tab>
+          </Items>
+          <Events>
+            <ItemSelectedEvent event="tabSelected" storeTabNameIn="currentTabName" />
+          </Events>
+        </TabSelector>
+      </Area>
+      <Area areaName="Main" areaPattern="MultiArea">
+        <Area areaName="Main" areaPattern="GroupedElementsArea">
+          <MenuItems></MenuItems>
+          <GroupElement name="DetailGroup">
+            <Bindings>
+              <Resource target="Title" type="Label" id="DetailId" defaultLabel="Detalle" />
+            </Bindings>
+            <InputArea name="Id" editable="false">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Id" id="IdId" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.pKey" bindingMode="ONE_WAY" />
+              </Bindings>
+            </InputArea>
+            <InputArea name="Name" editable="false">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Nombre de la cuenta" id="NameId" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.name" bindingMode="ONE_WAY" />
+              </Bindings>
+            </InputArea>
+            <InputArea name="SalesZone" editable="false">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Zona de Ventas" id="SalesZoneId" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.salesZone" bindingMode="ONE_WAY" />
+              </Bindings>
+            </InputArea>
+            <DatePickerField name="AssignmentDate" editable="false">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Fecha de asignación" id="AssignmentDateId" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.assignmentDate" bindingMode="TWO_WAY" />
+              </Bindings>
+            </DatePickerField>
+            <DatePickerField name="EndAssignmentDate" editable="false">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Fecha fin asignación" id="EndAssignmentDateId" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.endAssignmentDate" bindingMode="TWO_WAY" />
+              </Bindings>
+            </DatePickerField>
+            <DatePickerField name="LastVisitDate" editable="false">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Ultima Visita" id="LastVisitDateId" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.lastVisitDateCustom" bindingMode="TWO_WAY" />
+              </Bindings>
+            </DatePickerField>
+            <SelectionBox name="Frequency">
+              <Bindings>
+                <Resource target="Label" type="Label" id="FreqId" defaultLabel="Frecuencia" />
+                <Binding target="DataSource" toggleId="DomPortFreq" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.freq" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <SelectionBox name="Shift">
+              <Bindings>
+                <Resource target="Label" type="Label" id="ShiftId" defaultLabel="Tarea" />
+                <Binding target="DataSource" toggleId="DomPortShift" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.shift" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <SelectionBox name="Category">
+              <Bindings>
+                <Resource target="Label" type="Label" id="FreqId" defaultLabel="Categoria" />
+                <Binding target="DataSource" toggleId="DomPortCategory" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.category" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <SelectionBox name="ZoneType">
+              <Bindings>
+                <Resource target="Label" type="Label" id="ZoneTypeId" defaultLabel="Tipo de Zona" />
+                <Binding target="DataSource" toggleId="DomPortZoneType" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::PortfolioDetail.zoneType" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <!-- CON IMAGEN -->
+            <Merger name="PortfolioCoverageMerge" pattern="twoInputControls" labelHandling="Combined" separator="," leftRatio="0" rightRatio="0">
+              <ImageButton name="PortfolioCoverageImage">
+                <Bindings>
+                  <Resource target="Label" type="Label" defaultLabel="Cobertura" id="CoberturaId" />
+                  <Binding target="Image" type="Image" binding="ProcessContext::PortfolioDetail.coverageImage" bindingMode="ONE_WAY" />
+                </Bindings>
+                <Events>
+                  <ButtonPressedEvent event="mailPressed" />
+                </Events>
+              </ImageButton>
+            </Merger>
+            <!-- solo color 
+            <Merger name="PortfolioCoverageMerge2" pattern="twoInputControls" labelHandling="Combined" separator="," leftRatio="0" rightRatio="0">
+              <ImageButton name="PortfolioCoverageImage2"  >
+                <Bindings>
+                	<Resource target="Label" type="Label" defaultLabel="Cobertura" id="CoberturaId" />
+                    <Binding target="backColor" type="Color" binding="ProcessContext::PortfolioDetail.coverageColor" bindingMode="ONE_WAY" />
+                </Bindings>
+                <Events>
+                  <ButtonPressedEvent event="mailPressed" />
+                </Events>
+              </ImageButton>
+            </Merger>-->
+          </GroupElement>
+          <!-- -->
+          <GroupElement name="DetailGroup2">
+            <Bindings>
+              <Resource target="Title" type="Label" id="CoverageId" defaultLabel="Cobertura" />
+            </Bindings>
+          </GroupElement>
+        </Area>
+      </Area>
+      <!-- VISITAS TAB - @JuanFelipe - Historia FMG-91 -->
+      <Area areaName="Visits" areaPattern="SingleElementArea" lazyLoading="true">
+        <GroupedList name="PortfolioVisitList" searchable="false" dataSource="ProcessContext::PortfolioDetail.LoMyPortfolioVisit.Items[]" hasBorder="true">
+          <!--<SearchAttributes>
+            <SearchAttribute name="Subject" />
+          </SearchAttributes> -->
+          <Items name="Items" itemPattern="PortfolioVisitItem">
+            <ItemListLayout>
+              <Default>
+                <Col width="2.1em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" />
+                <Col>
+                  <Row>
+                    <Col layoutType="itemIdentifier" bindingId="Description" />
+                  </Row>
+                  <Row>
+                    <Col width="1.5em" layoutType="Image" bindingId="DateImageId" />
+                    <Col width="6em" layoutType="itemSecondary" bindingId="DateFrom" />
+                    <Col width="1.5em" layoutType="Image" bindingId="TimeImageId" />
+                    <Col width="4em" layoutType="itemSecondary" bindingId="TimeFrom" />
+                  </Row>
+                  <Row>
+                    <Col width="1.5em" layoutType="Image" bindingId="ResponsibleImageId" />
+                    <Col layoutType="itemValue" bindingId="Responsible" />
+                  </Row>
+                </Col>
+              </Default>
+              <Tablet>
+                <Default>
+                  <Col width="2.5em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col height="2.5em">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row layoutType="itemPaddingTop">
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="7em" layoutType="itemSecondary itemPaddingTop" bindingId="DateFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="4.2em" layoutType="itemSecondary itemPaddingTop" bindingId="TimeFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Default>
+                <Apple>
+                  <Col width="2.5em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col height="2.5em">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row layoutType="itemPaddingTop">
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="7em" layoutType="itemSecondary itemPaddingTop" bindingId="DateFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="4.2em" layoutType="itemSecondary itemPaddingTop" bindingId="TimeFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Apple>
+              </Tablet>
+              <Phone>
+                <Default>
+                  <Col width="1.3em" height="1.2em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row>
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="3.7em" layoutType="itemSecondary" bindingId="DateFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="2.4em" layoutType="itemSecondary" bindingId="TimeFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Default>
+                <Android>
+                  <Col width="1.3em" height="1.2em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row>
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="3.7em" layoutType="itemSecondary" bindingId="DateFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="2.4em" layoutType="itemSecondary" bindingId="TimeFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Android>
+                <Apple>
+                  <Col width="2em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row>
+                      <Col width="1.5em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="6em" layoutType="itemSecondary" bindingId="DateFrom" />
+                      <Col width="1.5em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="3em" layoutType="itemSecondary" bindingId="TimeFrom" />
+                      <Col width="1.5em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Apple>
+              </Phone>
+            </ItemListLayout>
+            <Bindings>
+              <Binding target="DateFrom" type="Date" binding=".dateFrom" bindingMode="ONE_WAY" />
+              <Binding target="TimeFrom" type="Text" binding=".timeFrom" bindingMode="ONE_WAY" />
+              <Binding target="Description" type="Text" binding=".subject" bindingMode="ONE_WAY" />
+              <Binding target="ClbStatus" type="Text" binding=".clbStatus" bindingMode="ONE_WAY" />
+              <Binding target="Responsible" type="Text" binding=".responsibleName" bindingMode="ONE_WAY" />
+              <Binding target="ClbStatusImage" type="Image" binding=".clbStatus.ImageId" bindingMode="ONE_WAY" />
+              <Resource target="TimeImageId" type="Image" id="ClockGrey16" defaultImage="ClockGrey16" />
+              <Resource target="DateImageId" type="Image" id="DayGrey16" defaultImage="DayGrey16" />
+              <Resource target="ResponsibleImageId" type="Image" id="UserGrey16" defaultImage="UserGrey16" />
+              <Binding target="typeWithStatusImage" type="Image" binding=".clbTypeStatus" bindingMode="ONE_WAY" />
+            </Bindings>
+          </Items>
+        </GroupedList>
+      </Area>
+      <!-- PREVISTOS TAB - @JuanFelipe - Historia FMG-91 -->
+      <Area areaName="Previstos" areaPattern="SingleElementArea" lazyLoading="true">
+        <GroupedList name="PrevistosList" searchable="false" dataSource="ProcessContext::PortfolioDetail.LoMyCarteraEvent.Items[]" hasBorder="true">
+          <!--<SearchAttributes>
+            <SearchAttribute name="Subject" />
+          </SearchAttributes> -->
+          <Items name="Items" itemPattern="ActivityItem">
+            <ItemListLayout>
+              <Default>
+                <!--<Col width="2.1em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" /> -->
+                <Col>
+                  <Row>
+                    <Col layoutType="itemIdentifier" bindingId="Description" />
+                  </Row>
+                  <Row>
+                    <Col width="1.5em" layoutType="Image" bindingId="DateImageId" />
+                    <Col width="6em" layoutType="itemSecondary" bindingId="StartDate" />
+                    <Col width="1.5em" layoutType="Image" bindingId="TimeImageId" />
+                    <Col width="4em" layoutType="itemSecondary" bindingId="StartTime" />
+                    <Col width="1.5em" layoutType="Image" bindingId="TimeImageId" />
+                    <Col width="4em" layoutType="itemSecondary" bindingId="EndTime" />
+                  </Row>
+                  <!--
+                  <Row>
+                    <Col width="1.5em" layoutType="Image" bindingId="ResponsibleImageId" />
+                    <Col layoutType="itemValue" bindingId="Responsible" />
+                  </Row>-->
+                </Col>
+              </Default>
+              <!--<Tablet>
+                <Default>
+                  <Col width="2.5em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col height="2.5em">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row layoutType="itemPaddingTop">
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="7em" layoutType="itemSecondary itemPaddingTop" bindingId="DateFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="4.2em" layoutType="itemSecondary itemPaddingTop" bindingId="TimeFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Default>
+                <Apple>
+                  <Col width="2.5em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col height="2.5em">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row layoutType="itemPaddingTop">
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="7em" layoutType="itemSecondary itemPaddingTop" bindingId="DateFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="4.2em" layoutType="itemSecondary itemPaddingTop" bindingId="TimeFrom" />
+                      <Col width="1.3em" height="1.6em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Apple>
+              </Tablet>
+              <Phone>
+                <Default>
+                  <Col width="1.3em" height="1.2em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row>
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="3.7em" layoutType="itemSecondary" bindingId="DateFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="2.4em" layoutType="itemSecondary" bindingId="TimeFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Default>
+                <Android>
+                  <Col width="1.3em" height="1.2em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row>
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="3.7em" layoutType="itemSecondary" bindingId="DateFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="2.4em" layoutType="itemSecondary" bindingId="TimeFrom" />
+                      <Col width="1em" height="1em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Android>
+                <Apple>
+                  <Col width="2em" height="1.4em" layoutType="Image" bindingId="typeWithStatusImage" />
+                  <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="Description" />
+                    <Row>
+                      <Col width="1.5em" layoutType="Image" bindingId="DateImageId" />
+                      <Col width="6em" layoutType="itemSecondary" bindingId="DateFrom" />
+                      <Col width="1.5em" layoutType="Image" bindingId="TimeImageId" />
+                      <Col width="3em" layoutType="itemSecondary" bindingId="TimeFrom" />
+                      <Col width="1.5em" layoutType="Image" bindingId="ResponsibleImageId" />
+                      <Col layoutType="itemValue" bindingId="Responsible" />
+                    </Row>
+                  </Col>
+                </Apple>
+              </Phone>-->
+            </ItemListLayout>
+            <Bindings>
+              <Binding target="Description" type="Text" binding=".subject" bindingMode="ONE_WAY" />
+              <Binding target="StartDate" type="Date" binding=".startDate" bindingMode="ONE_WAY" />
+              <Resource target="TimeImageId" type="Image" id="ClockGrey16" defaultImage="ClockGrey16" />
+              <Resource target="ResponsibleImageId" type="Image" id="UserGrey16" defaultImage="UserGrey16" />
+              <Resource target="DateImageId" type="Image" id="DayGrey16" defaultImage="DayGrey16" />
+              <Binding target="StartTime" type="Text" binding=".startTime" bindingMode="ONE_WAY" />
+              <Resource target="TimeImageId" type="Image" id="ClockGrey16" defaultImage="ClockGrey16" />
+              <Binding target="EndTime" type="Text" binding=".endTime" bindingMode="ONE_WAY" />
+              <!--
+              <Binding target="TimeFrom" type="Text" binding=".timeFrom" bindingMode="ONE_WAY" />
+              <Binding target="Description" type="Text" binding=".subject" bindingMode="ONE_WAY" />
+              <Binding target="ClbStatus" type="Text" binding=".clbStatus" bindingMode="ONE_WAY" />
+              <Binding target="Responsible" type="Text" binding=".responsibleName" bindingMode="ONE_WAY" />
+              <Binding target="ClbStatusImage" type="Image" binding=".clbStatus.ImageId" bindingMode="ONE_WAY" />
+              <Binding target="typeWithStatusImage" type="Image" binding=".clbTypeStatus" bindingMode="ONE_WAY" />
+              -->
+            </Bindings>
+          </Items>
+        </GroupedList>
+      </Area>
+      <!-- ESPECIALIDAD TAB - @VictorBosio - Historia FMG-90 -->
+      <Area areaName="Especialidades" areaPattern="MultiArea" lazyLoading="true">
+        <!-- Area donde se CARGAN todas las especialidades -->
+        <Area areaName="ESPOverview" areaPattern="SingleElementArea">
+          <!-- Grupo donde se obtienen y muestran la lista de Especialidades ya asignadas a la cartera -->
+          <GroupedList name="ESPListOverview" searchable="false" groupBy="" dataSource="ProcessContext::PortfolioDetail.LoMyPortfolioESPRelation.Items[]" hasBorder="true">
+            <Items name="Items" itemPattern="CustomerESPRelationItem">
+              <ItemListLayout>
+                <Default>
+                  <!--  Mostrar el nombre de la especialidad-->
+                  <Col width="8em">
+                    <Row layoutType="itemIdentifier" bindingId="espName" />
+                  </Col>
+                </Default>
+              </ItemListLayout>
+              <!-- Bindings son los que asocian los valores de la lista y los asocian a los targets en el 'ItemListLayout'-->
+              <Bindings>
+                <Binding target="espName" type="Text" binding=".espName" bindingMode="ONE_WAY" />
+              </Bindings>
+            </Items>
+            <Events></Events>
+          </GroupedList>
+        </Area>
+      </Area>
+      <!-- HORARIOS TAB - @VictorBosio - Historia FMG-90 -->
+      <Area areaName="Horarios" areaPattern="MultiArea" lazyLoading="true">
+        <!-- Area donde se CARGAN todos las Horarios -->
+        <Area areaName="HorariosOverview" areaPattern="SingleElementArea">
+          <MenuItems>
+            <!-- Menu superior en donde ubicamos el boton 'Nuevo Horario' -->
+            <MenuItem itemId="NewHorario" directlyVisible="true">
+              <Bindings>
+                <!-- Label e imagen mostrada en el boton 'Nuevo Horario' -->
+                <Resource target="Text" type="Label" id="NewHorarioId" defaultLabel="Nuevo Horario" />
+                <Resource target="Icon" type="Image" id="PlusDarkGrey24" defaultImage="PlusDarkGrey24" />
+              </Bindings>
+              <Events>
+                <!-- Cuando se presiona el boton lanza el evento 'newHorario'  -->
+                <ButtonPressedEvent event="newHorario">
+                  <ValidateAndSelectArea name="HorarioEdit" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <!-- Grupo donde se obtienen y muestran la lista de Horarios ya asignadas a la cartera -->
+          <GroupedList name="HorariosList" searchable="false" dataSource="ProcessContext::PortfolioDetail.LoMyProfessionalHours.Items[]" hasBorder="true">
+            <Items name="Items" itemPattern="HorarioListItem">
+              <ItemListLayout>
+                <Default>
+                  <Col flex="1">
+                    <Row layoutType="itemSecondarySmall" bindingId="horarioName" />
+                    <Row layoutType="itemIdentifier" bindingId="horarioDays" />
+                    <Row>
+                      <Col layoutType="itemValue" bindingId="horarioTimeFrom" />
+                      <Col width="1em" layoutType="itemSecondary" bindingId="Spacer" />
+                      <Col layoutType="itemValue" bindingId="horarioTimeUntil" />
+                    </Row>
+                  </Col>
+                </Default>
+              </ItemListLayout>
+              <Bindings>
+                <Binding target="horarioName" type="Text" binding=".name" bindingMode="ONE_WAY" />
+                <Binding target="horarioDays" type="Text" binding=".availableDays" bindingMode="ONE_WAY" />
+                <Binding target="horarioTimeFrom" type="Text" binding=".timeFrom" bindingMode="ONE_WAY" />
+                <Binding target="horarioTimeUntil" type="Text" binding=".timeUntil" bindingMode="ONE_WAY" />
+              </Bindings>
+            </Items>
+            <Events>
+              <ItemSelectedEvent event="horarioSelected">
+                <SelectArea name="HorarioEdit" />
+                <Params>
+                  <Param name="pKey" value=".pKey" />
+                </Params>
+              </ItemSelectedEvent>
+            </Events>
+          </GroupedList>
+        </Area>
+        <Area areaName="HorarioEdit" areaPattern="GroupedElementsArea">
+          <MenuItems>
+            <MenuItem itemId="AcceptHorarioChanges" directlyVisible="true">
+              <Bindings>
+                <Resource target="Text" type="Label" id="AcceptHorarioChangesId" defaultLabel="Hecho" />
+                <Resource target="Icon" type="Image" id="CheckDarkGrey24" />
+              </Bindings>
+              <Events>
+                <ButtonPressedEvent event="acceptHorarioChanges">
+                  <ValidateAndSelectArea name="HorariosOverview" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <GroupElement name="HorarioGroup">
+            <Bindings>
+              <Resource target="Title" type="Label" id="HorarioGroupId" defaultLabel="Horarios del Profesional" />
+            </Bindings>
+            <InputArea name="Name">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Nombre" id="HorarioNameId" />
+                <Binding target="Value" binding="ProcessContext::ProfHoursDetail.name" bindingMode="TWO_WAY" />
+              </Bindings>
+            </InputArea>
+            <CheckBox name="Monday">
+              <Bindings>
+                <Resource target="Label" type="Label" id="AvailableDaysId" defaultLabel="Lunes" />
+                <Binding target="checkedValue" binding="ProcessContext::ProfHoursDetail.monday" bindingMode="TWO_WAY" />
+              </Bindings>
+            </CheckBox>
+            <CheckBox name="Tuesday">
+              <Bindings>
+                <Resource target="Label" type="Label" id="AvailableDaysId" defaultLabel="Martes" />
+                <Binding target="checkedValue" binding="ProcessContext::ProfHoursDetail.tuesday" bindingMode="TWO_WAY" />
+              </Bindings>
+            </CheckBox>
+            <CheckBox name="Wednesday">
+              <Bindings>
+                <Resource target="Label" type="Label" id="AvailableDaysId" defaultLabel="Miercoles" />
+                <Binding target="checkedValue" binding="ProcessContext::ProfHoursDetail.wednesday" bindingMode="TWO_WAY" />
+              </Bindings>
+            </CheckBox>
+            <CheckBox name="Thursday">
+              <Bindings>
+                <Resource target="Label" type="Label" id="AvailableDaysId" defaultLabel="Jueves" />
+                <Binding target="checkedValue" binding="ProcessContext::ProfHoursDetail.thursday" bindingMode="TWO_WAY" />
+              </Bindings>
+            </CheckBox>
+            <CheckBox name="Friday">
+              <Bindings>
+                <Resource target="Label" type="Label" id="AvailableDaysId" defaultLabel="Viernes" />
+                <Binding target="checkedValue" binding="ProcessContext::ProfHoursDetail.friday" bindingMode="TWO_WAY" />
+              </Bindings>
+            </CheckBox>
+            <SelectionBox name="TimeFrom">
+              <Bindings>
+                <Resource target="Label" type="Label" id="TimeFromId" defaultLabel="Horario: Desde" />
+                <Binding target="DataSource" toggleId="ProfHTime" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::ProfHoursDetail.timeFrom" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <SelectionBox name="TimeUntil">
+              <Bindings>
+                <Resource target="Label" type="Label" id="TimeUntilId" defaultLabel="Horario: Hasta" />
+                <Binding target="DataSource" toggleId="ProfHTime" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::ProfHoursDetail.timeUntil" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+          </GroupElement>
+        </Area>
+      </Area>
+      <!-- SECRETARIAS TAB - @JuanFelipe - Historia FMG-91 -->
+      <Area areaName="Secretarias" areaPattern="MultiArea" lazyLoading="true">
+        <!-- Area donde se CARGAN todas las Secretarias -->
+        <Area areaName="SecretariaOverview" areaPattern="SingleElementArea">
+          <MenuItems>
+            <!-- Menu superior en donde ubicamos el boton 'Nueva Secretaria' -->
+            <MenuItem itemId="NewSecretaria" directlyVisible="true">
+              <Bindings>
+                <!-- Label e imagen mostrada en el boton 'Nueva Secretaria' -->
+                <Resource target="Text" type="Label" id="NewSecretariaId" defaultLabel="Nueva Secretaria" />
+                <Resource target="Icon" type="Image" id="PlusDarkGrey24" defaultImage="PlusDarkGrey24" />
+              </Bindings>
+              <Events>
+                <!-- Cuando se presiona el boton lanza el evento 'newSecretaria'  -->
+                <ButtonPressedEvent event="newSecretaria">
+                  <ValidateAndSelectArea name="SecretariaEdit" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <!-- Grupo donde se obtienen y muestran la lista de Secretarias ya asignadas a la cartera -->
+          <GroupedList name="SecretariasList" searchable="false" dataSource="ProcessContext::PortfolioDetail.LoMyCarteraSecretarias.Items[]" hasBorder="true">
+            <Items name="Items" itemPattern="SecretariaListItem">
+              <ItemListLayout>
+                <Default>
+                  <Col flex="1">
+                    <Row layoutType="itemIdentifier" bindingId="secretariaName" />
+                    <Row layoutType="itemSecondary" bindingId="secretariaEmail" />
+                    <Row layoutType="itemSecondary" bindingId="secretariaTelefono" />
+                  </Col>
+                </Default>
+              </ItemListLayout>
+              <Bindings>
+                <Binding target="secretariaName" type="Text" binding=".secretariaName" bindingMode="ONE_WAY" />
+                <Resource target="secretariaTelefonoLabel" type="Label" defaultLabel="Telefono" id="SecretariaPhone1Id" />
+                <Binding target="secretariaTelefono" type="Text" binding=".secretariaTelefono" bindingMode="ONE_WAY" />
+                <Binding target="secretariaEmail" type="Text" binding=".secretariaEmail" bindingMode="ONE_WAY" />
+              </Bindings>
+            </Items>
+            <Events>
+              <ItemSelectedEvent event="secretariaSelected">
+                <SelectArea name="SecretariaEdit" />
+                <Params>
+                  <Param name="pKey" value=".bpaSecretariaPKey" />
+                </Params>
+              </ItemSelectedEvent>
+            </Events>
+          </GroupedList>
+        </Area>
+        <Area areaName="SecretariaEdit" areaPattern="GroupedElementsArea">
+          <MenuItems>
+            <MenuItem itemId="AcceptSecretariaChanges" directlyVisible="true">
+              <Bindings>
+                <Resource target="Text" type="Label" id="AcceptSecretariaChangesId" defaultLabel="Hecho" />
+                <Resource target="Icon" type="Image" id="CheckDarkGrey24" />
+              </Bindings>
+              <Events>
+                <ButtonPressedEvent event="acceptSecretariaChanges">
+                  <ValidateAndSelectArea name="SecretariaOverview" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <GroupElement name="SecretariaGroup">
+            <Bindings>
+              <Resource target="Title" type="Label" id="SecretariaGroupId" defaultLabel="Datos Básicos" />
+            </Bindings>
+            <InputArea name="Nombre">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Nombre" id="SecretariaNameId" />
+                <Binding target="Value" binding="ProcessContext::SecretariaDetail.secretariaName" bindingMode="TWO_WAY" />
+              </Bindings>
+            </InputArea>
+            <InputArea name="ContactPartnerPhone2">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Movil" id="MobileId" />
+                <Binding target="Value" binding="ProcessContext::SecretariaDetail.secretariaTelefono" bindingMode="TWO_WAY" />
+              </Bindings>
+            </InputArea>
+            <InputArea name="Correo Electrónico">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Correo Electrónico" id="EmailId" />
+                <Binding target="Value" binding="ProcessContext::SecretariaDetail.secretariaEmail" bindingMode="TWO_WAY" />
+              </Bindings>
+            </InputArea>
+          </GroupElement>
+        </Area>
+      </Area>
+    </Section>
+  </Page>
+</UIDescription>

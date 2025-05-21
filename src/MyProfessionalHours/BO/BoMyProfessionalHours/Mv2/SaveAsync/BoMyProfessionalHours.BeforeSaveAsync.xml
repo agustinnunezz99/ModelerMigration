@@ -1,0 +1,47 @@
+<BusinessLogic methodName="beforeSaveAsync" businessObjectClass="BoMyProfessionalHours" businessObjectType="{BOType}" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters />
+  <Code language="JavaScript"><![CDATA[var promises = [];
+var profHoursSavedPromise;
+var days = '';
+var days2 = '';
+
+me.setAvailableDays('');
+
+if(me.getMonday() === '1') {
+  days += 'Lunes;';
+}
+if(me.getTuesday() === '1') {
+  days += 'Martes;';
+}
+if(me.getWednesday() === '1') {
+  days += 'Miercoles;';
+}
+if(me.getThursday() === '1') {
+  days += 'Jueves;';
+}
+if(me.getFriday() === '1') {
+  days += 'Viernes';
+}
+
+if(days.endsWith(';')) {
+  days2 = days.substring(0, days.length-1);
+} else {
+  days2 = days;
+}
+
+me.setAvailableDays(days2);
+
+
+//Save BoContactPartner
+// SF/CASDIF: General Dif
+if (Utils.isSfBackend()) {
+  profHoursSavedPromise = BoFactory.createObjectAsync("BoSfHelper", {})
+    .then(function (helper) {
+    return helper.saveTrackedObject(me, []);
+  });
+}
+else {
+  profHoursSavedPromise = Facade.saveObjectAsync(me);
+}]]></Code>
+  <Return name="promise" value="promise" />
+</BusinessLogic>

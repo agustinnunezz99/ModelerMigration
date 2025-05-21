@@ -1,0 +1,24 @@
+<BusinessLogic methodName="afterLoadAsync" businessObjectClass="BoMyProfessionalHours" businessObjectType="{BOType}" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="result" type="Object" />
+    <MethodInput name="context" type="Object" />
+  </Parameters>
+  <Code language="JavaScript"><![CDATA[var promise=when.resolve(result);
+
+if(me.getAvailableDays().includes('Lunes')) {
+  me.setMonday('1');
+}
+if(me.getAvailableDays().includes('Martes')) {
+  me.setTuesday('1');
+}
+if(me.getAvailableDays().includes('Miercoles')) {
+  me.setWednesday('1');
+}
+if(me.getAvailableDays().includes('Jueves')) {
+  me.setThursday('1');
+}
+if(me.getAvailableDays().includes('Viernes')) {
+  me.setFriday('1');
+}]]></Code>
+  <Return name="result" value="promise" />
+</BusinessLogic>

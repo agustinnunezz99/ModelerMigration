@@ -1,0 +1,21 @@
+<BusinessLogic methodName="myLoadLoPortfolioVisitAsync" businessObjectClass="BoMyCartera" businessObjectType="businessobject" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="bReload" type="DomText" />
+  </Parameters>
+  <Code language="JavaScript"><![CDATA[
+var promise;
+if(bReload == "1" || !Utils.isDefined(me.getLoMyPortfolioVisit())) {
+      promise = BoFactory.loadListAsync(LO_MYPORTFOLIOVISIT, me.getQueryBy("portfolioPKey", me.getPortfolioPKey())).then(
+        function (loMyPortfolioVisitJson) {
+          //set MYPORTFOLIOVISIT list and reset object status for save handling 
+          //(make not BoMyCartera DIRTY after reloading data via tab click)
+          var objectState = me.getObjectStatus();
+          me.setLoMyPortfolioVisit(loMyPortfolioVisitJson);
+          me.setObjectStatus(objectState);
+        });
+}
+ else {
+       promise = when.resolve();
+}]]></Code>
+  <Return name="BoMyCartera_myLoadLoPortfolioVisitAsync" value="promise" />
+</BusinessLogic>

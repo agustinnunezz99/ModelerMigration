@@ -1,0 +1,20 @@
+<BusinessLogic methodName="myloadLoCustomerESPRelationAsync" businessObjectClass="BoCustomer" businessObjectType="" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="bReload" type="DomText" />
+  </Parameters>
+  <Code language="JavaScript"><![CDATA[var promise;
+if(bReload == "1" || !Utils.isDefined(me.getLoMyCustomerESPRelation())) {
+      promise = BoFactory.loadListAsync(LO_MYCUSTOMERESPRELATION, me.getQueryBy("customerPKey", me.getPKey())).then(
+        function (loMyCustomerESPRelationJson) {
+          //set ESP relation list and reset object status for save handling 
+          //(make not BoCustomer DIRTY after reloading data via tab click)
+          var objectState = me.getObjectStatus();
+          me.setLoMyCustomerESPRelation(loMyCustomerESPRelationJson);
+          me.setObjectStatus(objectState);
+        });
+    }
+    else {
+      promise = when.resolve();
+    }]]></Code>
+  <Return name="BoCustomer_myloadLoCustomerESPRelationAsync" value="promise" />
+</BusinessLogic>

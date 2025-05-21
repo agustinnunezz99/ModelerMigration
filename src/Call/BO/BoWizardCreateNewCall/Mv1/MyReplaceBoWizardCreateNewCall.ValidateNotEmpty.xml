@@ -1,0 +1,59 @@
+<BusinessLogic methodName="replaceValidateNotEmpty" businessObjectClass="BoWizardCreateNewCall" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="messageCollector" type="messageCollector" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[/**--------------------------------------------------------------------------------------------------------
+ * Nombre: BoWizardCreateNewCall.replaceValidateNotEmpty
+ * Autor: Edu Torres
+ * Proyecto: Fichero Medico
+ * Descripción: Remplazar el metodo ValidateNotEmpty
+ * Validar la existencia d euna cartera y mapear la información de la cuenta correspondiente
+ * --------------------------------------------------------------------------------------------------------
+ * Versión       Fecha           Autor                                  Descripción
+ * --------------------------------------------------------------------------------------------------------
+ * 1.0.0         12/05/2023      Ruben Sarasty                             Creación
+ * --------------------------------------------------------------------------------------------------------
+ */
+/*Ruben: Ini Validar que exista una cartera*/
+if("Visit" === me.getCallMetaLookup().getId()) {
+  //Cambiar fecha, acultar campo y marcar managed customer
+  me.setManagementRelationValidThru(new Date(3000, 01, 01));
+  me.setSubValidThru(new Date(3000, 01, 01));
+  me.setIsManagedCustomer("1");
+  if(Utils.isEmptyString(me.getBriefcasePKey())) {
+    var newError = {"level": "error",
+                    "objectClass": "BoWizardCreateNewCall",
+                    "messageID": "validateBriefcase"};
+    messageCollector.add(newError);
+  }
+} else {
+  if("Previstos" === me.getCallMetaLookup().getId()) {
+    me.setCustomerPKey(" ");
+    if(Utils.isEmptyString(me.getBriefcasePKey()) && Utils.isEmptyString(me.getInstitutionPKey())) {
+      var newError = {"level": "error",
+                      "objectClass": "BoWizardCreateNewCall",
+                      "messageID": "validateBriefcaseOrInstitution"};
+      messageCollector.add(newError);
+    } else {
+      if(!Utils.isEmptyString(me.getBriefcasePKey()) && !Utils.isEmptyString(me.getInstitutionPKey())) {
+        var newError = {"level": "error",
+                        "objectClass": "BoWizardCreateNewCall",
+                        "messageID": "validateBriefcaseOrInstitution2"};
+        messageCollector.add(newError);
+      } 
+    }
+  }
+}
+/*Ruben: Fin Validar que exista una cartera*/
+if (Utils.isEmptyString(me.getCallMetaPKey()) || Utils.isEmptyString(me.getTimeFrom()) || Utils.isEmptyString(me.getDateFrom()) ||
+    (me.getCallMetaLookup().getCompanyRequired() === "Mandatory" && Utils.isEmptyString(me.getCustomerPKey()))) {
+  var newError = {"level": "error",
+                  "objectClass": "BoWizardCreateNewCall",
+                  "messageID": "CasClbFillInAllValues"};
+  messageCollector.add(newError);
+}
+me.setObjectStatus(STATE.NEW);]]>
+</Code>
+  <Return name="" value="" />
+</BusinessLogic>

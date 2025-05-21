@@ -1,0 +1,16 @@
+<DataSource name="DsLuMyEspecialidad" backendSystem="sf" businessObjectClass="LuMyEspecialidad" external="False" readOnly="True" editableEntity="cgf_Especialidad__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="cgf_Especialidad__c" column="Id" />
+    <Attribute name="name" table="cgf_Especialidad__c" column="Name" />
+  </Attributes>
+  <Entities>
+    <Entity name="cgf_Especialidad__c" alias="" idAttribute="Id" />
+  </Entities>
+  <QueryCondition><![CDATA[
+  cgf_Especialidad__c.Id = #pKey#
+ ]]></QueryCondition>
+  <OrderCriteria></OrderCriteria>
+  <Parameters>
+    <Parameter name="pKey" type="TEXT" />
+  </Parameters> 
+</DataSource>

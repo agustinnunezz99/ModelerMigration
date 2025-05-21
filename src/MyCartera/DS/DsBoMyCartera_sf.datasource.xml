@@ -1,0 +1,63 @@
+<DataSource name="DsBoMyCartera" backendSystem="sf" businessObjectClass="BoMyCartera" external="true" editableEntity="AsignacionCuenta__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="AsignacionCuenta__c" column="Id" />
+    <Attribute name="portfolioPKey" table="AsignacionCuenta__c" column="Id" />
+    <Attribute name="name" table="AsignacionCuenta__c" column="cgf_Cartera__c" />
+    <Attribute name="salesZone" table="AsignacionCuenta__c" column="cgf_NombreZonaDeVenta__c" />
+    <Attribute name="accountpKey" table="AsignacionCuenta__c" column="AccountId__c" />
+    <Attribute name="institutionpKey" table="AsignacionCuenta__c" column="cgf_Institucion__c" />
+    <Attribute name="assignmentDate" table="AsignacionCuenta__c" column="cgf_Fecha_de_Asignacion__c" />
+    <Attribute name="endAssignmentDate" table="AsignacionCuenta__c" column="cgf_Fecha_Fin_Asignacion__c" />
+    <Attribute name="lastVisitDateSF" table="AsignacionCuenta__c" column="cgf_Ultima_Visita__c" />
+    <Attribute name="freq" table="AsignacionCuenta__c" column="cgf_Frecuencia__c" />
+    <Attribute name="shift" table="AsignacionCuenta__c" column="cgf_Tarea__c" />
+    <Attribute name="category" table="AsignacionCuenta__c" column="cgf_Categoria__c" />
+    <Attribute name="zoneType" table="AsignacionCuenta__c" column="cgf_Tipo_de_zona__c" />
+    <Attribute name="coverage" table="AsignacionCuenta__c" column="cgf_Cobertura__c" />
+    <DerivedAttribute name="lastVisitDateCustom" value="''" />
+    <DerivedAttribute name="coverageImage" value="''" />
+    <DerivedAttribute name="coverageColor" value="''" />
+  </Attributes>
+  <Entities>
+    <Entity name="AsignacionCuenta__c" alias="" idAttribute="Id" />
+  </Entities>
+  <Database platform="SQLite">
+    <Load><![CDATA[
+
+	  var pKey = "";
+      var additionalCond = "";
+
+	  if(Utils.isDefined(jsonQuery.pKey)){
+        pKey =  Utils.convertForDBParam(jsonQuery.pKey, "DomPKey");
+        additionalCond += "AND AsignacionCuenta__c.Id = #pKey# ";
+	  }
+
+      var sqlParams = {pKey};
+
+      var sqlStmt = "SELECT ";
+      sqlStmt +=           "AsignacionCuenta__c.Id AS pKey, ";
+      sqlStmt +=           "AsignacionCuenta__c.Id AS portfolioPKey, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Cartera__c AS name, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_NombreZonaDeVenta__c as salesZone, ";
+      sqlStmt +=           "AsignacionCuenta__c.AccountId__c AS accountpKey, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Institucion__c AS institutionpKey, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Fecha_de_Asignacion__c AS assignmentDate, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Fecha_Fin_Asignacion__c AS endAssignmentDate, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Ultima_Visita__c AS lastVisitDateSF, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Frecuencia__c AS freq, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Tarea__c AS shift, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Categoria__c AS category, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Tipo_de_zona__c AS zoneType, ";
+      sqlStmt +=           "AsignacionCuenta__c.cgf_Cobertura__c AS coverage, ";
+      sqlStmt +=           "(SELECT PlannedVisitStartTime FROM Visit WHERE cgf_Cartera__c = #pKey# ORDER BY PlannedVisitStartTime DESC LIMIT 1) lastVisitDateCustom, ";
+      sqlStmt +=           "'' AS coverageImage, ";
+      sqlStmt +=           "'' AS coverageColor ";
+      sqlStmt +=   "FROM   AsignacionCuenta__c ";
+	  sqlStmt +=   "WHERE ";
+      sqlStmt +=           "AsignacionCuenta__c.IsDeleted = '0' ";
+      sqlStmt +=           additionalCond;
+
+      return Utils.replaceMacrosParam(sqlStmt, sqlParams);
+	]]></Load>
+  </Database>
+</DataSource>

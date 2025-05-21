@@ -1,0 +1,28 @@
+<DataSource name="DsLuMyBriefcase" backendSystem="sf" businessObjectClass="LuMyBriefcase" external="false" editableEntity="AsignacionCuenta__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="AsignacionCuenta__c" column="Id" />
+    <Attribute name="name" table="AsignacionCuenta__c" column="cgf_Cartera__c" />
+    <Attribute name="accountId" table="AsignacionCuenta__c" column="AccountId__c" />
+    <Attribute name="cgfTarea" table="AsignacionCuenta__c" column="cgf_Tarea__c" />
+    <Attribute name="recordType" table="AsignacionCuenta__c" column="RecordTypeId" />
+    <Attribute name="recordTypeAccount" table="AsignacionCuenta__c" column="cgf_RecordTypeAccount__c" />
+    <Attribute name="retailStoreId" table="RetailStore" column="Id" />
+  </Attributes>
+  <Entities>
+    <Entity name="AsignacionCuenta__c" alias="" />
+    <Entity name="RetailStore" alias="">
+      <Join Type="left">
+        <SimpleJoin>
+          <Condition leftSideValue="AsignacionCuenta__c.Id" comparator="eq" rightSideType="Attribute" rightSideValue="RetailStore.cgf_Cartera__c" />
+        </SimpleJoin>
+      </Join>
+    </Entity>
+  </Entities>
+  <QueryCondition><![CDATA[
+     AsignacionCuenta__c.Id = #pKey#
+        ]]></QueryCondition>
+  <OrderCriteria />
+  <Parameters>
+    <Parameter name="pKey" type="TEXT" />
+  </Parameters>
+</DataSource>

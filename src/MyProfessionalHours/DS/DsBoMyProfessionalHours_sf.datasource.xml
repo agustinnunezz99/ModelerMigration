@@ -1,0 +1,25 @@
+<DataSource name="DsBoMyProfessionalHours" backendSystem="sf" businessObjectClass="BoMyProfessionalHours" external="false" editableEntity="cgf_Horarios_de_Profesional__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="cgf_Horarios_de_Profesional__c" column="Id" />
+    <Attribute name="portfolioPKey" table="cgf_Horarios_de_Profesional__c" column="cgf_Cartera__c" />
+    <Attribute name="availableDays" table="cgf_Horarios_de_Profesional__c" column="cgf_Dias_de_la_Semana__c" />
+    <Attribute name="timeFrom" table="cgf_Horarios_de_Profesional__c" column="cgf_Hora_Desde__c" />
+    <Attribute name="timeUntil" table="cgf_Horarios_de_Profesional__c" column="cgf_Hora_Hasta__c" />
+    <Attribute name="name" table="cgf_Horarios_de_Profesional__c" column="Name" />
+    <DerivedAttribute name="monday" value="''" />
+    <DerivedAttribute name="tuesday" value="''" />
+    <DerivedAttribute name="wednesday" value="''" />
+    <DerivedAttribute name="thursday" value="''" />
+    <DerivedAttribute name="friday" value="''" />
+  </Attributes>
+  <Entities>
+    <Entity name="cgf_Horarios_de_Profesional__c" alias="" idAttribute="Id" />
+  </Entities>
+  <QueryCondition><![CDATA[
+    cgf_Horarios_de_Profesional__c.Id = #pKey#
+  ]]></QueryCondition>
+  <OrderCriteria />
+  <Parameters>
+    <Parameter name="pKey" type="TEXT" />
+  </Parameters>
+</DataSource>

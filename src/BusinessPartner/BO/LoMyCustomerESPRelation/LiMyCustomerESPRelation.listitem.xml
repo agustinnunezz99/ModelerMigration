@@ -1,0 +1,8 @@
+<ListItem name="LiMyCustomerESPRelation">
+  <SimpleProperties>
+    <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
+    <SimpleProperty name="espName" type="DomBpaName" dataSourceProperty="espName" />
+    <SimpleProperty name="customerPKey" type="DomPKey" dataSourceProperty="customerPKey" />
+    <SimpleProperty name="espPKey" type="DomPKey" dataSourceProperty="espPKey" />
+  </SimpleProperties>
+</ListItem>

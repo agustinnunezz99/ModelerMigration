@@ -1,0 +1,10 @@
+<ListItem name="LiMyProfessionalHours">
+  <SimpleProperties>
+    <SimpleProperty name="pKey" type="DomPKey" id="true" dataSourceProperty="pKey" />
+    <SimpleProperty name="name" type="DomBpaName" id="false" dataSourceProperty="name" />
+    <SimpleProperty name="portfolioPKey" type="DomPKey" id="false" dataSourceProperty="portfolioPKey" />
+    <SimpleProperty name="availableDays" type="DomProfHDays" id="false" dataSourceProperty="availableDays" />
+    <SimpleProperty name="timeFrom" type="DomProfHTime" id="false" dataSourceProperty="timeFrom" />
+    <SimpleProperty name="timeUntil" type="DomProfHTime" id="false" dataSourceProperty="timeUntil" />
+  </SimpleProperties>
+</ListItem>

@@ -1,0 +1,8 @@
+<ListItem name="LiMyCarteraEvent">
+  <SimpleProperties>
+    <SimpleProperty name="subject" type="DomText" dataSourceProperty="subject" />
+    <SimpleProperty name="startDate" type="DomDate" dataSourceProperty="startDateTime" />
+    <SimpleProperty name="startTime" type="DomTime" dataSourceProperty="startDateTime" />
+    <SimpleProperty name="endTime" type="DomTime" dataSourceProperty="endDateTime" />
+  </SimpleProperties>
+</ListItem>

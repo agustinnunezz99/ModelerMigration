@@ -1,0 +1,44 @@
+<Process name="Customer::MyEspecialidadLookupProcess" defaultAction="ShowView" schemaVersion="0.0.0.5">
+  <Entry>
+    <ProcessContext>
+      <Declarations>
+      </Declarations>
+      <Parameters>
+        <Input name="EspecialidadList" type="LoMyEspecialidadOverview" />
+        <Input name="especialidadPKey" type="DomPKey" />
+        <Input name="especialidadName" type="DomBpaName" />
+      </Parameters>
+    </ProcessContext>
+    <EntryActions>
+      <Action actionType="LOAD" name="GetEspecialidadList" type="LoMyEspecialidadOverview">
+        <Parameters>
+          <Input name="considerSubstitutionLeadFollowUpTime" type="Literal" value="1" />
+          <Input name="mode" type="Literal" value="order" />
+        </Parameters>
+        <Return name="ProcessContext::EspecialidadList" />
+      </Action>
+    </EntryActions>
+  </Entry>
+  <Body>
+    <Actions>
+      <Action actionType="View" name="ShowView">
+        <UIDescription>Customer::MyEspecialidadLookupUI</UIDescription>
+        <Events>
+          <Event name="itemSelected" action="EndWithNewValue" />
+        </Events>
+      </Action>
+      <Action actionType="END" name="EndWithNewValue">
+        <ReturnValues>
+          <Return name="pKey" value="Event.pKey" />
+          <Return name="especialidadName" value="Event.name" />
+        </ReturnValues>
+      </Action>
+      <Action actionType="END" name="End">
+        <ReturnValues>
+          <Return name="pKey" value="ProcessContext::especialidadPKey" />
+          <Return name="especialidadName" value="ProcessContext::especialidadName" />
+        </ReturnValues>
+      </Action>
+    </Actions>
+  </Body>
+</Process>

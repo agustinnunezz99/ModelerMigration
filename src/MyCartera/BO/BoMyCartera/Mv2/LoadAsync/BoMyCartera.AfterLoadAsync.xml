@@ -1,0 +1,27 @@
+<BusinessLogic methodName="afterLoadAsync" businessObjectClass="BoMyCartera" businessObjectType="{BOType}" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="result" type="Object" />
+    <MethodInput name="context" type="Object" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[var promise=when.resolve(result);
+
+if(me.getCoverage().includes('rojo')){
+    me.setCoverageImage('MyRedCoverage');
+    me.setCoverageColor('bb0000');
+}
+if(me.getCoverage().includes('gris')){
+    me.setCoverageImage('MyGreyCoverage');
+}
+if(me.getCoverage().includes('verde')){
+    me.setCoverageImage('MyGreenCoverage');
+}
+if(me.getCoverage().includes('amarillo')){
+    me.setCoverageImage('MyYellowCoverage');
+}
+if(me.getCoverage().includes('azul')){
+    me.setCoverageImage('MyBlueCoverage');
+}]]>
+</Code>
+  <Return name="result" value="promise" />
+</BusinessLogic>

@@ -1,0 +1,107 @@
+<BusinessLogic methodName="mySetRemoveRights" businessObjectClass="BoCustomer" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters />
+<Code language="JavaScript">
+<![CDATA[var user = ApplicationContext.get('user');
+var userSales = user.getBoUserSales();
+var isOwner = false;
+if(user.getPKey() === me.getOwnerId()) {
+  isOwner = true;
+}
+
+if (me.getCustomerId().includes('Local_') && 'Profesionales_de_la_Salud' != me.getRecordTypeDeveloperName()) {
+  me.getACL().removeRight(AclObjectType.PROPERTY,"name1",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"razonSocial",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"luMyParentAccount",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"luMyPostalCode",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"grupo",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"cuit",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"farmanet",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"tipoInstitucion",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"cpa",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"webSite",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"statusAcc",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"hierarchyType",AclPermission.VISIBLE);
+  return;
+}
+
+switch (me.getRecordTypeDeveloperName()){
+  case "Farmacy": 
+    me.getACL().removeRight(AclObjectType.PROPERTY,"gender",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"dni",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"tipoDoc",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"name1",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"name2",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"birthdate",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"residente",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"epc",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"phone2",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"obrasSociales",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"tipoInstitucion",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"matNacAcc",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"luMyPostalCode",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"luMyParentAccount",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"statusAcc",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"hierarchyType",AclPermission.EDIT);
+    if (!isOwner) {
+      me.getACL().removeRight(AclObjectType.PROPERTY,"name",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"razonSocial",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"grupo",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"cuit",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"farmanet",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"cpa",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"loCustomerAddress",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"phone1",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"phone2",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"fax1",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"email1",AclPermission.EDIT);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"webSite",AclPermission.EDIT);
+    }
+    isOwner = false;
+    break;
+
+  case "Instituciones_sin_venta": 
+    me.getACL().removeRight(AclObjectType.PROPERTY,"gender",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"dni",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"tipoDoc",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"razonSocial",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"name1",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"name2",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"birthdate",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"residente",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"epc",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"phone2",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"obrasSociales",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"luMyParentAccount",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"hierarchyType",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"statusAcc",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"grupo",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"matNacAcc",AclPermission.VISIBLE);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"name",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"cuit",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"farmanet",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"tipoInstitucion",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"cpa",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"loCustomerAddress",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"phone1",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"fax1",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"email1",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"webSite",AclPermission.EDIT);
+    me.getACL().removeRight(AclObjectType.PROPERTY,"email2",AclPermission.EDIT);
+    break;
+    
+  default: 
+      me.getACL().removeRight(AclObjectType.PROPERTY,"name",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"razonSocial",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"luMyParentAccount",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"grupo",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"cuit",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"farmanet",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"tipoInstitucion",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"cpa",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"webSite",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"statusAcc",AclPermission.VISIBLE);
+      me.getACL().removeRight(AclObjectType.PROPERTY,"hierarchyType",AclPermission.VISIBLE);
+}]]>
+</Code>
+  <Return name="" value="" />
+</BusinessLogic>

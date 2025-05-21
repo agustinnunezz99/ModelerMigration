@@ -1,0 +1,89 @@
+<DataSource name="DsLoMyBriefcaseOverview" backendSystem="sf" businessObjectClass="LoMyBriefcaseOverview" external="true" editableEntity="AsignacionCuenta__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="AsignacionCuenta__c" column="Id" />
+    <Attribute name="name" table="AsignacionCuenta__c" column="cgf_Cartera__c" />
+    <Attribute name="salesZone" table="AsignacionCuenta__c" column="cgf_NombreZonaDeVenta__c" />
+    <DerivedAttribute name="isProfessional" value="'0'" />
+    <DerivedAttribute name="isPharmacy" value="'0'" />
+  </Attributes>
+  <Entities>
+    <Entity name="AsignacionCuenta__c" alias="" idAttribute="Id" />
+  </Entities>
+  <Database platform="SQLite">
+    <Load><![CDATA[
+
+      if (!jsonQuery){jsonQuery={'params': []};}
+
+      if (Utils.isDefined(jsonQuery)){
+           var newParams = jsonQuery;
+           if (Utils.isOldParamsFormat(newParams)){
+               newParams = Utils.convertDsParamsOldToNew(newParams);
+           }
+      }
+
+	  var addCondSearch = "";
+	  var salesZone = "";
+      var isPharmacy = "";
+      var isProfessional = "";
+
+
+      //############################
+      //## Advanced Search Paging ##
+	  //############################
+
+      /**  Sales Zone  */
+	  if (Utils.isDefined(newParams.salesZone)){
+          salesZone = Utils.convertForDBParam(newParams.salesZone, "DomText");
+          addCondSearch += " AND AsignacionCuenta__c.cgf_NombreZonaDeVenta__c " + Utils.replaceOperator(newParams.salesZoneComp) + "#salesZone# ";
+	  }
+      /**  isPharmacy and isProfessional */
+	  if (Utils.isDefined(newParams.isPharmacy) && Utils.isDefined(newParams.isProfessional) ){
+          isPharmacy = Utils.convertForDBParam(newParams.isPharmacy, "DomBool");
+          isProfessional = Utils.convertForDBParam(newParams.isProfessional, "DomBool");
+		  /* Si el filtro es el mismo y falso no se mostrarán carteras, si ambos son verdaderon no agregar condiciones y mostrar todo  */
+          if(isPharmacy === isProfessional && isPharmacy === '1'){
+                 //No hacer ningun filtro, mostrar todo
+		  }else{
+              addCondSearch += " AND isPharmacy " + Utils.replaceOperator(newParams.isPharmacyComp) + "#isPharmacy# ";
+              addCondSearch += " AND isProfessional " + Utils.replaceOperator(newParams.isProfessionalComp) + "#isProfessional# ";
+		  }
+	  }else{
+        /**  isPharmacy  */
+        if (Utils.isDefined(newParams.isPharmacy)){
+            isPharmacy = Utils.convertForDBParam(newParams.isPharmacy, "DomBool");
+            addCondSearch += " AND isPharmacy " + Utils.replaceOperator(newParams.isPharmacyComp) + "#isPharmacy# ";
+        }
+        /**  isProfessional  */
+        if (Utils.isDefined(newParams.isProfessional)){
+            isProfessional = Utils.convertForDBParam(newParams.isProfessional, "DomBool");
+            addCondSearch += " AND isProfessional " + Utils.replaceOperator(newParams.isProfessionalComp) + "#isProfessional# ";
+        }
+      }
+     
+
+
+      var sqlParams = {salesZone,isPharmacy,isProfessional};
+
+
+      var sqlStmt = "SELECT ";
+      sqlStmt +=             "AsignacionCuenta__c.Id AS pKey, ";
+      sqlStmt +=             "AsignacionCuenta__c.cgf_Cartera__c AS name, ";
+	  sqlStmt +=             "CASE WHEN RecordType.DeveloperName = 'cgf_Cartera_de_Farmacias' THEN '1' ELSE '0' END AS isPharmacy, ";
+	  sqlStmt +=             "CASE WHEN RecordType.DeveloperName = 'cgf_Cartera_de_Medicos' THEN '1' ELSE '0' END AS isProfessional ";
+      sqlStmt +=    "FROM    AsignacionCuenta__c ";
+
+      sqlStmt +=             " INNER JOIN RecordType ON RecordType.Id = AsignacionCuenta__c.RecordTypeId ";
+      sqlStmt +=              " AND ( ";
+      sqlStmt +=                    "AsignacionCuenta__c.IsDeleted <> '1'  ";
+      sqlStmt +=                    "OR AsignacionCuenta__c.IsDeleted IS NULL ";
+      sqlStmt +=              ") ";
+
+      sqlStmt +=    "WHERE ";
+      sqlStmt +=             " AsignacionCuenta__c.IsDeleted = '0' ";
+	  sqlStmt +=             addCondSearch;
+
+
+      return Utils.replaceMacrosParam(sqlStmt, sqlParams);
+	]]></Load>
+  </Database>
+</DataSource>

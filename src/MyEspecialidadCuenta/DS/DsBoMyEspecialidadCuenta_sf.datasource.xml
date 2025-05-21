@@ -1,0 +1,16 @@
+<DataSource name="DsBoMyEspecialidadCuenta" backendSystem="sf" businessObjectClass="BoMyEspecialidadCuenta" external="false" editableEntity="cgf_Especialidad_Cuenta__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="cgf_Especialidad_Cuenta__c" column="Id" />
+    <Attribute name="name" table="cgf_Especialidad_Cuenta__c" column="Name" />
+    <Attribute name="customerPKey" table="cgf_Especialidad_Cuenta__c" column="cgf_Cuenta__c" />
+    <Attribute name="especialidadPKey" table="cgf_Especialidad_Cuenta__c" column="cgf_Especialidad__c" />
+  </Attributes>
+  <Entities>
+    <Entity name="cgf_Especialidad_Cuenta__c" alias="" idAttribute="Id" />
+  </Entities>
+  <QueryCondition><![CDATA[cgf_Especialidad_Cuenta__c.Id = #pKey#]]></QueryCondition>
+  <OrderCriteria />
+  <Parameters>
+    <Parameter name="pKey" type="TEXT" />
+  </Parameters>
+</DataSource>

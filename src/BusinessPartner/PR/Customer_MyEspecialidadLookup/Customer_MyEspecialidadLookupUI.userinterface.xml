@@ -1,0 +1,38 @@
+<UIDescription name="Customer::MyEspecialidadLookupUI" schemaVersion="0.0.0.5">
+  <Page pagePattern="SingleSectionDialogPage">
+    <PageHeader>
+      <Bindings>
+        <Resource target="title" type="Label" id="EspecialidadLookupTitleId" defaultLabel="Especialidades" />
+      </Bindings>
+      <MenuItems>
+      </MenuItems>
+    </PageHeader>
+    <Section sectionName="masterSection" sectionPattern="SingleAreaSection">
+      <Area areaName="mainArea" areaPattern="SingleElementArea">
+        <GroupedList name="EspecialidadList" direction="ASC" searchable="true" dataSource="ProcessContext::EspecialidadList.Items[]">
+          <Items name="Items" itemPattern="EspecialidadLookupItem">
+            <Bindings>
+              <Binding target="Name" type="Text" binding=".name" bindingMode="ONE_WAY" />
+            </Bindings>
+            <ItemListLayout>
+              <Col width="12em">
+                <Row layoutType="itemIdentifier" bindingId="Name" />
+              </Col>
+            </ItemListLayout>
+          </Items>
+          <Events>
+            <ItemSelectedEvent event="itemSelected">
+              <Params>
+                <Param name="pKey" value=".pKey" />
+                <Param name="name" value=".name" />
+              </Params>
+            </ItemSelectedEvent>
+          </Events>
+          <SearchAttributes>
+            <SearchAttribute name="Name" />
+          </SearchAttributes>
+        </GroupedList>
+      </Area>
+    </Section>
+  </Page>
+</UIDescription>

@@ -1,0 +1,73 @@
+<BusinessLogic methodName="replaceValidateTime" businessObjectClass="BoWizardCreateNewCall" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="messageCollector" type="messageCollector" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[/**--------------------------------------------------------------------------------------------------------
+ * Nombre: BoWizardCreateNewCall.replaceValidateTime
+ * Autor: Edu Torres
+ * Proyecto: Fichero Medico
+ * Descripción: Remplazar el metodo ValidateTime
+ * para calcular el tiempo total del evento: previsto u otra actividad y poder validar las fechas de asignación
+ * --------------------------------------------------------------------------------------------------------
+ * Versión       Fecha           Autor                                  Descripción
+ * --------------------------------------------------------------------------------------------------------
+ * 1.0.0         12/05/2023      Edu Torres                             Creación
+ * --------------------------------------------------------------------------------------------------------
+ */
+if (!Utils.isEmptyString(me.getDateFrom()))
+{
+  var d1 = Utils.convertAnsiDate2Date(me.getDateFrom());               
+  var splitString = me.getTimeFrom().split(":");
+  d1.setHours(splitString[0],splitString[1],0,0);
+  //Edu: Mapear el turno
+  me.setShiftVisit(Number(splitString[0])<12? "AM" : "PM");
+  var duration = me.getCallMetaLookup().getDefaultDuration();
+  //Edu: FMG-95 y FMG-96: Previstos u Otras actividades
+  if (me.getCallMetaLookup().getId()==="Previstos" || me.getCallMetaLookup().getId()==="Otras Actividades") {
+    var fraccion =  me.getFraccion();
+    var spFeStartMor = me.getCallMetaLookup().getFeStartMor().split(":");
+    var spFeEndMor = me.getCallMetaLookup().getFeEndMor().split(":");
+    var spFeStartAft = me.getCallMetaLookup().getFeStartAft().split(":");
+    var spFeEndAft = me.getCallMetaLookup().getFeEndAft().split(":");
+    
+    if(me.getTaskVisit()==='TARDE') {
+      var timeStart = Number(spFeStartAft[0]) + Number((spFeStartAft[1]/60));
+      var timeEnd = Number(spFeEndAft[0]) + Number((spFeEndAft[1]/60));
+      me.setTimeFrom(me.getCallMetaLookup().getFeStartAft());
+      d1.setHours(spFeStartAft[0],spFeStartAft[1],0,0);
+    } else {
+      var timeStart = Number(spFeStartMor[0]) + Number((spFeStartMor[1]/60));
+      var timeEnd = Number(spFeEndMor[0]) + Number((spFeEndMor[1]/60));
+      me.setTimeFrom(me.getCallMetaLookup().getFeStartMor());
+      d1.setHours(spFeStartMor[0],spFeStartMor[1],0,0);
+    }
+    var timeDifference = (timeEnd - timeStart) * 60;
+    if(me.getCallMetaLookup().getId()==="Previstos") {
+      duration = 60*4;
+    } else {
+      duration = (timeDifference * fraccion) / 100;
+    }
+    if("100" === me.getFraccion()){
+      me.setAllDay("1");
+    }
+    me.getCallMetaLookup().setDefaultDuration(duration);
+    me.getCallMetaLookup().setText(me.getCallMetaLookup().getText() + ' - ' + me.getActividades());  
+  }
+  //Edu: FMG-95 y FMG-96: Previstos u Otras actividades
+  d1.setMinutes(d1.getMinutes() + duration );
+  d1.setHours(0,0,0,0);
+
+  if (d1 > Utils.convertAnsiDate2Date(me.getDateFrom()))
+  {
+    var  newError = {
+      "level": "error",
+      "objectClass": "BoCall",
+      "messageID": "CasClbCallsMayNotSpanSeveralDays"
+    };
+    messageCollector.add(newError);
+  }
+}]]>
+</Code>
+  <Return name="" value="" />
+</BusinessLogic>

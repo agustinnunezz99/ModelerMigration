@@ -1,0 +1,22 @@
+<BusinessLogic methodName="myLoadLoPortfolioESPRelationAsync" businessObjectClass="BoMyCartera" businessObjectType="businessobject" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="bReload" type="DomText" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[var promise;
+if(bReload == "1" || !Utils.isDefined(me.getLoMyPortfolioESPRelation())) {
+      promise = BoFactory.loadListAsync(LO_MYPORTFOLIOESPRELATION, me.getQueryBy("portfolioPKey", me.getPKey())).then(
+        function (loMyPortfolioESPRelationJson) {
+          //set ESP relation list and reset object status for save handling 
+          //(make not BoCustomer DIRTY after reloading data via tab click)
+          var objectState = me.getObjectStatus();
+          me.setLoMyPortfolioESPRelation(loMyPortfolioESPRelationJson);
+          me.setObjectStatus(objectState);
+        });
+    }
+    else {
+      promise = when.resolve();
+    }]]>
+</Code>
+  <Return name="BoMyCartera_myloadLoPortfolioESPRelationAsync" value="promise" />
+</BusinessLogic>

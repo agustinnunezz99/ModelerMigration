@@ -1,0 +1,13 @@
+<LookupObject name="LuMyRecordType" generateLoadMethod="true" schemaVersion="1.1">
+  <DataSource name="DsLuMyRecordType" />
+  <SimpleProperties>
+    <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKeyRecordType" />
+    <SimpleProperty name="namePKey" type="DomBpaName" dataSourceProperty="namePKey" />
+    <SimpleProperty name="devName" type="DomBpaName" dataSourceProperty="devName" />
+  </SimpleProperties>
+  <Methods>
+    <Method name="afterLoadAsync" />
+    <Method name="beforeLoadAsync" />
+    <Method name="loadAsync" />
+  </Methods>
+</LookupObject>

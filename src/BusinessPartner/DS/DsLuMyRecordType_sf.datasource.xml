@@ -1,0 +1,17 @@
+<DataSource name="DsLuMyRecordType" backendSystem="sf" businessObjectClass="LuMyRecordType" external="false" editableEntity="RecordType" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKeyRecordType" table="RecordType" column="Id" />
+    <Attribute name="namePKey" table="RecordType" column="Name" />
+    <Attribute name="devName" table="RecordType" column="DeveloperName" />
+  </Attributes>
+  <Entities>
+    <Entity name="RecordType" alias="" />
+  </Entities>
+  <QueryCondition><![CDATA[
+     RecordType.Name = #pKey#
+        ]]></QueryCondition>
+  <OrderCriteria />
+  <Parameters>
+    <Parameter name="pKey" type="TEXT" />
+  </Parameters>
+</DataSource>

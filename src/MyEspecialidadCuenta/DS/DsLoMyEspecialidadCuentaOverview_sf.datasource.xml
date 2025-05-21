@@ -1,0 +1,14 @@
+<DataSource name="DsLoMyEspecialidadCuentaOverview" backendSystem="sf" businessObjectClass="LoMyEspecialidadCuentaOverview" external="false" editableEntity="cgf_Especialidad_Cuenta__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="cgf_Especialidad_Cuenta__c" column="Id" />
+    <Attribute name="name" table="cgf_Especialidad_Cuenta__c" column="Name" />
+  </Attributes>
+  <Entities>
+    <Entity name="cgf_Especialidad_Cuenta__c" alias="" idAttribute="Id" />
+  </Entities>
+  <QueryCondition><![CDATA[cgf_Especialidad_Cuenta__c.cgf_Cuenta__c = #accountId#]]></QueryCondition>
+  <OrderCriteria />
+  <Parameters>
+    <Parameter name="accountId" type="TEXT" />
+  </Parameters>
+</DataSource>

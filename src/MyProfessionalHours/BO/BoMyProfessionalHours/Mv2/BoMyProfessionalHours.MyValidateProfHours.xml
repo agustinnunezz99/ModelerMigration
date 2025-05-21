@@ -1,0 +1,14 @@
+<BusinessLogic methodName="myValidateProfHours" businessObjectClass="BoMyProfessionalHours" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="messageCollector" type="messageCollector" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[if (Utils.isEmptyString(me.getName()) && me.getObjectStatus() !== STATE.PERSISTED){
+  var newError = {"level": "error",
+                  "ObjectClass": "BoMyProfessionalHours",
+                  "messageID": "CasSdoFillInAllValues"};
+  messageCollector.add(newError);
+}]]>
+</Code>
+  <Return name="" value="" />
+</BusinessLogic>

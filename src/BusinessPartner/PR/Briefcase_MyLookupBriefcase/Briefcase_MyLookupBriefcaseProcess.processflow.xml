@@ -1,0 +1,48 @@
+<Process name="Briefcase::MyLookupBriefcaseProcess" defaultAction="ShowView" schemaVersion="0.0.0.5">
+  <Entry>
+    <ProcessContext>
+      <Declarations></Declarations>
+      <Parameters>
+        <!--<Input name="EspecialidadList" type="LoMyEspecialidadOverview" />
+		<Input name="especialidadPKey" type="DomPKey" />
+        <Input name="especialidadName" type="DomBpaName" />-->
+        <Input name="BriefcaseList" type="LoMyBriefcaseOverview" />
+        <Input name="briefcasePKey" type="DomPKey" />
+        <Input name="briefcaseName" type="DomBpaName" />
+      </Parameters>
+    </ProcessContext>
+    <EntryActions>
+      <Action actionType="LOAD" name="GetBriefcaseList" type="LoMyBriefcaseOverview">
+        <Parameters>
+          <Input name="considerSubstitutionLeadFollowUpTime" type="Literal" value="1" />
+          <Input name="mode" type="Literal" value="order" />
+          <!-- Busqueda avanzada de carteras segun tipo -->
+          <Input name="aso" value="AsoBriefcaseCartera" type="Literal" />
+        </Parameters>
+        <Return name="ProcessContext::BriefcaseList" />
+      </Action>
+    </EntryActions>
+  </Entry>
+  <Body>
+    <Actions>
+      <Action actionType="View" name="ShowView">
+        <UIDescription>Briefcase::MyLookupBriefcaseUI</UIDescription>
+        <Events>
+          <Event name="itemSelected" action="EndWithNewValue" />
+        </Events>
+      </Action>
+      <Action actionType="END" name="EndWithNewValue">
+        <ReturnValues>
+          <Return name="pKey" value="Event.pKey" />
+          <Return name="briefcaseName" value="Event.name" />
+        </ReturnValues>
+      </Action>
+      <Action actionType="END" name="End">
+        <ReturnValues>
+          <Return name="pKey" value="ProcessContext::briefcasePKey" />
+          <Return name="briefcaseName" value="ProcessContext::briefcaseName" />
+        </ReturnValues>
+      </Action>
+    </Actions>
+  </Body>
+</Process>

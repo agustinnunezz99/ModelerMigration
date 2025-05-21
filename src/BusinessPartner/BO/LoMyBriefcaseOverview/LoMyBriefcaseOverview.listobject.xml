@@ -1,0 +1,22 @@
+<ListObject name="LoMyBriefcaseOverview" generateLoadMethod="true" schemaVersion="1.1">
+  <DataSource name="DsLoMyBriefcaseOverview" />
+  <Item objectClass="LiMyBriefcaseOverview" />
+  <Methods>
+    <Method name="beforeSaveAsync" />
+    <Method name="afterSaveAsync" />
+    <Method name="afterLoadAsync" />
+    <Method name="beforeLoadAsync" />
+    <Method name="afterDoValidateAsync" />
+    <Method name="beforeDoValidateAsync" />
+    <Method name="loadAsync" />
+    <Method name="saveAsync" />
+  </Methods>
+  <AdvancedSearchObjects>
+    <AdvancedSearchObject name="AsoBriefcaseCartera">
+      <AdvancedSearchAttributes profileId="default">
+        <AdvancedSearchAttribute label="BriefcaseCartera_IsPharmacy" property="isPharmacy" type="Boolean" />
+        <AdvancedSearchAttribute label="BriefcaseCartera_IsProfessional" property="isProfessional" type="Boolean" />
+      </AdvancedSearchAttributes>
+    </AdvancedSearchObject>
+  </AdvancedSearchObjects>
+</ListObject>

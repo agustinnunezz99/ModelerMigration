@@ -1,0 +1,15 @@
+<BusinessLogic methodName="myValidateNotEmpty" businessObjectClass="BoMyWizardCreateNewWithCustomer" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="messageCollector" type="messageCollector" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[if (Utils.isEmptyString(me.getEspecialidadPKey())) {
+  var newError = {"level": "error",
+                  "businessObjectClass": "BoMyWizardCreateNewWithCustomer",
+                  "messageID": "CasSdoFillInAllValues"};
+  messageCollector.add(newError);
+}
+me.setObjectStatus(STATE.NEW);]]>
+</Code>
+  <Return name="" value="" />
+</BusinessLogic>

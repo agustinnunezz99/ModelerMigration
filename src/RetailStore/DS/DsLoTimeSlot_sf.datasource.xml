@@ -1,0 +1,28 @@
+<DataSource name="DsLoTimeSlot" backendSystem="sf" businessObjectClass="LoTimeSlot" external="false" editableEntity="TimeSlot" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="TimeSlot" column="Id" />
+    <Attribute name="dayOfWeek" table="TimeSlot" column="DayOfWeek" />
+    <Attribute name="operatingHoursId" table="TimeSlot" column="OperatingHoursId" />
+    <Attribute name="startTime" table="TimeSlot" column="StartTime" />
+    <Attribute name="endTime" table="TimeSlot" column="EndTime" />
+    <Attribute name="type" table="TimeSlot" column="Type" />
+    <Attribute name="timeZone" table="OperatingHours" column="TimeZone" />
+  </Attributes>
+  <Entities>
+    <Entity name="TimeSlot" alias="" idAttribute="Id" />
+    <Entity name="OperatingHours">
+      <Join Type="left outer">
+        <SimpleJoin>
+          <Condition leftSideValue="TimeSlot.operatingHoursId" comparator="eq" rightSideType="Attribute" rightSideValue="OperatingHours.Id" />
+        </SimpleJoin>
+      </Join>
+    </Entity>
+  </Entities>
+  <QueryCondition><![CDATA[
+        TimeSlot.OperatingHoursId = #operatingHoursId#
+      ]]></QueryCondition>
+  <OrderCriteria />
+  <Parameters>
+    <Parameter name="operatingHoursId" type="TEXT" />
+  </Parameters>
+</DataSource>

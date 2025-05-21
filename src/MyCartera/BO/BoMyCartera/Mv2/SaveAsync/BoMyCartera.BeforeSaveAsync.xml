@@ -1,0 +1,20 @@
+<BusinessLogic methodName="beforeSaveAsync" businessObjectClass="BoMyCartera" businessObjectType="{BOType}" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters />
+<Code language="JavaScript">
+<![CDATA[var promises = [];
+var portfolioSavedPromise;
+
+//Save BoContactPartner
+// SF/CASDIF: General Dif
+if (Utils.isSfBackend()) {
+  portfolioSavedPromise = BoFactory.createObjectAsync("BoSfHelper", {})
+    .then(function (helper) {
+    return helper.saveTrackedObject(me, []);
+  });
+}
+else {
+  portfolioSavedPromise = Facade.saveObjectAsync(me);
+}]]>
+</Code>
+  <Return name="promise" value="promise" />
+</BusinessLogic>

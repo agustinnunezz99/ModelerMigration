@@ -1,0 +1,218 @@
+<Process name="Portfolio::MyOverviewProcess" defaultAction="ShowPortfolioList" schemaVersion="0.0.0.5">
+  <Entry>
+    <ProcessContext>
+      <Declarations>
+        <Declaration name="PortfolioList" type="LoMyCarteraOverview" />
+        <Declaration name="PortfolioDetail" type="BoMyCartera" />
+        <Declaration name="ProfHoursDetail" type="BoMyProfessionalHours" />
+        <Declaration name="SecretariaDetail" type="BoMySecretarias" />
+      </Declarations>
+      <Parameters>
+        <Input name="PortfolioType" type="String" />
+        <Input name="VisitTabVisible" type="String" />
+        <Input name="PrevistosTabVisible" type="String" />
+        <Input name="SpecialtiesTabVisible" type="String" />
+        <Input name="HoursTabVisible" type="String" />
+        <Input name="SecretariesTabVisible" type="String" />
+      </Parameters>
+    </ProcessContext>
+    <EntryActions>
+      <Action actionType="LOAD" name="GetPortfolioList" type="LoMyCarteraOverview">
+        <Parameters>
+          <Input name="aso" value="AsoPortfolio" type="Literal" />
+          <Input name="PortfolioType" value="ProcessContext::PortfolioType" type="String" />
+        </Parameters>
+        <Return name="ProcessContext::PortfolioList" />
+      </Action>
+    </EntryActions>
+  </Entry>
+  <Body>
+    <Actions>
+      <Action actionType="VIEW" name="ShowPortfolioList">
+        <UIDescription>Portfolio::MyOverviewUI</UIDescription>
+        <Events>
+          <!-- Habilitar y modificar seleccion -->
+          <Event name="itemSelected" action="PortfolioListMasterDetail" />
+          <Event name="tabSelected" action="TabDecision" />
+          <Event name="horarioSelected" action="LoadProfHDetail" />
+          <Event name="secretariaSelected" action="LoadSecretariaDetail" />
+          <!-- Accept Events -->
+          <Event name="acceptHorarioChanges" action="ValidateProfH" />
+          <Event name="acceptSecretariaChanges" action="ValidateSecretaria" />
+          <!-- Handle New Object Events -->
+          <Event name="newHorario" action="ValidateProfHBeforeComplete" />
+          <Event name="newSecretaria" action="ValidateSecretariaBeforeComplete" />
+        </Events>
+      </Action>
+      <Action name="PortfolioListMasterDetail" actionType="MASTER_DETAIL_HANDLER">
+        <MasterList name="ProcessContext::PortfolioList">
+          <!--RELOAD|UPDATE|NONE-->
+          <ItemUnselected type="RELOAD" />
+        </MasterList>
+        <DetailObject name="ProcessContext::PortfolioDetail" objectClass="BoMyCartera">
+          <!-- type="DIRTY|ALWAYS|NEVER" confirmation="TRUE|FALSE" validate="TRUE|FALSE" -->
+          <Save type="ALWAYS" confirmation="FALSE" validate="FALSE" />
+        </DetailObject>
+      </Action>
+      <!-- Decision Point for selected Tab Pages -->
+      <Action name="TabDecision" actionType="DECISION" parameter="Event.tabName">
+        <Case value="Visits" action="LoadLoVisits" />
+        <Case value="Previstos" action="LoadLoEvents" />
+        <Case value="Especialidades" action="LoadLoESPRelation" />
+        <Case value="Horarios" action="LoadLoProfHours" />
+        <Case value="Secretarias" action="LoadLoSecretarias" />
+        <CaseElse action="ShowPortfolioList" />
+      </Action>
+      <!-- BEGIN: Handling TabDecision -->
+      <!-- VISITS Tab -->
+      <Action name="LoadLoVisits" actionType="LOGIC" call="ProcessContext::PortfolioDetail.myLoadLoPortfolioVisitAsync">
+        <Parameters>
+          <Input name="bReload" type="Literal" value="0" />
+        </Parameters>
+      </Action>
+      <!-- ACTIVITIES Tab -->
+      <Action name="LoadLoEvents" actionType="LOGIC" call="ProcessContext::PortfolioDetail.myLoadLoCarteraEventAsync">
+        <Parameters>
+          <Input name="bReload" type="Literal" value="0" />
+        </Parameters>
+      </Action>
+      <!-- SPECIALTIES Tab -->
+      <Action name="LoadLoESPRelation" actionType="LOGIC" call="ProcessContext::PortfolioDetail.myLoadLoPortfolioESPRelationAsync">
+        <Parameters>
+          <Input name="bReload" type="Literal" value="0" />
+        </Parameters>
+      </Action>
+      <!-- SECRETARIAS Tab -->
+      <Action name="LoadLoSecretarias" actionType="LOGIC" call="ProcessContext::PortfolioDetail.myLoadLoSecretariasAsync">
+        <Parameters>
+          <Input name="bReload" type="Literal" value="0" />
+        </Parameters>
+      </Action>
+      <!-- HORARIOS Tab -->
+      <Action name="LoadLoProfHours" actionType="LOGIC" call="ProcessContext::PortfolioDetail.myLoadLoProfessionalHoursAsync">
+        <Parameters>
+          <Input name="bReload" type="Literal" value="0" />
+        </Parameters>
+      </Action>
+      <!-- END: Handling TabDecision -->
+      <!-- BEGIN: Hours Events -->
+      <Action name="LoadProfHDetail" actionType="LOAD" type="BoMyProfessionalHours">
+        <Parameters>
+          <Input name="pKey" value="Event.pKey" />
+        </Parameters>
+        <Return name="ProcessContext::ProfHoursDetail" />
+      </Action>
+      <Action name="ValidateProfHBeforeComplete" actionType="VALIDATION">
+        <Validations>
+          <Validation name="ProcessContext::PortfolioDetail.doValidateAsync" />
+        </Validations>
+        <TransitionTo action="ValidateProfHBeforeCompleteResult_Decision" />
+      </Action>
+      <Action name="ValidateProfHBeforeCompleteResult_Decision" actionType="DECISION" parameter="ProcessContext::validationResult">
+        <Case value="validateOk" action="CreateProfHours" />
+        <CaseElse action="ShowPortfolioList" />
+      </Action>
+      <Action name="CreateProfHours" actionType="CREATE" type="BoMyProfessionalHours">
+        <Parameters>
+          <Input name="portfolioPKey" value="ProcessContext::PortfolioDetail.pKey" />
+        </Parameters>
+        <Return name="ProcessContext::ProfHoursDetail" />
+      </Action>
+      <!--*****************************************************************************************************
+        * Nota: En este punto ya hay una instancia creada de 'BoMyProfessionalHours', con el id de la cuenta. *
+        * De aquí en adelante si el usuario le da 'Done' ya sigue el proceso iniciando desde el evento        *
+        * 'AcceptHorarioChanges' y se desencadenan las acciones correspondientes a las validaciones           *
+        * y el guardado.                                                                                      *
+        *******************************************************************************************************-->
+      <!-- Hours Validation after click Done Button -->
+      <Action name="ValidateProfH" actionType="VALIDATION">
+        <Validations>
+          <Validation name="ProcessContext::ProfHoursDetail.myValidateProfHours" />
+          <Validation name="ProcessContext::PortfolioDetail.doValidateAsync" />
+        </Validations>
+        <TransitionTo action="ValidateProfHours_Decision" />
+      </Action>
+      <Action name="ValidateProfHours_Decision" actionType="DECISION" parameter="ProcessContext::validationResult">
+        <Case value="validateOk" action="SaveReloadLoMyProfHours" />
+        <Case value="validateDiscard" action="ClearValidatedProfHours" />
+        <CaseElse action="ShowPortfolioList" />
+      </Action>
+      <!-- Save Hours and refresh LoProfessionalHours -->
+      <Action name="SaveReloadLoMyProfHours" actionType="SAVE">
+        <TransitionTo action="ReloadLoMyProfHours" />
+      </Action>
+      <Action name="ClearValidatedProfHours" actionType="LOGIC" call="BoFactory.instantiate">
+        <Parameters>
+          <Input name="clear" type="Literal" value="BoMyProfessionalHours" />
+        </Parameters>
+        <Return name="ProcessContext::ProfHoursDetail" />
+        <TransitionTo action="ReloadLoMyProfHours" />
+      </Action>
+      <Action name="ReloadLoMyProfHours" actionType="LOGIC" call="ProcessContext::PortfolioDetail.myLoadLoProfessionalHoursAsync">
+        <Parameters>
+          <Input name="bReload" type="Literal" value="1" />
+        </Parameters>
+      </Action>
+      <!-- END: Hours Events -->
+      <!-- BEGIN: Secretaries Events -->
+      <Action name="LoadSecretariaDetail" actionType="LOAD" type="BoMySecretarias">
+        <Parameters>
+          <Input name="pKey" value="Event.pKey" />
+        </Parameters>
+        <Return name="ProcessContext::SecretariaDetail" />
+      </Action>
+      <Action name="ValidateSecretariaBeforeComplete" actionType="VALIDATION">
+        <Validations>
+          <Validation name="ProcessContext::PortfolioDetail.doValidateAsync" />
+        </Validations>
+        <TransitionTo action="ValidateSecretariaBeforeCompleteResult_Decision" />
+      </Action>
+      <Action name="ValidateSecretariaBeforeCompleteResult_Decision" actionType="DECISION" parameter="ProcessContext::validationResult">
+        <Case value="validateOk" action="CreateSecretaria" />
+        <CaseElse action="ShowPortfolioList" />
+      </Action>
+      <Action name="CreateSecretaria" actionType="CREATE" type="BoMySecretarias">
+        <Parameters>
+          <Input name="cartera" value="ProcessContext::PortfolioDetail.pKey" />
+        </Parameters>
+        <Return name="ProcessContext::SecretariaDetail" />
+      </Action>
+      <!--**********************************************************************************************
+       * Nota: En este punto ya hay una instancia creada de 'BoMySecretarias', con el id de la cartera.*
+	   * De aquí en adelante si el usuario le da 'Done' ya sigue el proceso iniciando desde el evento  *
+       * 'acceptSecretariaChanges' y se desencadenan las acciones correspondientes a las validaciones  *
+       * y el guardado.                                                                                *
+       **********************************************************************************************-->
+      <!-- Secretaria Validation after click Done Button -->
+      <Action name="ValidateSecretaria" actionType="VALIDATION">
+        <Validations>
+          <Validation name="ProcessContext::SecretariaDetail.myValidateSecretaria" />
+          <Validation name="ProcessContext::PortfolioDetail.doValidateAsync" />
+        </Validations>
+        <TransitionTo action="ValidateSecretaria_Decision" />
+      </Action>
+      <Action name="ValidateSecretaria_Decision" actionType="DECISION" parameter="ProcessContext::validationResult">
+        <Case value="validateOk" action="SaveReloadLoMySecretarias" />
+        <Case value="validateDiscard" action="ClearValidatedSecretaria" />
+        <CaseElse action="ShowPortfolioList" />
+      </Action>
+      <!-- Save Secretaria and refresh LoMySecretarias -->
+      <Action name="SaveReloadLoMySecretarias" actionType="SAVE">
+        <TransitionTo action="ReloadLoMySecretarias" />
+      </Action>
+      <Action name="ClearValidatedSecretaria" actionType="LOGIC" call="BoFactory.instantiate">
+        <Parameters>
+          <Input name="clear" type="Literal" value="BoMySecretarias" />
+        </Parameters>
+        <Return name="ProcessContext::SecretariaDetail" />
+        <TransitionTo action="ReloadLoMySecretarias" />
+      </Action>
+      <Action name="ReloadLoMySecretarias" actionType="LOGIC" call="ProcessContext::PortfolioDetail.myLoadLoSecretariasAsync">
+        <Parameters>
+          <Input name="bReload" type="Literal" value="1" />
+        </Parameters>
+      </Action>
+      <!-- END: Secretaries Events -->
+    </Actions>
+  </Body>
+</Process>

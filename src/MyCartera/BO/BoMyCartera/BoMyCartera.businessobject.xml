@@ -1,0 +1,51 @@
+<BusinessObject name="BoMyCartera" schemaVersion="1.1">
+  <DataSource name="DsBoMyCartera"/>
+  <SimpleProperties>
+    <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey"/>
+    <SimpleProperty name="portfolioPKey" type="DomPKey" dataSourceProperty="portfolioPKey"/>
+    <SimpleProperty name="name" type="DomString" dataSourceProperty="name"/>
+    <SimpleProperty name="salesZone" type="DomString" dataSourceProperty="salesZone"/>
+    <SimpleProperty name="accountpKey" type="DomPKey" dataSourceProperty="accountpKey"/>
+    <SimpleProperty name="institutionpKey" type="DomPKey" dataSourceProperty="institutionpKey"/>
+    <SimpleProperty name="assignmentDate" type="DomDate" dataSourceProperty="assignmentDate"/>
+    <SimpleProperty name="endAssignmentDate" type="DomDate" dataSourceProperty="endAssignmentDate"/>
+    <SimpleProperty name="lastVisitDateSF" type="DomDate" dataSourceProperty="lastVisitDateSF"/>
+    <SimpleProperty name="lastVisitDateCustom" type="DomDate" dataSourceProperty="lastVisitDateCustom"/>
+    <SimpleProperty name="freq" type="DomPortFreq" dataSourceProperty="freq"/>
+    <SimpleProperty name="shift" type="DomPortShift" dataSourceProperty="shift"/>
+    <SimpleProperty name="category" type="DomPortCategory" dataSourceProperty="category"/>
+    <SimpleProperty name="zoneType" type="DomPortZoneType" dataSourceProperty="zoneType"/>
+    <SimpleProperty name="coverage" type="DomString" dataSourceProperty="coverage"/>
+    <SimpleProperty name="coverageImage" type="DomString" dataSourceProperty="coverageImage"/>
+    <SimpleProperty name="coverageColor" type="DomString" dataSourceProperty="coverageColor"/>
+  </SimpleProperties>
+  <NestedObjects/>
+  <ObjectLookups/>
+  <ListObjects>
+    <ListObject name="loMyPortfolioVisit" objectClass="LoMyPortfolioVisit" dataSourceProperty="portfolioPKey" listProperty="portfolioPKey" loadMode="LoadImmediate"/>
+    <ListObject name="loMyCarteraEvent" objectClass="LoMyCarteraEvent" dataSourceProperty="portfolioPKey" listProperty="portfolioPKey" loadMode="LoadImmediate"/>
+    <ListObject name="loMyPortfolioESPRelation" objectClass="LoMyPortfolioESPRelation" dataSourceProperty="portfolioPKey" listProperty="portfolioPKey" loadMode="LoadImmediate"/>
+    <ListObject name="loMyProfessionalHours" objectClass="LoMyProfessionalHours" dataSourceProperty="portfolioPKey" listProperty="portfolioPKey" loadMode="LoadImmediate"/>
+    <ListObject name="loMyCarteraSecretarias" objectClass="LoMyCarteraSecretarias" dataSourceProperty="portfolioPKey" listProperty="portfolioPKey" loadMode="LoadImmediate"/>
+  </ListObjects>
+  <Methods>
+    <Method name="beforeSaveAsync"/>
+    <Method name="afterSaveAsync"/>
+    <Method name="beforeLoadAsync"/>
+    <Method name="afterLoadAsync"/>
+    <Method name="beforeInitialize"/>
+    <Method name="afterInitialize"/>
+    <Method name="beforeDoValidateAsync"/>
+    <Method name="afterDoValidateAsync"/>
+    <Method name="beforeCreateAsync"/>
+    <Method name="afterCreateAsync"/>
+    <Method name="loadAsync"/>
+    <Method name="saveAsync"/>
+    <Method name="createAsync"/>
+    <Method name="myLoadLoPortfolioVisitAsync"/>
+    <Method name="myLoadLoCarteraEventAsync"/>
+    <Method name="myLoadLoPortfolioESPRelationAsync"/>
+    <Method name="myLoadLoProfessionalHoursAsync"/>
+    <Method name="myLoadLoSecretariasAsync"/>
+  </Methods>
+</BusinessObject>

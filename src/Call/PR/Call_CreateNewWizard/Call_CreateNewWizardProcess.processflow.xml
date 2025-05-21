@@ -1,0 +1,342 @@
+<Process name="Call::CreateNewWizardProcess" defaultAction="AssignCompanyRequired_Decision" schemaVersion="0.0.0.5">
+  <Entry>
+    <ProcessContext>
+      <Declarations>
+        <Declaration name="CallMetaPKey" type="String" />
+        <Declaration name="CustomerPKey" type="String" />
+        <Declaration name="CallBO" type="BoCall" />
+        <Declaration name="WizardBO" type="BoWizardCreateNewCall" />
+        <Declaration name="SubstitutedUsrPKey" type="DomPKey" />
+        <Declaration name="SubValidFrom" type="DomDate" />
+        <Declaration name="SubValidThru" type="DomValidThru" />
+        <Declaration name="CompanyRequired" type="String" />
+        <Declaration name="IsManagedCustomer" type="DomBool" />
+        <Declaration name="IsSubstituted" type="DomBool" />
+        <Declaration name="ManagementRelationValidFrom" type="DomDate" />
+        <Declaration name="ManagementRelationValidThru" type="DomValidThru" />
+        <Declaration name="buttonPressed" type="String" />
+        <Declaration name="namePKey" type="String" />
+      </Declarations>
+      <Parameters>
+        <Input name="DateFrom" type="String" />
+        <Input name="TimeFrom" type="String" />
+        <!--Edu-->
+        <Input name="Fraccion" type="String" />
+        <!--Fin Edu-->
+        <!--Edu: campo de turno y tipo de visita-->
+        <Input name="ShiftVisit" type="String" />
+        <Input name="TypeVisit" type="String" />
+        <!--Fin Edu-->
+        <Input name="JobListPKey" type="String" />
+        <Input name="TripListPKey" type="String" />
+        <Input name="TripListName" type="String" />
+        <Input name="CustomerPKey" type="String" />
+        <Input name="CallMetaPKey" type="String" />
+        <Input name="AllDay" type="DomBool" />
+        <Input name="Mode" type="String" />
+        <Input name="ResponsiblePKey" type="DomPKey" />
+        <Input name="CreateCallViaMap" type="DomBool" />
+        <Input name="namePKey" type="String" />
+      </Parameters>
+    </ProcessContext>
+    <EntryActions>
+      <Action name="CreateWizardBO" actionType="CREATE" type="BoWizardCreateNewCall">
+        <Parameters>
+          <Input name="dateFrom" value="ProcessContext::DateFrom" />
+          <Input name="timeFrom" value="ProcessContext::TimeFrom" />
+          <!--Edu-->
+          <Input name="fraccion" value="ProcessContext::Fraccion" />
+          <!--Fin Edu-->
+          <!--Edu: campo de turno y tipo de visita-->
+          <Input name="shiftVisit" value="ProcessContext::ShiftVisit" />
+          <Input name="typeVisit" value="ProcessContext::TypeVisit" />
+          <!--Fin Edu-->
+          <Input name="jobListPKey" value="" type="Literal" />
+          <Input name="tripListName" value="ProcessContext::TripListName" />
+          <Input name="tripListPKey" value="ProcessContext::TripListPKey" />
+          <Input name="customerPKey" value="ProcessContext::CustomerPKey" />
+          <Input name="callMetaPKey" value="ProcessContext::CallMetaPKey" />
+          <Input name="allDay" value="ProcessContext::AllDay" />
+          <Input name="mode" value="ProcessContext::Mode" />
+          <Input name="responsiblePKey" value="ProcessContext::ResponsiblePKey" />
+          <!--Edu: nuevo lookup carteras-->
+          <Input name="briefcasePKey" type="Literal" value="" />
+          <Input name="briefcaseName" type="Literal" value="" />
+          <Input name="accountId" type="Literal" value="" />
+          <Input name="cgfTarea" type="Literal" value="" />
+          <Input name="recordType" type="Literal" value="" />
+          <Input name="retailStoreId" type="Literal" value="" />
+          <Input name="namePKey" value="ProcessContext::namePKey" />
+          <Input name="pKeyRecordType" type="Literal" value="" />
+          <Input name="devName" type="Literal" value="" />
+          <Input name="institutionPKey" type="Literal" value="" />
+          <Input name="institutionName" type="Literal" value="" />
+        </Parameters>
+        <Return name="ProcessContext::WizardBO" />
+      </Action>
+    </EntryActions>
+  </Entry>
+  <Body>
+    <Actions>
+      <Action name="AssignCompanyRequired_Decision" actionType="DECISION" parameter="ProcessContext::Mode">
+        <Case value="CustomerPlanning" action="AssignCompanyRequiredOne" />
+        <Case value="FollowUp" action="AssignCompanyRequiredOne" />
+        <Case value="JobListPlanning" action="setDirty" />
+        <Case value="Scanning" action="setDirty" />
+        <CaseElse action="AssignCompanyRequiredZero" />
+        <CaseEmpty action="AssignCompanyRequiredZero" />
+      </Action>
+      <Action actionType="LOGIC" name="AssignCompanyRequiredZero" call="Utils.identity">
+        <Parameters>
+          <Input name="param1" type="Literal" value="0" />
+        </Parameters>
+        <Return name="ProcessContext::CompanyRequired" />
+        <TransitionTo action="IsCallCreatedViaMap" />
+      </Action>
+      <Action actionType="LOGIC" name="AssignCompanyRequiredOne" call="Utils.identity">
+        <Parameters>
+          <Input name="param1" type="Literal" value="1" />
+        </Parameters>
+        <Return name="ProcessContext::CompanyRequired" />
+        <TransitionTo action="ShowView" />
+      </Action>
+      <Action name="IsCallCreatedViaMap" actionType="DECISION" parameter="ProcessContext::CreateCallViaMap">
+        <Case value="1" action="assignButtonPressed" />
+        <CaseElse action="ShowView" />
+        <CaseEmpty action="ShowView" />
+      </Action>
+      <Action actionType="View" name="ShowView">
+        <UIDescription>Call::CreateNewWizardUI</UIDescription>
+        <Events>
+          <Event name="FinishWizard" action="setDirty" />
+          <Event name="OpenCallMetaLookup" action="OpenCallMetaLookup" />
+          <Event name="OpenCustomerNameLookup" action="OpenCustomerNameLookup" />
+          <Event name="AllDayChanged" action="RefreshEditAccessRights" />
+          <!--Edu: INI evento abrir las carteras-->
+          <Event name="OpenBriefcaseNameLookup" action="OpenBriefcaseNameLookup" />
+          <!--Edu: FIN evento abrir las carteras-->
+          <!--Edu: INI evento abrir las instituciones-->
+          <Event name="OpenInstitutionNameLookup" action="OpenInstitutionNameLookup" />
+          <!--Edu: FIN evento abrir las instituciones-->
+        </Events>
+      </Action>
+      <Action actionType="PROCESS" name="OpenCallMetaLookup" process="Call::MetaLookupProcess">
+        <Parameters>
+          <Input name="CompanyRequired" value="ProcessContext::CompanyRequired" />
+          <Input name="CallMetaPKey" value="ProcessContext::WizardBO.callMetaPKey" />
+        </Parameters>
+        <ReturnValues>
+          <Return name="ProcessContext::CallMetaPKey" value="callMetaPKey" />
+        </ReturnValues>
+        <TransitionTo action="LoadCallMetaLookup" />
+      </Action>
+      <Action actionType="LOGIC" name="LoadCallMetaLookup" call="ProcessContext::WizardBO.loadCallMetaLookup">
+        <Parameters>
+          <Input name="callMetapKey" value="ProcessContext::CallMetaPKey" />
+        </Parameters>
+        <!--Edu: Ini - Otras actividades: nueva acción de decisión para obtener el recortype de actividades, se comenta la transición y se adiciona una nueva-->
+        <TransitionTo action="AssignRecordTypeOtherActivity" />
+        <!--Edu: Fin - Otras actividades: nueva acción de decisión para obtener el recortype de actividades, se comenta la transición y se adiciona una nueva-->
+      </Action>
+      <!--Edu: Ini - Otras actividades: nueva acción de decisión para obtener el recortype de actividades-->
+      <Action actionType="LOAD" name="AssignRecordTypeOtherActivity" type="LuMyRecordType">
+        <Parameters>
+          <Input name="pKey" value="ProcessContext::WizardBO.callMetaLookup.id" />
+        </Parameters>
+        <Return name="ProcessContext::WizardBO.recordTypeLookup" />
+        <TransitionTo action="LoadRecordTypeLookup" />
+      </Action>
+      <Action actionType="LOGIC" name="LoadRecordTypeLookup" call="ProcessContext::WizardBO.myLoadRecordTypeLookup">
+        <Parameters>
+          <Input name="pKey" value="ProcessContext::WizardBO.recordTypeLookup.namePKey" />
+        </Parameters>
+        <!--<TransitionTo action="LoadCallMetaLookup" />-->
+      </Action>
+      <!--Edu: Fin - Otras actividades: nueva acción de decisión para obtener el recortype de actividades-->
+      <Action actionType="PROCESS" name="OpenCustomerNameLookup" process="Customer::LookupProcess">
+        <Parameters>
+          <Input name="ReferenceUserPKey" value="ProcessContext::ResponsiblePKey" />
+        </Parameters>
+        <ReturnValues>
+          <Return name="ProcessContext::CustomerPKey" value="customerPKey" />
+          <Return name="ProcessContext::SubstitutedUsrPKey" value="substitutedUsrPKey" />
+          <Return name="ProcessContext::SubValidFrom" value="subValidFrom" />
+          <Return name="ProcessContext::SubValidThru" value="subValidThru" />
+          <Return name="ProcessContext::IsManagedCustomer" value="isManagedCustomer" />
+          <Return name="ProcessContext::ManagementRelationValidFrom" value="managementRelationValidFrom" />
+          <Return name="ProcessContext::ManagementRelationValidThru" value="managementRelationValidThru" />
+        </ReturnValues>
+        <TransitionTo action="SetSubstitutedUsrPKey" />
+      </Action>
+      <!-- Set properties of validation BO for validation of substitution time frame -->
+      <Action actionType="LOGIC" name="SetSubstitutedUsrPKey" call="ProcessContext::WizardBO.setSubstitutedUsrPKey">
+        <Parameters>
+          <Input name="substitutedUsrPKey" value="ProcessContext::SubstitutedUsrPKey" />
+        </Parameters>
+        <TransitionTo action="SetSubValidFrom" />
+      </Action>
+      <Action actionType="LOGIC" name="SetSubValidFrom" call="ProcessContext::WizardBO.setSubValidFrom">
+        <Parameters>
+          <Input name="subValidFrom" value="ProcessContext::SubValidFrom" />
+        </Parameters>
+        <TransitionTo action="SetSubValidThru" />
+      </Action>
+      <Action actionType="LOGIC" name="SetSubValidThru" call="ProcessContext::WizardBO.setSubValidThru">
+        <Parameters>
+          <Input name="subValidThru" value="ProcessContext::SubValidThru" />
+        </Parameters>
+        <TransitionTo action="SetManagementRelationValidFrom" />
+      </Action>
+      <Action actionType="LOGIC" name="SetManagementRelationValidFrom" call="ProcessContext::WizardBO.setManagementRelationValidFrom">
+        <Parameters>
+          <Input name="managementRelationValidFrom" value="ProcessContext::ManagementRelationValidFrom" />
+        </Parameters>
+        <TransitionTo action="SetManagementRelationValidThru" />
+      </Action>
+      <Action actionType="LOGIC" name="SetManagementRelationValidThru" call="ProcessContext::WizardBO.setManagementRelationValidThru">
+        <Parameters>
+          <Input name="managementRelationValidThru" value="ProcessContext::ManagementRelationValidThru" />
+        </Parameters>
+        <TransitionTo action="SetIsManagedCustomer" />
+      </Action>
+      <Action actionType="LOGIC" name="SetIsManagedCustomer" call="ProcessContext::WizardBO.setIsManagedCustomer">
+        <Parameters>
+          <Input name="subValidThru" value="ProcessContext::IsManagedCustomer" />
+        </Parameters>
+        <TransitionTo action="LoadCustomerLookup" />
+      </Action>
+      <Action actionType="LOGIC" name="LoadCustomerLookup" call="ProcessContext::WizardBO.loadCustomerLookup">
+        <Parameters>
+          <Input name="customerPKey" value="ProcessContext::CustomerPKey" />
+        </Parameters>
+      </Action>
+      <Action actionType="LOGIC" name="setDirty" call="ProcessContext::WizardBO.setObjectStatus">
+        <Parameters>
+          <Input name="objectStatus" type="Literal" value="5" />
+        </Parameters>
+        <TransitionTo action="updateTimeAllDay" />
+      </Action>
+      <Action actionType="LOGIC" name="updateTimeAllDay" call="ProcessContext::WizardBO.updateTimeAllDay">
+        <TransitionTo action="ReloadManagementInformation" />
+      </Action>
+      <Action actionType="LOGIC" name="ReloadManagementInformation" call="ProcessContext::WizardBO.reloadManagementInformation">
+        <TransitionTo action="WizardValidation" />
+      </Action>
+      <Action actionType="LOGIC" name="RefreshEditAccessRights" call="ProcessContext::WizardBO.setEARights"></Action>
+      <Action actionType="VALIDATION" name="WizardValidation">
+        <Validations>
+          <Validation name="ProcessContext::WizardBO.reloadManagementInformation" />
+          <Validation name="ProcessContext::WizardBO.validateNotEmpty" />
+          <Validation name="ProcessContext::WizardBO.validateCustomer" />
+          <Validation name="ProcessContext::WizardBO.validateSub" />
+          <Validation name="ProcessContext::WizardBO.validateTime" />
+        </Validations>
+        <TransitionTo action="ValidationResult_Decision" />
+      </Action>
+      <Action name="ValidationResult_Decision" actionType="DECISION" parameter="ProcessContext::validationResult">
+        <Case value="validateOk" action="assignButtonPressed" />
+        <Case value="validateDiscard" action="EndCancel" />
+        <CaseElse action="ShowView" />
+      </Action>
+      <Action actionType="LOGIC" name="assignButtonPressed" call="Utils.identity">
+        <Parameters>
+          <Input name="param" type="Literal" value="createCall" />
+        </Parameters>
+        <Return name="ProcessContext::buttonPressed" />
+        <TransitionTo action="EndCreateCall" />
+      </Action>
+      <Action actionType="END" name="EndCancel" />
+      <Action actionType="END" name="EndCreateCall">
+        <ReturnValues>
+          <Return name="callMetaPKey" value="ProcessContext::WizardBO.callMetaPKey" />
+          <Return name="customerPKey" value="ProcessContext::WizardBO.customerPKey" />
+          <Return name="dateFrom" value="ProcessContext::WizardBO.dateFrom" />
+          <Return name="timeFrom" value="ProcessContext::WizardBO.timeFrom" />
+          <!--Edu-->
+          <Return name="fraccion" value="ProcessContext::WizardBO.fraccion" />
+          <Return name="taskVisit" value="ProcessContext::WizardBO.taskVisit" />
+          <Return name="actividades" value="ProcessContext::WizardBO.actividades" />
+          <!--Fin Edu-->
+          <!--Edu: campo de turno y tipo de visita-->
+          <Return name="shiftVisit" value="ProcessContext::WizardBO.ShiftVisit" />
+          <Return name="typeVisit" value="ProcessContext::WizardBO.TypeVisit" />
+          <!--Fin Edu-->
+          <Return name="allDay" value="ProcessContext::WizardBO.allDay" />
+          <Return name="substitutedUsrPKey" value="ProcessContext::WizardBO.substitutedUsrPKey" />
+          <Return name="buttonPressed" value="ProcessContext::buttonPressed" />
+          <Return name="isManagedCustomer" value="ProcessContext::WizardBO.isManagedCustomer" />
+          <Return name="isSubstituted" value="ProcessContext::WizardBO.isSubstituted" />
+          <Return name="tripListPKey" value="ProcessContext::TripListPKey" />
+          <!--Edu: INI new lookup cartera-->
+          <Return name="briefcasePKey" value="ProcessContext::WizardBO.briefcasePKey" />
+          <Return name="briefcaseName" value="ProcessContext::WizardBO.briefcaseName" />
+          <Return name="accountId" value="ProcessContext::WizardBO.accountId" />
+          <Return name="cgfTarea" value="ProcessContext::WizardBO.cgfTarea" />
+          <Return name="recordType" value="ProcessContext::WizardBO.recordType" />
+          <Return name="retailStoreId" value="ProcessContext::WizardBO.retailStoreId" />
+          <Return name="briefcasePKey" value="ProcessContext::WizardBO.briefcasePKey" />
+          <Return name="briefcaseName" value="ProcessContext::WizardBO.briefcaseName" />
+          <!--Edu: FIN new lookup cartera-->
+          <!--Edu: Ini new lookup de recordType-->
+          <Return name="pKeyRecordType" value="ProcessContext::WizardBO.pKeyRecordType" />
+          <Return name="devName" value="ProcessContext::WizardBO.devName" />
+          <!--Edu: Fin new lookup de recordType-->
+          <!--Edu: Ini new lookup de institucion-->
+          <Return name="institutionPKey" value="ProcessContext::WizardBO.institutionPKey" />
+          <Return name="institutionName" value="ProcessContext::WizardBO.institutionName" />
+          <!--Edu: Fin new lookup de institucion-->
+        </ReturnValues>
+      </Action>
+      <!--Edu: Ini nueva acción para  el lookup de carteras-->
+      <Action actionType="PROCESS" name="OpenBriefcaseNameLookup" process="Briefcase::MyLookupBriefcaseProcess">
+        <Parameters>
+          <Input name="ReferenceUserPKey" value="ProcessContext::ResponsiblePKey" />
+          <Input name="briefcasePKey" value="ProcessContext::WizardBO.briefcaseLookup.pKey" />
+        </Parameters>
+        <ReturnValues>
+          <Return name="ProcessContext::WizardBO.briefcasePKey" value="pKey" />
+          <Return name="ProcessContext::WizardBO.briefcaseName" value="briefcaseName" />
+          <Return name="ProcessContext::WizardBO.accountId" value="accountId" />
+          <Return name="ProcessContext::WizardBO.cgfTarea" value="cgfTarea" />
+          <Return name="ProcessContext::WizardBO.recordType" value="recordType" />
+          <Return name="ProcessContext::WizardBO.retailStoreId" value="retailStoreId" />
+        </ReturnValues>
+        <TransitionTo action="LoadBriefcaseLookup" />
+      </Action>
+      <Action actionType="LOAD" name="LoadBriefcaseLookup" type="LuMyBriefcase">
+        <Parameters>
+          <Input name="pKey" value="ProcessContext::WizardBO.briefcasePKey" />
+        </Parameters>
+        <Return name="ProcessContext::WizardBO.briefcaseLookup" />
+        <TransitionTo action="LoadCustomerBriefcaseLookup" />
+      </Action>
+      <Action actionType="LOGIC" name="LoadCustomerBriefcaseLookup" call="ProcessContext::WizardBO.loadCustomerLookup">
+        <Parameters>
+          <Input name="customerPKey" value="ProcessContext::WizardBO.briefcaseLookup.accountId" />
+        </Parameters>
+        <TransitionTo action="removeCustomerVisibility" />
+      </Action>
+      <Action actionType="LOGIC" name="removeCustomerVisibility" call="ProcessContext::WizardBO.mycustomerVisibility"></Action>
+      <!--Edu: Ini nueva acción para  el lookup de carteras-->
+      <!--Edu: Ini nueva acción para  el lookup de instituciones-->
+      <Action actionType="PROCESS" name="OpenInstitutionNameLookup" process="Customer::MyInstitutionProcess">
+        <Parameters>
+          <Input name="ReferenceUserPKey" value="ProcessContext::ResponsiblePKey" />
+          <Input name="institutionPKey" value="ProcessContext::WizardBO.institutionLookup.pKey" />
+        </Parameters>
+        <ReturnValues>
+          <Return name="ProcessContext::WizardBO.institutionPKey" value="pKey" />
+          <Return name="ProcessContext::WizardBO.institutionName" value="institutionName" />
+        </ReturnValues>
+        <TransitionTo action="LoadInstitutionLookup" />
+      </Action>
+      <Action actionType="LOAD" name="LoadInstitutionLookup" type="LuMyInstitutionLookup">
+        <Parameters>
+          <Input name="pKey" value="ProcessContext::WizardBO.institutionPKey" />
+        </Parameters>
+        <Return name="ProcessContext::WizardBO.institutionLookup" />
+      </Action>
+      <!--Edu: Fin nueva acción para  el lookup de instituciones-->
+    </Actions>
+  </Body>
+</Process>

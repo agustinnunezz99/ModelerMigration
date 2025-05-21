@@ -1,0 +1,81 @@
+<DataSource name="DsLoMyCarteraOverview" backendSystem="sf" businessObjectClass="LoMyCarteraOverview" external="true" editableEntity="AsignacionCuenta__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="AsignacionCuenta__c" column="Id" />
+    <Attribute name="name" table="AsignacionCuenta__c" column="cgf_Cartera__c" />
+    <Attribute name="salesZone" table="AsignacionCuenta__c" column="cgf_NombreZonaDeVenta__c" />
+    <Attribute name="recorTypeId" table="AsignacionCuenta__c" column="RecordTypeId" />
+    <Attribute name="recordTypeDeveloperName" table="RecordType" column="DeveloperName" />
+    <Attribute name="shift" table="AsignacionCuenta__c" column="cgf_Tarea__c" />
+    <Attribute name="coverage" table="AsignacionCuenta__c" column="cgf_Cobertura__c" />
+    <DerivedAttribute name="coverageImage" value="''" />
+    <DerivedAttribute name="grouping1" value="''" />
+  </Attributes>
+  <Entities>
+    <Entity name="AsignacionCuenta__c" alias="" idAttribute="Id" />
+  </Entities>
+  <Database platform="SQLite">
+    <Load><![CDATA[
+
+      if (!jsonQuery){jsonQuery={'params': []};}
+
+      if (Utils.isDefined(jsonQuery)){
+           var newParams = jsonQuery;
+           if (Utils.isOldParamsFormat(newParams)){
+               newParams = Utils.convertDsParamsOldToNew(newParams);
+           }
+      }
+
+	  var portfolioType = "";
+      var additionalCond = "";
+	  var addCondSearch = "";
+	  var salesZone = "";
+	  var shift = "";
+
+      if(Utils.isDefined(newParams.portfolioType)){
+	      portfolioType = newParams.portfolioType;
+          additionalCond += "AND RecordType.DeveloperName = #portfolioType# ";
+	  }
+
+      //############################
+      //## Advanced Search Paging ##
+	  //############################
+
+      /**  Sales Zone  */
+	  if (Utils.isDefined(newParams.salesZone)){
+          salesZone = Utils.convertForDBParam(newParams.salesZone, "DomText");
+          addCondSearch += " AND AsignacionCuenta__c.cgf_NombreZonaDeVenta__c " + Utils.replaceOperator(newParams.salesZoneComp) + "#salesZone# ";
+	  }
+
+	  /**  Shift  */
+	  if (Utils.isDefined(newParams.shift)){
+          shift = Utils.convertForDBParam(newParams.shift, "DomPortShift");
+          addCondSearch += " AND AsignacionCuenta__c.cgf_Tarea__c " + Utils.replaceOperator(newParams.shiftComp) + "#shift# ";
+	  }
+
+      var sqlParams = {portfolioType,salesZone,shift};
+
+      var sqlStmt = "SELECT ";
+      sqlStmt += "AsignacionCuenta__c.Id AS pKey, ";
+      sqlStmt += "AsignacionCuenta__c.cgf_Cartera__c AS name, ";
+      sqlStmt += "AsignacionCuenta__c.cgf_NombreZonaDeVenta__c AS salesZone, ";
+      sqlStmt += "AsignacionCuenta__c.RecordTypeId AS recorTypeId, ";
+      sqlStmt += "RecordType.DeveloperName AS recordTypeDeveloperName, ";
+      sqlStmt += "AsignacionCuenta__c.cgf_Tarea__c AS shift, ";
+      sqlStmt += "AsignacionCuenta__c.cgf_Cobertura__c AS coverage, ";
+      sqlStmt += "'' AS coverageImage, ";
+      sqlStmt += "Upper(substr(AsignacionCuenta__c.cgf_Cartera__c,1,1)) as grouping1 ";
+      sqlStmt += "FROM AsignacionCuenta__c ";
+      sqlStmt +=       "INNER JOIN RecordType ON RecordType.Id = AsignacionCuenta__c.RecordTypeId ";
+      sqlStmt +=        "AND ( ";
+      sqlStmt +=          "AsignacionCuenta__c.IsDeleted <> '1'  ";
+      sqlStmt +=          "OR AsignacionCuenta__c.IsDeleted IS NULL ";
+      sqlStmt +=         ") ";
+      sqlStmt += "WHERE ";
+      sqlStmt += "AsignacionCuenta__c.IsDeleted = '0' ";
+      sqlStmt +=  additionalCond;
+	  sqlStmt +=  addCondSearch;
+
+      return Utils.replaceMacrosParam(sqlStmt, sqlParams);
+	]]></Load>
+  </Database>
+</DataSource>

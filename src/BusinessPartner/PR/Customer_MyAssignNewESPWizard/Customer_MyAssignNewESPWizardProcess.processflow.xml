@@ -1,0 +1,73 @@
+<Process name="Customer::MyAssignNewESPWizardProcess" defaultAction="ShowView" schemaVersion="0.0.0.5">
+  <Entry>
+    <ProcessContext>
+      <Declarations>
+        <Declaration name="ValidationBo" type="BoMyWizardCreateNewWithCustomer" />
+      </Declarations>
+    </ProcessContext>
+    <EntryActions>
+      <Action name="CreateValidationBo" actionType="CREATE" type="BoMyWizardCreateNewWithCustomer">
+        <Parameters>
+          <Input name="especialidadPKey" type="Literal" value="" />
+          <Input name="especialidadName" type="Literal" value="" />
+        </Parameters>
+        <Return name="ProcessContext::ValidationBo" />
+      </Action>
+    </EntryActions>
+  </Entry>
+  <Body>
+    <Actions>
+      <Action actionType="View" name="ShowView">
+        <UIDescription>Customer::MyAssignNewESPWizardUI</UIDescription>
+        <Events>
+          <Event name="especialidadLookup" action="OpenEspecialidadLookup" />
+          <Event name="createEspecialidad" action="setDirty" />
+        </Events>
+      </Action>
+      <!-- Actions for Especialidad Lookup -->
+      <Action actionType="PROCESS" name="OpenEspecialidadLookup" process="Customer::MyEspecialidadLookupProcess">
+        <Parameters>
+          <Input name="especialidadPKey" value="ProcessContext::validationBo.luEspecialidad.pKey" />
+        </Parameters>
+        <ReturnValues>
+          <Return name="ProcessContext::validationBo.especialidadPKey" value="pKey" />
+          <Return name="ProcessContext::validationBo.especialidadName" value="especialidadName" />
+        </ReturnValues>
+        <TransitionTo action="LoadCustomerLookup" />
+      </Action>
+      <Action actionType="LOAD" name="LoadCustomerLookup" type="LuMyEspecialidad">
+        <Parameters>
+          <Input name="pKey" value="ProcessContext::validationBo.especialidadPKey" />
+        </Parameters>
+        <Return name="ProcessContext::validationBo.luEspecialidad" />
+      </Action>
+      <!-- Validation actions -->
+      <Action actionType="VALIDATION" name="WizardValidations">
+        <Validations>
+          <Validation name="ProcessContext::ValidationBo.myValidateNotEmpty" />
+        </Validations>
+        <TransitionTo action="ValidationResult_Decision" />
+      </Action>
+      <Action name="ValidationResult_Decision" actionType="DECISION" parameter="ProcessContext::validationResult">
+        <Case value="validateOk" action="EndCreateEspecialidad" />
+        <Case value="validateDiscard" action="EndCancel" />
+        <CaseElse action="ShowView" />
+      </Action>
+      <!-- Set validation business object dirty on clicking done button-->
+      <Action actionType="LOGIC" name="setDirty" call="ProcessContext::ValidationBo.setObjectStatus">
+        <Parameters>
+          <Input name="objectStatus" type="Literal" value="5" />
+        </Parameters>
+        <TransitionTo action="WizardValidations" />
+      </Action>
+      <Action actionType="END" name="EndCreateEspecialidad">
+        <ReturnValues>
+          <Return name="especialidadPKey" value="ProcessContext::validationBo.especialidadPKey" />
+          <Return name="especialidadName" value="ProcessContext::validationBo.especialidadName" />
+          <Return name="buttonPressed" value="Event.buttonPressed" />
+        </ReturnValues>
+      </Action>
+      <Action actionType="END" name="EndCancel"></Action>
+    </Actions>
+  </Body>
+</Process>

@@ -1,0 +1,22 @@
+<ListObject name="LoMyCarteraOverview" generateLoadMethod="true" schemaVersion="1.1">
+  <DataSource name="DsLoMyCarteraOverview" />
+  <Item objectClass="LiMyCarteraOverview" />
+  <Methods>
+    <Method name="beforeSaveAsync" />
+    <Method name="afterSaveAsync" />
+    <Method name="afterLoadAsync" />
+    <Method name="beforeLoadAsync" />
+    <Method name="afterDoValidateAsync" />
+    <Method name="beforeDoValidateAsync" />
+    <Method name="loadAsync" />
+    <Method name="saveAsync" />
+  </Methods>
+  <AdvancedSearchObjects>
+    <AdvancedSearchObject name="AsoPortfolio">
+      <AdvancedSearchAttributes profileId="default">
+        <AdvancedSearchAttribute label="Portfolio_SalesZone" property="salesZone" type="Text" />
+        <AdvancedSearchAttribute label="Portfolio_Shift" property="shift" type="Selection" toggleId="PortShift" editable="true" /> 
+      </AdvancedSearchAttributes>
+    </AdvancedSearchObject>
+  </AdvancedSearchObjects>
+</ListObject>

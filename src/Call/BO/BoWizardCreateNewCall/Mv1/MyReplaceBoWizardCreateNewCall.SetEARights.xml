@@ -1,0 +1,91 @@
+<BusinessLogic methodName="replaceSetEARights" businessObjectClass="BoWizardCreateNewCall" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters />
+<Code language="JavaScript">
+<![CDATA[/**--------------------------------------------------------------------------------------------------------
+ * Nombre: BoWizardCreateNewCall.replaceSetEARights
+ * Autor: Edu Torres
+ * Proyecto: Fichero Medico
+ * Descripción: Acción para configurar la visualización y edición de los campos según el tipo de 
+ * agendamiento a crear, ejemplo si es Visitas, Otra actividad o previsto
+ * --------------------------------------------------------------------------------------------------------
+ * Versión       Fecha           Autor                                  Descripción
+ * --------------------------------------------------------------------------------------------------------
+ * 1.0.0         12/05/2023      Edu Torres                             Creación
+ * --------------------------------------------------------------------------------------------------------
+ */
+var acl = me.getACL();
+me.getCustomerLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+me.setCustomerPKey(" ");
+me.getInstitutionLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+if("Otras Actividades" === me.getCallMetaLookup().getId()) {
+    me.getBriefcaseLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+} else {
+  me.getBriefcaseLookup().getACL().addRight(AclObjectType.PROPERTY, "name", AclPermission.EDIT);
+  me.getBriefcaseLookup().getACL().addRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+  if ("Previstos" === me.getCallMetaLookup().getId()) {
+    me.getInstitutionLookup().getACL().addRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+  }
+}
+me.getCustomerLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+if(me.getAllDay() == "1") {
+  acl.removeRight(AclObjectType.PROPERTY, "timeFrom", AclPermission.VISIBLE);
+}
+else {
+  acl.addRight(AclObjectType.PROPERTY, "timeFrom", AclPermission.EDIT);
+  acl.addRight(AclObjectType.PROPERTY, "timeFrom", AclPermission.VISIBLE);
+}
+
+// additional info
+me.getJobListLookup().getACL().removeRight(AclObjectType.OBJECT, "LuJobList", AclPermission.EDIT);
+acl.removeRight(AclObjectType.PROPERTY, "tripListName", AclPermission.EDIT);
+
+if(me.getMode() == "JobListPlanning") {
+  acl.removeRight(AclObjectType.PROPERTY, "tripListName", AclPermission.VISIBLE);
+  me.getCustomerLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+  me.getCallMetaLookup().getACL().removeRight(AclObjectType.PROPERTY, "text", AclPermission.VISIBLE);
+}
+else if(me.getMode() == "TripListPlanning") {
+  me.getJobListLookup().getACL().removeRight(AclObjectType.OBJECT, "LuJobList", AclPermission.VISIBLE);
+  me.getCustomerLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.VISIBLE);
+  acl.removeRight(AclObjectType.PROPERTY, "timeFrom", AclPermission.VISIBLE);
+}
+else if(me.getMode() == "CustomerPlanning") {
+  me.getJobListLookup().getACL().removeRight(AclObjectType.OBJECT, "LuJobList", AclPermission.VISIBLE);
+  me.getCustomerLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.EDIT);
+  acl.removeRight(AclObjectType.PROPERTY, "tripListName", AclPermission.VISIBLE);
+}
+else {
+  me.getJobListLookup().getACL().removeRight(AclObjectType.OBJECT, "LuJobList", AclPermission.VISIBLE);
+  acl.removeRight(AclObjectType.PROPERTY, "tripListName", AclPermission.VISIBLE);
+}
+
+if(me.getMode() === "Overdue" || me.getMode() === "FollowUp") {
+  me.getCustomerLookup().getACL().removeRight(AclObjectType.PROPERTY, "name", AclPermission.EDIT);
+}
+//Edu: Ocultar el tipo de visita para las opciones previstos y Otras actividades
+me.getACL().removeRight(AclObjectType.PROPERTY,"typeVisit",AclPermission.VISIBLE);
+//Edu: FMG-95 y FMG-96: Previstos u Otras actividades
+if(me.getCallMetaLookup().getId()==="Previstos" || me.getCallMetaLookup().getId()==="Otras Actividades") {
+  me.getACL().addRight(AclObjectType.PROPERTY,"fraccion",AclPermission.VISIBLE);
+  me.getACL().addRight(AclObjectType.PROPERTY,"taskVisit",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"timeFrom",AclPermission.VISIBLE);
+  if(me.getCallMetaLookup().getId()==="Otras Actividades") {
+    me.getACL().addRight(AclObjectType.PROPERTY,"actividades",AclPermission.VISIBLE);  
+  }
+} else {
+  me.getACL().removeRight(AclObjectType.PROPERTY,"fraccion",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"taskVisit",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"actividades",AclPermission.VISIBLE);
+  //Edu: Mostrar el tipo de visit
+  me.getACL().addRight(AclObjectType.PROPERTY,"typeVisit",AclPermission.VISIBLE);
+}
+if(me.getCallMetaLookup().getId()==="Previstos") {
+  me.getACL().removeRight(AclObjectType.PROPERTY,"fraccion",AclPermission.VISIBLE);
+  me.getACL().removeRight(AclObjectType.PROPERTY,"allDay",AclPermission.VISIBLE);
+}
+//Edu: FMG-95 y FMG-96: Previstos u Otras actividades
+//Edu: ocultar picklist de turno, porque al seleccionar la hora podemos obtenerla en alguna acción como la de guardado
+me.getACL().removeRight(AclObjectType.PROPERTY,"shiftVisit",AclPermission.VISIBLE);]]>
+</Code>
+  <Return name="" value="" />
+</BusinessLogic>

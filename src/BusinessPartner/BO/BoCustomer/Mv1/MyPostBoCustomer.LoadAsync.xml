@@ -1,0 +1,39 @@
+<BusinessLogic methodName="postLoadAsync" businessObjectClass="BoCustomer" businessObjectType="businessobject" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="context" type="Object" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[/*--------------------------------------------------------------------------------------------
+Se Agrega esta función, para actualizar atributos temporales en el objeto BoCustomer, 
+con el fin de indicarle a la UI cuales TABS mostrar o cuales ocultar.
+
+@Autor: Juan Felipe Muriel - Hitoria #88
+---------------------------------------------------------------------------------------------*/
+var promise=when.resolve(context);
+
+if (me.getRecordTypeDeveloperName() != " ") {
+  switch (me.getRecordTypeDeveloperName()){
+    case "Farmacy": 
+		me.setIsContactsTabVisible('1');
+		me.setIsVisitsTabVisible('1');
+		me.setIsSpecialtiesTabVisible('0');
+		me.setIsAttachmentsTabVisible('1');
+      break;
+
+    case "Instituciones_sin_venta": 
+		me.setIsContactsTabVisible('1');
+		me.setIsVisitsTabVisible('0');
+		me.setIsSpecialtiesTabVisible('0');
+		me.setIsAttachmentsTabVisible('1');
+      break;
+
+    default: 
+		me.setIsContactsTabVisible('0');
+		me.setIsVisitsTabVisible('1');
+		me.setIsSpecialtiesTabVisible('1');
+		me.setIsAttachmentsTabVisible('1');
+  }
+}]]>
+</Code>
+  <Return name="context" value="promise" />
+</BusinessLogic>

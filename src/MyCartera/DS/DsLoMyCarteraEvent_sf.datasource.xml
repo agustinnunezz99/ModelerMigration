@@ -1,0 +1,46 @@
+<DataSource name="DsLoMyCarteraEvent" backendSystem="sf" businessObjectClass="LoMyCarteraEvent" external="true" editableEntity="Event" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="Event" column="Id" />
+    <Attribute name="accountpKey" table="Event" column="AccountId" />
+    <Attribute name="carteraPKey" table="Event" column="cgf_Cartera__c" />
+    <Attribute name="startDateTime" table="Event" column="StartDateTime" />
+    <Attribute name="endDateTime" table="Event" column="EndDateTime" />
+    <Attribute name="subject" table="Event" column="Subject" />
+  </Attributes>
+  <Entities>
+    <Entity name="Event" alias="" idAttribute="Id" />
+  </Entities>
+  <Database platform="SQLite">
+    <Load><![CDATA[
+
+	  var accountpKey = "";
+	  var portfolioPKey = "";
+      var additionalCond = "";
+
+	  if(Utils.isDefined(jsonQuery.accountpKey)){
+        accountpKey =  Utils.convertForDBParam(jsonQuery.accountpKey, "DomPKey");
+        additionalCond += "AND Event.AccountId = #accountpKey# ";
+	  }
+	  if(Utils.isDefined(jsonQuery.portfolioPKey)){
+        portfolioPKey = Utils.convertForDBParam(jsonQuery.portfolioPKey, "DomPKey");
+        additionalCond += "AND Event.cgf_Cartera__c = #portfolioPKey# ";
+      }
+
+      var sqlParams = {accountpKey, portfolioPKey};
+
+      var sqlStmt = "SELECT ";
+      sqlStmt += "Event.Id AS pKey, ";
+      sqlStmt += "Event.AccountId AS accountpKey, ";
+      sqlStmt += "Event.cgf_Cartera__c as carteraPKey, ";
+      sqlStmt += "Event.StartDateTime AS startDateTime, ";
+      sqlStmt += "Event.endDateTime AS EndDateTime, ";
+      sqlStmt += "Event.Subject AS subject ";
+      sqlStmt += "FROM Event ";
+      sqlStmt += "WHERE ";
+      sqlStmt += "Event.IsDeleted = '0' ";
+      sqlStmt += additionalCond;
+
+      return Utils.replaceMacrosParam(sqlStmt, sqlParams);
+	]]></Load>
+  </Database>
+</DataSource>

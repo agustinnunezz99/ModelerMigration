@@ -1,0 +1,20 @@
+<DataSource name="DsLoMyEspecialidadOverview" backendSystem="sf" businessObjectClass="LoMyEspecialidadOverview" readOnly="true" external="true" editableEntity="cgf_Especialidad__c" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="cgf_Especialidad__c" column="Id" />
+    <Attribute name="name" table="cgf_Especialidad__c" column="Name" />
+  </Attributes>
+  <Entities>
+    <Entity name="cgf_Especialidad__c" alias="" idAttribute="Id" />
+  </Entities>
+  <Database platform="SQLite">
+    <Load><![CDATA[
+
+      var sqlStmt = "SELECT ";
+      sqlStmt += "cgf_Especialidad__c.Id AS pKey, ";
+      sqlStmt += "cgf_Especialidad__c.Name AS name ";
+      sqlStmt += "FROM cgf_Especialidad__c ";
+
+      return Utils.replaceMacrosParam(sqlStmt);
+	]]></Load>
+  </Database>
+</DataSource>

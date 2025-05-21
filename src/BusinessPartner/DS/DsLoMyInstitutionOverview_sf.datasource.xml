@@ -1,0 +1,23 @@
+<DataSource name="DsLoMyInstitutionOverview" backendSystem="sf" businessObjectClass="LoMyInstitutionOverview" external="true" editableEntity="Account" schemaVersion="2.0">
+  <Attributes>
+    <Attribute name="pKey" table="Account" column="Id" />
+    <Attribute name="name" table="Account" column="Name" />
+  </Attributes>
+  <Entities>
+    <Entity name="Account" idAttribute="Id" />
+  </Entities>
+  <Database platform="SQLite">
+    <Load><![CDATA[
+
+      var sqlStmt = "SELECT ";
+      sqlStmt += "Account.Id AS pKey, ";
+      sqlStmt += "Account.Name AS name ";
+      sqlStmt += "FROM Account ";
+      sqlStmt += " JOIN ";
+      sqlStmt += " RecordType";
+      sqlStmt += " ON Account.RecordTypeId = RecordType.Id ";                    
+      sqlStmt += " AND RecordType.DeveloperName = 'Instituciones_sin_venta' ";
+      return Utils.replaceMacrosParam(sqlStmt);
+	]]></Load>
+  </Database>
+</DataSource>

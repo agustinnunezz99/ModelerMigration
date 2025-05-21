@@ -1,0 +1,37 @@
+<BusinessObject name="BoMyProfessionalHours" schemaVersion="1.1">
+  <DataSource name="DsBoMyProfessionalHours" />
+  <SimpleProperties>
+    <SimpleProperty name="pKey" type="DomPKey" id="true" dataSourceProperty="pKey" />
+    <SimpleProperty name="name" type="DomBpaName" id="false" dataSourceProperty="name" />
+    <SimpleProperty name="portfolioPKey" type="DomPKey" id="false" dataSourceProperty="portfolioPKey" />
+    <SimpleProperty name="availableDays" type="DomProfHDays" id="false" dataSourceProperty="availableDays" />
+    <SimpleProperty name="timeFrom" type="DomProfHTime" id="false" dataSourceProperty="timeFrom" />
+    <SimpleProperty name="timeUntil" type="DomProfHTime" id="false" dataSourceProperty="timeUntil" />
+    <SimpleProperty name="monday" type="DomBool" id="false" dataSourceProperty="monday" />
+    <SimpleProperty name="tuesday" type="DomBool" id="false" dataSourceProperty="tuesday" />
+    <SimpleProperty name="wednesday" type="DomBool" id="false" dataSourceProperty="wednesday" />
+    <SimpleProperty name="thursday" type="DomBool" id="false" dataSourceProperty="thursday" />
+    <SimpleProperty name="friday" type="DomBool" id="false" dataSourceProperty="friday" />
+  </SimpleProperties>
+  <NestedObjects />
+  <ObjectLookups />
+  <ListObjects />
+  <Methods>
+    <Method name="beforeSaveAsync" />
+    <Method name="afterSaveAsync" />
+    <Method name="beforeLoadAsync" />
+    <Method name="afterLoadAsync" />
+    <Method name="beforeInitialize" />
+    <Method name="afterInitialize" />
+    <Method name="beforeDoValidateAsync" />
+    <Method name="afterDoValidateAsync" />
+    <Method name="beforeCreateAsync" />
+    <Method name="afterCreateAsync" />
+    <Method name="loadAsync" />
+    <Method name="saveAsync" />
+    <Method name="createAsync" />
+  </Methods>
+  <Validations>
+    <Validation name="myValidateProfHours" />
+  </Validations>
+</BusinessObject>

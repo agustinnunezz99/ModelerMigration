@@ -1,0 +1,83 @@
+<BusinessLogic methodName="replaceBeforeSaveAsync" businessObjectClass="BoCall" businessObjectType="businessobject" asynchronous="true" accessibility="PUBLIC" final="false" module="CUSTOM" simpleEditorOnly="">
+  <Parameters>
+    <MethodInput name="context" type="Object" />
+  </Parameters>
+<Code language="JavaScript">
+<![CDATA[/**--------------------------------------------------------------------------------------------------------
+ * Nombre: BoCall.replaceBeforeSaveAsync
+ * Autor: Edu Torres
+ * Proyecto: Fichero Medico
+ * Descripción: Remplazar el metodo BeforeSaveAsync
+ * para calcular el tiempo total del evento: previsto u otra actividad
+ * --------------------------------------------------------------------------------------------------------
+ * Versión       Fecha           Autor                                  Descripción
+ * --------------------------------------------------------------------------------------------------------
+ * 1.0.0         12/05/2023      Edu Torres                             Creación
+ * --------------------------------------------------------------------------------------------------------
+ */
+// update week number
+if (!Utils.isEmptyString(me.getDateFrom())){
+  var weekNumber = ""+Utils.getCalendarWeek(me.getDateFrom());
+  me.setWeek(weekNumber);
+}
+
+//Update CreationMode
+if (Utils.isEmptyString(me.getCreationMode())){
+  me.setCreationMode('Manually');
+}
+//Edu: FMG-95 y FMG-96: Previstos u Otras actividades
+
+var duration = me.getLuCallMeta().getDefaultDuration();
+if (me.getLuCallMeta().getId()==="Previstos" || me.getLuCallMeta().getId()==="Otras Actividades") {
+  var fraccion =  me.getFraccion();
+  var spFeStartMor = me.getLuCallMeta().getFeStartMor().split(":");
+  var spFeEndMor = me.getLuCallMeta().getFeEndMor().split(":");
+  var spFeStartAft = me.getLuCallMeta().getFeStartAft().split(":");
+  var spFeEndAft = me.getLuCallMeta().getFeEndAft().split(":");
+
+  if(me.getTaskVisit()==='TARDE') {
+    var timeStart = Number(spFeStartAft[0]) + Number((spFeStartAft[1]/60));
+    var timeEnd = Number(spFeEndAft[0]) + Number((spFeEndAft[1]/60));
+    me.setTimeFrom(me.getLuCallMeta().getFeStartAft());
+  } else {
+    var timeStart = Number(spFeStartMor[0]) + Number((spFeStartMor[1]/60));
+    var timeEnd = Number(spFeEndMor[0]) + Number((spFeEndMor[1]/60));
+    me.setTimeFrom(me.getLuCallMeta().getFeStartMor());
+  }
+  var timeDifference = (timeEnd - timeStart) * 60;
+  if("Previstos" === me.getLuCallMeta().getId()) {
+    duration = 60*4;
+  } else {
+    duration = (timeDifference * fraccion) / 100;
+  }
+  me.getLuCallMeta().setDefaultDuration(duration);
+  me.setDuration(duration);
+}
+var d1 = Utils.convertAnsiDate2Date(me.getDateFrom());               
+var splitString = me.getTimeFrom().split(":");
+d1.setHours(splitString[0],splitString[1],0,0);
+var xmin = d1.getMinutes();
+var feTest = xmin + duration;
+d1.setMinutes(feTest);
+var xhr = d1.getHours();
+var xmi = d1.getMinutes();
+//
+var x2 = (xhr.toString().length == 1? '0' + xhr.toString() : xhr.toString()) + ':' + (xmi.toString().length == 1? '0' + xmi.toString() : xmi.toString());
+me.setTimeThru(x2);
+d1.setHours(0,0,0,0);
+//Edu: FMG-95 y FMG-96: Previstos u Otras actividades
+//Edu: Cambiar el estado y el campo placeId por el retailstore
+if("Visit"===me.getLuCallMeta().getId()) {
+  me.setClbStatus("Completed");
+  if(!Utils.isEmptyString(me.getBriefcaseLookup().getRetailStoreId())){
+  	me.setPlaceId(me.getBriefcaseLookup().getRetailStoreId());  
+  }
+}
+var promise = when.resolve(context);
+
+if(Utils.isDefined(ApplicationContext.get('currentTourPKey')) && !Utils.isEmptyString(ApplicationContext.get('currentTourPKey')) && ApplicationContext.get('currentTourStatus') !== "Running" && me.getClbStatus() !== "Abandoned"){
+  me.setObjectStatus(STATE.PERSISTED);
+}]]>
+</Code>
+  <Return name="context" value="promise" />
+</BusinessLogic>

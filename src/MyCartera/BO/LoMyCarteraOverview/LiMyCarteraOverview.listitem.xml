@@ -1,0 +1,11 @@
+<ListItem name="LiMyCarteraOverview">
+  <SimpleProperties>
+    <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />
+    <SimpleProperty name="name" type="DomString" dataSourceProperty="name" />
+    <SimpleProperty name="salesZone" type="DomString" dataSourceProperty="salesZone" />
+    <SimpleProperty name="grouping1" type="DomString" dataSourceProperty="grouping1" />
+    <SimpleProperty name="shift" type="DomPortShift" dataSourceProperty="shift" />
+    <SimpleProperty name="coverage" type="DomString" dataSourceProperty="coverage" />
+    <SimpleProperty name="coverageImage" type="DomString" dataSourceProperty="coverageImage" />
+  </SimpleProperties>
+</ListItem>
