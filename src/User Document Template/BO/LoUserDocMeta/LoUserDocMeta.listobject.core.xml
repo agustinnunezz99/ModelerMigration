@@ -1,5 +1,0 @@
-<ListObject name="LoUserDocMeta" generateLoadMethod="true" xmlns="BoSchema.xsd">
-  <DataSource name="DsLoUserDocMeta" />
-  <Item objectClass="LiUserDocMeta" />
-  <Methods />
-</ListObject>

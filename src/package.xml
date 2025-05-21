@@ -1,0 +1,6 @@
+<package version="254.0">
+    <dependencies>
+        <dependency id="Consumer Goods Cloud - Mobile App" majorVersion="254" minorVersion="0" />
+        <dependency id="Consumer Goods Cloud - Managed Package" majorVersion="254" minorVersion="0" />
+    </dependencies>
+</package>

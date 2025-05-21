@@ -1,8 +1,0 @@
-<ListObject name="LoUserOverview" generateLoadMethod="true" xmlns="BoSchema.xsd">
-  <DataSource name="DsLoUserOverview" />
-  <Item objectClass="LiUserOverview" />
-  <Methods>
-    <Method name="saveAsync" />
-    <Method name="afterLoadAsync" />
-  </Methods>
-</ListObject>

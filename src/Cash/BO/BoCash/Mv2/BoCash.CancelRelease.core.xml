@@ -1,9 +1,0 @@
-<BusinessLogic methodName="cancelRelease" businessObjectClass="BoCash" businessObjectType="businessobject" asynchronous="false" accessibility="PUBLIC" final="false" module="CORE" simpleEditorOnly="">
-  <Parameters />
-<Code language="JavaScript">
-<![CDATA[me.setSetPhaseInBeforeSave("0");
-me.setValidateForRelease("0");
-me.setReleaseTime(Utils.getMinDate());]]>
-</Code>
-  <Return name="" value="" />
-</BusinessLogic>

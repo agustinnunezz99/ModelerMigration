@@ -1,5 +1,0 @@
-<ListObject name="LoWfeState" generateLoadMethod="true" xmlns="BoSchema.xsd">
-  <DataSource name="DsLoWfeState" />
-  <Item objectClass="LiWfeState" />
-  <Methods></Methods>
-</ListObject>

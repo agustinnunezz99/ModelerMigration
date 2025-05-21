@@ -1,4 +1,4 @@
-<Process name="Application::DashboardProcess" defaultAction="ConfigureStartScreen_Decision" schemaVersion="0.0.0.5" xmlns="ProcessSchema.xsd">
+<Process name="Application::DashboardProcess" defaultAction="ConfigureStartScreen_Decision" schemaVersion="0.0.0.5" >
   <Entry>
     <ProcessContext>
       <Declarations>
@@ -96,8 +96,6 @@
           <Event name="openProductOverview" action="ProductOverview" />
           <Event name="openReporting" action="ReportingOverview" />
           <Event name="OpenSalesFolder" action="LoadSalesFolder_Decision" />
-          <Event name="openPortfolioOverview" action="PortfolioOverview" />
-          <Event name="openPortfolioOverview2" action="PortfolioOverview2" />
         </Events>
       </Action>
       <Action actionType="PROCESS" name="OpenAdvancedCockpit" process="Application::CockpitProcess">
@@ -117,28 +115,6 @@
       </Action>
       <Action actionType="PROCESS" name="SyncOverviewProcess" process="Sync::OverviewProcess"></Action>
       <Action actionType="PROCESS" name="CustomerContractsOverview" process="Contract::CustomerContractProcess">
-        <TransitionTo action="LoadCallCount" />
-      </Action>
-      <Action name="PortfolioOverview" actionType="PROCESS" process="Portfolio::MyOverviewProcess">
-        <Parameters>
-          <Input name="PortfolioType" type="literal" value="cgf_Cartera_de_Medicos" />
-          <Input name="VisitTabVisible" type="literal" value="true" />
-          <Input name="PrevistosTabVisible" type="literal" value="true" />
-          <Input name="SpecialtiesTabVisible" type="literal" value="true" />
-          <Input name="HoursTabVisible" type="literal" value="true" />
-          <Input name="SecretariesTabVisible" type="literal" value="true" />
-        </Parameters>
-        <TransitionTo action="LoadCallCount" />
-      </Action>
-      <Action name="PortfolioOverview2" actionType="PROCESS" process="Portfolio::MyOverviewProcess">
-        <Parameters>
-          <Input name="PortfolioType" type="literal" value="cgf_Cartera_de_Farmacias" />
-          <Input name="VisitTabVisible" type="literal" value="true" />
-          <Input name="PrevistosTabVisible" type="literal" value="true" />
-          <Input name="SpecialtiesTabVisible" type="literal" value="false" />
-          <Input name="HoursTabVisible" type="literal" value="false" />
-          <Input name="SecretariesTabVisible" type="literal" value="false" />
-        </Parameters>
         <TransitionTo action="LoadCallCount" />
       </Action>
       <Action actionType="PROCESS" name="DailyReportOverview" process="DailyReport::DailyReportProcess">

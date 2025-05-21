@@ -1,4 +1,4 @@
-<UIDescription name="Application::UserCockpitUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd">
+<UIDescription name="Application::UserCockpitUI" schemaVersion="0.0.0.5" >
   <Page pagePattern="SingleSectionPage">
     <PageHeader>
       <Bindings>
@@ -114,7 +114,7 @@
         <!-- CardVisits START -->
         <CardContainer name="CardVisits">
           <Bindings>
-            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible " bindingMode="ONE_WAY">
+            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible" bindingMode="ONE_WAY">
               <Parameters>
                 <Input name="cardName" type="Literal" value="CardVisits" />
               </Parameters>
@@ -220,7 +220,7 @@
         <!-- Card Sync -->
         <SyncCardContainer name="cardSync">
           <Bindings>
-            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible " bindingMode="ONE_WAY">
+            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible" bindingMode="ONE_WAY">
               <Parameters>
                 <Input name="cardName" type="Literal" value="CardSync" />
               </Parameters>

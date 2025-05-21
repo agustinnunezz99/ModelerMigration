@@ -25,7 +25,7 @@
     </ProcessContext>
     <EntryActions>
       <!-- Card Controller-->
-      <Action name="CreateCardController" actionType="Create" type="BoUserCockpitHelper">
+      <Action name="CreateCardController" actionType="CREATE" type="BoUserCockpitHelper">
         <Parameters>
           <Input name="mode" value="ProcessContext::Mode" />
         </Parameters>

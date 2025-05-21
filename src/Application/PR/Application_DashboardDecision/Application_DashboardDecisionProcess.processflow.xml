@@ -1,4 +1,4 @@
-<Process name="Application::DashboardDecisionProcess" defaultAction="PromotionApprover_Decision" schemaVersion="0.0.0.5" xmlns="ProcessSchema.xsd">
+<Process name="Application::DashboardDecisionProcess" defaultAction="PromotionApprover_Decision" schemaVersion="0.0.0.5" >
   <Entry>
     <ProcessContext>
       <Declarations>
@@ -41,7 +41,7 @@
       <!-- Check if User had TourUser role -->
       <Action name="DSD_Decision" actionType="DECISION" parameter="ProcessContext::TourUserRole.pKey">
         <CaseEmpty action="SalesRepDashboard" />
-        <CaseElse action="DSDDashboard" />
+        <CaseElse action="DSDDriverCockpit" />
       </Action>
       <!-- Check if both Roles (PrmApprover and SalesRep) are active. If Yes open Dashboarddecision UI-->
       <Action name="SalesRep_Decision" actionType="DECISION" parameter="ProcessContext::SalesRepRole.pKey">
@@ -61,7 +61,7 @@
       </Action>
       <Action actionType="PROCESS" name="SalesRepDashboard" process="Application::DashboardProcess" />
       <Action actionType="PROCESS" name="PromotionApproverDashboard" process="Application::PrmApproverDashboardProcess" />
-      <Action actionType="PROCESS" name="DSDDashboard" process="Application::DSDDashboardProcess" />
+      <Action actionType="PROCESS" name="DSDDriverCockpit" process="Tour::DriverCockpitProcess" />
     </Actions>
   </Body>
 </Process>

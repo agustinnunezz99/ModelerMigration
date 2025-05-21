@@ -35,16 +35,6 @@
         <Declaration name="CardVisits_SubstitutedUsrPKey" type="DomPKey" />
         <Declaration name="CardVisits_IsManagedCustomer" type="DomBool" />
         <Declaration name="CardVisits_IsCallComplete" type="DomBool" />
-        <!--Edu: mapear campos eventos-->
-        <Declaration name="CardVisits_Fraccion" type="String" />
-        <Declaration name="CardVisits_TaskVisit" type="String" />
-        <Declaration name="CardVisits_Actividades" type="String" />
-        <Declaration name="CardVisits_BriefcasePKey" type="String" />
-        <Declaration name="CardVisits_PKeyRecordType" type="String" />
-        <Declaration name="CardVisits_InstitutionPKey" type="String" />
-        <!--Edu: Campos de turno y tipo de visita-->
-        <Declaration name="CardVisits_ShiftVisit" type="String" />
-        <Declaration name="CardVisits_TypeVisit" type="String" />
         <!-- Card: Reporting -->
         <Declaration name="CardReporting_DataLoaded" type="DomBool" />
         <!--  Sales -->
@@ -137,7 +127,7 @@
         <Return name="ProcessContext::CurrentUser" />
       </Action>
       <!-- Card Controller-->
-      <Action name="CreateCardController" actionType="Create" type="BoSalesCockpitHelper">
+      <Action name="CreateCardController" actionType="CREATE" type="BoSalesCockpitHelper">
         <Parameters>
           <Input name="mode" value="ProcessContext::Mode" />
         </Parameters>
@@ -409,7 +399,7 @@
       <Action actionType="LOGIC" name="CardVisits_LoadCallsOfToday" call="ProcessContext::CardVisits_VisitList.getCallsForCard">
         <Parameters>
           <Input name="setDateFunction" value="none" type="Literal" />
-          <Input name="filterCalls" value="'Planned'" type="Literal" />
+          <Input name="filterCalls" value="'Planned','InProgress'" type="Literal" />
           <Input name="currentDate" value="ProcessContext::CardDate" />
           <Input name="currentResponsible" value="ProcessContext::CurrentUser" />
           <Input name="numberOfListItems" value="ProcessContext::CardController.numberOfListItems" />
@@ -472,16 +462,6 @@
           <Return name="ProcessContext::CardVisits_ButtonPressed" value="buttonPressed" />
           <Return name="ProcessContext::CardVisits_SubstitutedUsrPKey" value="substitutedUsrPKey" />
           <Return name="ProcessContext::CardVisits_IsManagedCustomer" value="isManagedCustomer" />
-          <!--Edu: mapear campos eventos-->
-          <Return name="ProcessContext::CardVisits_Fraccion" value="fraccion" />
-          <Return name="ProcessContext::CardVisits_TaskVisit" value="taskVisit" />
-          <Return name="ProcessContext::CardVisits_Actividades" value="actividades" />
-          <Return name="ProcessContext::CardVisits_BriefcasePKey" value="briefcasePKey" />
-          <Return name="ProcessContext::CardVisits_PKeyRecordType" value="pKeyRecordType" />
-          <Return name="ProcessContext::CardVisits_InstitutionPKey" value="institutionPKey" />
-          <!--Edu: Campos de turno y tipo de visita-->
-          <Return name="ProcessContext::CardVisits_ShiftVisit" value="shiftVisit" />
-          <Return name="ProcessContext::CardVisits_TypeVisit" value="typeVisit" />
         </ReturnValues>
       </Action>
       <Action name="CreateNewCall_Decision" actionType="DECISION" parameter="ProcessContext::CardVisits_ButtonPressed">
@@ -501,23 +481,6 @@
           <Input name="allDay" value="ProcessContext::CardVisits_AllDay" />
           <Input name="responsiblePKey" value="ProcessContext::CurrentUser" />
           <Input name="boSfReplicationCallbacks" value="ProcessContext::SfReplicationCallbacks" />
-          <!--Edu: Otras actividades y previstos-->
-          <Input name="fraccion" value="ProcessContext::CardVisits_Fraccion" />
-          <Input name="taskVisit" value="ProcessContext::CardVisits_TaskVisit" />
-          <Input name="actividades" value="ProcessContext::CardVisits_Actividades" />
-          <!--Edu: Campos de turno y tipo de visita-->
-          <Input name="shiftVisit" value="ProcessContext::CardVisits_ShiftVisit" />
-          <Input name="typeVisit" value="ProcessContext::CardVisits_TypeVisit" />
-          <!--Edu: fin Otras actividades y previstos-->
-          <!--Edu: INI new lookup cartera-->
-          <Input name="briefcasePKey" value="ProcessContext::CardVisits_BriefcasePKey" />
-          <!--Edu: FIN new lookup cartera-->
-          <!--Edu: INI new lookup recordType-->
-          <Input name="pKeyRecordType" value="ProcessContext::CardVisits_PKeyRecordType" />
-          <!--Edu: FIN new lookup recordType-->
-          <!--Edu: INI new lookup institución-->
-          <Input name="institutionPKey" value="ProcessContext::CardVisits_InstitutionPKey" />
-          <!--Edu: FIN new lookup institución-->
         </Parameters>
         <TransitionTo action="CardVisits_refresh" />
       </Action>
@@ -532,23 +495,6 @@
           <Input name="responsiblePKey" value="ProcessContext::CurrentUser" />
           <Input name="isManagedCustomer" value="ProcessContext::CardVisits_IsManagedCustomer" />
           <Input name="boSfReplicationCallbacks" value="ProcessContext::SfReplicationCallbacks" />
-          <!--Edu: fin Otras actividades y previstos-->
-          <Input name="fraccion" value="ProcessContext::CardVisits_Fraccion" />
-          <Input name="taskVisit" value="ProcessContext::CardVisits_TaskVisit" />
-          <Input name="actividades" value="ProcessContext::CardVisits_Actividades" />
-          <!--Edu: fin Otras actividades y previstos-->
-          <!--Edu: Campos de turno y tipo de visita-->
-          <Input name="shiftVisit" value="ProcessContext::CardVisits_ShiftVisit" />
-          <Input name="typeVisit" value="ProcessContext::CardVisits_TypeVisit" />
-          <!--Edu: INI new lookup cartera-->
-          <Input name="briefcasePKey" value="ProcessContext::CardVisits_BriefcasePKey" />
-          <!--Edu: FIN new lookup cartera-->
-          <!--Edu: INI new lookup recordType-->
-          <Input name="pKeyRecordType" value="ProcessContext::CardVisits_PKeyRecordType" />
-          <!--Edu: FIN new lookup recordType-->
-          <!--Edu: INI new lookup institución-->
-          <Input name="institutionPKey" value="ProcessContext::CardVisits_InstitutionPKey" />
-          <!--Edu: FIN new lookup institución-->
         </Parameters>
         <TransitionTo action="CardVisits_refresh" />
       </Action>
@@ -557,6 +503,7 @@
           <Input name="pKey" value="Event.pKey" />
           <Input name="clbStatus" value="Event.clbStatus" />
           <Input name="deleteAllowed" value="Event.deleteAllowed" />
+          <Input name="isStartVisitRqrToCheckIn" value="Event.isStartVisitRqrToCheckIn" />
           <Input name="referenceUserPKey" value="ProcessContext::CurrentUser" />
           <Input name="responsiblePKey" value="Event.responsiblePKey" />
           <Input name="referenceDate" value="Event.dateFrom" />
@@ -577,6 +524,8 @@
         <Case value="Re-Schedule" action="CardVisits_RescheduleVisit" />
         <Case value="Info" action="CardVisits_VisitInfo" />
         <Case value="NavigateToCustomer" action="CardVisits_NavigateToCustomer" />
+        <Case value="Open" action="CardVisits_LoadCall_Decision" />
+        <Case value="Start" action="CardVisits_LoadCall_Decision" />
         <CaseElse action="ShowCockpit" />
       </Action>
       <Action name="CardVisits_LoadCall_Decision" actionType="DECISION" parameter="Event.customerOnDevice">
@@ -628,6 +577,7 @@
         <Parameters>
           <Input name="CallPKey" value="Event.pKey" />
           <Input name="ResponsiblePKey" value="ProcessContext::CurrentUser" />
+          <Input name="ActionName" value="Event.selected" />
         </Parameters>
         <TransitionTo action="CardVisits_refresh" />
       </Action>
@@ -755,7 +705,7 @@
       <Action actionType="LOGIC" name="CardReportingVisitRate_loadData" call="ProcessContext::CardReportingVisitRate_Visits.getVisitRateForCard">
         <Parameters>
           <Input name="setDateFunction" value="NONE" type="Literal" />
-          <Input name="filterCalls" value="'Completed','Planned','Abandoned'" type="Literal" />
+          <Input name="filterCalls" value="'Completed','Planned','Abandoned','InProgress'" type="Literal" />
           <Input name="currentResponsible" value="ProcessContext::CurrentUser" />
           <Input name="cardMode" value="VisitRate" type="Literal" />
           <Input name="currentDate" value="ProcessContext::CardDate" />
@@ -786,7 +736,7 @@
       <Action actionType="LOGIC" name="CardReportingVisitRate_refreshData" call="ProcessContext::CardReportingVisitRate_Visits.getVisitRateForCard">
         <Parameters>
           <Input name="setDateFunction" value="NONE" type="Literal" />
-          <Input name="filterCalls" value="'Completed','Planned','Abandoned'" type="Literal" />
+          <Input name="filterCalls" value="'Completed','Planned','Abandoned','InProgress'" type="Literal" />
           <Input name="currentResponsible" value="ProcessContext::CurrentUser" />
           <Input name="cardMode" value="VisitRate" type="Literal" />
           <Input name="currentDate" value="ProcessContext::CardDate" />
@@ -1200,7 +1150,7 @@
       <Action actionType="LOGIC" name="CardVisitsGuideMap_LoadCallsOfToday" call="ProcessContext::CardVisits_VisitList.getCallsForCard">
         <Parameters>
           <Input name="setDateFunction" value="none" type="Literal" />
-          <Input name="filterCalls" value="'Planned'" type="Literal" />
+          <Input name="filterCalls" value="'Planned','InProgress'" type="Literal" />
           <Input name="currentDate" value="ProcessContext::CardDate" />
           <Input name="currentResponsible" value="ProcessContext::CurrentUser" />
           <Input name="numberOfListItems" value="ProcessContext::CardController.numberOfListItems" />

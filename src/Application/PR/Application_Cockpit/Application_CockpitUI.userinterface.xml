@@ -1,4 +1,4 @@
-<UIDescription name="Application::CockpitUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" simpleEditorOnly="true">
+<UIDescription name="Application::CockpitUI" schemaVersion="0.0.0.5"  simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage">
     <PageHeader>
       <Bindings>
@@ -40,7 +40,7 @@
             <Events>
               <ButtonPressedEvent event="executeStartOfDay" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
             </VisibilityRoles>
           </NavigationMenuItem>
@@ -52,7 +52,7 @@
             <Events>
               <ButtonPressedEvent event="openAgendaOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
               <Role name="RetailUser" />
             </VisibilityRoles>
@@ -70,7 +70,7 @@
             <Events>
               <ButtonPressedEvent event="executeEndOfDay" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
             </VisibilityRoles>
           </NavigationMenuItem>
@@ -87,7 +87,7 @@
             <Events>
               <ButtonPressedEvent event="openTourOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
             </VisibilityRoles>
           </NavigationMenuItem>
@@ -104,7 +104,7 @@
             <Events>
               <ButtonPressedEvent event="openInventoryOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
             </VisibilityRoles>
           </NavigationMenuItem>
@@ -121,7 +121,7 @@
             <Events>
               <ButtonPressedEvent event="openCashOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
             </VisibilityRoles>
           </NavigationMenuItem>
@@ -138,7 +138,7 @@
             <Events>
               <ButtonPressedEvent event="openReplenishmentOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
             </VisibilityRoles>
           </NavigationMenuItem>
@@ -150,7 +150,7 @@
             <Events>
               <ButtonPressedEvent event="openCustomerOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
               <Role name="TourUser" />
@@ -164,7 +164,7 @@
             <Events>
               <ButtonPressedEvent event="openProductOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
               <Role name="TourUser" />
@@ -178,7 +178,7 @@
             <Events>
               <ButtonPressedEvent event="openOrderOverview" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
               <Role name="TourUser" />
@@ -197,7 +197,7 @@
             <Events>
               <ButtonPressedEvent event="openSalesFolder" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
             </VisibilityRoles>
@@ -215,7 +215,7 @@
             <Events>
               <ButtonPressedEvent event="openDailyReport" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
               <Role name="TourUser" />
@@ -229,7 +229,7 @@
             <Events>
               <ButtonPressedEvent event="openReporting" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
               <Role name="TourUser" />
@@ -243,7 +243,7 @@
             <Events>
               <ButtonPressedEvent event="openNotifications" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="TourUser" />
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
@@ -262,7 +262,7 @@
             <Events>
               <ButtonPressedEvent event="openCustomerContracts" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="ReservedForFutureUse_RetailUser" />
               <Role name="ReservedForFutureUse_PromotionApprover" />
             </VisibilityRoles>
@@ -280,7 +280,7 @@
             <Events>
               <ButtonPressedEvent event="openPayments" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="ReservedForFutureUse_RetailUser" />
               <Role name="ReservedForFutureUse_PromotionApprover" />
             </VisibilityRoles>
@@ -298,7 +298,7 @@
             <Events>
               <ButtonPressedEvent event="openTodo" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
             </VisibilityRoles>
@@ -316,7 +316,7 @@
             <Events>
               <ButtonPressedEvent event="openIssue" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
             </VisibilityRoles>
@@ -329,7 +329,7 @@
             <Events>
               <ButtonPressedEvent event="openUsrSettings" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
               <Role name="TourUser" />
@@ -348,7 +348,7 @@
             <Events>
               <ButtonPressedEvent event="synchronizeData" />
             </Events>
-            <VisibilityRoles allRoles="false">
+            <VisibilityRoles allRoles="true">
               <Role name="RetailUser" />
               <Role name="PromotionApprover" />
               <Role name="TourUser" />
@@ -426,7 +426,7 @@
         <!-- CardVisits START -->
         <CardContainer name="CardVisits">
           <Bindings>
-            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible " bindingMode="ONE_WAY">
+            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible" bindingMode="ONE_WAY">
               <Parameters>
                 <Input name="cardName" type="Literal" value="CardVisits" />
               </Parameters>
@@ -442,7 +442,7 @@
             <Binding target="IsReadyToLoad" type="Text" binding="ProcessContext::CardVisits_DataLoaded" bindingMode="ONE_WAY" />
             <Binding target="DisplayedSubcomponentName" type="Text" binding="ProcessContext::CardVisits_DisplayedSubcomponentName" bindingMode="ONE_WAY" />
           </Bindings>
-          <VisibilityRoles allRoles="false">
+          <VisibilityRoles allRoles="true">
             <Role name="RetailUser" />
             <Role name="TourUser" />
           </VisibilityRoles>
@@ -517,6 +517,7 @@
                     <Binding target="Icon" type="Image" binding=".actionImg" />
                     <Binding target="Text" type="Label" binding=".actionId" />
                     <Binding type="Editable" target="Editable" binding=".actionEnabled" />
+                    <Binding type="Visible" target="Visible" binding=".actionVisible" />
                   </Bindings>
                 </Items>
               </ContextMenu>
@@ -539,6 +540,7 @@
                   <Param name="pKey" value=".pKey" />
                   <Param name="clbStatus" value=".clbStatus" />
                   <Param name="deleteAllowed" value=".deleteAllowed" />
+                  <Param name="isStartVisitRqrToCheckIn" value=".isStartVisitRqrToCheckIn" />
                   <Param name="dateFrom" value=".dateFrom" />
                   <Param name="bpaMainPKey" value=".bpaMainPKey" />
                   <Param name="responsiblePKey" value=".responsiblePKey" />
@@ -594,7 +596,7 @@
             <Binding target="CollapseState" type="Text" binding="ProcessContext::CardController.CollapseState_CardReporting" bindingMode="TWO_WAY" />
             <Binding target="IsReadyToLoad" type="Text" binding="ProcessContext::CardReporting_DataLoaded" bindingMode="ONE_WAY" />
           </Bindings>
-          <VisibilityRoles allRoles="false">
+          <VisibilityRoles allRoles="true">
             <Role name="RetailUser" />
             <Role name="TourUser" />
           </VisibilityRoles>
@@ -609,6 +611,7 @@
               <Binding target="visitRate" type="Text" binding="ProcessContext::CardReportingVisitRate_Rate" bindingMode="ONE_WAY" />
               <Binding target="selectedDate" type="Text" binding="ProcessContext::CardDate" bindingMode="ONE_WAY" />
               <Binding target="currentDate" type="Text" binding="ProcessContext::CurrentDate" bindingMode="ONE_WAY" />
+              <Binding target="currency" type="Text" binding="ApplicationContext::User.translatedCurrency" bindingMode="ONE_WAY" />
               <List target="salesData" dataSource="ProcessContext::CardReportingSales_SalesData.Items[]">
                 <Binding target="pKey" type="Text" binding=".pKey" />
                 <Binding target="netSales" type="Text" binding=".netSales" />
@@ -640,7 +643,7 @@
             <Binding target="CollapseState" type="Text" binding="ProcessContext::CardController.collapseState_CardActivities" bindingMode="TWO_WAY" />
             <Binding target="DisplayedSubcomponentName" type="Text" binding="ProcessContext::CardActivities_DisplayedSubcomponentName" bindingMode="ONE_WAY" />
           </Bindings>
-          <VisibilityRoles allRoles="false">
+          <VisibilityRoles allRoles="true">
             <Role name="RetailUser" />
             <Role name="TourUser" />
           </VisibilityRoles>
@@ -760,7 +763,7 @@
             <Binding target="CollapseState" type="Text" binding="ProcessContext::CardController.collapseState_CardVisitsGuide" bindingMode="TWO_WAY" />
           </Bindings>
           <!--TODO : Should be same as  Card visits ?-->
-          <VisibilityRoles allRoles="false">
+          <VisibilityRoles allRoles="true">
             <Role name="RetailUser" />
             <Role name="TourUser" />
           </VisibilityRoles>
@@ -1099,7 +1102,7 @@
             <Binding target="CollapseState" type="Text" binding="ProcessContext::CardController.CollapseState_CardCustomerTasks" bindingMode="TWO_WAY" />
             <Binding target="DisplayedSubcomponentName" type="Text" binding="ProcessContext::CardCustomerTasks_DisplayedSubcomponentName" bindingMode="ONE_WAY" />
           </Bindings>
-          <VisibilityRoles allRoles="false">
+          <VisibilityRoles allRoles="true">
             <Role name="RetailUser" />
           </VisibilityRoles>
           <Events>
@@ -1243,7 +1246,7 @@
             <Binding target="CollapseState" type="Text" binding="ProcessContext::CardController.CollapseState_CardTasks" bindingMode="TWO_WAY" />
             <Binding target="DisplayedSubcomponentName" type="Text" binding="ProcessContext::CardTasks_DisplayedSubcomponentName" bindingMode="ONE_WAY" />
           </Bindings>
-          <VisibilityRoles allRoles="false">
+          <VisibilityRoles allRoles="true">
             <Role name="RetailUser" />
           </VisibilityRoles>
           <Events>
@@ -1387,7 +1390,7 @@
             <Binding target="CollapseState" type="Text" binding="ProcessContext::CardController.CollapseState_CardCustomersOverdue" bindingMode="TWO_WAY" />
             <Binding target="DisplayedSubcomponentName" type="Text" binding="ProcessContext::CardCustomersOverdue_DisplayedSubcomponentName" bindingMode="ONE_WAY" />
           </Bindings>
-          <VisibilityRoles allRoles="false">
+          <VisibilityRoles allRoles="true">
             <Role name="RetailUser" />
             <Role name="TourUser" />
           </VisibilityRoles>
@@ -1494,7 +1497,7 @@
         <!-- Sync Card -->
         <SyncCardContainer name="cardSync">
           <Bindings>
-            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible " bindingMode="ONE_WAY">
+            <Binding type="Visible" target="Visible" call="ProcessContext::CardController.isCardVisible" bindingMode="ONE_WAY">
               <Parameters>
                 <Input name="cardName" type="Literal" value="CardSync" />
               </Parameters>

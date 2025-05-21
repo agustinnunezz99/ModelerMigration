@@ -1,4 +1,4 @@
-<UIDescription name="Application::DashboardUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd">
+<UIDescription name="Application::DashboardUI" schemaVersion="0.0.0.5" >
   <Page pagePattern="SingleSectionPage">
     <PageHeader>
       <Bindings>
@@ -7,7 +7,7 @@
     </PageHeader>
     <Section sectionName="masterSection" sectionPattern="DashboardSection" showInfoArea="true" showPasswordChangeButton="false">
       <Bindings>
-        <Resource target="LogoIcon" type="Image" id="MyLogoGador" />
+        <Resource target="LogoIcon" type="Image" id="LogoSalesforce" />
         <Resource target="AltLogoIcon" type="Image" id="EmptyImage" />
       </Bindings>
       <Area areaName="welcomeArea" areaPattern="WelcomeArea">
@@ -70,33 +70,6 @@
             <Role name="PromotionApprover" />
           </VisibilityRoles>
         </ImageButton>
-        <ImageButton name="PortfolioButton">
-          <Bindings>
-            <Resource target="Image" type="Image" id="MenuClipboardClock" />
-            <Resource target="Text" type="Label" id="portfolioOverviewLabelId" defaultLabel="Cartera Medicos" />
-          </Bindings>
-          <Events>
-            <ButtonPressedEvent event="openPortfolioOverview" />
-          </Events>
-          <VisibilityRoles allRoles="false">
-            <Role name="RetailUser" />
-            <Role name="PromotionApprover" />
-          </VisibilityRoles>
-        </ImageButton>
-        <ImageButton name="PortfolioButton2">
-          <Bindings>
-            <Resource target="Image" type="Image" id="MenuClipboardClock" />
-            <Resource target="Text" type="Label" id="portfolioOverviewLabelId" defaultLabel="Cartera Farmacias" />
-          </Bindings>
-          <Events>
-            <ButtonPressedEvent event="openPortfolioOverview2" />
-          </Events>
-          <VisibilityRoles allRoles="false">
-            <Role name="RetailUser" />
-            <Role name="PromotionApprover" />
-          </VisibilityRoles>
-        </ImageButton>
-        <!--
         <ImageButton name="ProductButton" backendSystem="both">
           <Bindings>
             <Resource target="Image" type="Image" id="MenuProducts" />
@@ -234,7 +207,6 @@
             <Role name="PromotionApprover" />
           </VisibilityRoles>
         </ImageButton>
--->
         <ImageButton name="PersonalSettingsButton" backendSystem="both">
           <Bindings>
             <Resource target="Image" type="Image" id="MenuUserCog" />

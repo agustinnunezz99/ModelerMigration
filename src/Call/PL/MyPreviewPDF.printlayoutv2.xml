@@ -1,0 +1,148 @@
+<PrintLayout name="MyPreviewPDF" xmlns="https://www.salesforce.com/cgcloud/xsds" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <Declarations>
+    <DataDeclaration name="customer" type="BoCustomer" />
+    <DataDeclaration name="tasks" type="LoIssueOverview" />
+    <!-- <DataDeclaration name="taskDetail" type="BoIssue" /> -->
+    <DataDeclaration name="notes" type="BoCall" />
+    <!-- <DataDeclaration name="MainAddress" type="LiBpaAddress" /> -->
+    <DataDeclaration name="myImageName" type="Image" mimeType="image/png" imageId="cgLogo" />
+   </Declarations>
+   <ReportLayout pageMargins="[40,40,40,40]">
+    <!--
+  
+           Current Visit
+      -->
+      <h2 alignment="center">{{Labels::VisitId; defaultLabel=VISIT}}</h2>
+      <table name="CurrentVisitTable" dontBreakRows="false" tableLayout="noBorders">
+        <tbody>
+          <tr>
+            <td width="200" alignment="center" rowSpan="6">
+              <img src="{{Declarations::myImageName}}" width="100" />
+            </td>
+            <td width="100" />
+             <td width="100" alignment="left">{{Labels::TittleId; defaultLabel=Key points and commitments}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--
+
+
+ 		Header Table
+    -->
+    <table name="HeaderTable" tableLayout="noBorders">
+      <tbody>
+        <tr>
+          <td alignment="right" bold="true">{{Labels::InfoClienteId; defaultLabel=Client information:}}</td>   
+          <td></td>     
+        </tr>
+        <tr>
+          <td alignment="right" bold="true">{{Labels::ClientCodeId; defaultLabel=Client Code:}}</td>
+          <td>{{Declarations::customer.customerId}} </td>
+        </tr>
+        <tr>
+          <td alignment="right">{{Labels::PhoneId; defaultLabel=Phone:}}</td>
+          <td>{{Declarations::customer.phone1}}</td>
+        </tr>
+        <tr>
+            <td alignment="right" bold="true">{{Labels::NameId; defaultLabel=Name:}}</td>
+            <td>{{Declarations::customer.name}}</td>
+        </tr>
+        <tr>
+            <td alignment="right" bold="true">{{Labels::FechaInicioId; defaultLabel=Date from:}}</td>
+            <td>{{Declarations::notes.dateFrom}}</td>
+        </tr>
+        <tr>
+            <td alignment="right" bold="true">{{Labels::FechaFinId; defaultLabel=Date thru:}}</td>
+            <td>{{Declarations::notes.dateThru}}</td>
+        </tr>
+         <tr>
+            <td alignment="right" bold="true">{{Labels::CityId; defaultLabel=City:}}</td>
+            <td>{{Declarations::notes.luCustomer.city}}</td>
+        </tr>
+        <tr>
+            <td alignment="right" bold="true">{{Labels::CustomerAddressId; defaultLabel=Address:}}</td>
+            <td>{{Declarations::notes.luCustomer.street}}/{{Declarations::notes.luCustomer.houseNumber}}/{{Declarations::notes.luCustomer.zipCode}}/{{Declarations::notes.luCustomer.city}}/{{Declarations::notes.luCustomer.state}}</td>
+        </tr>
+        <tr>
+            <td alignment="right" bold="true">{{Labels::OwnerId; defaultLabel=Owner:}}</td>
+            <td>{{Declarations::notes.luStoreManager.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+<!--
+
+
+ 		Store Check
+
+    -->
+    <h2 alignment="left">{{Labels::StoreCheckId; defaultLabel=Store Check}}</h2>
+    <table tableLayout="lightHorizontalLinesMainItemsOnly" name="StoreCheckItemsTable">
+      <thead>
+        <tr>
+          <th width="*" alignment="left" bold="true">{{Labels::TopicId; defaultLabel=Topic}}</th>
+          <th width="*" bold="true" >{{Labels::CommitmentsId; defaultLabel=Conclusion}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <each name="itemsEach" value="{{Declarations::notes.boJobManager.loQuestions}}">
+          <tr>
+            <td>{{.questionText}}</td>
+            <td>{{.value}}</td>
+          </tr>
+        </each>
+      </tbody>
+    </table>
+<!--
+
+ 		client Commitment 
+    -->
+    <h2 alignment="left">{{Labels::CommitmentId; defaultLabel=Commitments}}</h2>
+    <table tableLayout="lightHorizontalLinesMainItemsOnly" name="CommitmentItemsTable">
+      <thead>
+        <tr>
+          <th width="*" alignment="left" bold="true">{{Labels::ActivityId; defaultLabel=Activity}}</th>
+          <th width="*" bold="true">{{Labels::DescriptionId; defaultLabel=Description}}</th>
+          <th width="60" bold="true">{{Labels::CreatedAtId; defaultLabel=Created At}}</th>
+          <th width="48" bold="true">{{Labels::StateId; defaultLabel=State}}</th>
+          <th width="48" bold="true">{{Labels::PriorityId; defaultLabel=Priority}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <each name="itemsEach" value="{{Declarations::tasks}}">
+          <orderCriteria>
+            <orderCriterion fieldName="initiationDate" direction="DESC" compareMode="NUMBER" />
+          </orderCriteria>
+          <tr>
+            <td>{{.templateName}}</td>
+            <td>{{.text}}</td>
+            <td>{{.initiationDate}}</td>
+            <td>{{.issuePhase}}</td>
+            <td>{{.priority}}</td>
+          </tr>
+        </each>
+      </tbody>
+    </table>
+    <!-- 
+
+		Notes
+    -->
+    <h2 alignment="left">{{Labels::NotesId; defaultLabel=Notes}}</h2>
+    <table tableLayout="lightHorizontalLinesMainItemsOnly" name="NotesItemsTable">
+      <thead>
+        <tr>
+          <th width="*" alignment="left">{{Labels::InfoId; defaultLabel=General information}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <each name="itemsEach" value="{{Declarations::tasks}}">
+
+          <tr>
+            <td>{{.text}}</td>
+          </tr>
+        </each>
+      </tbody>
+    </table>
+
+   </ReportLayout>
+</PrintLayout>
