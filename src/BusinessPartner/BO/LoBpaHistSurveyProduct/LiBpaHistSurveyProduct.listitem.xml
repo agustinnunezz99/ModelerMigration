@@ -1,4 +1,4 @@
-<ListItem name="LiBpaHistSurveyProduct" xmlns="BoSchema.xsd" >
+<ListItem name="LiBpaHistSurveyProduct"  >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="bpaCustomerPKey" type="DomPKey" dataSourceProperty="bpaCustomerPKey" />

@@ -16,6 +16,7 @@
   <Label id="NavigateToCustomer" text="Navigate to Store" translationStatus="7" />
   <Label id="Delete" text="Delete" translationStatus="7" />
   <Label id="Info" text="Info" translationStatus="7" />
+  <Label id="Open" text="Open" translationStatus="7" />
   <Label id="Execute" text="Execute" translationStatus="7" />
   <Label id="AddImage" text="Add Image" translationStatus="7" />
   <Label id="ReviewImages" text="Review Images" translationStatus="7" />
@@ -38,8 +39,9 @@
   <!-- KPI Location Filter - Default label for Store -->
   <Label id="InStoreLocation_Store" text="Store" translationStatus="7" />
   <!-- Visit KPI:Product Scan not associated to Store -->
-  <Label id="ProductScan_NoValidStoreText" text="The product isn't associated with your tasks." translationStatus="1" />
+  <Label id="ProductScan_NoValidStoreText" text="The product isn't associated with your tasks." translationStatus="7" />
   <Label id="ProductScan_NoValidStoreLocationText" text="This product isn’t available in this in-store location. Try searching the product in another in-store location." translationStatus="7" />
+  <Label id="BoVisitAssessmentTask_TimeFormatValidationFor" text="for" translationStatus="7" />
   <!-- ### Global Labels from 234 end (Already approved by translation team) -->
   <!-- ####################################################################################################################################################################################### -->
   <Label id="Options" text="Options" translationStatus="7" />
@@ -89,6 +91,7 @@
   <Label id="ClbManualQuestionGroupName" text="Misc." translationStatus="7" />
   <Label id="MessageBox_Title_Info" text="Info" translationStatus="7" />
   <Label id="MessageBox_Title_Validation" text="We hit a snag." translationStatus="7" />
+  <Label id="MessageBox_Title_Attention" text="Your attention, please." translationStatus="1" />
   <Label id="MessageBox_Title_Warning" text="Warning" translationStatus="7" />
   <Label id="MessageBox_Title_Error" text="Error" translationStatus="7" />
   <Label id="ImageSelector_StoreLabel" text="Store" translationStatus="7" />
@@ -110,8 +113,8 @@
   <Label id="NoEmptyPaymentReason" text="You can change the Reason Code to empty only when the Document Type is not a Non Valuated Delivery Note." translationStatus="7" />
   <Label id="Order_Print_EndOfPrint1" text="End of Order Confirmation" translationStatus="7" />
   <Label id="Order_Print_EndOfPrint2" text="Printed" translationStatus="7" />
-  <Label id="Order_Print_EndOfPrint3" text="End of Invoice" translationStatus="1" />
-  <Label id="Order_Print_EndOfPrint4" text="End of Credit Memo" translationStatus="1" />
+  <Label id="Order_Print_EndOfPrint3" text="End of Invoice" translationStatus="7" />
+  <Label id="Order_Print_EndOfPrint4" text="End of Credit Memo" translationStatus="7" />
   <Label id="Draft" text="- Draft -" translationStatus="7" />
   <Label id="Original" text="- Final Print -" translationStatus="7" />
   <Label id="Reprint" text="- Reprint -" translationStatus="7" />
@@ -179,6 +182,8 @@
   <Label id="CardReportingUnsuccessfulVisits_SubTitleRetail" text="This week" translationStatus="7" />
   <Label id="CardReportingUnsuccessfulVisits_SubTitleTour" text="This tour" translationStatus="7" />
   <Label id="CardReportingUnsuccessfulVisits_NoDataMessage" text="Sorry, there‘s not enough data to show you a pretty chart. :(" translationStatus="7" />
+  <Label id="CardReportingUnsuccessfulVisits_Info" text="Rate of your unsuccessful visits this week: " translationStatus="7" />
+  <Label id="CardReportingVisitRate_Info" text="Your visit rate in the current week: " translationStatus="7" />
   <Label id="CardReportingVisitRate_Title" text="Visit Rate (%)" translationStatus="7" />
   <Label id="CardReportingVisitRate_SubTitleRetail" text="This week (till today)" translationStatus="7" />
   <Label id="CardReportingVisitRate_SubTitleRetail_CurrentDate" text="This week (till this day)" translationStatus="7" />
@@ -285,6 +290,7 @@
   <Label id="CardVisits_NoDataMessageMainDateText" text="No visits planned," translationStatus="7" />
   <Label id="CardActivities_StoreCheck" text="Store Check" translationStatus="7" />
   <Label id="CardActivities_CaptureSurvey" text="Capture Survey" translationStatus="7" />
+  <!-- <Label id="CardActivities_PreviewPDF" text="Preview PDF" translationStatus="7"/> -->
   <Label id="CardActivities_CreateOrder" text="Create Order" translationStatus="7" />
   <Label id="CardActivities_TrackAssets" text="Track Assets" translationStatus="7" />
   <Label id="CardCustomerTasks_CreatedToday" text="Today" translationStatus="7" />
@@ -322,4 +328,32 @@
   <Label id="TakePicture" text="Take Picture" translationStatus="7" />
   <Label id="SelectPicture" text="Select Picture from Gallery" translationStatus="7" />
   <Label id="ReviewPicture" text="Review Pictures" translationStatus="7" />
+  <!-- Group Title for Operating Hours list -->
+  <Label id="LoTimeSlot_TitlePrefix" text="Deviation to current time: " translationStatus="7" />
+  <Label id="LoTimeSlot_GroupTextPostfix" text=" hrs" translationStatus="7" />
+  <Label id="Yes" text="Yes" translationStatus="7" />
+  <Label id="No" text="No" translationStatus="7" />
+  <!-- Driver Cockpit - Tour Schedule Card -->
+  <Label id="DriverCockpit_TourSceduleCard_LinkAllTours_Prefix" text="View all" translationStatus="7" />
+  <Label id="CardTourStart_VehicleDetails" text="Review vehicle details" translationStatus="7" />
+  <Label id="CardTourStart_CheckoutInventory" text="Check out products" translationStatus="7" />
+  <Label id="CardTourStart_PendingStartActivities" text="Complete all mandatory activities and try again." translationStatus="7" />
+  <Label id="CardTourStart_CompletedStartActivities" text="Activities for the start tour were completed." translationStatus="7" />
+  <Label id="MessageBox_Heading_Error" text="Activities not completed" translationStatus="7" />
+  <Label id="MessageBox_Heading_Success" text="Activities completed" translationStatus="7" />
+  <Label id="CardTourStart_ActivitiesCompleted" text="Activities Completed" translationStatus="7" />
+  <Label id="CardTourVisit_Start" text="Start" translationStatus="7" />
+  <Label id="CardTourVisit_Open" text="Open" translationStatus="7" />
+  <Label id="CardTourEnd_CheckinInventory" text="Check in products" translationStatus="1"/>
+  <Label id="CardTourEnd_Heading_Error" text="Your attention please" translationStatus="1"/>
+  <Label id="CardTourEnd_PendingVisits" text="Complete all tour visits to enable end tour activities and try again." translationStatus="1"/>
+  <!-- Delivery Cockpit - Visit Summary Card-->
+  <Label id="Visit_Summary_Status_Prefix" text="Status:" translationStatus="7"/>
+  <Label id="Visit_Summary_Planned_Date_Prefix" text="Planned Date:" translationStatus="7"/>
+  <Label id="Visit_Summary_Actual_Date_Prefix" text="Actual Date:" translationStatus="7"/>
+  <Label id="Visit_Summary_Planned_Time_Prefix" text="Planned Time:" translationStatus="7"/>
+  <Label id="Visit_Summary_Actual_Time_Prefix" text="Actual Time:" translationStatus="7"/>
+  <Label id="Visit_Summary_Duration_Prefix" text="Duration:" translationStatus="7"/>
+  <Label id="Visit_Summary_Actual_Duration_Prefix" text="Actual Duration:" translationStatus="7"/>
+  <Label id="Visit_Summary_Duration_Minutes_Suffix" text="min" translationStatus="7"/>
 </Global>

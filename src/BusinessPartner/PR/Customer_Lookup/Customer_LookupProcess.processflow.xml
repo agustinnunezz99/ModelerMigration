@@ -45,7 +45,7 @@
         </Parameters>
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Customer::Lookup</UIDescription>
         <Events>
           <Event name="itemSelected" action="End" />

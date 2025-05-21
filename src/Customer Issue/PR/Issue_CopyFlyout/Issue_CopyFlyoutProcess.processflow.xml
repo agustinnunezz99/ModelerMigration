@@ -34,7 +34,7 @@
         <CaseEmpty action="ShowView" />
         <CaseElse action="GetCustomerAndCopyIssue" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Issue::CopyFlyoutUI</UIDescription>
         <Events>
           <Event name="CustomerLookup" action="OpenCustomerNameLookup" />

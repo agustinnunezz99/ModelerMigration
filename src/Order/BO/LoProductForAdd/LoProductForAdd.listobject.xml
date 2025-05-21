@@ -1,4 +1,4 @@
-<ListObject name="LoProductForAdd" filter="InDatabase" generateLoadMethod="false" xmlns="BoSchema.xsd">
+<ListObject name="LoProductForAdd" filter="InDatabase" generateLoadMethod="false" >
   <DataSource name="DsLoProductForAdd" />
   <Item objectClass="LiProductForAdd" />
   <Methods>
@@ -23,6 +23,17 @@
         <AdvancedSearchAttribute label="ProductForSearch_eAN" property="eAN" type="Text" />
         <AdvancedSearchAttribute label="ProductForSearch_prdType" property="prdType" toggleId="PrdType" type="Selection" />
         <AdvancedSearchAttribute label="ProductForSearch_foreignProduct" property="foreignProduct" type="Boolean" defaultValue="0" defaultOperator="EQ" />
+      </AdvancedSearchAttributes>
+    </AdvancedSearchObject>
+    <AdvancedSearchObject name="AsoProductForAddDSD">
+      <AdvancedSearchAttributes profileId="default">
+        <AdvancedSearchAttribute label="ProductForSearch_prdId" property="prdId" type="Text" />
+        <AdvancedSearchAttribute label="ProductForSearch_text1" property="text1" type="Text" />
+        <AdvancedSearchAttribute label="ProductForSearch_category" property="category" toggleId="PrdCategory" type="Selection" />
+        <AdvancedSearchAttribute label="ProductForSearch_eAN" property="eAN" type="Text" />
+        <AdvancedSearchAttribute label="ProductForSearch_prdType" property="prdType" toggleId="PrdType" type="Selection" />
+        <AdvancedSearchAttribute label="ProductForSearch_foreignProduct" property="foreignProduct" type="Boolean" defaultValue="0" defaultOperator="EQ" />
+        <AdvancedSearchAttribute label="ProductForSearch_isAvailableInventory" property="isAvailableInventory" type="Boolean" defaultValue="0" defaultOperator="EQ" />
       </AdvancedSearchAttributes>
     </AdvancedSearchObject>
   </AdvancedSearchObjects>

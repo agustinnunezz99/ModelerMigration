@@ -19,7 +19,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>TourManagement::FlyoutSelectCoDriverUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="AssignUserId" />

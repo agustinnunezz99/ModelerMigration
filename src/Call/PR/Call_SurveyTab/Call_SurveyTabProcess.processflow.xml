@@ -67,7 +67,7 @@
         </Parameters>
         <TransitionTo action="ShowSurvey" />
       </Action>
-      <Action actionType="View" name="ShowSurvey">
+      <Action actionType="VIEW" name="ShowSurvey">
         <UIDescription>Call::SurveyTabUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="GetSurveysForProduct_Decision" />
@@ -186,6 +186,7 @@
       </Action>
       <Action name="GetSurveysForProduct_Decision" actionType="DECISION" parameter="ProcessContext::MainBO.clbStatus">
         <Case value="Planned" action="GetSurveysForProduct" />
+        <Case value="InProgress" action="GetSurveysForProduct" />
         <CaseElse action="GetSurveysForProductExisting" />
       </Action>
       <Action name="GetSurveysForProductExisting" actionType="LOGIC" call="ProcessContext::MainBO.boJobManager.getSurveysExisting">
@@ -250,6 +251,7 @@
       </Action>
       <Action name="GetJobProducts_Decision" actionType="DECISION" parameter="ProcessContext::MainBO.clbStatus">
         <Case value="Planned" action="GetProductSurveyMatrix" />
+        <Case value="InProgress" action="GetProductSurveyMatrix" />
         <CaseElse action="GetProductSurveyExistingMatrix" />
       </Action>
       <Action name="nextProductAction" actionType="LOGIC" call="ProcessContext::MainBO.boJobManager.setNextProduct">

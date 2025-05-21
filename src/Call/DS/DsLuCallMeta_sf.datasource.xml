@@ -7,6 +7,7 @@
     <Attribute name="cancelReasonRequired" table="Visit_Template__c" column="Cancel_Reason_Required__c" />
     <Attribute name="locCaptureDuringCancel" table="Visit_Template__c" column="Loc_Capture_During_Cancel__c" />
     <Attribute name="locCaptureDuringComplete" table="Visit_Template__c" column="Loc_Capture_During_Complete__c" />
+    <Attribute name="locCaptureDuringStart" table="Visit_Template__c" column="Loc_Capture_At_Start__c" />
     <Attribute name="captureProceedingTime" table="Visit_Template__c" column="Capture_Proceeding_Time__c" />
     <Attribute name="defaultDuration" table="Visit_Template__c" column="Default_Duration__c" />
     <Attribute name="text" table="Visit_Template__c" column="Description_#Language#__c" />
@@ -23,13 +24,12 @@
     <Attribute name="deviationThreshold" table="Visit_Template__c" column="Derivation_Threshold__c" />
     <Attribute name="maxPictures" table="Visit_Template__c" column="Max_Pictures__c" />
     <Attribute name="mobilityUserGuidance" table="Visit_Template__c" column="Mobility_User_Guidance__c" />
-    <!--Edu: FMG-95 y FMG-96: Previstos u Otras actividades-->
-    <Attribute name="feStartMor" table="Visit_Template__c" column="cgf_StartTimeInTheMorning__c" />
-    <Attribute name="feEndMor" table="Visit_Template__c" column="cgf_EndTimeInTheMorning__c" />
-    <Attribute name="feStartAft" table="Visit_Template__c" column="cgf_StartTimeInTheAfternoon__c" />
-    <Attribute name="feEndAft" table="Visit_Template__c" column="cgf_EndTimeInTheAfternoon__c" />
-    <!--Edu: FMG-95 y FMG-96: Previstos u Otras actividades-->
     <DerivedAttribute name="usrTimeEntryMetaPKey" value="' '" />
+    <Attribute name="isStartVisitRqrToCheckIn" table="Visit_Template__c" column="Is_Start_Visit_Rqr_To_Check_In__c" />
+    <Attribute name="doesShowReadOnlyVisitInfo" table="Visit_Template__c" column="Does_Show_Read_Only_Visit_Info__c" />
+    <Attribute name="limitToOneVisitInProgress" table="Visit_Template__c" column="Limit_To_One_Visit_In_Progress__c" />
+    <Attribute name="cmplVstGeolcValidation" table="Visit_Template__c" column="Cmpl_Vst_Geolc_Validation__c" />
+    <Attribute name="startVstGeolcValidation" table="Visit_Template__c" column="Start_Vst_Geolc_Validation__c" />
   </Attributes>
   <Entities>
     <Entity name="Visit_Template__c" alias="" idAttribute="Id" />

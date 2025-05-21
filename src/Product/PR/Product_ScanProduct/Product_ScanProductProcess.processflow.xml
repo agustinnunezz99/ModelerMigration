@@ -110,7 +110,7 @@
           <Case value="Ok" action="End" />
         </Cases>
       </Action>
-      <Action actionType="View" name="ShowScannedProductsFlyout">
+      <Action actionType="VIEW" name="ShowScannedProductsFlyout">
         <UIDescription>Product::ScanProductUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndItemSelected" />

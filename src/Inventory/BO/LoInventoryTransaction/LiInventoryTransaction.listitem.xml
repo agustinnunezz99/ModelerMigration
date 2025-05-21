@@ -1,4 +1,4 @@
-<ListItem name="LiInventoryTransaction" xmlns="BoSchema.xsd">
+<ListItem name="LiInventoryTransaction" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="amount" type="DomDecimal" storable="true" dataSourceProperty="amount" />

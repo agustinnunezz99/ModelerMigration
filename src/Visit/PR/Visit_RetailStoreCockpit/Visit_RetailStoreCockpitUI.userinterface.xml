@@ -1,4 +1,4 @@
-<UIDescription name="Visit::RetailStoreCockpitUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="Visit::RetailStoreCockpitUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionPage">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="StoreCockpit" />
@@ -304,7 +304,7 @@
             </ImageButton>
           </ActionBar>
           <CockpitList name="OrderHistory" hasBorder="false" dataSource="ProcessContext::CardOrderHistory_OrderList.Items[]">
-            <Items name="Items" itemPattern="CardOrderHistoryItems">
+            <Items name="Items" itemPattern="RetailStoreCardOrderHistoryItems">
               <ItemListLayout>
                 <Default>
                   <Col width="1em" height="1.6em" layoutType="Image" bindingId="OrderPhaseImage" />

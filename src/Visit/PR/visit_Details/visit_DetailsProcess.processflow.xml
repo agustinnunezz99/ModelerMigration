@@ -26,16 +26,16 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="showVisitDetails">
+      <Action actionType="VIEW" name="showVisitDetails">
         <UIDescription>Visit::DetailsUI</UIDescription>
       </Action>
-      <Action actionType="View" name="ShowDetail">
+      <Action actionType="VIEW" name="ShowDetail">
         <UIDescription>Visit::DetailsUI</UIDescription>
         <Events>
           <Event name="editVisit" action="showRetailOverview" />
         </Events>
       </Action>
-      <Action actionType="View" name="showRetailOverview">
+      <Action actionType="VIEW" name="showRetailOverview">
         <UIDescription>Visit::RetailStoreCockpitUI</UIDescription>
       </Action>
     </Actions>

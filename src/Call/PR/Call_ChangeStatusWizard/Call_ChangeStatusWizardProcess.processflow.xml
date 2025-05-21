@@ -45,6 +45,7 @@
       <!-- Complete Call -->
       <Action name="CompleteAllowedDecision" actionType="DECISION" parameter="ProcessContext::CallBo.clbStatus">
         <Case value="Planned" action="GetNonDeliverySalesDocOnComplete_Decision" />
+        <Case value="InProgress" action="GetNonDeliverySalesDocOnComplete_Decision" />
         <CaseElse action="endWithoutRefresh" />
       </Action>
       <Action name="GetNonDeliverySalesDocOnComplete_Decision" actionType="DECISION" parameter="ApplicationContext::currentTourStatus">
@@ -88,8 +89,16 @@
         <TransitionTo action="CompleteCallViaVisitsCard_Decision" />
       </Action>
       <Action name="CompleteCallViaVisitsCard_Decision" actionType="DECISION" parameter="ProcessContext::CardVisits_IsCallComplete">
-        <Case value="1" action="ValidateBeforeComplete" />
+        <Case value="1" action="ValidateLocationBeforeComplete" />
         <CaseElse action="ValidateBeforeExit" />
+      </Action>
+      <Action actionType="LOGIC" name="ValidateLocationBeforeComplete" call="ProcessContext::CallBo.validGeoLocationVisit">
+        <Return name="ProcessContext::ValidationLocationResult" />
+        <TransitionTo action="ValidateLocationBeforeComplete_Decision" />
+      </Action>
+      <Action name="ValidateLocationBeforeComplete_Decision" actionType="DECISION" parameter="ProcessContext::ValidationLocationResult">
+        <Case value="valid" action="ValidateBeforeComplete" />
+        <CaseElse action="ValidateBeforeComplete_ResetStatus" />
       </Action>
       <Action actionType="LOGIC" name="ValidateBeforeComplete" call="ProcessContext::CallBo.validateMandatoryQuestions">
         <Return name="ProcessContext::ValidationResult" />
@@ -118,6 +127,7 @@
       <!-- Cancel Call -->
       <Action name="CancelAllowedDecision" actionType="DECISION" parameter="ProcessContext::CallBo.clbStatus">
         <Case value="Planned" action="GetNonDeliverySalesDoc_Decision" />
+        <Case value="InProgress" action="GetNonDeliverySalesDoc_Decision" />
         <CaseElse action="endWithoutRefresh" />
       </Action>
       <Action name="GetNonDeliverySalesDoc_Decision" actionType="DECISION" parameter="ApplicationContext::currentTourStatus">
@@ -157,7 +167,7 @@
         <Return name="ProcessContext::CancelReasonList" />
         <TransitionTo action="ShowCancelReasons" />
       </Action>
-      <Action actionType="View" name="ShowCancelReasons">
+      <Action actionType="VIEW" name="ShowCancelReasons">
         <UIDescription>Call::CancelWizardUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="SetCancelReasonCode" />

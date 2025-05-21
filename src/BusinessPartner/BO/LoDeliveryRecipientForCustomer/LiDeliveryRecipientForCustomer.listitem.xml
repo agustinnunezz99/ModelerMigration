@@ -1,4 +1,4 @@
-<ListItem name="LiDeliveryRecipientForCustomer" xmlns="BoSchema.xsd">
+<ListItem name="LiDeliveryRecipientForCustomer" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="salesOrg" type="DomSalesOrg" storable="false" dataSourceProperty="salesOrg" />

@@ -1,4 +1,4 @@
-<ListObject name="LoBpaUsrCallSettings" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoBpaUsrCallSettings" generateLoadMethod="true" >
   <DataSource name="DsLoBpaUsrCallSettings" />
   <Item objectClass="LiBpaUsrCallSetting" />
   <Methods>

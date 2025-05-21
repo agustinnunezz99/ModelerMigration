@@ -1,4 +1,4 @@
-<ListItem name="LiLogisticUnit" xmlns="BoSchema.xsd">
+<ListItem name="LiLogisticUnit" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="unitType" type="DomPrdLogisticUnit" dataSourceProperty="unitType" />

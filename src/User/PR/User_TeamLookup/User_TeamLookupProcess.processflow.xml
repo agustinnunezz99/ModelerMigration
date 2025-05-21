@@ -32,7 +32,7 @@
         <Return name="ProcessContext::TeamUserList" />
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>User::TeamLookupUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="End" />

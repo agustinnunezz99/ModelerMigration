@@ -27,7 +27,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::SetItemTypeUI</UIDescription>
         <Events>
           <Event name="itemMetaLookup" action="SetActiveFilterBeforeOrderMetaLookup" />

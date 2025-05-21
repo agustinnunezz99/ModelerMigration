@@ -29,7 +29,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::AddProductWizardUI</UIDescription>
         <Events>
           <Event name="productLookup" action="OpenProductLookup" />

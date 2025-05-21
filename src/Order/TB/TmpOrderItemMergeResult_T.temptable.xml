@@ -1,6 +1,7 @@
 <TempTable name="TmpOrderItemMergeResult_T" schemaVersion="">
   <columns>
     <column name="PrdMainPKey" defaultValue="" nullable="true" domain="DomPKey" migrationDefault=" " />
+    <column name="IsAvailableInventory" defaultValue="" nullable="true" domain="DomBool" migrationDefault=" " />
     <column name="Listed" defaultValue="0" nullable="true" domain="DomBool" migrationDefault=" " />
     <column name="Listing" defaultValue="'None'" nullable="true" domain="DomSdoPdaListingFinding" migrationDefault=" " />
     <column name="ListingWithModules" defaultValue="'None'" nullable="true" domain="DomSdoPdaListingFinding" migrationDefault=" " />

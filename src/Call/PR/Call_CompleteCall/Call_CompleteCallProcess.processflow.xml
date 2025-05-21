@@ -51,6 +51,7 @@
         <Case value="0" action="UpdateCssBLProcessingScheduleTable" />
         <Case value="1" action="CallHasOpenDeliveriesConfirmation" />
         <Case value="2" action="CallHasOpenOrdersConfirmation" />
+        <Case value="3" action="CallHasOpenOrdersConfirmationTourUser" />
         <CaseElse action="EndNotComplete" />
       </Action>
       <Action actionType="CONFIRM" confirmType="Ok" name="CallHasOpenDeliveriesConfirmation">
@@ -66,6 +67,12 @@
           <Case value="No" action="EndNotComplete" />
         </Cases>
       </Action>
+      <Action actionType="CONFIRM" name="CallHasOpenOrdersConfirmationTourUser" confirmType="Ok">
+        <Message messageId="CasClbCompleteHasOpenOrdersTourUser" />
+        <Cases>
+          <Case value="Ok" action="EndNotComplete" />
+        </Cases>
+      </Action>
       <Action name="UpdateCssBLProcessingScheduleTable" actionType="LOGIC" call="ProcessContext::MainBO.updateCssBLProcessingSchedule">
         <Parameters>
           <Input name="callPKey" value="ProcessContext::MainBO.pKey" />
@@ -76,11 +83,25 @@
         <Return name="ProcessContext::SaveClbStatus" />
         <TransitionTo action="SetClbStatusToComplete" />
       </Action>
-      <Action actionType="Logic" name="SetClbStatusToComplete" call="ProcessContext::MainBO.setClbStatus">
+      <Action actionType="LOGIC" name="SetClbStatusToComplete" call="ProcessContext::MainBO.setClbStatus">
         <Parameters>
           <Input name="clbStatus" value="Completed" type="Literal" />
         </Parameters>
-        <TransitionTo action="ValidateBeforeComplete" />
+        <TransitionTo action="ValidateLocationBeforeComplete" />
+      </Action>
+      <Action actionType="LOGIC" name="ValidateLocationBeforeComplete" call="ProcessContext::MainBO.validGeoLocationVisit">
+        <Return name="ProcessContext::ValidationLocationResult" />
+        <TransitionTo action="ValidateLocationBeforeComplete_Decision" />
+      </Action>
+      <Action name="ValidateLocationBeforeComplete_Decision" actionType="DECISION" parameter="ProcessContext::ValidationLocationResult">
+        <Case value="valid" action="ValidateBeforeComplete" />
+        <CaseElse action="ValidateLocationBeforeComplete_ResetStatus" />
+      </Action>
+      <Action actionType="LOGIC" name="ValidateLocationBeforeComplete_ResetStatus" call="ProcessContext::MainBO.setClbStatus">
+        <Parameters>
+          <Input name="targetClbStatus" value="ProcessContext::SaveClbStatus" />
+        </Parameters>
+        <TransitionTo action="EndNotComplete" />                
       </Action>    
       <Action actionType="LOGIC" name="ValidateBeforeComplete" call="ProcessContext::MainBO.validateMandatoryQuestions">
         <Return name="ProcessContext::ValidationResult" />

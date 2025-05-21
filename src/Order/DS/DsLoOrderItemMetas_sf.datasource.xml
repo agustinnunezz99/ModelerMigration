@@ -30,9 +30,9 @@
     <Attribute name="uoMScanBehavior" table="Order_Item_Template__c" column="UoM_Scan_Behavior__c" />
     <Attribute name="uoMScanDefaultUnit" table="Order_Item_Template__c" column="UoM_Scan_Default_Unit__c" />
     <Attribute name="movementDirection" table="Order_Item_Template__c" column="Movement_Direction__c" />
+    <Attribute name="modReasonRequired" table="Order_Item_Template__c" column="Modification_Reason__c" />
     <Attribute name="validFrom" table="Order_Item_Order_Template_Association__c" column="Valid_From__c" />
     <Attribute name="validThru" table="Order_Item_Order_Template_Association__c" column="Valid_Thru__c" />
-    <DerivedAttribute name="modReasonRequired" value="''" />
   </Attributes>
   <Entities>
     <Entity name="Order_Item_Template__c" alias="" idAttribute="Id" />

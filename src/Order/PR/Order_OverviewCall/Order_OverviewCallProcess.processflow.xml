@@ -10,15 +10,22 @@
         <Declaration name="ContextMenuList" type="LoOrderOverviewContextMenu" />
         <Declaration name="CopyOrder" type="BoOrder" />
         <Declaration name="IsValidOrder" type="DomBool" />
+        <Declaration name="isReadOnly" type="DomBool" />
       </Declarations>
       <Parameters>
         <Input name="CallCustomerPKey" type="DomPKey" />
         <Input name="CallPKey" type="DomPKey" />
         <Input name="CallOutOfStockProducts" type="String" />
+        <Input name="UIPosition" type="String" />
         <Input name="MainBO" type="BoCall" />
+        <Input name="DocumentType" type="String" />
       </Parameters>
     </ProcessContext>
-    <EntryActions></EntryActions>
+    <EntryActions>
+      <Action name="IsVisitReadOnly" actionType="LOGIC" call="ProcessContext::MainBO.isReadOnly">
+        <Return name="ProcessContext::isReadOnly" />
+      </Action>
+    </EntryActions>
   </Entry>
   <Body>
     <Actions>
@@ -27,6 +34,7 @@
           <Input name="CallCustomerPKey" value="ProcessContext::CallCustomerPKey" />
           <Input name="UIPosition" value="ProcessContext::UIPosition" />
           <Input name="CallPKey" value="ProcessContext::CallPKey" />
+          <Input name="documentType" value="ProcessContext::DocumentType" />
         </Parameters>
         <Return name="ProcessContext::OverviewList" />
         <TransitionTo action="OrderHistory_LoadOrderPaymentDetails" />
@@ -66,6 +74,8 @@
           <Input name="responsiblePKey" value="Event.responsiblePKey" />
           <Input name="pKey" value="Event.pKey" />
           <Input name="syncStatus" value="Event.syncStatus" />
+          <Input name="clbStatus" value="ProcessContext::MainBO.clbStatus" /> 
+          <Input name="isVisitReadOnly" value="ProcessContext::isReadOnly" />
         </Parameters>
         <Return name="ProcessContext::ContextMenuList" />
       </Action>

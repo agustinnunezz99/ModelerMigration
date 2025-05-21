@@ -1,4 +1,4 @@
-<UIDescription name="SalesFolder::SalesFolderCallCustomerTabUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="SalesFolder::SalesFolderCallCustomerTabUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionPage">
     <PageHeader titleBinding="ProcessContext::CurrentCustomerName">
       <MenuItems>

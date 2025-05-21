@@ -1,19 +1,12 @@
-<BusinessObject name="BoWizardCreateNewCall" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="false">
+<BusinessObject name="BoWizardCreateNewCall"  generateLoadMethod="true" generateCreateMethod="false">
   <DataSource name="DsBoWizardCreateNewCall" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="dateFrom" type="DomDate" dataSourceProperty="dateFrom" />
     <SimpleProperty name="timeFrom" type="DomTime" dataSourceProperty="timeFrom" />
     <SimpleProperty name="allDay" type="DomBool" dataSourceProperty="allDay" />
-    <!--Edu: FMG-95 y FMG-96: Previstos u Otras actividades-->
-    <SimpleProperty name="fraccion" type="DomFraccionVisit" dataSourceProperty="fraccion" />
-    <SimpleProperty name="taskVisit" type="DomTaskVisit" dataSourceProperty="taskVisit" />
-    <SimpleProperty name="actividades" type="DomActividadesVisit" dataSourceProperty="actividades" />
-    <!--Fin Edu: FMG-95 y FMG-96: Previstos u Otras actividades-->
     <SimpleProperty name="callMetaPKey" type="DomPKey" dataSourceProperty="callMetaPKey" />
     <SimpleProperty name="customerPKey" type="DomPKey" dataSourceProperty="customerPKey" />
-    <!--Edu: INI new lookup-->
-    <!--Edu: FIN new lookup-->
     <SimpleProperty name="hasSubstitute" type="DomBool" dataSourceProperty="hasSubstitute" />
     <SimpleProperty name="substitutedUsrPKey" type="DomPKey" dataSourceProperty="substitutedUsrPKey" />
     <SimpleProperty name="subValidFrom" type="DomDate" dataSourceProperty="subValidFrom" />
@@ -26,69 +19,24 @@
     <SimpleProperty name="responsiblePKey" type="DomPKey" dataSourceProperty="responsiblePKey" />
     <SimpleProperty name="managementRelationValidFrom" type="DomDate" dataSourceProperty="managementRelationValidFrom" />
     <SimpleProperty name="managementRelationValidThru" type="DomValidThru" dataSourceProperty="managementRelationValidThru" />
-    <!--Definir las 2 variables pkey y name de la cartera-->
-    <!--Edu: INI new lookup cartera-->
-    <SimpleProperty name="briefcasePKey" type="DomPKey" storable="false" dataSourceProperty="briefcasePKey" />
-    <SimpleProperty name="briefcaseName" type="DomPKey" storable="false" dataSourceProperty="briefcaseName" />
-    <SimpleProperty name="accountId" type="DomPKey" storable="false" dataSourceProperty="accountId" />
-    <SimpleProperty name="cgfTarea" type="DomText" storable="false" dataSourceProperty="cgfTarea" />
-    <SimpleProperty name="recordType" type="DomPKey" storable="false" dataSourceProperty="recordType" />
-    <SimpleProperty name="retailStoreId" type="DomPKey" storable="false" dataSourceProperty="retailStoreId" />
-    <!--Edu: FIN new lookup cartera-->
-    <!--Edu: id record type: Otras Activdades-->
-    <SimpleProperty name="recordTypeNamePKey" type="DomPKey" dataSourceProperty="recordTypeNamePKey" />
-    <!--Edu:Variables a retornar en la busqueda del lookup de recordType-->
-    <SimpleProperty name="pKeyRecordType" type="DomPKey" dataSourceProperty="pKeyRecordType" />
-    <SimpleProperty name="namePKey" type="DomBpaName" dataSourceProperty="namePKey" />
-    <SimpleProperty name="devName" type="DomBpaName" dataSourceProperty="devName" />
-    <!--Edu: Ini new lookup para instituciones-->
-    <SimpleProperty name="institutionPKey" type="DomPKey" storable="false" dataSourceProperty="institutionPKey" />
-    <SimpleProperty name="institutionName" type="DomBpaName" storable="false" dataSourceProperty="institutionName" />
-    <!--Edu: Fin new lookup para instituciones-->
-    <!--Edu: Creación de los campos tipo de visita y turno-->
-    <SimpleProperty name="typeVisit" type="DomTypeVisit" dataSourceProperty="typeVisit" />
-    <SimpleProperty name="shiftVisit" type="DomShiftVisit" dataSourceProperty="shiftVisit" />
   </SimpleProperties>
   <ObjectLookups>
     <ObjectLookup name="customerLookup" objectClass="LuCustomer" dataSourceProperty="customerPKey" lookupProperty="pKey" loadMode="LoadImmediate" />
     <ObjectLookup name="callMetaLookup" objectClass="LuCallMeta" dataSourceProperty="callMetaPKey" lookupProperty="pKey" loadMode="LoadImmediate" />
     <ObjectLookup name="jobListLookup" objectClass="LuJobList" dataSourceProperty="jobListPKey" lookupProperty="pKey" loadMode="LoadImmediate" />
-    <!--Edu: INI new lookup cartera-->
-    <ObjectLookup name="briefcaseLookup" objectClass="LuMyBriefcase" dataSourceProperty="briefcasePKey" lookupProperty="pKey" loadMode="LoadImmediate" />
-    <!--Edu: FIN new lookup cartera-->
-    <!--Edu: recordType de Otras Actividades-->
-    <ObjectLookup name="recordTypeLookup" objectClass="LuMyRecordType" dataSourceProperty="recordTypeNamePKey" lookupProperty="pKey" loadMode="LoadImmediate" />
-    <!--Edu: Ini new lookup para instituciones-->
-    <ObjectLookup name="institutionLookup" objectClass="LuMyInstitutionLookup" dataSourceProperty="institutionPKey" lookupProperty="pKey" loadMode="LoadImmediate" />
-    <!--Edu: Fin new lookup para instituciones-->
   </ObjectLookups>
   <Methods>
     <Method name="createAsync" />
     <Method name="loadCallMetaLookup" />
     <Method name="loadCustomerLookup" />
-    <!--Edu: Ini - Nueva acción e carga del recordType para Otras Actividades-->
-    <Method name="myLoadRecordTypeLookup" />
-    <!--Edu: Fin - Nueva acción e carga del recordType para Otras Actividades-->
     <Method name="reloadManagementInformation" />
     <Method name="setEARights" />
-    <!--Edu: Otras actividades y previstos - replace metodo setEARights-->
-    <Method name="replaceSetEARights" />
-    <!--Edu: Otras actividades y previstos - replace metodo setEARights-->    
-    <Method name="updateTimeAllDay" />
-    <Method name="mycustomerVisibility" />
-    <Method name="myLoadRecordType" />
-    <Method name="myLoadRecordTypeLookup" />
+    <Method name="updateTimeAllDay"/>
   </Methods>
   <Validations>
     <Validation name="validateNotEmpty" />
-    <!--Ruben: Otras actividades y previstos - remplaza el metodo validateNotEmpty-->
-    <Validation name="replaceValidateNotEmpty" />
-    <!--Ruben: Otras actividades y previstos - remplaza el metodo validateNotEmpty-->
     <Validation name="validateSub" />
     <Validation name="validateTime" />
-    <!--Edu: Otras actividades y previstos - remplaza el metodo validateTime-->
-    <Validation name="replaceValidateTime" />
-    <!--Edu: Fin Otras actividades y previstos-->
     <Validation name="validateCustomer" />
   </Validations>
 </BusinessObject>

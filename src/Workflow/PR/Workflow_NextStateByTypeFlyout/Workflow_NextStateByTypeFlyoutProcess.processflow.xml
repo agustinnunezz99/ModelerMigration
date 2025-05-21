@@ -40,7 +40,7 @@
         <Case value="1" action="GetNextStatePKey" />
         <CaseElse action="ShowView" />
       </Action>
-      <Action name="ShowView" actionType="View">
+      <Action name="ShowView" actionType="VIEW">
         <UIDescription>Workflow::NextStatesFlyoutUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="AssignNextStatePKey" />

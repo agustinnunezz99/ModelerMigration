@@ -20,7 +20,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::MetaLookupUI</UIDescription>
         <Events>
           <Event name="TemplateItemSelected" action="EndWithReturnValues" />

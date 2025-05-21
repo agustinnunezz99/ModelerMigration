@@ -1,8 +1,9 @@
-<BusinessObject name="BoCustomer" xmlns="BoSchema.xsd" generateLoadMethod="false" generateCreateMethod="false" OERReference="BpaCustomer">
+<BusinessObject name="BoCustomer"  generateLoadMethod="false" generateCreateMethod="false" OERReference="BpaCustomer">
   <DataSource name="DsBoCustomer" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="name" type="DomBpaName" storable="true" dataSourceProperty="name" />
+    <SimpleProperty name="billingAddress" type="DomString" storable="true" dataSourceProperty="billingAddress" />
     <SimpleProperty name="name2" type="DomBpaName" storable="true" dataSourceProperty="name2" />
     <SimpleProperty name="matchcode" type="DomBpaName" storable="true" dataSourceProperty="matchcode" />
     <SimpleProperty name="customerId" type="DomId" storable="true" dataSourceProperty="customerId" />
@@ -18,9 +19,6 @@
     <SimpleProperty name="state" type="DomBpaState" storable="true" dataSourceProperty="state" />
     <SimpleProperty name="bpaMetaPKey" type="DomPKey" storable="true" dataSourceProperty="bpaMetaPKey" />
     <SimpleProperty name="dateClosure" type="DomDate" storable="true" dataSourceProperty="dateClosure" />
-    <SimpleProperty name="stWrap" type="DomString" storable="false" dataSourceProperty="stWrap" />
-    <SimpleProperty name="stSyncStatus" type="DomString" storable="false" dataSourceProperty="stSyncStatus" />
-    <SimpleProperty name="msjError" type="DomString" storable="false" dataSourceProperty="msjError" />
     <SimpleProperty name="deleted" type="DomBool" storable="false" dataSourceProperty="deleted" />
     <SimpleProperty name="totalDebit" type="DomString" dataSourceProperty="totalDebit" />
     <SimpleProperty name="totalCredit" type="DomString" dataSourceProperty="totalCredit" />
@@ -32,50 +30,10 @@
     <SimpleProperty name="accountOi" type="DomBool" storable="true" id="false" dataSourceProperty="accountOi" />
     <SimpleProperty name="operatingHoursId" type="DomPKey" dataSourceProperty="operatingHoursId" />
     <SimpleProperty name="emailEditable" type="DomBool" storable="false" dataSourceProperty="emailEditable" />
-    <!--Ini: Nuevos campos -->
-    <SimpleProperty name="cuit" type="DomCuit" storable="true" dataSourceProperty="cuit" />
-    <SimpleProperty name="farmanet" type="DomFarma" storable="true" dataSourceProperty="farmanet" />
-    <!--Campos del profesional de Salud-->
-    <SimpleProperty name="dni" type="DomDni" storable="true" dataSourceProperty="dni" />
-    <SimpleProperty name="phone2" type="DomDial" storable="true" dataSourceProperty="phone2" />
-    <SimpleProperty name="birthdate" type="DomDate" storable="true" dataSourceProperty="birthdate" />
-    <SimpleProperty name="email2" type="DomEmail" storable="true" dataSourceProperty="email2" />
-    <SimpleProperty name="residente" type="DomBool" storable="true" dataSourceProperty="residente" />
-    <SimpleProperty name="epc" type="DomBool" storable="true" dataSourceProperty="epc" />
-    <SimpleProperty name="obrasSociales" type="DomAccObrasSoc" storable="true" dataSourceProperty="obrasSociales" />
-    <SimpleProperty name="tipoDoc" type="DomTipoDoc" storable="true" dataSourceProperty="tipoDoc" />
-    <SimpleProperty name="gender" type="DomAccGender" storable="true" dataSourceProperty="gender" />
-    <SimpleProperty name="matNacAcc" type="DomMatNacAcc" storable="true" dataSourceProperty="matNacAcc" />
-    <SimpleProperty name="name1" type="DomBpaName" storable="true" dataSourceProperty="name1" />
-    <!--Fin Campos del profesional de Salud-->
-    <!--Campos Farmacias-->
-    <SimpleProperty name="razonSocial" type="DomBusName" storable="true" dataSourceProperty="razonSocial" />
-    <SimpleProperty name="webSite" type="DomUrl" storable="true" dataSourceProperty="webSite" />
-    <SimpleProperty name="hierarchyType" type="DomHierarchyType" storable="true" dataSourceProperty="hierarchyType" />
-    <SimpleProperty name="statusAcc" type="DomAccStatus" storable="true" dataSourceProperty="statusAcc" />
-    <SimpleProperty name="grupo" type="DomAccGroup" storable="true" dataSourceProperty="grupo" />
-    <!--Fin Campos Farmacias-->
-    <!--Campos Instituciones-->
-    <SimpleProperty name="tipoInstitucion" type="DomTipoInstitucion" storable="true" dataSourceProperty="tipoInstitucion" />
-    <SimpleProperty name="cpa" type="DomCPA" storable="true" dataSourceProperty="cpa" />
-    <!--Fin Campos Instituciones-->
-    <SimpleProperty name="ownerId" type="DomId" storable="false" dataSourceProperty="ownerId" />
-    <!--Fin: Nuevos campos -->
-    <!-- ini Juanfe -->
-    <SimpleProperty name="RecordTypeDeveloperName" type="DomString" storable="false" dataSourceProperty="recordTypeDeveloperName" />
-    <SimpleProperty name="isContactsTabVisible" type="DomBool" storable="false" dataSourceProperty="isContactsTabVisible" />
-    <SimpleProperty name="isVisitsTabVisible" type="DomBool" storable="false" dataSourceProperty="isVisitsTabVisible" />
-    <SimpleProperty name="isSpecialtiesTabVisible" type="DomBool" storable="false" dataSourceProperty="isSpecialtiesTabVisible" />
-    <SimpleProperty name="isAttachmentsTabVisible" type="DomBool" storable="false" dataSourceProperty="isAttachmentsTabVisible" />
-    <!-- fin Juanfe -->
   </SimpleProperties>
   <ObjectLookups>
     <!-- luCustomerTradeOrg: load immediate -->
     <ObjectLookup name="luCustomerTradeOrg" objectClass="LuCustomerTradeOrg" dataSourceProperty="pKey" lookupProperty="customerPKey" loadMode="LoadImmediate" />
-    <!-- Lookup para codigo postal-->
-    <ObjectLookup name="luMyPostalCode" objectClass="LuMyPostalCode" dataSourceProperty="pKey" lookupProperty="customerPKey" loadMode="LoadImmediate" />
-    <!-- Lookup para cuenta padre-->
-    <ObjectLookup name="luMyParentAccount" objectClass="LuMyParentAccount" dataSourceProperty="pKey" lookupProperty="customerPKey" loadMode="LoadImmediate" />
   </ObjectLookups>
   <NestedObjects>
     <NestedObject name="boBpaMeta" objectClass="BoBpaMeta" dataSourceProperty="bpaMetaPKey" nestingProperty="pKey" loadMode="LoadImmediate" />
@@ -87,6 +45,7 @@
     <NestedObject name="boPayerRole" objectClass="BoPayerRole" dataSourceProperty="pKey" nestingProperty="customerPKey" loadMode="OnDemand" />
     <NestedObject name="boDeliveryRole" objectClass="BoDeliveryRole" dataSourceProperty="pKey" nestingProperty="customerPKey" loadMode="OnDemand" />
     <NestedObject name="boStoreRole" objectClass="BoStoreRole" dataSourceProperty="pKey" nestingProperty="customerPKey" loadMode="OnDemand" />
+    <NestedObject name="boOperatingHour" objectClass="BoOperatingHour" dataSourceProperty="operatingHoursId" nestingProperty="pKey" loadMode="OnDemand" />
   </NestedObjects>
   <ListObjects>
     <!-- loCustomerAddress: load immediate -->
@@ -108,11 +67,9 @@
     <ListObject name="loListingModules" objectClass="LoListingModules" dataSourceProperty="pKey" listProperty="customerPKey" loadMode="OnDemand" />
     <ListObject name="loListingClassification" objectClass="LoListingClassification" dataSourceProperty="pKey" listProperty="customerPKey" loadMode="OnDemand" />
     <ListObject name="loOpenHours" objectClass="LoTimeSlot" dataSourceProperty="operatingHoursId" listProperty="operatingHoursId" loadMode="OnDemand" />
-    <ListObject name="loMyCustomerESPRelation" objectClass="LoMyCustomerESPRelation" dataSourceProperty="pKey" listProperty="customerPKey" loadMode="LoadImmediate" />
   </ListObjects>
   <Methods>
     <Method name="loadAsync" />
-    <Method name="postLoadAsync" />
     <Method name="createAsync" />
     <Method name="saveAsync" />
     <Method name="updateGeoCoordinates" />
@@ -142,9 +99,6 @@
     <Method name="selectedListingModule" />
     <Method name="validatePOSDeletion" />
     <Method name="loadLoOpenHoursAsync" />
-    <Method name="myloadLoCustomerESPRelationAsync" />
-    <Method name="replaceSaveAsync" />
-    <Method name="mySetRemoveRights" />
   </Methods>
   <Validations>
     <!--Account Harmonization: obsolete <Validation name="validateCustomerOpeningTime" /> -->

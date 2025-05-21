@@ -1,4 +1,4 @@
-<ListObject name="LoTeamUserOverview" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoTeamUserOverview" generateLoadMethod="true" >
   <DataSource name="DsLoTeamUserOverview" />
   <Item objectClass="LiTeamUserOverview" />
   <Methods>

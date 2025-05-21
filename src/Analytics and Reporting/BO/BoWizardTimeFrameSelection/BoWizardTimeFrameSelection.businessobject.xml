@@ -1,4 +1,4 @@
-<BusinessObject name="BoWizardTimeFrameSelection" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="true">
+<BusinessObject name="BoWizardTimeFrameSelection"  generateLoadMethod="true" generateCreateMethod="true">
   <DataSource name="DsBoWizardTimeFrameSelection" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />

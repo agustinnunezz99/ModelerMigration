@@ -52,13 +52,13 @@
         <CaseElse action="noProducts" />
         <CaseEmpty action="noProducts" />
       </Action>
-      <Action actionType="Logic" name="noProducts" call="ProcessContext::loScannedProduct.validateNoProduct">
+      <Action actionType="LOGIC" name="noProducts" call="ProcessContext::loScannedProduct.validateNoProduct">
         <Parameters>
           <Input name="GTIN" value="ProcessContext::GTIN" />
         </Parameters>
         <TransitionTo action="End" />
       </Action>
-      <Action actionType="View" name="ShowScannedProductsFlyout">
+      <Action actionType="VIEW" name="ShowScannedProductsFlyout">
         <UIDescription>Product::ScanKPIProductUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndItemSelected" />

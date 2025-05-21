@@ -8,5 +8,7 @@
     <Method name="createAsync" />
     <Method name="calculateItemValue" />
     <Method name="calculateHeaderValue" />
+    <Method name="fetchItems"/>
+    <Method name="fetchItemTemplateId"/>
   </Methods>
 </BusinessObjectHelper>

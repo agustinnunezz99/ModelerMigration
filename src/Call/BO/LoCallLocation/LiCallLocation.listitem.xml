@@ -1,4 +1,4 @@
-<ListItem name="LiCallLocation" xmlns="BoSchema.xsd" >
+<ListItem name="LiCallLocation"  >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="logDate" type="DomDateTime" storable="true" dataSourceProperty="logDate" />

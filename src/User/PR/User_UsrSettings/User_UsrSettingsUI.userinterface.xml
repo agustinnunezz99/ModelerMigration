@@ -1,4 +1,4 @@
-<UIDescription name="User::UsrSettingsUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="User::UsrSettingsUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionDialogPage">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Calendar" />
@@ -46,6 +46,24 @@
               <Resource target="Label" type="Label" id="LandingPageId" defaultLabel="Landing Page" />
               <Binding target="DataSource" toggleId="UsrLandingPageMobility" bindingMode="TWO_WAY" />
               <Binding target="Value" binding="ApplicationContext::User.boUserSettings.usrLandingPageMobility" bindingMode="TWO_WAY" />
+            </Bindings>
+            <Items>
+              <Bindings>
+                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+              </Bindings>
+            </Items>
+          </SelectionBox>
+        </GroupElement>
+        <GroupElement name="External Device Settings">
+          <Bindings>
+            <Resource target="Title" type="Label" id="ExternalDeviceSettingsTitle" defaultLabel="External Device Settings" />
+          </Bindings>
+          <SelectionBox name="ExternalDeviceSettingsSelectionBox">
+            <Bindings>
+              <Resource target="Label" type="Label" id="BluetoothDeviceId" defaultLabel="Bluetooth Device" />
+              <Binding target="DataSource" toggleId="BluetoothDevice" bindingMode="TWO_WAY" />
+              <Binding target="Value" binding="ApplicationContext::User.boUserSettings.mobileBluetoothDevice" bindingMode="TWO_WAY" />
             </Bindings>
             <Items>
               <Bindings>

@@ -9,7 +9,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowMessage">
+      <Action actionType="VIEW" name="ShowMessage">
         <UIDescription>Order::MessageTabUI</UIDescription>
         <Events>       
         </Events>

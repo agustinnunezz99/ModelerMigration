@@ -1,4 +1,4 @@
-<ListObject name="LoTourTemplate" generateLoadMethod="true" xmlns="BoSchema.xsd" schemaVersion="1.1">
+<ListObject name="LoTourTemplate" generateLoadMethod="true"  schemaVersion="1.1">
   <DataSource name="DsLoTourTemplate" />
   <Item objectClass="LiTourTemplate" />
   <Methods>

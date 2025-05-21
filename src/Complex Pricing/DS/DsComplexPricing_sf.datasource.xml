@@ -28,7 +28,7 @@
 		sql +=       "CP_Pricing_Condition_Template__c.Subtotal__c as Subtotal, ";
 		sql +=       "CP_Calculation_Schema_Step__c.Statistical__c as Statistical, ";
 		sql +=       "CP_Calculation_Schema_Step__c.Print_Relevant__c as PrintRelevant, ";
-		sql +=       "CASE CP_Calculation_Schema_Step__c.Interim_Value__c WHEN 'CarryOver(1)' THEN 'CarryOver1' WHEN 'CarryOver(2)' THEN 'CarryOver2' WHEN 'CarryOver(3)' THEN 'CarryOver3' WHEN 'CarryOver(4)' THEN 'CarryOver4' WHEN 'CarryOver(5)' THEN 'CarryOver5' WHEN 'CarryOver(6)' THEN 'CarryOver6' ELSE ' ' END as CalcVariable, ";
+		sql +=       "CASE CP_Calculation_Schema_Step__c.Interim_Value__c WHEN 'CarryOver(1)' THEN 'CarryOver1' WHEN 'CarryOver(2)' THEN 'CarryOver2' WHEN 'CarryOver(3)' THEN 'CarryOver3' WHEN 'CarryOver(4)' THEN 'CarryOver4' WHEN 'CarryOver(5)' THEN 'CarryOver5' WHEN 'CarryOver(6)' THEN 'CarryOver6' WHEN 'Copy1' THEN 'Copy1' WHEN 'Copy2' THEN 'Copy2' WHEN 'Copy3' THEN 'Copy3' WHEN 'Copy4' THEN 'Copy4' WHEN 'Copy5' THEN 'Copy5' WHEN 'Copy6' THEN 'Copy6' ELSE ' ' END as CalcVariable, ";
 		sql +=       "CP_Calculation_Schema_Step__c.Target_Condition__c as TargetAttributeCondition, ";
 		sql +=       "CP_Calculation_Schema_Step__c.Target_Result__c as TargetAttributeResult, ";
 		sql +=       "CP_Calculation_Schema_Step__c.Constraint_User_Exit_Id__c as ConstraintUserExitId, ";

@@ -1,4 +1,4 @@
-<ListItem name="LiUsrWorkTimeEntry" xmlns="BoSchema.xsd">
+<ListItem name="LiUsrWorkTimeEntry" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" storable="false" />
     <SimpleProperty name="effectiveUTCTimeFrom" type="DomDateTime" dataSourceProperty="effectiveUTCTimeFrom" storable="false" />

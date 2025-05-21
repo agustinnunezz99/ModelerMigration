@@ -31,7 +31,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>DailyReport::FlyoutTimeEntryDetailUI</UIDescription>
         <Events>
           <Event name="updateTimeEntry" action="validateChanges" />

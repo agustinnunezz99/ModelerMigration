@@ -1,4 +1,4 @@
-<BusinessObject name="BoUserDRAnnotation" xmlns="BoSchema.xsd" generateLoadMethod="true" schemaVersion="1.1">
+<BusinessObject name="BoUserDRAnnotation"  generateLoadMethod="true" schemaVersion="1.1">
   <DataSource name="DsBoUserDRAnnotation" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />

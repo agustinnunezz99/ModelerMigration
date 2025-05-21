@@ -35,7 +35,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::AutomaticPlanningUI</UIDescription>
         <Events>
           <Event name="deleteAutomaticCalls" action="AskforDelete" />

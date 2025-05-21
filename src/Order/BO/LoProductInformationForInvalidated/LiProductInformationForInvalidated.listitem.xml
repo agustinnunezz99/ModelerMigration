@@ -1,4 +1,4 @@
-<ListItem name="LiProductInformationForInvalidated" xmlns="BoSchema.xsd">
+<ListItem name="LiProductInformationForInvalidated" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="prdMainPKey" type="DomPKey" storable="true" dataSourceProperty="prdMainPKey" />

@@ -1,4 +1,4 @@
-<BusinessObject name="BoPrmSlogan" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="true">
+<BusinessObject name="BoPrmSlogan"  generateLoadMethod="true" generateCreateMethod="true">
   <DataSource name="DsBoPrmSlogan" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />

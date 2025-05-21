@@ -1,4 +1,4 @@
-<BusinessObject name="BoSysReleaseProcess" xmlns="BoSchema.xsd" schemaVersion="1.1" generateLoadMethod="false" generateCreateMethod="false" OERReference="SysReleaseProcess">
+<BusinessObject name="BoSysReleaseProcess"  schemaVersion="1.1" generateLoadMethod="false" generateCreateMethod="false" OERReference="SysReleaseProcess">
   <DataSource name="DsBoSysReleaseProcess" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" id="true" dataSourceProperty="pKey" />

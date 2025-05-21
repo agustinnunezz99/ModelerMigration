@@ -1,4 +1,4 @@
-<UIDescription name="Call::CompleteTabUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" simpleEditorOnly="true">
+<UIDescription name="Call::CompleteTabUI" schemaVersion="0.0.0.5"  simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage" cachable="false">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Complete" />

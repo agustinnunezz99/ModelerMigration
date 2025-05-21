@@ -1,4 +1,4 @@
-<UIDescription name="SalesFolder::SalesFolderPromotionUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd">
+<UIDescription name="SalesFolder::SalesFolderPromotionUI" schemaVersion="0.0.0.5" >
   <Page pagePattern="SingleSectionPage">
     <PageHeader titleBinding="ProcessContext::SloganTextValue">
       <MenuItems>

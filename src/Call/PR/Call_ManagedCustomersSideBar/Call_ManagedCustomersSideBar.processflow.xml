@@ -36,7 +36,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::ManagedCustomersSideBarUI</UIDescription>
         <Events>
           <Event name="ManagedCustomerSelected" action="AssignCustomerPKey" />

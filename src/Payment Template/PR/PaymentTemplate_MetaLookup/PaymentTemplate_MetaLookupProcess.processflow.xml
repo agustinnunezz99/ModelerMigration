@@ -16,7 +16,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>PaymentTemplate::MetaLookupUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="End" />

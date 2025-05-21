@@ -1,4 +1,4 @@
-<BusinessObject name="BoPayCttPayment" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="true" OERReference="PayCttPayment" schemaVersion="1.1">
+<BusinessObject name="BoPayCttPayment"  generateLoadMethod="true" generateCreateMethod="true" OERReference="PayCttPayment" schemaVersion="1.1">
   <DataSource name="DsBoPayCttPayment" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />

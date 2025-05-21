@@ -1,4 +1,4 @@
-<ListObject name="LoOrderMetaPrdSelector" generateLoadMethod="true" xmlns="BoSchema.xsd" schemaVersion="1.1">
+<ListObject name="LoOrderMetaPrdSelector" generateLoadMethod="true"  schemaVersion="1.1">
   <DataSource name="DsLoOrderMetaPrdSelector" />
   <Item objectClass="LiOrderMetaPrdSelector" />
   <Methods>

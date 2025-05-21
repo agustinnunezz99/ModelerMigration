@@ -57,7 +57,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="showVisitInfo">
+      <Action actionType="VIEW" name="showVisitInfo">
         <UIDescription>Visit::InfoUI</UIDescription>
       </Action>
     </Actions>

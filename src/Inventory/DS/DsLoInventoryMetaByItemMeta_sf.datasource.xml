@@ -10,6 +10,8 @@
     <Attribute name="prdPolicy" table="Inventory_Control_Template__c" column="Product_Policy__c" />
     <Attribute name="usrPolicy" table="Inventory_Control_Template__c" column="User_Policy__c" />
     <Attribute name="bpaPolicy" table="Inventory_Control_Template__c" column="Customer_Policy__c" />
+    <Attribute name="tmgPolicy" table="Inventory_Control_Template__c" column="Tour_Policy__c" />
+    <Attribute name="vehiclePolicy" table="Inventory_Control_Template__c" column="Vehicle_Policy__c" />
     <Attribute name="useIvcRefPKey1" table="Inventory_Transaction_Template__c" column="Use_Inventory_Reference_1__c" />
     <Attribute name="useIvcRefPKey2" table="Inventory_Transaction_Template__c" column="Use_Inventory_Reference_2__c" />
     <Attribute name="useIvcRefPKey3" table="Inventory_Transaction_Template__c" column="Use_Inventory_Reference_3__c" />

@@ -78,7 +78,7 @@
         </Parameters>
         <TransitionTo action="ShowQuestions" />
       </Action>
-      <Action actionType="View" name="ShowQuestions">
+      <Action actionType="VIEW" name="ShowQuestions">
         <UIDescription>Call::QuestionTabUI</UIDescription>
         <Events>
           <Event name="posSelected" action="GetQuestions" />

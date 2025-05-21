@@ -43,6 +43,7 @@ var sqlParams = {};
 var sql = "";
 sql += "INSERT INTO TmpOrderItemMergeResult_T SELECT ";
 sql += "product.pKey, ";
+sql += "inventory.isAvailableInventory, ";
 sql += "listing.listed, listing.listing, listing.listingWithModules, listing.customerProductNumber, listing.focusProductType, listing.focusProductImage, ";
 sql += "oos.outOfStock, ";
 sql += "sda.sdoAssortment, ";

@@ -33,7 +33,7 @@
         <Return name="ProcessContext::CardReportingSurveyExceptions_ModeMaximized" />
         <TransitionTo action="ShowReporting" />
       </Action>
-      <Action actionType="View" name="ShowReporting">
+      <Action actionType="VIEW" name="ShowReporting">
         <UIDescription>Reporting::CardExceptionsMaximizedUI</UIDescription>
       </Action>
     </Actions>

@@ -19,6 +19,7 @@
     <SimpleProperty name="longitude" type="DomDegree" dataSourceProperty="longitude" />
     <SimpleProperty name="address" type="DomText" storable="false" dataSourceProperty="address" />
     <SimpleProperty name="deleteAllowed" type="DomBool" storable="true" dataSourceProperty="deleteAllowed" />
+    <SimpleProperty name="isStartVisitRqrToCheckIn" type="DomBool" storable="true" dataSourceProperty="isStartVisitRqrToCheckIn" />
     <SimpleProperty name="color" type="DomRgbColor" storable="true" dataSourceProperty="color" />
     <SimpleProperty name="tourContextId" type="DomId" storable="false" dataSourceProperty="tourContextId" />
     <SimpleProperty name="toolTipText" type="DomText" storable="false" dataSourceProperty="toolTipText" />

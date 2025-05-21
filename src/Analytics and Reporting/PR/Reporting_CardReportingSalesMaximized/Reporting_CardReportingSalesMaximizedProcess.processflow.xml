@@ -41,7 +41,7 @@
         <Return name="ProcessContext::CardReporting_ModeMaximized" />
         <TransitionTo action="ShowReporting" />
       </Action>
-      <Action actionType="View" name="ShowReporting">
+      <Action actionType="VIEW" name="ShowReporting">
         <UIDescription>Reporting::CardReportingSalesMaximizedUI</UIDescription>
       </Action>
     </Actions>

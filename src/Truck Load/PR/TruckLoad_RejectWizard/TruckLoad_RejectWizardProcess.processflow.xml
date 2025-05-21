@@ -24,7 +24,7 @@
         <Return name="ProcessContext::CancelReasons" />
         <TransitionTo action="ShowRejectReasonSelectionView" />
       </Action>
-      <Action actionType="View" name="ShowRejectReasonSelectionView">
+      <Action actionType="VIEW" name="ShowRejectReasonSelectionView">
         <UIDescription>TruckLoad::RejectWizardUI</UIDescription>
         <Events>
           <Event name="itemSelected" action="SetButtonPressedOnYes" />

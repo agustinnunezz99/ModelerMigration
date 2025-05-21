@@ -1,4 +1,4 @@
-<ListItem name="LiUsrDailyReportOverview" xmlns="BoSchema.xsd">
+<ListItem name="LiUsrDailyReportOverview" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="reportId" type="DomId" dataSourceProperty="reportId" />

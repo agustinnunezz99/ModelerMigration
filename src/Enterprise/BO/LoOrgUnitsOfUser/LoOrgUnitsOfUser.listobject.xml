@@ -1,4 +1,4 @@
-<ListObject name="LoOrgUnitsOfUser" generateLoadMethod="true" schemaVersion="1.1" xmlns="BoSchema.xsd">
+<ListObject name="LoOrgUnitsOfUser" generateLoadMethod="true" schemaVersion="1.1" >
   <DataSource name="DsLoOrgUnitsOfUser" />
   <Item objectClass="LiOrgUnitsOfUser" />
   <Methods>

@@ -1,4 +1,4 @@
-<UIDescription xmlns="UISchema.xsd" name="User::Notification" schemaVersion="0.0.0.5" simpleEditorOnly="true">
+<UIDescription  name="User::Notification" schemaVersion="0.0.0.5" simpleEditorOnly="true">
   <Page pagePattern="MasterDetailSectionPage" masterSectionFlex="40" detailSectionFlex="60">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Main" />

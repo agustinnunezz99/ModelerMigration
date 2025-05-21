@@ -1,4 +1,4 @@
-<UIDescription name="TruckLoad::ItemListTabUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd">
+<UIDescription name="TruckLoad::ItemListTabUI" schemaVersion="0.0.0.5" >
   <Page pagePattern="MasterDetailSectionPage" cachable="false" masterSectionFlex="4.5" detailSectionFlex="3.1">
     <PageHeader>
       <Bindings>

@@ -1,4 +1,4 @@
-<ListItem name="LiTimeEntryReport" xmlns="BoSchema.xsd">
+<ListItem name="LiTimeEntryReport" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <!--<SimpleProperty name="businessModified" type="DomBusinessModified" dataSourceProperty="businessModified" />

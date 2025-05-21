@@ -23,7 +23,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="showView">
+      <Action actionType="VIEW" name="showView">
         <UIDescription>Order::RewardProductsUI</UIDescription>
       </Action>
       <Action actionType="LOGIC" name="generateTitleForList" call="ProcessContext::HurdleEvaluationHelper.loRewards.getProductsSelectionTitle">

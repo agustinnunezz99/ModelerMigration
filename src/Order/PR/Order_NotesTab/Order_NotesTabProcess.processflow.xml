@@ -24,21 +24,21 @@
         <Case value="Replenishment" action="ShowReplenishmentNotesTab" />
         <CaseElse action="ShowNotes" />
       </Action>
-      <Action actionType="View" name="ShowNotes">
+      <Action actionType="VIEW" name="ShowNotes">
         <UIDescription>Order::NotesTab</UIDescription>
         <Events>
           <Event name="showInvoiceNote" action="SelectNote" />
           <Event name="showDeliveryNote" action="SelectNote" />
         </Events>
       </Action>
-      <Action actionType="View" name="ShowReplenishmentNotesTab">
+      <Action actionType="VIEW" name="ShowReplenishmentNotesTab">
         <UIDescription>Order::ReplenishmentNotesTabUI</UIDescription>
         <Events>
           <Event name="showInvoiceNote" action="SelectNote" />
           <Event name="showDeliveryNote" action="SelectNote" />
         </Events>
       </Action>
-      <Action actionType="View" name="ShowDeliveryNotes">
+      <Action actionType="VIEW" name="ShowDeliveryNotes">
         <UIDescription>Order::DeliveryNotesTabUI</UIDescription>
         <Events>
           <Event name="showInvoiceNote" action="SelectNote" />

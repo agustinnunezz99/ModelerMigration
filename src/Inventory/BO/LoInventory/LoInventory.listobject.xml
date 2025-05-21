@@ -7,5 +7,6 @@
     <Method name="saveAsync" />
     <Method name="createInventoryForTruckLoadItem" />
     <Method name="createInventoryForCashPayment" />
+    <Method name="fetchProductId" />
   </Methods>
 </ListObject>

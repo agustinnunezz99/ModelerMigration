@@ -24,6 +24,47 @@
                     sql += "AND #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','<=' , #dateThru#, 'Date')# ";
                     return Utils.replaceMacrosParam(sql, sqlParams);
                 ]]></CustomersWithCallsForSync>
+        <AssignedTourOrders>
+            <!-- Fetch orderIDs and customerIDs of Visit and Orders linked to a tour -->
+            <![CDATA[
+                    var dateFrom = Utils.convertForDBParam(jsonParams.previousDay, 'DomDate');
+                    var dateThru = Utils.convertForDBParam(jsonParams.nextDay, 'DomDate');
+                    var sqlParams = {dateFrom, dateThru, dateFrom, dateThru};
+
+                    //Visit customers and orders liked to visits
+                    var sql = "SELECT ";
+                    sql +=      "Order__c.Id as Id, ";
+                    sql +=      "Visit.AccountId as customerId ";
+                    sql +=    "FROM Visit ";
+                    sql +=    "LEFT JOIN Order__c ON Visit.Id = Order__c.Visit__c ";
+                    sql +=    "INNER JOIN Tour__c ON Visit.Tour__c = Tour__c.Id ";
+                    sql +=    "WHERE #compareAsDate('Tour__c.Start_Date_Time__c', 'DateTime','<=' , #dateThru#, 'Date')# ";
+                    sql +=    "AND #compareAsDate('Tour__c.End_Date_Time__c', 'DateTime','>=' , #dateFrom#, 'Date')# ";
+                    sql +=    "UNION ALL ";
+
+                    //Orders without visit link but with tour link (for example Product CheckOut/In)
+                    sql +=    "SELECT ";
+                    sql +=      "Order__c.Id as Id, ";
+                    sql +=      "Order__c.Order_Account__c as customerId ";
+                    sql +=    "FROM Order__c ";
+                    sql +=    "INNER JOIN Tour__c ON Tour__c.Id = Order__c.Tour__c ";
+                    sql +=    "WHERE #compareAsDate('Tour__c.Start_Date_Time__c', 'DateTime','<=' , #dateThru#, 'Date')# ";
+                    sql +=    "AND #compareAsDate('Tour__c.End_Date_Time__c', 'DateTime','>=' , #dateFrom#, 'Date')# ";
+                    sql +=    "AND Order__c.Visit__c = ' ' ";
+
+                    return Utils.replaceMacrosParam(sql, sqlParams);
+                ]]>
+        </AssignedTourOrders>
+        <AssignedRole><![CDATA[
+            var userId = Utils.convertForDBParam(jsonParams.userId, 'DomPKey');
+            var sqlParams = {userId};
+            var sql = "SELECT Custom_Permission_User_Role_Mapping__c.Custom_Permission__c as pKey,";
+            sql += "Custom_Permission_User_Role_Mapping__c.User_Role_Name__c as usrRoleId";
+            sql +=  " FROM PermissionSetAssignment inner JOIN SetupEntityAccess ON PermissionSetAssignment.PermissionSetId = SetupEntityAccess.ParentId";
+            sql += " inner JOIN Custom_Permission_User_Role_Mapping__c ON Custom_Permission_User_Role_Mapping__c.Custom_Permission__c = SetupEntityAccess.SetupEntityId";
+            sql += " WHERE PermissionSetAssignment.AssigneeId = #userId#";
+            return Utils.replaceMacrosParam(sql, sqlParams);
+        ]]></AssignedRole>
       <CustomerSetsOfCustomers><![CDATA[
 					var accountIds = Utils.getListParams(jsonParams.accountId);
 					var sql = "SELECT Account_Set__c AS AccountSetID FROM Account_Set_Account__c ";
@@ -161,6 +202,10 @@
 					sqlStmt    += "INNER JOIN Job_Definition_List__c ON SF_FileLink.ParentId = Job_Definition_List__c.Id ";
                     sqlStmt    += "WHERE SF_File.Usage__c IN ('InitialBadge', 'FulfilledBadge') ";
 					sqlStmt    += "UNION ";
+                    sqlStmt    += "SELECT SF_File.Id FROM SF_File ";                    
+                    sqlStmt    += "INNER JOIN SF_FileLink ON SF_FileLink.FileId = SF_File.Id ";
+					sqlStmt    += "INNER JOIN Signature__c ON SF_FileLink.ParentId = Signature__c.Id ";
+					sqlStmt    += "UNION ";
 					sqlStmt    += "SELECT SF_File.Id FROM SF_File ";
 					sqlStmt    += "INNER JOIN SF_FileLink ON SF_FileLink.FileId = SF_File.Id ";
 					sqlStmt    += "WHERE SF_FileLink.ParentId in (Select Account_Manager__c.Account__c from Account_Manager__c "; 
@@ -170,49 +215,103 @@
 					sqlStmt    += "AND cast(SF_File.ContentSize as int) <=3000000 "; 					
                     return Utils.replaceMacrosParam(sqlStmt, sqlParams);
      			]]></AllMandatoryAttachmentsForSync>
+      <VisitAttachments><![CDATA[
+                    
+                    var accountIds = Utils.getListParams(jsonParams.accountId);
+
+                    //#####################################################
+                    //## Visit Jobs (only for visits in the 3 day range) ##
+                    //##################;##################################
+                    var sqlStmt = "SELECT Visit_Job__c.Id as Id FROM Visit_Job__c ";
+                    sqlStmt    += "INNER JOIN Visit ON Visit.Id = Visit_Job__c.Visit__c ";
+                    sqlStmt    += "INNER JOIN Account on Visit.AccountId = Account.Id ";
+                    sqlStmt    += "WHERE Visit.AccountId IN (" + accountIds.sql + ") ";
+
+                    //list is used twice --> IDs must be doubled in the params
+                    return {sql: sqlStmt, params: accountIds.params};
+
+      ]]></VisitAttachments>
       <!-- On demand data request, the below query fetches the ids for which the attachment header data needs to be downloaded. The attachment blob will be downloaded when the user tries to access the attachment. -->
       <AllAttachments><![CDATA[
-					var dateFrom = Utils.convertForDBParam(jsonParams.dateFrom, 'DomDate');
-				    var dateThru = Utils.convertForDBParam(jsonParams.dateThru, 'DomDate');	
-                    var cgVisitDateFrom = Utils.convertForDBParam(jsonParams.cgVisitDateFrom, 'DomDate');	
-                    var cgVisitDateThru = Utils.convertForDBParam(jsonParams.cgVisitDateThru, 'DomDate');	
-                    var sqlParams = {dateFrom,dateThru,cgVisitDateFrom,cgVisitDateThru};           			
-                    var sqlStmt = "SELECT Id as parentId FROM Product2 ";
-					sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Id as parentId FROM Order__c ";
-					sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Id as parentId FROM Signature__c ";
-					sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Id as parentId FROM Visit "; 
-					sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Mobile_Link__c.Id as parentId FROM Mobile_Link__c "; 
-                    sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Job_Definition_List__c.Id as parentId FROM Job_Definition_List__c "; 
-                    sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Visit_Job__c.Id as parentId FROM Visit_Job__c ";
- 					sqlStmt    += "INNER JOIN Visit ON Visit.Id = Visit_Job__c.Visit__c ";
-                    sqlStmt    += "UNION ";
-                    //Contacts via Account link
-					sqlStmt    += "SELECT Contact.Id as parentId FROM Contact "; 
-  					sqlStmt    += "INNER JOIN Account on Contact.AccountId = Account.Id ";
-			  	 	sqlStmt    += "INNER JOIN Visit on Visit.AccountId = Account.Id ";
-                    sqlStmt    += "WHERE #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','>=' , #dateFrom#, 'Date')# ";
-                    sqlStmt    += "AND #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','<=' , #dateThru#, 'Date')# ";
-                    sqlStmt    += "UNION ";
-                    //Contacts via Retail Store link
-					sqlStmt    += "SELECT Contact.Id as parentId FROM Contact "; 
-  					sqlStmt    += "INNER JOIN RetailStore on Contact.AccountId = RetailStore.PrimaryContactId ";
-			  	 	sqlStmt    += "INNER JOIN Visit on RetailStore.Id = Visit.RetailStoreId ";
-                    sqlStmt    += "WHERE #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','>=' , #cgVisitDateFrom#, 'Date')# ";
-                    sqlStmt    += "AND #compareAsDate('Visit.PlannedVisitEndTime', 'DateTime','<=' , #cgVisitDateThru#, 'Date')# ";
-                    sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Id as parentId FROM RetailStore ";
-                    sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Id as parentId FROM RetailVisitKpi ";
-                    sqlStmt    += "UNION ";
-					sqlStmt    += "SELECT Id as parentId FROM AssessmentTask WHERE AssessmentTask.TaskType in ('Other','InventoryCheck')";
-                    return Utils.replaceMacrosParam(sqlStmt, sqlParams);
-     			]]></AllAttachments>
+                   var dateFrom = Utils.convertForDBParam(jsonParams.dateFrom, 'DomDate');
+                   var dateThru = Utils.convertForDBParam(jsonParams.dateThru, 'DomDate');	
+                   var cgVisitDateFrom = Utils.convertForDBParam(jsonParams.cgVisitDateFrom, 'DomDate');	
+                   var cgVisitDateThru = Utils.convertForDBParam(jsonParams.cgVisitDateThru, 'DomDate');	
+                   const DSD_MODE = jsonParams.dsdMode;
+                   var sqlParams = {dateFrom,dateThru,cgVisitDateFrom,cgVisitDateThru};  
+                   //#############################################
+                   //## Product (all needed distribute to all)  ##
+                   //#############################################
+                   var sqlStmt = "SELECT Id as parentId FROM Product2 ";
+                   sqlStmt    += "UNION ";
+                   //################################################################
+                   //## Order (should be filtered via distribution relevant flag)  ##
+                   //################################################################
+                   sqlStmt    += "SELECT Id as parentId FROM Order__c ";
+                   sqlStmt    += "UNION ";
+                   //################
+                   //## Signature  ##
+                   //################
+                   sqlStmt    += "SELECT Signature__c.Id as parentId FROM Signature__c ";
+                   sqlStmt    += "UNION ";
+                   //############
+                   //## Visit  ##
+                   //############
+                   sqlStmt    += "SELECT Visit.Id as parentId FROM Visit "; 
+                   sqlStmt    += "INNER JOIN Account on Visit.AccountId = Account.Id ";
+                   sqlStmt    += "UNION ";
+                   //##################
+                   //## Mobile Link  ##
+                   //##################
+                   sqlStmt    += "SELECT Mobile_Link__c.Id as parentId FROM Mobile_Link__c "; 
+                   sqlStmt    += "UNION ";
+                   //#####################################
+                   //## Activity / Job Definition List  ##
+                   //##################;##################
+                   sqlStmt    += "SELECT Job_Definition_List__c.Id as parentId FROM Job_Definition_List__c "; 
+                   sqlStmt    += "UNION ";
+                   //###############################
+                   //## Contacts via Account link ##
+                   //###############################
+                   sqlStmt    += "SELECT Contact.Id as parentId FROM Contact "; 
+                   sqlStmt    += "INNER JOIN Account on Contact.AccountId = Account.Id ";
+                   sqlStmt    += "INNER JOIN Visit on Visit.AccountId = Account.Id ";
+     
+                   //working days are only needed in Retail case
+                   //but currently there is no separation betwenn DSD and Retail so handing it over here
+                   //In Retail case missing contact partner attachments will be loaded via requestCallOnDemandDataAsync
+                   //Do not use Application Context variable here because not yet defined
+                   if(!DSD_MODE){
+                        sqlStmt    += "WHERE #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','>=' , #dateFrom#, 'Date')# ";
+                        sqlStmt    += "AND #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','<=' , #dateThru#, 'Date')# ";
+                   }
+
+                   sqlStmt    += "UNION ";
+                   //####################################
+                   //## Contacts via Retail Store link ##
+                   //####################################
+                   sqlStmt    += "SELECT Contact.Id as parentId FROM Contact "; 
+                   sqlStmt    += "INNER JOIN RetailStore on Contact.AccountId = RetailStore.PrimaryContactId ";
+                   sqlStmt    += "INNER JOIN Visit on RetailStore.Id = Visit.RetailStoreId ";
+                   sqlStmt    += "WHERE #compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','>=' , #cgVisitDateFrom#, 'Date')# ";
+                   sqlStmt    += "AND #compareAsDate('Visit.PlannedVisitEndTime', 'DateTime','<=' , #cgVisitDateThru#, 'Date')# ";
+                   sqlStmt    += "UNION ";
+                   //##############################################
+                   //## Retail Store (CG Cloud Basic Data Model) ##
+                   //##############################################
+                   sqlStmt    += "SELECT Id as parentId FROM RetailStore ";
+                   sqlStmt    += "UNION ";
+                   //######################################################
+                   //## RetailVisitKpi Store (CG Cloud Basic Data Model) ##
+                   //######################################################
+                   sqlStmt    += "SELECT Id as parentId FROM RetailVisitKpi ";
+                   sqlStmt    += "UNION ";
+                   //##################################################
+                   //## AssessmentTasks (CG Cloud Basic Data Model) ##
+                   //#################################################
+                   sqlStmt    += "SELECT Id as parentId FROM AssessmentTask WHERE AssessmentTask.TaskType in ('Other','InventoryCheck')";
+                   return Utils.replaceMacrosParam(sqlStmt, sqlParams);
+      ]]></AllAttachments>
       <RelevantCustomerContracts><![CDATA[
       				var userId = Utils.convertForDBParam(jsonParams.userId, 'DomPKey');
 					var sqlParams = {userId};           		

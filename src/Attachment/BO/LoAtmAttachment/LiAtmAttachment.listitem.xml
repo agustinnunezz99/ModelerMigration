@@ -1,4 +1,4 @@
-<ListItem name="LiAtmAttachment" xmlns="BoSchema.xsd">
+<ListItem name="LiAtmAttachment" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="businessModified" type="DomBusinessModified" dataSourceProperty="businessModified" />

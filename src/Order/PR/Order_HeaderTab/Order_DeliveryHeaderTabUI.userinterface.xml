@@ -1,4 +1,4 @@
-<UIDescription name="Order::DeliveryHeaderTabUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="Order::DeliveryHeaderTabUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionPage" cachable="false">
     <PageHeader>
       <Bindings>
@@ -69,22 +69,99 @@
     </PageHeader>
     <Section sectionName="masterSection" sectionPattern="SingleAreaSection">
       <Area areaName="mainArea" areaPattern="GroupedElementsArea">
-        <GroupElement name="DeliveryGroup">
+        <GroupElement name="DeliveryDetails">
           <Bindings>
-            <Resource target="Title" type="Label" id="DeliveryId" defaultLabel="Delivery" />
+            <Resource target="Title" type="Label" id="DeliveryDetailsId" defaultLabel="Delivery Details" />
           </Bindings>
-          <!-- Type -->
-          <InputArea name="Type" disabled="true">
+          <!-- Document Number -->
+          <InputArea name="DocumentNumber" disabled="true">
             <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Type" id="TypeId" />
+              <Resource target="Label" type="Label" defaultLabel="Document Number" id="DocumentNumberId" />
+              <Binding target="Value" binding="ProcessContext::MainBO.pKey" bindingMode="ONE_WAY" />
+            </Bindings>
+          </InputArea>
+          <!-- Invoice Number -->
+          <InputArea name="InvoiceNumber" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Invoice Number" id="InvoiceNumberId" />
+              <Binding target="Value" binding="ProcessContext::MainBO.invoiceId" bindingMode="ONE_WAY" />
+            </Bindings>
+          </InputArea>
+          <!-- Document date -->
+          <DatePickerField name="DocumentDate" dateVisible="true" timeVisible="false" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Document Date" id="DocumentDateId" />
+              <Binding target="Value" binding="ProcessContext::MainBO.commitDate" bindingMode="ONE_WAY" />
+            </Bindings>
+          </DatePickerField>
+          <!-- Customer Name -->
+          <Lookup name="CustomerName" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Customer Name" id="CustomerNameId" />
+              <Binding target="Value" binding="ProcessContext::MainBO.luOrderer.name" bindingMode="ONE_WAY" />
+            </Bindings>
+          </Lookup>
+          <!-- Customer Purchase Number -->
+          <InputArea name="CustomerPurchaseNumber">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Customer Purchase Number" id="CustomerPurchaseNumberId" />
+              <Binding target="Value" binding="ProcessContext::MainBO.customerOrderId" bindingMode="TWO_WAY" />
+            </Bindings>
+          </InputArea>
+          <!-- Document Type -->
+          <InputArea name="DocumentType" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Document Type" id="DocumentTypeId" />
               <Binding target="Value" binding="ProcessContext::MainBO.boOrderMeta.text" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
-          <!-- ASN -->
-          <InputArea name="ASN" disabled="true">
+          <!-- Transaction Type -->
+          <SelectionBox name="TransactionType" disabled="true">
             <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="ASN" id="ASNId" />
+              <Resource target="Label" type="Label" id="TransactionTypeId" defaultLabel="Transaction Type" />
+              <Binding target="DataSource" toggleId="BpaPaymentPolicy" bindingMode="ONE_WAY" />
+              <Binding target="Value" binding="ProcessContext::MainBO.docTaType" bindingMode="TWO_WAY" />
+            </Bindings>
+            <Items>
+              <Bindings>
+                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+              </Bindings>
+            </Items>
+          </SelectionBox>
+          <!-- Document Status-->
+          <InputArea name="DocumentStatus" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Document Status" id="DocumentStatusId" />
+              <Binding target="Value" binding="ProcessContext::MainBO.phase.text" bindingMode="ONE_WAY" />
+            </Bindings>
+          </InputArea>
+          <!-- ASN Number -->
+          <InputArea name="ASNNumber" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="ASN Number" id="ASNNumberId" />
               <Binding target="Value" binding="ProcessContext::MainBO.asn" bindingMode="ONE_WAY" />
+            </Bindings>
+          </InputArea>
+          <!-- Cancel Reason -->
+          <SelectionBox name="CancelReason" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" id="CancelReasonId" defaultLabel="Cancel Reason Code" />
+              <Binding target="DataSource" toggleId="SdoCancelReason" bindingMode="ONE_WAY" />
+              <Binding target="Value" binding="ProcessContext::MainBO.cancelReason" bindingMode="TWO_WAY" />
+            </Bindings>
+            <Items>
+              <Bindings>
+                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+              </Bindings>
+            </Items>
+          </SelectionBox>
+          <!-- Tour -->
+          <InputArea name="Tour" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Tour" id="TourId" />
+              <Binding target="Value" binding="ProcessContext::MainBO.luTour.Id" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>
           <!-- Shipped Quantity-->
@@ -101,6 +178,11 @@
               <Binding target="Value" binding="ProcessContext::MainBO.totalReturnedQuantity" bindingMode="ONE_WAY" />
             </Bindings>
           </InputArea>-->
+        </GroupElement>
+        <GroupElement name="DocumentValueGroup">
+          <Bindings>
+            <Resource target="Title" type="Label" id="DocumentValueId" defaultLabel="Document Value" />
+          </Bindings>
           <!-- Total value-->
           <Merger name="TotalValue" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1" disabled="true">
             <Bindings>
@@ -151,6 +233,28 @@
               </Items>
             </SelectionBox>
           </Merger>
+          <!--Header Discount -->
+          <Stepper name="HeaderDiscount" minValue="0" maxValue="100" disabled="true">
+            <Bindings>
+              <Resource target="Label" type="Label" defaultLabel="Header Discount (%)" id="HeaderDiscountId" />
+              <Binding target="Value" type="Decimal" formatV2="3.1" binding="ProcessContext::MainBO.headerDiscount" bindingMode="TWO_WAY" />
+              <Binding target="StepSize" value="0.1" />
+            </Bindings>
+          </Stepper>
+          <!-- Payment Method -->
+          <SelectionBox name="PaymentMethod" disabled="false">
+            <Bindings>
+              <Resource target="Label" type="Label" id="PaymentMethodId" defaultLabel="Payment Method" />
+              <Binding target="DataSource" binding="ProcessContext::MainBO.allowedPaymentMethods" bindingMode="ONE_WAY" />
+              <Binding target="Value" binding="ProcessContext::MainBO.paymentMethod" bindingMode="TWO_WAY" />
+            </Bindings>
+            <Items>
+              <Bindings>
+                <Binding target="ItemValue" type="Text" binding=".code" bindingMode="ONE_WAY" />
+                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+              </Bindings>
+            </Items>
+          </SelectionBox>
           <!-- Paid Amount value-->
           <Merger name="PaidAmountValue" pattern="twoInputControls" labelHandling="Own" leftRatio="1" rightRatio="1" disabled="true">
             <Bindings>
@@ -176,144 +280,21 @@
               </Items>
             </SelectionBox>
           </Merger>
-          <!-- Payment Method -->
-          <SelectionBox name="PaymentMethod" disabled="false">
+          <!-- Payment Collected -->
+          <CheckBox name="PaymentCollected">
             <Bindings>
-              <Resource target="Label" type="Label" id="PaymentMethodId" defaultLabel="Payment Method" />
-              <Binding target="DataSource" binding="ProcessContext::MainBO.allowedPaymentMethods" bindingMode="ONE_WAY" />
-              <Binding target="Value" binding="ProcessContext::MainBO.paymentMethod" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".code" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-        </GroupElement>
-        <GroupElement name="IdentificationGroup">
-          <Bindings>
-            <Resource target="Title" type="Label" id="IdentificationId" defaultLabel="Identification" />
-          </Bindings>
-          <!-- Id -->
-          <InputArea name="Id" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Id" id="IdId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.id" bindingMode="ONE_WAY" />
-            </Bindings>
-          </InputArea>
-          <!-- Invoice Number -->
-          <InputArea name="InvoiceNumber" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Invoice Number" id="InvoiceNumberId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.invoiceId" bindingMode="ONE_WAY" />
-            </Bindings>
-          </InputArea>
-          <!-- Document Transaction Type -->
-          <SelectionBox name="DocumentTransactionType" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" id="DocumentTaTypeId" defaultLabel="Transaction Type" />
-              <Binding target="DataSource" toggleId="BpaPaymentPolicy" bindingMode="ONE_WAY" />
-              <Binding target="Value" binding="ProcessContext::MainBO.docTaType" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-          <!-- Payment Reason -->
-          <SelectionBox name="PaymentReason" disabled="false">
-            <Bindings>
-              <Resource target="Label" type="Label" id="PaymentReasonId" defaultLabel="Reason Code" />
-              <Binding target="DataSource" toggleId="SdoPaymentReason" bindingMode="ONE_WAY" />
-              <Binding target="Value" binding="ProcessContext::MainBO.paymentReason" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-          <!-- Cancel Reason -->
-          <SelectionBox name="CancelReason" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" id="CancelReasonId" defaultLabel="Cancel Reason Code" />
-              <Binding target="DataSource" toggleId="SdoCancelReason" bindingMode="ONE_WAY" />
-              <Binding target="Value" binding="ProcessContext::MainBO.cancelReason" bindingMode="TWO_WAY" />
-            </Bindings>
-            <Items>
-              <Bindings>
-                <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
-                <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
-              </Bindings>
-            </Items>
-          </SelectionBox>
-          <!-- CustomerOrderId -->
-          <InputArea name="CustomerOrderId">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Customer Order ID" id="CustomerOrderIdId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.customerOrderId" bindingMode="TWO_WAY" />
-            </Bindings>
-          </InputArea>
-          <!-- Phase-->
-          <InputArea name="Phase" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Phase" id="PhaseId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.phase.text" bindingMode="ONE_WAY" />
-            </Bindings>
-          </InputArea>
-        </GroupElement>
-        <GroupElement name="MiscellaneousGroup">
-          <Bindings>
-            <Resource target="Title" type="Label" id="MiscellaneousId" defaultLabel="Miscellaneous" />
-          </Bindings>
-          <!-- Orderer -->
-          <Lookup name="Orderer" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Orderer" id="OrdererId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.luOrderer.name" bindingMode="ONE_WAY" />
-            </Bindings>
-          </Lookup>
-          <!-- Delivery recipient -->
-          <Lookup name="DeliveryRecipient">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Delivery Recipient" id="DeliveryRecipientId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.luDeliveryRecipient.name" bindingMode="TWO_WAY" />
+              <Resource target="Label" type="Label" defaultLabel="Payment Collected?" id="PaymentCollected" />
+              <Binding target="checkedValue" binding="ProcessContext::MainBO.isPaymentCollected" bindingMode="TWO_WAY" />
             </Bindings>
             <Events>
-              <LookupEvent event="deliveryRecipientLookup" />
+              <ValueChangedEvent event="PaymentCollectedChanged" />
             </Events>
-          </Lookup>
-          <!-- Tour -->
-          <InputArea name="Tour" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Tour" id="TourId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.luTour.Id" bindingMode="ONE_WAY" />
-            </Bindings>
-          </InputArea>
-          <!-- Order date -->
-          <DatePickerField name="OrderDate" dateVisible="true" timeVisible="false" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Order Date" id="OrderDateId" />
-              <Binding target="Value" binding="ProcessContext::MainBO.commitDate" bindingMode="ONE_WAY" />
-            </Bindings>
-          </DatePickerField>
-          <!--Header Discount -->
-          <Stepper name="HeaderDiscount" minValue="0" maxValue="100" disabled="true">
-            <Bindings>
-              <Resource target="Label" type="Label" defaultLabel="Header Discount" id="HeaderDiscountId" />
-              <Binding target="Value" type="Decimal" formatV2="3.1" binding="ProcessContext::MainBO.headerDiscount" bindingMode="TWO_WAY" />
-              <Binding target="StepSize" value="0.1" />
-            </Bindings>
-          </Stepper>
+          </CheckBox>
         </GroupElement>
         <!-- Shipment -->
-        <EmbeddedList name="Shipment" dataSource="ProcessContext::shipmentList.Items[]">
+        <EmbeddedList name="ProductDetails" dataSource="ProcessContext::shipmentList.Items[]">
           <Bindings>
-            <Resource target="Title" type="Label" id="ShipmentTitleId" defaultLabel="Totals" />
+            <Resource target="Title" type="Label" id="ProductDetailsId" defaultLabel="Product Details" />
           </Bindings>
           <Items name="Items" itemPattern="UoMSumsList">
             <Bindings>

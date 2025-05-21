@@ -18,6 +18,8 @@
     <Attribute name="prmFindingLeadTime" table="Visit_Template__c" column="Promotion_Finding_Lead_Time__c" />
     <Attribute name="updatePlannedTimes" table="Visit_Template__c" column="Update_Planned_Times__c" />
     <Attribute name="historicalProducts" table="Visit_Template__c" column="Historical_Products__c" />
+    <Attribute name="cmplVstGeolcValidation" table="Visit_Template__c" column="Cmpl_Vst_Geolc_Validation__c" />
+    <Attribute name="startVstGeolcValidation" table="Visit_Template__c" column="Start_Vst_Geolc_Validation__c" />
   </Attributes>
   <Entities>
     <Entity name="Visit_Template__c" alias="" idAttribute="Id" />

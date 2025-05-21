@@ -4,5 +4,6 @@
   <Methods>
     <Method name="beforeLoadAsync" />
     <Method name="setEARights" />
+    <Method name="afterLoadAsync"/>
   </Methods>
 </ListObject>

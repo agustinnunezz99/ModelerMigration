@@ -40,14 +40,14 @@
         <Case value="true" action="ShowPhoneUI" />
         <CaseElse action="ShowTabletUI" />
       </Action>
-      <Action actionType="View" name="ShowPhoneUI">
+      <Action actionType="VIEW" name="ShowPhoneUI">
         <UIDescription>Call::CardPictureMaximizedPhoneUI</UIDescription>
         <Events>
           <Event name="SketchButtonPressed" action="OpenSketchEditor" />
           <Event name="DeleteButtonPressed" action="DeleteAttachmentConfirm" />
         </Events>
       </Action>
-      <Action actionType="View" name="ShowTabletUI">
+      <Action actionType="VIEW" name="ShowTabletUI">
         <UIDescription>Call::CardPictureMaximizedUI</UIDescription>
         <Events>
           <Event name="SketchButtonPressed" action="OpenSketchEditor" />

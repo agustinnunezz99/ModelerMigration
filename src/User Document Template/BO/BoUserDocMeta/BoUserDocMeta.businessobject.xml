@@ -1,4 +1,4 @@
-<BusinessObject name="BoUserDocMeta" xmlns="BoSchema.xsd" generateLoadMethod="true" OERReference="UsrDocMeta">
+<BusinessObject name="BoUserDocMeta"  generateLoadMethod="true" OERReference="UsrDocMeta">
   <DataSource name="DsBoUserDocMeta" />
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />

@@ -8,6 +8,7 @@
     <SimpleProperty name="tmgMetaPKey" type="DomPKey" storable="true" dataSourceProperty="tmgMetaPKey" />
     <SimpleProperty name="considerMultipleWarehouses" type="DomPKey" storable="true" dataSourceProperty="considerMultipleWarehouses" />
     <SimpleProperty name="startEtpWarehousePKey" type="DomPKey" storable="true" dataSourceProperty="startEtpWarehousePKey" />
+    <SimpleProperty name="endEtpWarehousePKey" type="DomPKey" storable="true" dataSourceProperty="endEtpWarehousePKey" />
     <SimpleProperty name="etpVehicleTruckPKey" type="DomPKey" storable="true" dataSourceProperty="etpVehicleTruckPKey" />
     <SimpleProperty name="defaultEtpVehicleTruckPKey" type="DomPKey" storable="true" dataSourceProperty="defaultEtpVehicleTruckPKey" />
     <SimpleProperty name="driverName" type="DomUsrName" storable="true" dataSourceProperty="driverName" />

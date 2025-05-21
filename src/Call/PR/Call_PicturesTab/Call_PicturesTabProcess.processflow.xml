@@ -10,7 +10,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowPictures">
+      <Action actionType="VIEW" name="ShowPictures">
         <UIDescription>Call::PicturesTabUI</UIDescription>
         <Events></Events>
       </Action>

@@ -1,4 +1,4 @@
-<ListObject name="LoUserDRCallStatistic" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoUserDRCallStatistic" generateLoadMethod="true" >
   <DataSource name="DsLoUserDRCallStatistic" />
   <Item objectClass="LiUserDRCallStatistic" />
   <Methods></Methods>

@@ -1,4 +1,4 @@
-<ListItem name="LiUnitFactorForProduct" xmlns="BoSchema.xsd">
+<ListItem name="LiUnitFactorForProduct" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="productPKey" type="DomPKey" dataSourceProperty="productPKey" />

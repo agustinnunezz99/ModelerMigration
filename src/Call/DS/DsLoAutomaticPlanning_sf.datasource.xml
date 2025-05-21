@@ -143,7 +143,6 @@
 			sqlStmt +=          ")";
 			sqlStmt +=      ") customers ";
 			sqlStmt +=    "WHERE 1=1 ";
-			sqlStmt +=    "group by customers.pKey, customers.clbMetaPKey ";
 
 			return Utils.replaceMacrosParam(sqlStmt, sqlParams);
 		]]></Load>

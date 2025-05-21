@@ -20,7 +20,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="showView">
+      <Action actionType="VIEW" name="showView">
         <UIDescription>Order::RewardsUI</UIDescription>
         <Events>
           <Event name="onButtonPressedEvent" action="openRewardProducts" />

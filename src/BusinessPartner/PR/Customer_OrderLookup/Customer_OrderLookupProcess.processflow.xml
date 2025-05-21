@@ -27,7 +27,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Customer::OrdererLookup</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndWithNewValue" />

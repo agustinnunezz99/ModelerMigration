@@ -1,4 +1,4 @@
-<ListItem name="LiBpaPOSMetaRel" xmlns="BoSchema.xsd">
+<ListItem name="LiBpaPOSMetaRel" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="text" type="DomText" dataSourceProperty="text" />

@@ -9,7 +9,7 @@
       <Join Type="inner">
         <SimpleJoin>
           <Condition leftSideValue="Account_Template__c.RecordTypeId" comparator="eq" rightSideType="Attribute" rightSideValue="RecordType.Id" />
-          <Condition leftSideValue="RecordType.DeveloperName" comparator="eq" rightSideType="Parameter" rightSideValue="'Profesionales_de_la_Salud'" />
+          <Condition leftSideValue="RecordType.DeveloperName" comparator="eq" rightSideType="Parameter" rightSideValue="'Customer'" />
         </SimpleJoin>
       </Join>
     </Entity>

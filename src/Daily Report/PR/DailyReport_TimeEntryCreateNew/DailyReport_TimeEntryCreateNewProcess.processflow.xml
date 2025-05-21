@@ -28,7 +28,7 @@
       <Action name="WizardShowMoreDetails" actionType="LOGIC" call="ProcessContext::ValidationBo.setEARights">
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>DailyReport::TimeEntryCreateNewUI</UIDescription>
         <Events>
           <Event name="createTimeEntry" action="WizardValidations" />

@@ -27,7 +27,7 @@
         <Case value="createCall" action="ShowView" />
         <CaseElse action="End" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::ChooseCreationProperties</UIDescription>
         <Events>
           <Event name="FinishWizard" action="End" />

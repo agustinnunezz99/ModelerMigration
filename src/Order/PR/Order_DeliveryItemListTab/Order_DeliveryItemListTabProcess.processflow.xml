@@ -18,7 +18,6 @@
         <Declaration name="ScanProcessCompleted" type="String" />
         <Declaration name="LoSuggestedQuantity" type="LoSuggestedQuantity" />
         <Declaration name="ConfirmEditItemQuantity" type="String" />
-        <Declaration name="IsSfBackend" type="DomBool" />
         <Declaration name="currentDate" type="DomDate" />
         <Declaration name="GroupingAttribute" type="DomString" />
         <Declaration name="BoHelperHurdleExpressionFunctions" type="BoHelperHurdleExpressionFunctions" />
@@ -38,9 +37,6 @@
       <Action actionType="LOGIC" name="GetCurrentDate" call="Utils.createAnsiToday">
         <Return name="ProcessContext::currentDate" />
       </Action>
-      <Action actionType="LOGIC" name="SetIsSfBackend" call="Utils.isSfBackend">
-        <Return name="ProcessContext::IsSfBackend" />
-      </Action>
       <Action name="ResetHierarchyBindings" actionType="LOGIC" call="ProcessContext::MainBO.boItemTabManager.onItemTabEntered">
         <Return name="ProcessContext::NavigateToLastLevelActive" />
       </Action>
@@ -54,11 +50,11 @@
         </Parameters>
         <Return name="ProcessContext::boItemSettings" />
       </Action>
-      <Action actionType="LOGIC" name="ProcessValidateReasonCode" call="ProcessContext::MainBO.processValidateReasonCode">
+      <!-- <Action actionType="LOGIC" name="ProcessValidateReasonCode" call="ProcessContext::MainBO.processValidateReasonCode">
         <Parameters>
           <Input name="showMessage" value="0" type="Literal" />
         </Parameters>
-      </Action>
+      </Action> -->
       <Action actionType="LOGIC" name="SetScanProcess_Initial" call="Utils.identity">
         <Parameters>
           <Input name="value" type="Literal" value="1" />

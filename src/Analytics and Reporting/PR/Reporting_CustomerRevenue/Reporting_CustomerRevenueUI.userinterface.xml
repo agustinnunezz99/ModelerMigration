@@ -1,4 +1,4 @@
-<UIDescription name="Reporting::CustomerRevenueUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" simpleEditorOnly="true">
+<UIDescription name="Reporting::CustomerRevenueUI" schemaVersion="0.0.0.5"  simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage" cachable="false" useSolidBackground="true">
     <PageHeader>
       <Bindings>

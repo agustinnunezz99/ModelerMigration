@@ -29,7 +29,7 @@ sqlStmt += " Visit.Visit_Template__c as clbMetaPKey, ";
 sqlStmt += " Visit.Completed_Date__c as completedDate ";
 sqlStmt += " FROM Visit";
 sqlStmt += " WHERE (1=1) AND Visit.Responsible__c = #responsiblePKey#";
-sqlStmt += " AND Visit.Status = 'Completed'";
+sqlStmt += " AND Visit.Status = '" + BLConstants.VISIT.STATUS_COMPLETED + "'";
 sqlStmt += " AND Visit.Creation_Mode__c <= 'Automatically'"; 
 sqlStmt += " AND #compareAsDate('Visit.Completed_Date__c', 'Date','<',#referenceDate#, 'Date')# ";
 sqlStmt += " AND Visit.Completed_Date__c <> ''"; 

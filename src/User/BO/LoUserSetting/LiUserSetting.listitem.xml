@@ -1,4 +1,4 @@
-<ListItem name="LiUserSetting" xmlns="BoSchema.xsd">
+<ListItem name="LiUserSetting" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="name" type="DomString" />

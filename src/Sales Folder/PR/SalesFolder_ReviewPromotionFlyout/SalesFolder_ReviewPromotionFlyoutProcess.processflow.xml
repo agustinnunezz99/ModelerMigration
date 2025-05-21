@@ -10,7 +10,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>SalesFolder::ReviewPromotionFlyoutUI</UIDescription>
       </Action>
     </Actions>

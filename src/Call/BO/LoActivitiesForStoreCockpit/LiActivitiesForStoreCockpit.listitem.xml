@@ -1,4 +1,4 @@
-<ListItem name="LiActivitiesForStoreCockpit" xmlns="BoSchema.xsd">
+<ListItem name="LiActivitiesForStoreCockpit" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" />
     <SimpleProperty name="id" type="DomId" storable="false" />

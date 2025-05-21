@@ -1,5 +1,5 @@
  <!--Account Harmonization: obsolete:  OperatingHours (LoTimeSlot) is used instead of Account_Opening_Hours__c -->
-<ListObject name="LoCustomerOpeningTime" generateLoadMethod="false" xmlns="BoSchema.xsd">
+<ListObject name="LoCustomerOpeningTime" generateLoadMethod="false" >
   <DataSource name="DsLoCustomerOpeningTime" />
   <Item objectClass="LiCustomerOpeningTime" />
   <Methods>

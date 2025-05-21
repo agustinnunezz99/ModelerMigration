@@ -10,9 +10,9 @@
     <Attribute name="validThru" table="Inventory__c" column="Valid_Thru__c" />
     <Attribute name="invalid" table="Inventory__c" column="Invalid__c" />
     <Attribute name="salesOrg" table="Inventory__c" column="Sales_Org__c" />
+    <Attribute name="tmgTourPKey" table="Inventory__c" column="Tour__c" />
+    <Attribute name="etpVehiclePKey" table="Inventory__c" column="Vehicle__c" />
     <DerivedAttribute name="id" value="''" />
-    <DerivedAttribute name="tmgTourPKey" value="''" />
-    <DerivedAttribute name="etpVehiclePKey" value="''" />
     <Attribute name="currency" table="Inventory__c" column="Currency__c" />
     <Attribute name="recordTypeId" table="Inventory__c" column="RecordTypeId" />
   </Attributes>

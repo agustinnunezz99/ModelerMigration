@@ -1,4 +1,4 @@
-<ListItem name="LiOrderItem" xmlns="BoSchema.xsd">
+<ListItem name="LiOrderItem" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />
     <SimpleProperty name="sdoMainPKey" type="DomPKey" storable="true" dataSourceProperty="sdoMainPKey" />

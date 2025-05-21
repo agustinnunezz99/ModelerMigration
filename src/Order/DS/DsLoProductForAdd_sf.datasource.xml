@@ -63,6 +63,7 @@ var text1= "";
 var prdType= "";
 var foreignProduct= "";
 var category = "";
+var isAvailableInventory = "";
 
 /**  prdId */
 if (Utils.isDefined(jsonQuery.prdId)){
@@ -100,6 +101,14 @@ if (Utils.isDefined(jsonQuery.category)){
 	addCondSearch += " AND Category " + Utils.replaceOperator(jsonQuery.categoryComp) + " #category# ";
 }
 
+/** isAvailableInventory, if inventory is not available then null
+value is stored in order temp table. Therefore we use ifnull to replace null 
+with 0 when advance search filter is used */
+if (Utils.isDefined(jsonQuery.isAvailableInventory)){
+	isAvailableInventory = Utils.convertForDBParam(jsonQuery.isAvailableInventory, "DomBool");
+	addCondSearch += " AND ifnull(IsAvailableInventory,'0') " + Utils.replaceOperator(jsonQuery.isAvailableInventoryComp) + " #isAvailableInventory# ";
+}
+
 var index = 0;
 for (index in params){
   switch (params[index].field) {                           
@@ -128,7 +137,7 @@ if (filterOutCompetitorProducts == '1') {
   competitorProductsCondition = " AND ForeignProduct = '0' ";
 }			
 
-var sqlParams = {prdId, text1, eAN, prdType, foreignProduct, category}; 
+var sqlParams = {prdId, text1, eAN, prdType, foreignProduct, category, isAvailableInventory}; 
 var sqlStmt = "";
 sqlStmt += "SELECT ";
 sqlStmt += "DISTINCT PrdMainPKey AS prdMainPKey, ";

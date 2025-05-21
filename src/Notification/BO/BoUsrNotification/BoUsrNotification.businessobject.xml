@@ -1,4 +1,4 @@
-<BusinessObject name="BoUsrNotification" xmlns="BoSchema.xsd" generateLoadMethod="true" generateCreateMethod="true" OERReference="UsrNotification" schemaVersion="1.1">
+<BusinessObject name="BoUsrNotification"  generateLoadMethod="true" generateCreateMethod="true" OERReference="UsrNotification" schemaVersion="1.1">
   <DataSource name="DsBoUsrNotification" />
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" storable="true" dataSourceProperty="pKey" />

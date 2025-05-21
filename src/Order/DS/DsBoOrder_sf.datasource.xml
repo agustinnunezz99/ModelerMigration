@@ -51,7 +51,7 @@
     <Attribute name="asn" table="Order__c" column="ASN__c" />
     <Attribute name="tmgMainPKey" table="Order__c" column="Tour__c" />
     <Attribute name="etpWarehousePKey" table="Order__c" column="Warehouse__c" />
-    <DerivedAttribute name="invoiceId" value="''" />
+    <Attribute name="invoiceId" table="Order__c" column="Invoice_ID__c" />
     <DerivedAttribute name="message" value="''" />
     <Attribute name="documentType" table="Order__c" column="Document_Type__c" />
     <Attribute name="totalShippedQuantity" table="Order__c" column="Total_Shipped_Quantity__c" />

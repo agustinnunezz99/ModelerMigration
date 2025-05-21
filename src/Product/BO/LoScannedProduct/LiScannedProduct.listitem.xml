@@ -1,4 +1,4 @@
-<ListItem name="LiScannedProduct" xmlns="BoSchema.xsd">
+<ListItem name="LiScannedProduct" >
   <SimpleProperties>
     <SimpleProperty name="pKey" type="DomPKey" storable="false" dataSourceProperty="pKey" />
     <SimpleProperty name="productPKey" type="DomPKey" dataSourceProperty="productPKey" />

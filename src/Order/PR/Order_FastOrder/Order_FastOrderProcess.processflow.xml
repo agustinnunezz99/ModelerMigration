@@ -29,7 +29,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::FastOrderUI</UIDescription>
         <Events>
           <Event name="AddItemToGrid" action="AddItemToGrid" />

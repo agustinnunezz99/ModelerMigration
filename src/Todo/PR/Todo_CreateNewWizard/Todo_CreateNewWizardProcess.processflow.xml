@@ -38,7 +38,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Todo::CreateNewWizardUI</UIDescription>
         <Events>
           <Event name="createNewTodo" action="setDirty" />

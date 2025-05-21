@@ -25,7 +25,7 @@
         <Return name="ProcessContext::OrderMetaList" />
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::OrderMetaLookup</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndWithNewValue" />

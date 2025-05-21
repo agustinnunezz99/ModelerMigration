@@ -1,4 +1,4 @@
-<UIDescription name="RetailStore::OverviewUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" simpleEditorOnly="true">
+<UIDescription name="RetailStore::OverviewUI" schemaVersion="0.0.0.5"  simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage" showNavigation="false">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Main" />
@@ -219,11 +219,9 @@
               <Binding target="dayOfWeek" type="Text" binding=".dayOfWeek" bindingMode="ONE_WAY" />
               <Binding target="startTime" type="Text" binding=".startTime" bindingMode="ONE_WAY" />
               <Binding target="endTime" type="Text" binding=".endTime" bindingMode="ONE_WAY" />
-              <Binding target="type" type="Text" binding=".type" bindingMode="ONE_WAY" />
               <!-- Header Labels -->
               <Resource target="startTimeHeader" type="Label" id="OpenHoursStartTime" defaultLabel="Start time" />
               <Resource target="endTimeHeader" type="Label" id="OpenHoursEndTime" defaultLabel="End time" />
-              <Resource target="typeHeader" type="Label" id="OpenHoursType" defaultLabel="Type" />
             </Bindings>
             <ItemListLayout>
               <Default>
@@ -231,13 +229,11 @@
                   <Row layoutType="itemIdentifier" bindingId="dayOfWeek" />
                   <Row layoutType="itemSecondary" bindingId="startTimeHeader" />
                   <Row layoutType="itemSecondary" bindingId="endTimeHeader" />
-                  <Row layoutType="itemSecondary" bindingId="typeHeader" />
                 </Col>
                 <Col>
                   <Row />
                   <Row layoutType="itemValueSmall" bindingId="startTime" />
                   <Row layoutType="itemValueSmall" bindingId="endTime" />
-                  <Row layoutType="itemValueSmall" bindingId="type" />
                 </Col>
               </Default>
             </ItemListLayout>

@@ -1,4 +1,4 @@
-<UIDescription xmlns="UISchema.xsd" name="PromotionApproval::OverviewUI" schemaVersion="0.0.0.5">
+<UIDescription  name="PromotionApproval::OverviewUI" schemaVersion="0.0.0.5">
   <Page pagePattern="MasterDetailSectionPage" masterSectionFlex="40" detailSectionFlex="60">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Main" />

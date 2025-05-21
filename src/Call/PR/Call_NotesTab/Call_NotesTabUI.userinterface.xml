@@ -1,4 +1,4 @@
-<UIDescription name="Call::NotesTabUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd">
+<UIDescription name="Call::NotesTabUI" schemaVersion="0.0.0.5" >
   <Page pagePattern="MasterDetailSectionPage" masterSectionFlex="40" detailSectionFlex="60" selectFirstItemInList="true">
     <PageHeader>
       <Bindings>

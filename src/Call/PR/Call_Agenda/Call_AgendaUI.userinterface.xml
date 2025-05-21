@@ -178,7 +178,7 @@
             <Tab tabName="PlannedVisits">
               <Bindings>
                 <Resource target="image" type="Image" id="PlannedVisits" defaultImage="PlannedVisits" bindingMode="ONE_TIME" />
-                <Resource target="text" type="Label" id="PlannedVisitsId" defaultLabel="Planned Visits" bindingMode="ONE_TIME" />
+                <Resource target="text" type="Label" id="VisitsId" defaultLabel="Visits" bindingMode="ONE_TIME" />
               </Bindings>
             </Tab>
             <Tab tabName="FindCustomers">
@@ -255,6 +255,7 @@
                   <Binding target="Icon" type="Image" binding=".actionImg" />
                   <Binding target="Text" type="Label" binding=".actionId" />
                   <Binding type="Editable" target="Editable" binding=".actionEnabled" />
+                  <Binding type="Visible" target="Visible" binding=".actionVisible" />
                 </Bindings>
               </Items>
             </ContextMenu>
@@ -282,6 +283,7 @@
                 <Param name="pKey" value=".pKey" />
                 <Param name="clbStatus" value=".clbStatus" />
                 <Param name="deleteAllowed" value=".deleteAllowed" />
+                <Param name="isStartVisitRqrToCheckIn" value=".isStartVisitRqrToCheckIn" />
                 <Param name="dateFrom" value=".dateFrom" />
                 <Param name="bpaMainPKey" value=".bpaMainPKey" />
                 <Param name="responsiblePKey" value=".responsiblePKey" />

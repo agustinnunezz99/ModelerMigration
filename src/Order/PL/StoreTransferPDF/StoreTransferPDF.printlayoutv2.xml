@@ -2,7 +2,7 @@
   <Declarations>
     <DataDeclaration name="order" type="BoOrder" />
     <DataDeclaration name="salesOrg" type="LuSalesOrg" />
-    <DataDeclaration name="myImageName" type="Image" mimeType="image/png" imageId="CoralSpringLogo" />
+    <DataDeclaration name="myImageName" type="Image" mimeType="image/png" imageId="CompanyLogo" />
     <DataDeclaration name="textItems" type="BoOrderPrintTextItems" />
   </Declarations>
   <ReportLayout pageMargins="[40,40,40,40]">

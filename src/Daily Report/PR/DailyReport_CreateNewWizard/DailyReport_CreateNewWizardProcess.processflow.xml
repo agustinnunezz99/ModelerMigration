@@ -23,7 +23,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>DailyReport::CreateNewWizardUI</UIDescription>
         <Events>
           <Event name="createDailyReport" action="LoadValidationBO" />

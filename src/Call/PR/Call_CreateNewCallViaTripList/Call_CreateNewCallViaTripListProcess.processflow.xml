@@ -45,7 +45,7 @@
           <Case value="Ok" action="End" />
         </Cases>
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::CreateNewCallViaTripListUI</UIDescription>
         <Events>
           <Event name="OpenCallMetaLookup" action="OpenCallMetaLookup" />

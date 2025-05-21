@@ -1,4 +1,4 @@
-<ListItem name="LiCustomerOverview" xmlns="BoSchema.xsd">
+<ListItem name="LiCustomerOverview" >
   <SimpleProperties>
     <SimpleProperty id="true" name="pKey" type="DomPKey" dataSourceProperty="pKey" />
     <SimpleProperty name="name" type="DomBpaName" dataSourceProperty="name" />

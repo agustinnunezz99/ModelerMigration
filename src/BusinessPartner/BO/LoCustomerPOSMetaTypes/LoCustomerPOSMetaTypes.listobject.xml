@@ -1,4 +1,4 @@
-<ListObject name="LoCustomerPOSMetaTypes" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoCustomerPOSMetaTypes" generateLoadMethod="true" >
   <DataSource name="DsLoCustomerPOSMetaTypes" />
   <Item objectClass="LiCustomerPOSMetaTypes" />
   <Methods>

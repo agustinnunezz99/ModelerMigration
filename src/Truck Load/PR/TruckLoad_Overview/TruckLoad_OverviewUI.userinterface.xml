@@ -1,4 +1,4 @@
-<UIDescription name="TruckLoad::OverviewUI" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" layoutType="blank">
+<UIDescription name="TruckLoad::OverviewUI" schemaVersion="0.0.0.5"  layoutType="blank">
   <Page pagePattern="SingleSectionPage" cachable="false">
     <PageHeader>
       <Bindings>

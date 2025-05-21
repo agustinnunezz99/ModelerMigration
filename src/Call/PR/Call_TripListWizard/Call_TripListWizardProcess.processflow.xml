@@ -44,7 +44,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::TripListWizardUI</UIDescription>
         <Events>
           <Event name="FinishWizard" action="SetDirty" />

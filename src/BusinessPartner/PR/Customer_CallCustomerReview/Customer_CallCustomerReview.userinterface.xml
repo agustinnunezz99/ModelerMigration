@@ -1,4 +1,4 @@
-<UIDescription name="Customer::CallCustomerReview" schemaVersion="0.0.0.5" xmlns="UISchema.xsd" simpleEditorOnly="true">
+<UIDescription name="Customer::CallCustomerReview" schemaVersion="0.0.0.5"  simpleEditorOnly="true">
   <Page pagePattern="SingleSectionPage" cachable="false">
     <ViewVariables>
       <ViewVariable name="currentTabName" value="Main" />
@@ -196,7 +196,7 @@
                 </Bindings>
               </Items>
             </SelectionBox>
-			Account Harmonization: changed to simple InputArea-->
+   Account Harmonization: changed to simple InputArea-->
             <InputArea name="State">
               <Bindings>
                 <Resource target="Label" type="Label" id="CountryStateId" defaultLabel="State" />
@@ -632,38 +632,126 @@
         </Area>
       </Area>
       Account Harmonization: obsolete -->
-      <Area areaName="OpenHours" areaPattern="SingleElementArea">
-        <GroupedList name="OpenHoursList" groupBy="groupText" searchable="false" dataSource="ProcessContext::CustomerDetail.loOpenHours.items[]">
-          <Items name="Items" itemPattern="CallCustomerOpenHoursPattern">
+      <Area areaName="OpenHours" areaPattern="MultiArea" lazyLoading="true">
+        <Area areaName="OpenHoursOverview" areaPattern="SingleElementArea">
+          <MenuItems>
+            <MenuItem itemId="NewTimeSlot" directlyVisible="true">
+              <Bindings>
+                <Resource target="Text" type="Label" id="NewTimeSlotId" defaultLabel="New" />
+                <Resource target="Icon" type="Image" id="PlusDarkGrey24" defaultImage="PlusDarkGrey24" />
+                <Binding type="Visible" target="Visible" call="ProcessContext::AccountOperatingHourEnabled.getValue" />
+              </Bindings>
+              <Events>
+                <ButtonPressedEvent event="newTimeSlot">
+                  <SelectArea name="TimeSlotEdit" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <GroupedList name="OpenHoursList" groupBy="groupText" searchable="false" dataSource="ProcessContext::CustomerDetail.loOpenHours.items[]">
+            <Items name="Items" itemPattern="CustomerOpenHoursPattern">
+              <Bindings>
+                <Binding target="dayOfWeek" type="Text" binding=".dayOfWeek.text" bindingMode="ONE_WAY" />
+                <Binding target="dayOfWeekValue" type="Text" binding=".dayOfWeek.code" bindingMode="ONE_WAY" />
+                <Binding target="startTime" type="Text" binding=".startTime" bindingMode="ONE_WAY" />
+                <Binding target="endTime" type="Text" binding=".endTime" bindingMode="ONE_WAY" />
+                <Resource target="startTimeHeader" type="Label" id="OpenHoursStartTime" defaultLabel="Start time" />
+                <Resource target="endTimeHeader" type="Label" id="OpenHoursEndTime" defaultLabel="End time" />
+              </Bindings>
+              <ItemListLayout>
+                <Default>
+                  <Col>
+                    <Row layoutType="itemIdentifier" bindingId="dayOfWeek" />
+                    <Row layoutType="itemSecondary" bindingId="startTimeHeader" />
+                    <Row layoutType="itemSecondary" bindingId="endTimeHeader" />
+                  </Col>
+                  <Col>
+                    <Row />
+                    <Row layoutType="itemValueSmall" bindingId="startTime" />
+                    <Row layoutType="itemValueSmall" bindingId="endTime" />
+                  </Col>
+                </Default>
+              </ItemListLayout>
+              <ContextMenu>
+                <Bindings>
+                  <Binding target="DataSource" binding="ProcessContext::TimeSlotContextMenu.Items[]" bindingMode="ONE_WAY" />
+                </Bindings>
+                <Items name="TimeSlotContextMenutems">
+                  <Bindings>
+                    <Binding target="Icon" type="Image" binding=".actionImg" />
+                    <Binding target="Text" type="Label" binding=".actionId" />
+                    <Binding target="Editable" type="Editable" binding=".actionEnabled" />
+                  </Bindings>
+                </Items>
+              </ContextMenu>
+            </Items>
+            <Events>
+              <ItemSelectedEvent event="timeSlotSelected">
+                <SelectArea name="TimeSlotEdit" />
+                <Params>
+                  <Param name="pKey" value=".pKey" />
+                  <Param name="dayOfWeek" value=".dayOfWeekValue" />
+                  <Param name="startTime" value=".startTimeToSave" />
+                  <Param name="endTime" value=".endTimeToSave" />
+                  <Param name="operatingHoursId" value=".operatingHoursId" />
+                </Params>
+              </ItemSelectedEvent>
+              <ContextOpeningEvent event="timeSlotContextMenuOpened" />
+              <ContextSelectedEvent event="timeSlotContextMenuItemSelected">
+                <Params>
+                  <Param name="pKey" value=".pKey" />
+                </Params>
+              </ContextSelectedEvent>
+            </Events>
+          </GroupedList>
+        </Area>
+        <Area areaName="TimeSlotEdit" areaPattern="GroupedElementsArea">
+          <MenuItems>
+            <MenuItem itemId="AcceptTimeSlotChanges" directlyVisible="true">
+              <Bindings>
+                <Resource target="Text" type="Label" id="AcceptTimeSlotChangesId" defaultLabel="Done" />
+                <Resource target="Icon" type="Image" id="CheckDarkGrey24" />
+              </Bindings>
+              <Events>
+                <ButtonPressedEvent event="acceptTimeSlotChanges">
+                  <ValidateAndSelectArea name="OpenHoursOverview" />
+                </ButtonPressedEvent>
+              </Events>
+            </MenuItem>
+          </MenuItems>
+          <GroupElement name="TimeSlotGroup">
             <Bindings>
-              <Binding target="dayOfWeek" type="Text" binding=".dayOfWeek" bindingMode="ONE_WAY" />
-              <Binding target="startTime" type="Text" binding=".startTime" bindingMode="ONE_WAY" />
-              <Binding target="endTime" type="Text" binding=".endTime" bindingMode="ONE_WAY" />
-              <Binding target="type" type="Text" binding=".type" bindingMode="ONE_WAY" />
-              <!-- Header Labels -->
-              <Resource target="startTimeHeader" type="Label" id="OpenHoursStartTime" defaultLabel="Start time" />
-              <Resource target="endTimeHeader" type="Label" id="OpenHoursEndTime" defaultLabel="End time" />
-              <Resource target="typeHeader" type="Label" id="OpenHoursType" defaultLabel="Type" />
+              <Resource target="Title" type="Label" id="TimeSlotGroupId" defaultLabel="Time Slot" />
             </Bindings>
-            <ItemListLayout>
-              <Default>
-                <Col>
-                  <Row layoutType="itemIdentifier" bindingId="dayOfWeek" />
-                  <Row layoutType="itemSecondary" bindingId="startTimeHeader" />
-                  <Row layoutType="itemSecondary" bindingId="endTimeHeader" />
-                  <Row layoutType="itemSecondary" bindingId="typeHeader" />
-                </Col>
-                <Col>
-                  <Row />
-                  <Row layoutType="itemValueSmall" bindingId="startTime" />
-                  <Row layoutType="itemValueSmall" bindingId="endTime" />
-                  <Row layoutType="itemValueSmall" bindingId="type" />
-                </Col>
-              </Default>
-            </ItemListLayout>
-          </Items>
-        </GroupedList>
+            <SelectionBox name="DayOfWeek">
+              <Bindings>
+                <Resource target="Label" type="Label" id="dayOfWeek" defaultLabel="Day of week" />
+                <Binding target="DataSource" toggleId="DayOfWeek" bindingMode="TWO_WAY" />
+                <Binding target="Value" binding="ProcessContext::TimeSlot.dayOfWeek" bindingMode="TWO_WAY" />
+              </Bindings>
+              <Items>
+                <Bindings>
+                  <Binding target="ItemValue" type="Text" binding=".id" bindingMode="ONE_WAY" />
+                  <Binding target="ItemText" type="Text" binding=".text" bindingMode="ONE_WAY" />
+                </Bindings>
+              </Items>
+            </SelectionBox>
+            <TimePickerField name="StartTimeTimeSlot">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="Start time" id="TimeFromTimeSlot" />
+                <Binding target="Value" binding="ProcessContext::TimeSlot.startTime" bindingMode="TWO_WAY" />
+              </Bindings>
+            </TimePickerField>
+            <TimePickerField name="EndTimeTimeSlot">
+              <Bindings>
+                <Resource target="Label" type="Label" defaultLabel="End time" id="TimeThruTimeSlot" />
+                <Binding target="Value" binding="ProcessContext::TimeSlot.endTime" bindingMode="TWO_WAY" />
+              </Bindings>
+            </TimePickerField>
+          </GroupElement>
+        </Area>
       </Area>
+      <!-- ###################### Contact ###################### -->
       <Area areaPattern="MultiArea" areaName="Contact" lazyLoading="true">
         <Area areaName="ContactOverview" areaPattern="SingleElementArea">
           <MenuItems>

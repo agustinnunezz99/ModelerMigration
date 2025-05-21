@@ -15,7 +15,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>VisitGuide::ShowVisitMap</UIDescription>
         <Events>
           <Event name="Customer_MarkerClicked" action="CardVisitGuide_ShowCustomers" />

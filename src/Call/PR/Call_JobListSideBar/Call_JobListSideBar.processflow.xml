@@ -35,7 +35,7 @@
   </Entry>
   <Body>
     <Actions>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Call::JobListSideBarUI</UIDescription>
         <Events>
           <Event name="JobListSelected" action="AssignEventParams" />

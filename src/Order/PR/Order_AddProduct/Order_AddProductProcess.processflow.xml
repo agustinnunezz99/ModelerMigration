@@ -72,7 +72,7 @@
         </Parameters>
         <TransitionTo action="ShowView" />
       </Action>
-      <Action actionType="View" name="ShowView">
+      <Action actionType="VIEW" name="ShowView">
         <UIDescription>Order::AddProduct</UIDescription>
         <Events>
           <Event name="itemSelected" action="EndAddProduct" />

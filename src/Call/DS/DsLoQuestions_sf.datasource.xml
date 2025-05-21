@@ -318,7 +318,7 @@ sqlStmt+= "  AND Visit_Job__c.IsDeleted <> '1' ";
 sqlStmt+= "	 AND Visit_Job__c.Visit__c = (SELECT Visit.Id FROM Visit ";
 sqlStmt+= "  WHERE (#compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','<' , #validFrom# , 'Date')# OR (#compareAsDate('Visit.PlannedVisitStartTime', 'DateTime','=' , #validFrom# , 'Date')# AND #timeAsStringLocaltime('Visit.PlannedVisitStartTime')# < #timeFrom#)) ";
 sqlStmt+= "  AND Visit.AccountId= #bpaMainPKey# ";
-sqlStmt+= "  AND Visit.Status='Completed' ";
+sqlStmt+= "  AND Visit.Status='" + BLConstants.VISIT.STATUS_COMPLETED + "' ";
 sqlStmt+= "  AND Visit.Visit_Template__c= #clbMetaPKey# ";
 sqlStmt+= "  ORDER BY Visit.PlannedVisitStartTime DESC ";
 sqlStmt+= "  LIMIT 1) ";
@@ -331,7 +331,6 @@ sqlStmt+= "			AND Visit_Job__c.Product__c = Visit_Job__c2.Product__c ";
 sqlStmt+= "			AND Visit_Job__c2.Visit__c = #clbMainPKey# ";
 sqlStmt+= "			AND Visit_Job__c2.IsDeleted <> '1' ";
 sqlStmt+= "		) ";
-
 }
 
 return Utils.replaceMacrosParam(sqlStmt, sqlParams);

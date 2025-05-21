@@ -1,4 +1,4 @@
-<!-- // OBSOLETE!! - No longer called by core - Data is retrieved via datasource from LoProductForAdd via temp table containing the merge result-->
+<!-- // OBSOLETE!! - Related to no longer supported merge engine-->
 <LookupObject name="LuProductIsListedPromotedOutOfStock">
   <DataSource name="DsLuProductIsListedPromotedOutOfStock" />
   <SimpleProperties>

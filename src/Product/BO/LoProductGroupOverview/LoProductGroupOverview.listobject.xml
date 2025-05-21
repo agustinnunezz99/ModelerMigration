@@ -1,4 +1,4 @@
-<ListObject name="LoProductGroupOverview" generateLoadMethod="true" xmlns="BoSchema.xsd">
+<ListObject name="LoProductGroupOverview" generateLoadMethod="true" >
   <DataSource name="DsLoProductGroupOverview" />
   <Item objectClass="LiProductGroupOverview" />
   <Methods>

@@ -17,13 +17,18 @@
             <ItemListLayout>
               <Default>
                 <Col width="0.2em" layoutType="Image" bindingId="rewardImage" />
-                <Col width="9em" layoutType="itemName" bindingId="productName" />
+                <Col>
+                  <Row width="9em" layoutType="itemName" bindingId="productName" />
+                  <Row layoutType="itemSecondary" bindingId="logisticUnit" />
+                </Col>
                 <Col width="9em" bindingId="quantity" />
               </Default>
             </ItemListLayout>
             <Bindings>
               <Resource target="rewardImage" type="Image" id="RewardProduct" defaultImage="RewardProduct" />
               <Binding target="productName" type="Text" binding=".productName" bindingMode="ONE_WAY" />
+              <Binding target="logisticUnit" type="Text" binding=".logisticUnit" bindingMode="ONE_WAY" />
+
               <Binding target="quantity" type="Stepper" minValue="0" maxValue="9999" minBinding="minStepperValue" binding=".quantity" formatV2="4.0" bindingMode="TWO_WAY" />
             </Bindings>
           </Items>
